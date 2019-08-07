@@ -2,7 +2,7 @@ package model;
 
 public class Lecture {
 
-	int lecture_no;
+	int lecture_no1;
 	String lecture_name;
 	String lecture_teacher;
 	int price;

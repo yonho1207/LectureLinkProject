@@ -2,7 +2,7 @@ package model;
 
 public class Payment {
 
-	int payment_no;
+	int payment_no1;
 	int lecture_no;
 	int member_no;
 	String id;
