@@ -13,7 +13,7 @@ public class Members {
 	private String email;
 	private String question;
 	private String answer;
-	private String period;
+	
 	public int getMember_no() {
 		return member_no;
 	}
@@ -80,17 +80,12 @@ public class Members {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public String getPeriod() {
-		return period;
-	}
-	public void setPeriod(String period) {
-		this.period = period;
-	}
+	
 	@Override
 	public String toString() {
 		return "members [member_no=" + member_no + ", id=" + id + ", password=" + password + ", lastname=" + lastname
 				+ ", firstname=" + firstname + ", gender=" + gender + ", phone=" + phone + ", birth=" + birth
-				+ ", email=" + email + ", question=" + question + ", answer=" + answer + ", period=" + period + "]";
+				+ ", email=" + email + ", question=" + question + ", answer=" + answer + ", period="+ "]";
 	}
 	
 	
