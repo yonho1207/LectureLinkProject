@@ -8,5 +8,7 @@
 </head>
 <body>
 <h1><a href="login">로그인</a></h1>
+<li><a href="members_inputForm">회원가입</a></li>
+
 </body>
 </html>
