@@ -7,6 +7,7 @@
 <title>인터넷 강의 페이지 메인 화면</title>
 </head>
 <body>
+정현
 <h1><a href="login">로그인</a></h1>
 <li><a href="members_inputForm">회원가입</a></li>
 
