@@ -11,5 +11,7 @@
 <h1><a href="go_payment">결제화면</a></h1>
 <h1><a href="go_login">로그인</a></h1>
 <h1><a href="go_qna">Qna게시판</a></h1>
+<h1><a href="go_account">회원가입</a></h1>
+<h1><a href="go_cmt">댓글게시판</a></h1>
 </body>
 </html>
