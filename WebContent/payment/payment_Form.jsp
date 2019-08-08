@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>인터넷 강의 페이지 메인 화면</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1><a href="go_my_page">마이 페이지</a></h1>
-<h1><a href="go_payment">결제화면</a></h1>
-<h1><a href="go_login">로그인</a></h1>
-<h1><a href="go_qna">Qna게시판</a></h1>
+	asd
 </body>
 </html>
