@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -81,6 +82,41 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 	public List<Members> selectByName(String firstname, String lastname) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public int idcheck(String id) {
+
+		int cnt=0;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_ID_CHECK);
+			preparedStatement.setString(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+
+				
+
+				cnt = resultSet.getInt("cnt");
+				
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+
+		return cnt;
+
 	}
 
 }

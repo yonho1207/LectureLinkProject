@@ -14,5 +14,5 @@ public interface MembersDAO {
 	boolean update(Members members);
 	boolean delete(String id);
 	List<Members> selectByName(String firstname, String lastname);
-
+	int idcheck(String id);
 }
