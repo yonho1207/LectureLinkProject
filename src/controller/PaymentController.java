@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
+import model.Lecture;
 import model.Payment;
 @WebServlet(name="PaymentController", urlPatterns = {"/payment_Process","/payment_Confirm","/account_Transfer_Accept","/payment_Accept","/go_payment"})
 public class PaymentController extends HttpServlet {
@@ -34,8 +36,9 @@ public class PaymentController extends HttpServlet {
 		
 		if(action.equals("go_payment")) {
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
-			List<Payment> selected_Lecture_List = pdao.select_PaymentList(1);
-			req.setAttribute("selected_Lecture_List", selected_Lecture_List);
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			List<Lecture> lecture_List_Serve = ldao.select_All_Lecture();
+			req.setAttribute("lecture_List_Serve", lecture_List_Serve);
 			rd = req.getRequestDispatcher("payment/payment_Insert.jsp");
 			rd.forward(req, resp);
 			//resp.sendRedirect("payment/payment_Form.jsp");
