@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import dao.BaseDAO;
 
 
-
-
-
 public class PageDAOImpl extends BaseDAO implements PageDAO {
 
 	@Override

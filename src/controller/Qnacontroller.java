@@ -54,11 +54,12 @@ public class Qnacontroller extends HttpServlet {
 			QnaDAO dao = new QnaDAOImpl();
 
 			qnaList = dao.selectAll();
-
-			HttpSession session = req.getSession(); // 브라우저 닫을때가지 생존
+			
+			HttpSession session = req.getSession(); 
 			session.setAttribute("qnaList", qnaList);
-
-			RequestDispatcher rd = req.getRequestDispatcher("qnaList.jsp");
+			
+			//resp.sendRedirect("qna_req_list?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
 
 		} else if (action.equals("qna_detail")) { // QNA 상세페이지
@@ -107,10 +108,10 @@ public class Qnacontroller extends HttpServlet {
 			List<Qna> qnaList = dao.selectAllPage(pm.getPageRowResult().getRowStartNumber(),
 			pm.getPageRowResult().getRowEndNumber());
 
-			req.setAttribute("qnas", qnaList);
+			req.setAttribute("qnaList", qnaList);
 			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.QNA_SELETE_ALL_COUNT));
 
-			RequestDispatcher rd = req.getRequestDispatcher("go_qna");
+			RequestDispatcher rd = req.getRequestDispatcher("qnaList.jsp");
 			rd.forward(req, resp);
 		}
 	}

@@ -41,6 +41,4 @@ public class PageGroupResult {
 		this.selectPageNumber = selectPageNumber;
 	}
 
-
-
 }
