@@ -8,13 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MembersDAO;
 import dao.MembersDAOImpl;
+import model.Members;
 
 
 
-@WebServlet(name="IdcheckController",urlPatterns = {"/idcheck"})
+@WebServlet(name="IdcheckController",urlPatterns = {"/idcheck","/go_searchpwd","/search_pwd"})
 public class IdcheckController extends HttpServlet{
 
 	@Override
@@ -61,6 +63,46 @@ public class IdcheckController extends HttpServlet{
 				rd.forward(req, resp);
 				
 				
+				
+			}
+			else if(action.equals("go_searchpwd")) {
+				
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/members/search_password.jsp");
+				rd.forward(req, resp);
+			}
+			else if(action.equals("search_pwd")) {
+				String id = req.getParameter("id");
+				String email = req.getParameter("email");
+				String question = req.getParameter("question");
+				String answer = req.getParameter("answer");
+
+				MembersDAO dao = new MembersDAOImpl();
+				Members members = dao.selectById(id);
+				
+				if (members!=null && members.getId() !=null 
+						&& email.equals(members.getEmail()) 
+						&& question.equals(members.getQuestion()) 
+						&& answer.equals(members.getAnswer())) {
+
+					HttpSession session = req.getSession();
+					session.setAttribute("members_info", members);
+					
+					req.setAttribute("log","로그인");
+
+					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+					rd.forward(req, resp);
+				
+				}else{
+					
+					
+					req.setAttribute("message", "해당하는 회원이 없습니다.");
+					
+					RequestDispatcher rd = req.getRequestDispatcher("/members/search_password.jsp");
+					rd.forward(req, resp);
+					
+					
+				}
 				
 			}
 

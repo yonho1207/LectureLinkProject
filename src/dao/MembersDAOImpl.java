@@ -55,12 +55,6 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 	}
 
 	@Override
-	public Members selectByid(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean update(Members members) {
 		// TODO Auto-generated method stub
 		return false;

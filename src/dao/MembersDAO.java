@@ -10,7 +10,7 @@ public interface MembersDAO {
 	
 	List<Members> selectAll();
 	boolean insert(Members members);
-	Members selectByid(String id);
+	Members selectById(String id);
 	boolean update(Members members);
 	boolean delete(String id);
 	List<Members> selectByName(String firstname, String lastname);
