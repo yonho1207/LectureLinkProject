@@ -18,30 +18,26 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 	public boolean insert_Payment(Payment payment) {
 		boolean result = false;
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		Date get_payment_Day = cal.getTime();
-		String payment_Day= transFormat.format(get_payment_Day);
-		cal.add(Calendar.MONTH, 1);
-		Date get_After_1month = cal.getTime();
-		String one_Month_Later= transFormat.format(get_After_1month);
+		PreparedStatement preparedStatement = null; 
+		
 		
 		try {
 			connection = getConnection();
+			connection.setAutoCommit(false);
 			preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
-			preparedStatement.setInt(1, payment.getLecture_no());
-			preparedStatement.setInt(2, payment.getMember_no());
+			preparedStatement.setInt(1,payment.getLecture_no());
+			preparedStatement.setInt(2,payment.getMember_no());
 			preparedStatement.setString(3, payment.getId());
-			preparedStatement.setString(4, payment_Day);
+			preparedStatement.setString(4, payment.getPayment_date());
 			preparedStatement.setString(5, payment.getLecture_name());
 			preparedStatement.setInt(6, payment.getPrice());
 			preparedStatement.setInt(7, payment.getPay_option());
-			preparedStatement.setString(8, one_Month_Later);
+			preparedStatement.setString(8, payment.getPeriod());
 			int rowCount = preparedStatement.executeUpdate();
 			
+			
 			if(rowCount>0) {
+				
 				result=true;
 			}
 			
@@ -50,7 +46,9 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 			ex01.printStackTrace();
 		}finally {
 			closeDBObjects(null, preparedStatement, connection);
+	
 		}
+		
 		return result;
 	}
 
@@ -106,5 +104,45 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		
 		return paymentList;
 	}
+
+	@Override
+	public boolean Multiple_Insert_Payment(Payment payment) {
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null; 
+		
+		
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
+			preparedStatement.setInt(1,payment.getLecture_no());
+			preparedStatement.setInt(2,payment.getMember_no());
+			preparedStatement.setString(3, payment.getId());
+			preparedStatement.setString(4, payment.getPayment_date());
+			preparedStatement.setString(5, payment.getLecture_name());
+			preparedStatement.setInt(6, payment.getPrice());
+			preparedStatement.setInt(7, payment.getPay_option());
+			preparedStatement.setString(8, payment.getPeriod());
+			int rowCount = preparedStatement.executeUpdate();
+			
+			
+			if(rowCount>0) {
+				
+				result=true;
+			}
+			
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(null, preparedStatement, connection);
+	
+		}
+		
+		return result;
+	}
+	
+	
 
 }

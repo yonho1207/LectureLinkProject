@@ -9,60 +9,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script> 
 <script type="text/javascript">
-$(function(){
-	
-	$("input:eq(1)").click(function(){
-		window.open("payment/methodsOfPayment/account_Transfer.jsp", width=300, height=500);  
-	}); 
-	$("input:eq(2)").click(function(){
-		window.open("payment/methodsOfPayment/credit_Card.jsp", width=300, height=500);  
-	});
-	$("input:eq(3)").click(function(){
-		window.open("payment/methodsOfPayment/cell_Phone_Charge.jsp", width=300, height=500);  
-	});
-	$("input:eq(4)").click(function(){
-		window.open("payment/methodsOfPayment/gift_Card_etc.jsp", width=300, height=500);  
-	});
-});
 </script>
 </head>
 <body>
 	<h1>결제 정보를 확인하여 주십시오</h1>
 	<form method="get" action="payment_Confirm">
-		<input type="hidden" name="id" id="id">
-		<c:if test="${!empty selected_Lecture_List}">
+		<c:if test="${!empty purchase_Basket}">
 		<table>
-		 <thead>
-		      <tr>
-		         <th>강의 번호</th>
-		         <th>강의 제목</th>
-		         <th>결제일</th>
-		         <th>이용권 종료일</th>
-		         <th>가격</th>
-		      </tr>
-	    </thead>
-	    <c:forEach var="selected_Lecture_List" items="${selected_Lecture_List}">
-	    	<tr>
-	    	<td>${selected_Lecture_List.lecture_no}</td>
-	    	<td>${selected_Lecture_List.lecture_name}</td>
-	    	<td>${selected_Lecture_List.payment_date}</td>
-	    	<td>${selected_Lecture_List.period}</td>	    	
-	    	<td>${selected_Lecture_List.price}</td>	    	
-	    	</tr>	    	
-	    </c:forEach>
-		</table>	
+			<c:forEach var = "purchase_Basket" items="${purchase_Basket}">
+				구매하신 강의명 :${purchase_Basket.lecture_name}
+				가격 : ${purchase_Basket.price} 
+				예상 만료 기간: ${purchase_Basket.period}<br />
+			</c:forEach>
+		</table>
 	</c:if>
 	<c:set var="total" value="0"/>
-	<c:forEach var="price" items="${selected_Lecture_List}" varStatus="st">
+	<c:forEach var="price" items="${purchase_Basket}" varStatus="st">
 		
 		<c:set var="total" value="${total+price.price}"/>
 		
 	</c:forEach>
 		<h1>총액 : ${total}</h1>
-		<input type="button" value="현금 결제">
-		<input type="button" value="카드 결제">
-		<input type="button" value="휴대폰 결제">
-		<input type="button" value="상품권 혹은 기프티콘">
+		<input type="button" onclick="location.href='account_Transfer'" value="현금 결제">
+		<input type="button" onclick="location.href='credit_Card'" value="카드 결제">
+		<input type="button" onclick="location.href='cell_Phone_Bill'" value="휴대폰 결제">
+		<input type="button" onclick="location.href='gift_Card_ETC'" value="상품권 혹은 기프티콘"><br />
+		<input type="button" onclick="location.href='go_payment'" value="결제 화면으로 이동하기">
 	</form>
 
 </body>
