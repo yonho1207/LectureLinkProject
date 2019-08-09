@@ -18,7 +18,7 @@ import dao.MembersDAOImpl;
 
 import model.Members;
 
-@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login"})
+@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout"})
 public class MembersController extends HttpServlet{
 
 	@Override
@@ -102,6 +102,17 @@ public class MembersController extends HttpServlet{
 				
 				
 			}
+			
+			
+
+		}
+		else if (action.equals("logout")) {
+			
+			HttpSession session = req.getSession();
+			session.removeAttribute("members_info");
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+			rd.forward(req, resp);
 
 		}
 
