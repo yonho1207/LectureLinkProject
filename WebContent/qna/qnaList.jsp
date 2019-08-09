@@ -26,8 +26,8 @@
 		<tr>	
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
-					<td>${qna.qna_title}</td>
-					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.id}</td>
+					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</td>
+					<td>${qna.id}</td>
 					<td>${qna.visited}</td>
 					<td>${qna.qna_date}</td>
 				</tr>

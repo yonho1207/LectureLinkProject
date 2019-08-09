@@ -13,8 +13,8 @@ public interface QnaDAO {
 	List<Qna> selectAll();//리스트
 	Qna seleteByNo(int qna_no);//검색
 	
-	//void update(Qna qna);//수정
-	//void delete(int qna_no);//삭제
+	void update(Qna qna);//수정
+	void delete(int qna_no);//삭제
 	
 	void updateVisited(int qna_no);//조회수
 	

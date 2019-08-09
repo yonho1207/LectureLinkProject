@@ -1,57 +1,50 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Cmt;
+import sql.CmtSQL;
 
-public class CmtDAOImpl  extends BaseDAO implements CmtDAO{
-
-	@Override
-	public Cmt QnaInsert(Cmt cmt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 
 	@Override
-	public Cmt QnaComment(Cmt cmt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Cmt> selectAll() { 
 
-	@Override
-	public List<Cmt> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		List<Cmt> cmtList = new ArrayList<Cmt>();
 
-	@Override
-	public Cmt seleteByNo(int no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
-	@Override
-	public void update(Cmt cmt) {
-		// TODO Auto-generated method stub
-		
-	}
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CmtSQL.CMT_SELECTALL_SQL);
+			resultSet = preparedStatement.executeQuery();
 
-	@Override
-	public void delete(int cmt_no) {
-		// TODO Auto-generated method stub
-		
-	}
+			while (resultSet.next()) {
 
-	@Override
-	public void updateVisited(int cmt_no) {
-		// TODO Auto-generated method stub
-		
-	}
+				Cmt cmt = new Cmt();
+				cmt.setNum(resultSet.getInt("num"));
+				cmt.setWriter(resultSet.getString("writer"));
+				cmt.setContent(resultSet.getString("content"));
+				cmt.setDatetime(resultSet.getString("datetime"));
 
-	@Override
-	public List<Cmt> selectAllPage(int rowStartNumber, int rowEndNumber) {
-		// TODO Auto-generated method stub
-		return null;
+				cmtList.add(cmt);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return cmtList;
 	}
 
 }

@@ -184,4 +184,52 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 
 	}
 
+	@Override
+	public void update(Qna qna) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(QnaSQL.QNA_UPDATE_SQL);
+
+			preparedStatement.setString(1, qna.getQna_title());
+			preparedStatement.setString(2, qna.getQna_con());
+			preparedStatement.setInt(3, qna.getQna_no());
+
+			preparedStatement.executeQuery();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+
+	}
+
+	@Override
+	public void delete(int qna_no) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(QnaSQL.QNA_DELETE_SQL);
+			preparedStatement.setInt(1, qna_no);
+
+			preparedStatement.executeQuery();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+
+			closeDBObjects(null, preparedStatement, connection);
+		}
+
+	}
+
 }
