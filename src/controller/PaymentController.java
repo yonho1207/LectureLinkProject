@@ -44,15 +44,12 @@ public class PaymentController extends HttpServlet {
 		
 		if(action.equals("go_payment")) {
 			HttpSession session = req.getSession();
-			MembersDAOImpl mdao = new MembersDAOImpl();
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
 			LectureDAOImpl ldao = new LectureDAOImpl();
-			Members member = mdao.selectByid("temp"); 
 			req.setAttribute("payment_date", Time_Set_Helper.get_Today());
 			req.setAttribute("one_Month_Later", Time_Set_Helper.get_OneMonth_Later());
 			List<Payment> purchase_Basket = null;
 			List<Lecture> lecture_List_Serve = ldao.select_All_Lecture();
-			session.setAttribute("member", member);
 			req.setAttribute("lecture_List_Serve", lecture_List_Serve);
 			purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
 			rd = req.getRequestDispatcher("payment/payment_Insert.jsp");
