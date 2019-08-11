@@ -14,11 +14,11 @@
 				<c:set var="total" value="${total+price.price}"/>
 			</c:forEach>
 		<h1>총액 : ${total}</h1>
-		<form action="account_Transfer_Accept">
+		<form action="account_Transfer_Accept.do">
 			<input type="submit">
 		</form>
 		
-		<input type="button" onclick="location.href='accept_Purchase'" value="결제 화면으로 이동하기">
+		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 	
 </body>
 </html>

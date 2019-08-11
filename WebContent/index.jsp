@@ -15,8 +15,8 @@
 		<input type="submit" value="로그아웃"/>
 	</form>
 	</c:if>
-<h1><a href="go_my_page">마이 페이지a</a></h1>
-<h1><a href="go_payment">결제화면</a></h1>
+<h1><a href="go_my_page.do">마이 페이지a</a></h1>
+<h1><a href="go_payment.do">결제화면</a></h1>
 <h1><a href="go_login">로그인</a></h1>
 <h1><a href="go_qna">Qna게시판</a></h1>
 <h1><a href="go_account">회원가입</a></h1>

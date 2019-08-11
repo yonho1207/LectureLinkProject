@@ -22,7 +22,7 @@ import dao.Time_Set_Helper;
 import model.Lecture;
 import model.Members;
 import model.Payment;
-@WebServlet(name="PaymentController", urlPatterns = {"/clear_Purchase_Basket","/account_Transfer","/gift_Card_ETC","/cell_Phone_Bill","/credit_Card","/accept_Purchase","/payment_Process","/payment_Confirm","/account_Transfer_Accept","/payment_Accept","/go_payment"})
+@WebServlet(name="PaymentController", urlPatterns = {"/goMain","/clear_Purchase_Basket.do","/account_Transfer.do","/gift_Card_ETC.do","/cell_Phone_Bill.do","/credit_Card.do","/accept_Purchase.do","/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do","/payment_Accept.do","/go_payment.do"})
 public class PaymentController extends HttpServlet {
 
 	@Override
@@ -42,7 +42,7 @@ public class PaymentController extends HttpServlet {
 		
 		RequestDispatcher rd = null;
 		
-		if(action.equals("go_payment")) {
+		if(action.equals("go_payment.do")) {
 			HttpSession session = req.getSession();
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
 			LectureDAOImpl ldao = new LectureDAOImpl();
@@ -55,16 +55,17 @@ public class PaymentController extends HttpServlet {
 			rd = req.getRequestDispatcher("payment/payment_Insert.jsp");
 			rd.forward(req, resp);
 			//resp.sendRedirect("payment/payment_Form.jsp");
-		}else if(action.equals("payment_Process")) {
+		}else if(action.equals("payment_Process.do")) {
 			HttpSession session = req.getSession();
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
 			LectureDAOImpl ldao = new LectureDAOImpl();
+			Members member = (Members) session.getAttribute("members_info");
 			int selected_Lecture_No = Integer.parseInt(req.getParameter("select_Lecture_Pick"));
 			Lecture lecture = ldao.select_Lecture_No(selected_Lecture_No);
 			Payment payment = new Payment();
 			payment.setLecture_no(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
-			payment.setMember_no(Integer.parseInt(req.getParameter("member_no")));
-			payment.setId(req.getParameter("id"));
+			payment.setMember_no(member.getMember_no());
+			payment.setId(member.getId());
 			payment.setPayment_date(req.getParameter("payment_date"));
 			payment.setLecture_name(lecture.getLecture_name());
 			payment.setPrice(Integer.parseInt(req.getParameter("select_Price")));
@@ -75,89 +76,63 @@ public class PaymentController extends HttpServlet {
 			}
 			purchase_Basket.add(payment);
 			session.setAttribute("purchase_Basket", purchase_Basket);
-			for(Payment list : purchase_Basket){
-				System.out.println(list);
-			}
-			rd = req.getRequestDispatcher("go_payment");
+			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
 			
-		}else if(action.equals("accept_Purchase")) {
+		}else if(action.equals("accept_Purchase.do")) {
 			rd = req.getRequestDispatcher("/payment/payment_Form.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("credit_Card")) {
+		}else if(action.equals("credit_Card.do")) {
 			int pay_option = 2;
 			req.setAttribute("pay_option", pay_option);
 			rd = req.getRequestDispatcher("payment/methodsOfPayment/credit_Card.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("account_Transfer")) {
+		}else if(action.equals("account_Transfer.do")) {
 			int pay_option = 1;
 			req.setAttribute("pay_option", pay_option);
 			rd = req.getRequestDispatcher("payment/methodsOfPayment/account_Transfer.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("cell_Phone_Bill")) {
+		}else if(action.equals("cell_Phone_Bill.do")) {
 			int pay_option = 3;
 			req.setAttribute("pay_option", pay_option);
 			rd = req.getRequestDispatcher("payment/methodsOfPayment/cell_Phone_Charge.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("gift_Card_ETC")) {
+		}else if(action.equals("gift_Card_ETC.do")) {
 			int pay_option = 4;
 			req.setAttribute("pay_option", pay_option);
 			rd = req.getRequestDispatcher("payment/methodsOfPayment/gift_Card_etc.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("account_Transfer_Accept")) {
+		}else if(action.equals("account_Transfer_Accept.do")) {
+
 			int account_Transfer_Pay_Option = 1;
 			HttpSession session = req.getSession();
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
-			Payment payment = null;
 			BaseDAO bdao = new BaseDAO();
-			Connection connection = bdao.getConnection();
-			try {
-				connection.setAutoCommit(false);
-			}catch(SQLException ex01) {
-				ex01.printStackTrace();
-			}
 			
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
-			for(Payment list : purchase_Basket) {
-					payment = new Payment();
-					payment.setLecture_no(list.getLecture_no());
-					payment.setMember_no(list.getMember_no());
-					payment.setId(list.getId());
-					payment.setPayment_date(list.getPayment_date());
-					payment.setLecture_name(list.getLecture_name());
-					payment.setPrice(list.getPrice());
-					payment.setPay_option(account_Transfer_Pay_Option);
-					payment.setPeriod(list.getPeriod());
-					if(payment.getLecture_no()==3){
-						payment.setPay_option(6);
-					}
-					try {
-						connection.rollback();
-						System.out.println("error");
-					}catch(SQLException ex02) {
-						ex02.printStackTrace();
-					}
-					pdao.insert_Payment(payment);	
-				}
-		
-			
-			try {
-				connection.commit();
-				connection.setAutoCommit(true);
-			}catch(SQLException ex03) {
-				ex03.printStackTrace();
+			for(Payment list : purchase_Basket) {				
+				list.setPay_option(account_Transfer_Pay_Option);
 			}
+			boolean result = pdao.insert_Payment(purchase_Basket);
+			if(result==false) {
+				resp.sendRedirect("payment/methodsOfPayment/puchase_Failed.jsp");
+			}else if(result==true){
+				resp.sendRedirect("payment/methodsOfPayment/purchase_Succes.jsp");
+			}
+			
 				
-				resp.sendRedirect("index.jsp");
 				
-				
-		}else if(action.equals("clear_Purchase_Basket")) {
+		}else if(action.equals("clear_Purchase_Basket.do")) {
 			HttpSession session = req.getSession();
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
 			purchase_Basket.clear();
 			session.setAttribute("purchase_Basket", purchase_Basket);
-			rd = req.getRequestDispatcher("go_payment");
+			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
+		}else if(action.equals("goMain")) {
+			rd = req.getRequestDispatcher("/index.jsp");
+			rd.forward(req, resp);	
 		}
+			
 	}
 }

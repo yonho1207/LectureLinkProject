@@ -35,7 +35,7 @@ public class MembersCheckFilter implements Filter {
 			chain.doFilter(req,res);
 			
 		}else {
-			((HttpServletResponse)res).sendRedirect("/LectureLinkProject/members/login_input");
+			((HttpServletResponse)res).sendRedirect("go_login"); 
 			
 			
 		}

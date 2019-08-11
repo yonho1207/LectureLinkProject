@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h1>결제 정보를 확인하여 주십시오</h1>
-	<form method="get" action="payment_Confirm">
+	<form method="get" action="payment_Confirm.do">
 		<c:if test="${!empty purchase_Basket}">
 		<table>
 			<c:forEach var = "purchase_Basket" items="${purchase_Basket}">
@@ -30,11 +30,11 @@
 		
 	</c:forEach>
 		<h1>총액 : ${total}</h1>
-		<input type="button" onclick="location.href='account_Transfer'" value="현금 결제">
-		<input type="button" onclick="location.href='credit_Card'" value="카드 결제">
-		<input type="button" onclick="location.href='cell_Phone_Bill'" value="휴대폰 결제">
-		<input type="button" onclick="location.href='gift_Card_ETC'" value="상품권 혹은 기프티콘"><br />
-		<input type="button" onclick="location.href='go_payment'" value="결제 화면으로 이동하기">
+		<input type="button" onclick="location.href='account_Transfer.do'" value="현금 결제">
+		<input type="button" onclick="location.href='credit_Card.do'" value="카드 결제">
+		<input type="button" onclick="location.href='cell_Phone_Bill.do'" value="휴대폰 결제">
+		<input type="button" onclick="location.href='gift_Card_ETC.do'" value="상품권 혹은 기프티콘"><br />
+		<input type="button" onclick="location.href='go_payment.do'" value="결제 화면으로 이동하기">
 	</form>
 
 </body>

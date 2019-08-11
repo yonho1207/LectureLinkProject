@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Lecture;
+import model.Payment;
 
 public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 
@@ -108,6 +109,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 		
 		return lecture;
 	}
+
 
 	
 }

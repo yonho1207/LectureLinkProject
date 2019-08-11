@@ -15,8 +15,8 @@ import model.Payment;
 public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 
 	@Override
-	public boolean insert_Payment(Payment payment) {
-		boolean result = false;
+	public boolean insert_Payment(List<Payment> purchase_Basket) {
+		boolean result = false; 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null; 
 		
@@ -24,27 +24,47 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		try {
 			connection = getConnection();
 			connection.setAutoCommit(false);
-			preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
-			preparedStatement.setInt(1,payment.getLecture_no());
-			preparedStatement.setInt(2,payment.getMember_no());
-			preparedStatement.setString(3, payment.getId());
-			preparedStatement.setString(4, payment.getPayment_date());
-			preparedStatement.setString(5, payment.getLecture_name());
-			preparedStatement.setInt(6, payment.getPrice());
-			preparedStatement.setInt(7, payment.getPay_option());
-			preparedStatement.setString(8, payment.getPeriod());
-			int rowCount = preparedStatement.executeUpdate();
-			
-			
-			if(rowCount>0) {
+			for(Payment payment : purchase_Basket) {
+/*				if(payment.getLecture_no()==3) {
+					payment.setPay_option(7);
+				} */ //고의적 에러 발생으로 인한 트렌젝션 처리 정상 작동 여부 판별용 코드
+				preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
+				preparedStatement.setInt(1,payment.getLecture_no());
+				preparedStatement.setInt(2,payment.getMember_no());
+				preparedStatement.setString(3, payment.getId());
+				preparedStatement.setString(4, payment.getPayment_date());
+				preparedStatement.setString(5, payment.getLecture_name());
+				preparedStatement.setInt(6, payment.getPrice());
+				preparedStatement.setInt(7, payment.getPay_option());
+				preparedStatement.setString(8, payment.getPeriod());
+				int rowCount = preparedStatement.executeUpdate();
+				if(rowCount>0) {
+					
+					result=true;
+				}
 				
-				result=true;
 			}
 			
-			
+		
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
+			if(connection!=null) {
+				try {
+					connection.rollback();			
+		
+				}catch(SQLException ex02) {
+					ex02.printStackTrace();
+				}
+			}
+
 		}finally {
+			try {
+					connection.commit();
+					connection.setAutoCommit(true);
+				}catch(SQLException ex03) {
+					ex03.printStackTrace();
+				}
+			
 			closeDBObjects(null, preparedStatement, connection);
 	
 		}
@@ -106,41 +126,74 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 	}
 
 	@Override
-	public boolean Multiple_Insert_Payment(Payment payment) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null; 
-		
+	public List<Payment> attending_Lecture(int member_no) {
+		List<Payment> paymentList = new ArrayList<Payment>();
+		Connection connection = null; 
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
 		
 		try {
 			connection = getConnection();
-			connection.setAutoCommit(false);
-			preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
-			preparedStatement.setInt(1,payment.getLecture_no());
-			preparedStatement.setInt(2,payment.getMember_no());
-			preparedStatement.setString(3, payment.getId());
-			preparedStatement.setString(4, payment.getPayment_date());
-			preparedStatement.setString(5, payment.getLecture_name());
-			preparedStatement.setInt(6, payment.getPrice());
-			preparedStatement.setInt(7, payment.getPay_option());
-			preparedStatement.setString(8, payment.getPeriod());
-			int rowCount = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.ATTENDING_LECTURE);
+			preparedStatement.setInt(1, member_no);
+			resultSet = preparedStatement.executeQuery();
 			
-			
-			if(rowCount>0) {
-				
-				result=true;
+			while(resultSet.next()) {
+				Payment payment = new Payment();
+				payment.setPayment_no(resultSet.getInt("payment_no"));
+				payment.setLecture_no(resultSet.getInt("lecture_no"));
+				payment.setMember_no(resultSet.getInt("member_no"));
+				payment.setId(resultSet.getString("id")); 
+				payment.setPayment_date(resultSet.getString("payment_date"));
+				payment.setLecture_name(resultSet.getString("lecture_name"));
+				payment.setPrice(resultSet.getInt("price"));
+				payment.setPay_option(resultSet.getInt("pay_option"));
+				payment.setPeriod(resultSet.getString("period"));				
+				paymentList.add(payment);
 			}
-			
-			
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
 		}finally {
-			closeDBObjects(null, preparedStatement, connection);
-	
+			closeDBObjects(resultSet, preparedStatement, connection);
 		}
+		System.out.println(paymentList);
+		return paymentList;
+	}
+
+	@Override
+	public List<Payment> attended_Lecture(int member_no) {
+		List<Payment> paymentList = new ArrayList<Payment>();
+		Payment payment =null;
+		Connection connection = null; 
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
 		
-		return result;
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.LECTURE_SELECT_BY_NUM);
+			preparedStatement.setInt(1, member_no);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				payment = new Payment();
+				payment.setPayment_no(resultSet.getInt("payment_no"));
+				payment.setLecture_no(resultSet.getInt("lecture_no"));
+				payment.setMember_no(resultSet.getInt("member_no"));
+				payment.setId(resultSet.getString("id")); 
+				payment.setPayment_date(resultSet.getString("payment_date"));
+				payment.setLecture_name(resultSet.getString("lecture_name"));
+				payment.setPrice(resultSet.getInt("price"));
+				payment.setPay_option(resultSet.getInt("pay_option"));
+				payment.setPeriod(resultSet.getString("period"));				
+				paymentList.add(payment);
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		System.out.println(paymentList);
+		return paymentList;
 	}
 	
 	
