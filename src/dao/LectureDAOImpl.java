@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Lecture;
+import model.Payment;
 
 public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 
 	@Override
 	public List<Lecture> select_All_Lecture() {
 		List<Lecture> lecture_List = new ArrayList<Lecture>();
-		Connection connection = null;
+		Connection connection = null; 
 		PreparedStatement preparedStatement =null;
 		ResultSet resultSet = null;
 		
@@ -34,9 +35,9 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				
 			}
 			
-			for(Lecture list : lecture_List) {
+/*			for(Lecture list : lecture_List) {
 				System.out.println(list);
-			}
+			}*/
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
 		}finally {
@@ -77,4 +78,38 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 		return false;
 	}
 
+	@Override
+	public Lecture select_Lecture_No(int lecture_no) {
+		
+		Lecture lecture = null;
+		Connection connection = null; 
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.LECTURE_SELECT_BY_NUM);
+			preparedStatement.setInt(1, lecture_no);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				lecture = new Lecture();
+				lecture.setLecture_no(resultSet.getInt("lecture_no"));
+				lecture.setLecture_name(resultSet.getString("lecture_name"));
+				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
+				lecture.setPrice(resultSet.getInt("price"));
+				lecture.setText_price(resultSet.getInt("text_price"));
+				
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return lecture;
+	}
+
+
+	
 }

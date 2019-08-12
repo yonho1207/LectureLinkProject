@@ -3,7 +3,7 @@ package sql;
 public class PaymentSQL {
 
 	public static final String INSERT_PAYMENT_INFO =
-			"insert into payment VALUES (SEQ_PAYMENT_NO.nextval, ?, ?, ?,\r\n" + 
+			"insert into payment VALUES (SEQ_PAYMENT_NO.nextval, ?, ?, ?, \r\n" + 
 			" to_date(? ,'yyyy/mm/dd HH24:mi'), ?, ?, ?, \r\n" + 
 			" to_date(? ,'yyyy/mm/dd HH24:mi'))";
 	
