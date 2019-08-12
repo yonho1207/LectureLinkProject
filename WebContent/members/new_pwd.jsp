@@ -60,7 +60,7 @@
 </head>
 <body>
 새 비밀번호<br />
-${pwd_info}
+
 <form method="post" id="newpwdForm" action="pwd_update">
 <input type="hidden" name="member_no" id="member_no" value="${pwd_info.member_no}" />
 <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/><br />
