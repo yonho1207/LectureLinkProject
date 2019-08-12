@@ -74,7 +74,7 @@ public class PaymentController extends HttpServlet {
 			if(purchase_Basket==null) {
 				purchase_Basket = new ArrayList<Payment>();
 			}
-			purchase_Basket.add(payment);
+			purchase_Basket.add(payment); 
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);

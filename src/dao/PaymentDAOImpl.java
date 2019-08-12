@@ -161,18 +161,19 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 	}
 
 	@Override
-	public List<Payment> attended_Lecture(int member_no) {
+	public List<Payment> attended_Lecture(Payment payment) {
 		List<Payment> paymentList = new ArrayList<Payment>();
-		Payment payment =null;
 		Connection connection = null; 
 		PreparedStatement preparedStatement =null;
 		ResultSet resultSet = null;
 		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(sql.LectureSQL.LECTURE_SELECT_BY_NUM);
-			preparedStatement.setInt(1, member_no);
-			resultSet = preparedStatement.executeQuery();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.ATTENDED_LECTURE);
+			preparedStatement.setString(1, payment.getPeriod());
+			preparedStatement.setString(2, Time_Set_Helper.get_Today());
+			preparedStatement.setString(3, Time_Set_Helper.get_OneMonth_Later());
+			resultSet = preparedStatement.executeQuery(); 
 			
 			while(resultSet.next()) {
 				payment = new Payment();
