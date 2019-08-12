@@ -6,5 +6,5 @@ public class MembersSQL {
 			+ "(seq_member_no.nextval,?,?,?,?,?,?,?,?,?,?)";
 	public static final String MEMBERS_ID_CHECK = "select count(*) as cnt from members where id = ?";
 	public static final String MEMBERS_SELECT_BY_ID = "select * from members where id =?";
-
+	public static final String MEMBERS_UPDATE_SQL = "update members Set password=? where member_no=?";
 }

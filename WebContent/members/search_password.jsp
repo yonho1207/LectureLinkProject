@@ -1,23 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>ºñ¹Ð¹øÈ£ Ã£±â</h1>
+	<h1>ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</h1>
 	<form action="search_pwd" method="post">
-	<input type="text" name="id" id="id" placeholder="¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"/><br />
-	<input type="text" name="email" id="email" placeholder="ÀÌ¸ÞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"/><br />
-	Áú¹®<select name="question">
-				<option value="°¡Àå Ä£ÇÑ Ä£±¸ÀÇ ÀÌ¸§Àº?">°¡Àå Ä£ÇÑ Ä£±¸ÀÇ ÀÌ¸§Àº?</option>
-				<option value="ÃÊµîÇÐ±³ ¼±»ý´ÔÀÇ ÀÌ¸§Àº?">ÃÊµîÇÐ±³ ¼±»ý´ÔÀÇ ÀÌ¸§Àº?</option>
-				<option value="´ç½ÅÀÇ º°¸íÀº?">´ç½ÅÀÇ º°¸íÀº?</option>
+	<input type="text" name="id" id="id" placeholder="ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”"/><br />
+	<input type="text" name="email" id="email" placeholder="ì´ë©”ì¼ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”"/><br />
+	ì§ˆë¬¸<select name="question" id="question">
+				<option value="ê°€ìž¥ ì¹œí•œ ì¹œêµ¬ì˜ ì´ë¦„ì€?">ê°€ìž¥ ì¹œí•œ ì¹œêµ¬ì˜ ì´ë¦„ì€?</option>
+				<option value="ì´ˆë“±í•™êµ ì„ ìƒë‹˜ì˜ ì´ë¦„ì€?">ì´ˆë“±í•™êµ ì„ ìƒë‹˜ì˜ ì´ë¦„ì€?</option>
+				<option value="ë‹¹ì‹ ì˜ ë³„ëª…ì€?">ë‹¹ì‹ ì˜ ë³„ëª…ì€?</option>
 		</select><br />
-	<input type="text" name="answer" id="answer" placeholder="Áú¹®¿¡ ´ëÇÑ ´äÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"/><br />
-	<input type="submit" value="Á¦Ãâ"/><br />
+	<input type="text" name="answer" id="answer" placeholder="ì§ˆë¬¸ì— ëŒ€í•œ ë‹µì„ ìž…ë ¥í•´ì£¼ì„¸ìš”"/><br />
+	<input type="submit" value="ì œì¶œ"/><br />
 	</form>
 	${message}
 </body>

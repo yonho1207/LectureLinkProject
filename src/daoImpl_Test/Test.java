@@ -18,7 +18,7 @@ public class Test {
 		payment.setLecture_name("Python");
 		payment.setPrice(75000);
 		payment.setPay_option(2);
-		pdao.insert_Payment(payment);
+		
 		pdao.select_PaymentList(1);	
 
 		

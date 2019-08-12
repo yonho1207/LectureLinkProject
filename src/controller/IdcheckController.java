@@ -16,7 +16,7 @@ import model.Members;
 
 
 
-@WebServlet(name="IdcheckController",urlPatterns = {"/idcheck","/go_searchpwd","/search_pwd"})
+@WebServlet(name="IdcheckController",urlPatterns = {"/idcheck","/go_searchpwd","/search_pwd","/pwd_update"})
 public class IdcheckController extends HttpServlet{
 
 	@Override
@@ -80,17 +80,15 @@ public class IdcheckController extends HttpServlet{
 				MembersDAO dao = new MembersDAOImpl();
 				Members members = dao.selectById(id);
 				
+				System.out.println(members);
+				
 				if (members!=null && members.getId() !=null 
 						&& email.equals(members.getEmail()) 
 						&& question.equals(members.getQuestion()) 
 						&& answer.equals(members.getAnswer())) {
 
-					HttpSession session = req.getSession();
-					session.setAttribute("members_info", members);
-					
-					req.setAttribute("log","·Î±×ÀÎ");
-
-					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+					req.setAttribute("pwd_info", members);
+					RequestDispatcher rd = req.getRequestDispatcher("/members/new_pwd.jsp");
 					rd.forward(req, resp);
 				
 				}else{
@@ -105,6 +103,21 @@ public class IdcheckController extends HttpServlet{
 				}
 				
 			}
+			else if(action.equals("pwd_update")) {
+				
+				MembersDAO dao = new MembersDAOImpl();
+				Members members = new Members();
+				
+				members.setPassword(req.getParameter("password"));
+				members.setMember_no(Integer.parseInt(req.getParameter("member_no")));
+				dao.update(members);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+				rd.forward(req, resp);
+			}
+			
+			
+			
 
 		}
 }

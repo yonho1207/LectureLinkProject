@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
 import model.Members;
 import sql.MembersSQL;
 
@@ -54,13 +55,29 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 
 	}
 
-	@Override
-	public boolean update(Members members) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	public void update(Members members) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_UPDATE_SQL);
+			
+			preparedStatement.setString(1,members.getPassword());			
+			preparedStatement.setInt(2,members.getMember_no());
+			
+			
+			preparedStatement.executeUpdate();
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			closeDBObjects(null,preparedStatement,connection);
+			
+		}
+	}@Override
 	public boolean delete(String id) {
 		// TODO Auto-generated method stub
 		return false;
