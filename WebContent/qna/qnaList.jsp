@@ -60,5 +60,7 @@
 			<c:if test="${pageGroupResult.afterPage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
 			</c:if>
+			
+			<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

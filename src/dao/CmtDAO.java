@@ -8,7 +8,7 @@ import model.Cmt;
 public interface CmtDAO {
 
 	List<Cmt> selectAll();
-	//Cmt insert(Cmt comments);
-	//Cmt selectByNum(int num);
-	//void deleteByNum(int num);
+	Cmt insert(Cmt cmt);
+	Cmt selectByCmt_no(int cmt_no);
+	boolean deleteByCmt_no(int cmt_no);
 }

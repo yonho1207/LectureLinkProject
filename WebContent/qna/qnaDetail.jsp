@@ -79,5 +79,6 @@
 	<br >
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_qna'">리스트 돌아가기</button>
 	
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

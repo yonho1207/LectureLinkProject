@@ -18,10 +18,10 @@ import model.Qna;
 import page.PageManager;
 import page.PageSQL;
 
-@WebServlet(name = "Qnacontroller", urlPatterns = { "/go_qna", "/qna_detail", "/qna_inputform", "/qna_insert",
+@WebServlet(name = "QnaController", urlPatterns = { "/go_qna", "/qna_detail", "/qna_inputform", "/qna_insert",
 		"/qna_req_list","/qna_update","/qna_delete" })
 
-public class Qnacontroller extends HttpServlet {
+public class QnaController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
