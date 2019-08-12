@@ -25,5 +25,7 @@ public class LectureSQL {
 	public static final String UPDATE_LECTURE = 
 			"update lecture set LECTURE_NAME=? , \r\n" + 
 			"lecture_teacher = ?, PRICE =? ,TEXT_PRICE =? where LECTURE_NO=?";
+	public static final String DELETE_LECTURE =
+			"delete from lecture where lecture_no=?";
 	
 }

@@ -24,7 +24,7 @@
 				<td>${lecture_List.lecture_teacher}</td>
 				<td>${lecture_List.price}</td>
 				<td>${lecture_List.text_price}</td>
-				<input type="button" onclick="location.href='go_Main_in_Lectrue'" value="삭제하기">
+				<td><input type="button" onclick="location.href='delete_Lecture.do'" value="삭제하기"></td>
 			</tr>
 		</c:forEach>
 		</tbody>
