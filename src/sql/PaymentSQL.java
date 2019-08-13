@@ -14,8 +14,8 @@ public class PaymentSQL {
 	
 	public static final String UPDATE_PAYMENT_INFO =
 			" update  payment set  LECTURE_NO=?,MEMBER_NO=?, ID=?,\r\n" + 
-			" PAYMENT_DATE=to_date(? ,'yyyy/mm/dd HH24:mi'), LECTURE_NAME=?, \r\n" + 
-			" PRICE=?, PAY_OPTION=?, PERIOD=to_date(? ,'yyyy/mm/dd HH24:mi') \r\n" + 
+			" PAYMENT_DATE=to_date(? ,'yyyy-MM-dd hh24:mi:ss'), LECTURE_NAME=?, \r\n" + 
+			" PRICE=?, PAY_OPTION=?, PERIOD=to_date(? ,'yyyy-MM-dd hh24:mi:ss') \r\n" + 
 			" where PAYMENT_NO=?";
 	public static final String DELETE_PAYMENT_INFO =
 			" delete from payment where PAYMENT_NO = ?";

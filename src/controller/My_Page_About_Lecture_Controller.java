@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import dao.PaymentDAOImpl;
 import model.Members;
 import model.Payment;
-@WebServlet(name="My_Page_About_Lecture", urlPatterns = {"/go_Attended_Lecture.do","/go_Attending_Lecture.do"})
-public class My_Page_About_Lecture extends HttpServlet {
+@WebServlet(name="My_Page_About_Lecture_Controller", urlPatterns = {"/go_Attended_Lecture.do","/go_Attending_Lecture.do"})
+public class My_Page_About_Lecture_Controller extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,6 +50,7 @@ public class My_Page_About_Lecture extends HttpServlet {
 			List<Payment> selected_Period_List = new ArrayList<Payment>();
 			Members member =  (Members) session.getAttribute("members_info");		
 			selected_Period_List = pdao.attended_Lecture(member.getMember_no());
+			Lecture lec
 			req.setAttribute("selected_Period_List", selected_Period_List);
 			rd = req.getRequestDispatcher("my_Page/details/attended_Lecture.jsp");
 			rd.forward(req, resp);

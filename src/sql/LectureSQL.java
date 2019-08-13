@@ -13,13 +13,6 @@ public class LectureSQL {
 			"select PAYMENT_NO, lecture_no, member_no, id, lecture_name, payment_date\r\n" + 
 			",price, pay_option, period\r\n" + 
 			"from payment where member_no=? order by period desc";
-	public static final String ATTENDED_LECTURE =  
-			"    select PAYMENT_NO, lecture_no, member_no,\r\n" + 
-			"    id, lecture_name, payment_date\r\n" + 
-			"    ,price, pay_option, period from payment \r\n" + 
-			"    where to_date(?, 'yyyy/mm/dd') not between \r\n" + 
-			"    to_date(?, 'yyyy/mm/dd')\r\n" + 
-			"    and to_date(?, 'yyyy/mm/dd')";
 	public static final String INSERT_LECTURE =
 			"insert into lecture VALUES (seq_lecture_no.nextval, ?, ?, ?, ?)";
 	public static final String UPDATE_LECTURE = 
