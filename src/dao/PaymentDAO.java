@@ -10,7 +10,7 @@ public interface PaymentDAO {
 	boolean update_Payment(Payment payment);
 	boolean delete_Payment(int payment_no);
 	List<Payment> attending_Lecture(int member_no);
-	List<Payment> attended_Lecture(Payment payment);
+	List<Payment> attended_Lecture(int members_No);
 	
 	List<Payment> select_PaymentList(int member_no);
 }

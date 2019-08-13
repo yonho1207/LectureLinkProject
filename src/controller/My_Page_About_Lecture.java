@@ -45,6 +45,12 @@ public class My_Page_About_Lecture extends HttpServlet {
 			rd = req.getRequestDispatcher("my_Page/details/attending_Lecture.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("go_Attended_Lecture.do")) {
+			HttpSession session = req.getSession();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			List<Payment> selected_Period_List = new ArrayList<Payment>();
+			Members member =  (Members) session.getAttribute("members_info");		
+			selected_Period_List = pdao.attended_Lecture(member.getMember_no());
+			req.setAttribute("selected_Period_List", selected_Period_List);
 			rd = req.getRequestDispatcher("my_Page/details/attended_Lecture.jsp");
 			rd.forward(req, resp);
 		}

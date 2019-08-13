@@ -11,5 +11,6 @@
 	<h2><a href="">회원 정보 조회 및 수정</a></h2>
 	<h2><a href="go_Attending_Lecture.do">수강중인 강의 목록</a></h2>
 	<h2><a href="go_Attended_Lecture.do">수강했던 강의 목록</a></h2>
+	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
 </body>
 </html>

@@ -4,8 +4,8 @@ public class PaymentSQL {
 
 	public static final String INSERT_PAYMENT_INFO =
 			"insert into payment VALUES (SEQ_PAYMENT_NO.nextval, ?, ?, ?, \r\n" + 
-			" to_date(? ,'yyyy/mm/dd'), ?, ?, ?, \r\n" + 
-			" to_date(? ,'yyyy/mm/dd'))";
+			" to_date(? ,'yyyy-MM-dd hh24:mi:ss'), ?, ?, ?, \r\n" + 
+			" to_date(? ,'yyyy-MM-dd hh24:mi:ss'))";
 	
 	public static final String SELECT_MY_PAYMENT = 
 			"  select payment_no,LECTURE_NO,MEMBER_NO, id,\r\n" + 

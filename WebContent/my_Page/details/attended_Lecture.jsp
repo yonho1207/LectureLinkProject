@@ -11,10 +11,10 @@
 
 	<h3>반갑습니다 ${members_info.id}님</h3> 
 	귀하께서는 현재까지 이하의 강의를 수강하셨습니다.
-	<c:forEach var="attending_List" items="${attending_List}">
-			<h4>수강중이신 강의명 : ${attending_List.lecture_name}</h4>			
-			구매하신 일시 : ${attending_List.payment_date}<br />
-			예상 만료 기간: ${attending_List.period}<hr />
+	<c:forEach var="selected_Period_List" items="${selected_Period_List}">
+			<h4>수강중이신 강의명 : ${selected_Period_List.lecture_name}</h4>			
+			구매하신 일시 : ${selected_Period_List.payment_date}<br />
+			예상 만료 기간: ${selected_Period_List.period}<hr />
 		</c:forEach>
 	<br />
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
