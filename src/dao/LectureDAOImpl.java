@@ -117,8 +117,28 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 
 	@Override
 	public boolean delete_Lecture(int lecture_no) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection connection = null; 
+		PreparedStatement preparedStatement =null;
+		boolean Result = false;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareCall(sql.LectureSQL.DELETE_LECTURE);
+			preparedStatement.setInt(1, lecture_no);
+			int rowCount = preparedStatement.executeUpdate();
+			
+			if(rowCount > 0) {
+				Result = true;
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(null, preparedStatement, connection);
+			
+		}
+		
+		return Result;
 	}
 
 	@Override

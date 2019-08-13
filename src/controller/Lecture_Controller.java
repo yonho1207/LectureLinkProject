@@ -84,7 +84,8 @@ public class Lecture_Controller extends HttpServlet {
 			rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);	
 		}else if(action.equals("delete_Lecture.do")) {
-			
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			ldao.delete_Lecture(Integer.parseInt(req.getParameter("lecture_no")));
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
 			rd.forward(req, resp);
 		}

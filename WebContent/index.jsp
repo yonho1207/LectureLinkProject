@@ -22,7 +22,7 @@
 	<c:if test="${members_info!=null && members_info.id=='admin'}">
 	<h1><a href="go_admin">관리자페이지로 이동</a></h1>
 	</c:if>
-<h1><a href="go_my_page.do">마이 페이지a</a></h1>
+<h1><a href="go_my_page.do">마이 페이지</a></h1>
 <h1><a href="go_payment.do">결제화면</a></h1>
 
 <h1><a href="go_qna">Qna게시판</a></h1>

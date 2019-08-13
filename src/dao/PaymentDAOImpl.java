@@ -156,7 +156,6 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		}finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		System.out.println(paymentList);
 		return paymentList;
 	}
 

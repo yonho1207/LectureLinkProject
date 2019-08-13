@@ -12,7 +12,7 @@ public class LectureSQL {
 	public static final String ATTENDING_LECTURE =
 			"select PAYMENT_NO, lecture_no, member_no, id, lecture_name, payment_date\r\n" + 
 			",price, pay_option, period\r\n" + 
-			"from payment where member_no=?";
+			"from payment where member_no=? order by period desc";
 	public static final String ATTENDED_LECTURE =  
 			"    select PAYMENT_NO, lecture_no, member_no,\r\n" + 
 			"    id, lecture_name, payment_date\r\n" + 
