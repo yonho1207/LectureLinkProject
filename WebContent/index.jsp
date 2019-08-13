@@ -28,7 +28,5 @@
 <h1><a href="go_qna">Qna게시판</a></h1>
 <h1><a href="go_account">회원가입</a></h1>
 <h1><a href="go_cmt">댓글게시판</a></h1>
-<h1><a href="go_Lecture_Insert.do">강의 생성(임시)</a></h1>
-<h1><a href="go_Lecture_List.do">강의 목록(임시)</a></h1>
 </body>
 </html>
