@@ -36,19 +36,26 @@
 		<a class="fas fa-coins"  href="go_payment.do">결제 화면으로 ||</a>
 		<a class="far fa-list-alt"  href="go_qna">문의 게시판 ||</a>
 		<c:choose>
-		<c:when  test="${members_info==null}">
-			<a class="fas fa-sign-in-alt" href="go_login">로그인 ||</a>
-			<a  class="far fa-id-card" href="go_account">회원가입 ||</a>
-		</c:when>
-		<c:when test="${members_info!=null}">
-			<form action="logout" class= "fas fa-sign-out-alt">
-				<input type="submit" value="로그아웃"/>
-			</form>
-		</c:when>
-		</c:choose>
-		<c:if test="${admin!=null}">
-			<a class="fas fa-user-shield" href="go_admin.admin">관리자페이지로 이동</a>
-		</c:if>
+				<c:when  test="${members_info==null && admin==null}">
+					<li class="nav-item">
+						<a class="nav-link" href="go_login">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_account">회원가입</a>
+					</li>
+				</c:when>
+				<c:when test="${members_info!=null || admin!=null}">
+					<li class="nav-item">
+						<a class="nav-link" href="logout">로그아웃</a>
+					</li>
+				</c:when>
+				</c:choose>
+				<c:if test="${admin!=null && members_info==null}">
+					<li class="nav-item">
+					
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+					</li>
+				</c:if>
 	</header>
 
 
