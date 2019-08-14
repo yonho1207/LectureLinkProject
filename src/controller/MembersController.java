@@ -82,15 +82,40 @@ public class MembersController extends HttpServlet{
 			System.out.println(members);
 			/*System.out.println(id);
 */
-			if (members!=null && members.getId() !=null && password.equals(members.getPassword())) {
+			if (members!=null && members.getId() !=null && members.getId().equals("admin")
+					&& password.equals(members.getPassword())) {
 
-				HttpSession session = req.getSession();
-				session.setAttribute("members_info", members);
 				
-				req.setAttribute("log","로그인");
+					
+					HttpSession session = req.getSession();
+					session.setAttribute("admin", members);
+					
+					
+					req.setAttribute("log","로그인");
 
-				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-				rd.forward(req, resp);
+					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+					rd.forward(req, resp);
+					
+				
+				
+			
+			}
+			else if (members!=null && members.getId() !=null && members.getId() != "admin"
+					&& password.equals(members.getPassword())) {
+
+				
+					
+					HttpSession session = req.getSession();
+					session.setAttribute("members_info", members);
+					
+					
+					req.setAttribute("log","로그인");
+
+					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+					rd.forward(req, resp);
+					
+				
+				
 			
 			}else{
 				
@@ -104,8 +129,8 @@ public class MembersController extends HttpServlet{
 			}
 			
 			
-
 		}
+		
 		else if (action.equals("logout")) {
 			
 			HttpSession session = req.getSession();

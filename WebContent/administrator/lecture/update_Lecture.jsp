@@ -46,8 +46,8 @@
 			</form>
 		</c:when>
 		</c:choose>
-		<c:if test="${members_info!=null && members_info.id=='admin'}">
-			<a class="fas fa-user-shield" href="go_admin">관리자페이지로 이동</a>
+		<c:if test="${admin!=null}">
+			<a class="fas fa-user-shield" href="go_admin.admin">관리자페이지로 이동</a>
 		</c:if>
 	</header>
 

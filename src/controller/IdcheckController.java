@@ -48,7 +48,7 @@ public class IdcheckController extends HttpServlet{
 				MembersDAO dao = new MembersDAOImpl();
 				System.out.println(id);
 				int cnt = dao.idcheck(id);
-				System.out.println(cnt);
+				req.setAttribute("cnt", cnt);
 				
 				if(cnt>0) {
 					

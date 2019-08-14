@@ -4,5 +4,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <idcheck>
 	<idcheck_result>${message}</idcheck_result>
+	<idcheck_cnt>${cnt}</idcheck_cnt>
 	
 </idcheck>
