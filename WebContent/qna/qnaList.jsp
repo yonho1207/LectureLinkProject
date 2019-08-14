@@ -14,7 +14,7 @@
 </head>
 <body>
 <h3>Q&A게시판</h3>
-	<a href= "qna_detail"></a>
+
 	<div class="container">
 	<table class="table">
 		<tr>	
@@ -33,15 +33,17 @@
 					<td>${qna.qna_date}</td>
 				</tr>
 			</c:forEach>
-			
-			<c:if test="${members_info != null}">
-			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>		
-			</c:if>
 
 			</table>	
 		</div>	
 		
-		
+	<table class="">
+		<c:if test="${members_info != null}">
+			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>
+			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_cmt'" >Cmt</button>		
+		</c:if>
+	</table>
+	
 	<!-- 페이지 처리부분 -->
 			<c:if test="${pageGroupResult.beforePage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
@@ -64,7 +66,6 @@
 			<c:if test="${pageGroupResult.afterPage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
 			</c:if>
-			
 			<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

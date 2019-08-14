@@ -50,7 +50,6 @@ public class My_Page_About_Lecture_Controller extends HttpServlet {
 			List<Payment> selected_Period_List = new ArrayList<Payment>();
 			Members member =  (Members) session.getAttribute("members_info");		
 			selected_Period_List = pdao.attended_Lecture(member.getMember_no());
-			Lecture lec
 			req.setAttribute("selected_Period_List", selected_Period_List);
 			rd = req.getRequestDispatcher("my_Page/details/attended_Lecture.jsp");
 			rd.forward(req, resp);
