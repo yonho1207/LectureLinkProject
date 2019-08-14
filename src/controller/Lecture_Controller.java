@@ -89,10 +89,17 @@ public class Lecture_Controller extends HttpServlet {
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
 			rd.forward(req, resp);
 		}else if(action.equals("go_Lecture_attend.do")) {
-			rd = req.getRequestDispatcher("lecture/lecture_Progress_Page.jsp");
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
+			req.setAttribute("selected_Lecture", selected_Lecture);
+			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("jump_To_Clicked_Lecture")) {
-			
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
+			req.setAttribute("selected_Lecture", selected_Lecture);
+			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
+			rd.forward(req, resp);
 		}else if(action.equals("go_Lecture_List")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			List<Lecture> lecture_List = ldao.select_All_Lecture();

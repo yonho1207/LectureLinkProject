@@ -95,6 +95,7 @@ public class AdminController extends HttpServlet{
 				System.out.println(members);
 				dao.update(members);
 				
+				
 				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 				rd.forward(req, resp);
 			}

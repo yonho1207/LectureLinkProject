@@ -39,7 +39,7 @@
 				</div>
 			
 				<c:choose>
-				<c:when  test="${members_info==null}">
+				<c:when  test="${members_info==null && admin==null}">
 					<li class="nav-item">
 						<a class="nav-link" href="go_login">로그인</a>
 					</li>
@@ -47,15 +47,16 @@
 						<a class="nav-link" href="go_account">회원가입</a>
 					</li>
 				</c:when>
-				<c:when test="${members_info!=null}">
+				<c:when test="${members_info!=null || admin!=null}">
 					<li class="nav-item">
 						<a class="nav-link" href="logout">로그아웃</a>
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
+				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+					
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
 			</ul>
@@ -64,7 +65,7 @@
 	
 	<c:forEach var="lecture_List" items="${lecture_List}">
 		<input type="hidden" value="${lecture_List.lecture_no}">
-		<h4><a href="go_Lecture_attend.do">강의명 : ${lecture_List.lecture_name}</a></h4>
+		<h4><a href="go_Lecture_attend.do?lecture_no=${lecture_List.lecture_no}">강의명 : ${lecture_List.lecture_name}</a></h4>
 		강사 : ${lecture_List.lecture_teacher}
 		가격 : ${lecture_List.price}
 	</c:forEach>

@@ -100,7 +100,7 @@ public class MembersController extends HttpServlet{
 				
 			
 			}
-			else if (members!=null && members.getId() !=null && members.getId() != "admin"
+			else if (members!=null && members.getId() !=null &&!members.getId().equals("admin")
 					&& password.equals(members.getPassword())) {
 
 				
@@ -132,6 +132,7 @@ public class MembersController extends HttpServlet{
 			
 			HttpSession session = req.getSession();
 			session.removeAttribute("members_info");
+			session.removeAttribute("admin");
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
