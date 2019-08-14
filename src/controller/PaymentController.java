@@ -73,12 +73,29 @@ public class PaymentController extends HttpServlet {
 			payment.setPayment_date(req.getParameter("payment_date"));
 			payment.setLecture_name(lecture.getLecture_name());
 			int select_Price = Integer.parseInt(req.getParameter("select_Price"));
+			int perchase_Book = Integer.parseInt(req.getParameter("buy_Book"));
 			if(select_Price==6) {
-				payment.setPrice(lecture.getPrice()*6);
-				payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
+				Lecture book_Info = null;
+				if(perchase_Book==1) {
+					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
+					payment.setPrice(lecture.getPrice()*6+book_Info.getText_price());
+					payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
+				}else {
+					payment.setPrice(lecture.getPrice()*6);
+					payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
+				}
+
 			}else {
-				payment.setPrice(lecture.getPrice());
-				payment.setPeriod(req.getParameter("period"));
+				Lecture book_Info = null;
+				if(perchase_Book==1) {
+					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
+					payment.setPrice(lecture.getPrice()+book_Info.getText_price());
+					payment.setPeriod(req.getParameter("period"));
+				}else {
+					payment.setPrice(lecture.getPrice());
+					payment.setPeriod(req.getParameter("period"));
+				}
+
 			}
 			
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");

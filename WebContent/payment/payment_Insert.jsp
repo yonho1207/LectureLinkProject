@@ -79,7 +79,7 @@
 				<option value="1" > 1개월</option>
 				<option value="6" > 6개월</option>
 				</select><br />
-				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까?
+				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까?<br />
 				<input type="submit" value="구매 리스트에 추가하기">
 				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 		</form> 

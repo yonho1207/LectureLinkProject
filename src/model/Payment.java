@@ -11,7 +11,7 @@ public class Payment {
     String lecture_name;
     int price;
     int pay_option;
-    boolean buy_Book;
+    int buy_Book = 0;
     String period;
     
     public int getPayment_no() {
@@ -71,10 +71,10 @@ public class Payment {
     
     
     
-    public boolean isBuy_Book() {
+    public  int Buy_Book() {
 		return buy_Book;
 	}
-	public void setBuy_Book(boolean buy_Book) {
+	public void setBuy_Book(int buy_Book) {
 		this.buy_Book = buy_Book;
 	}
 	@Override
