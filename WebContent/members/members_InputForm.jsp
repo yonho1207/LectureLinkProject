@@ -102,6 +102,7 @@
 	});
 	</script>
 	<script type="text/javascript">
+var idck=0;
 	$(function(){
 		$("#checkid").click(function(){
 				
@@ -117,9 +118,47 @@
 				$.get(url,{"id":input_val},function(xml){
 					
 					var result = $(xml).find("idcheck_result").text();
-					
+					var cnt = $(xml).find("idcheck_cnt").text();
 					$(".console").html(result);
+					
+					if(cnt>0){
+						idck = 0;
+						
+						
+					}else if(cnt==0){
+						idck = 1;
+						
+						
+					}else if(cnt!=null){
+						
+						idck=2;
+					}
+					
+					
 				});
+		});
+		
+		
+	});
+	
+	
+	$(function(){
+		$("#signup").click(function(){
+			
+			if(idck == 1){
+				
+				alert("회원가입 완료.다시 로그인 해주세요.");
+				return true;
+				
+			}
+			if(idck ==0){
+				alert("중복체크를 먼저 진행해주세요");
+				return false;
+				
+			}
+			
+			
+			
 		});
 		
 		
@@ -162,9 +201,9 @@
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
+				<c:if test="${admin!=null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
 			</ul>
@@ -195,7 +234,7 @@
 			
 			
 			<input type="reset" value="원래대로"/>
-			<input type="submit" value="가입하기"/>
+			<input type="submit" id="signup" value="가입하기"/>
 		</form>
 
 </body>

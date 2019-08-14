@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.AdminDAO;
+import dao.AdminDAOImpl;
 import dao.MembersDAO;
 import dao.MembersDAOImpl;
 import model.Members;
 
 
-@WebServlet(name="AdminController",urlPatterns = {"/go_admin","/admin_memberList","/member_detail"})
+@WebServlet(name="AdminController",urlPatterns = {"/go_admin.admin","/admin_memberList","/member_detail","/admin_update"})
 public class AdminController extends HttpServlet{
 
 	@Override
@@ -41,7 +43,7 @@ public class AdminController extends HttpServlet{
 			req.setCharacterEncoding("utf-8");
 			
 			
-			if(action.equals("go_admin")) {
+			if(action.equals("go_admin.admin")) {
 				
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/administrator/member/adminPage.jsp");
@@ -71,6 +73,29 @@ public class AdminController extends HttpServlet{
 				req.setAttribute("members", members);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/administrator/member/member_detail.jsp");
+				rd.forward(req, resp);
+			}
+			else if(action.equals("admin_update")) {
+				
+				AdminDAO dao = new AdminDAOImpl();
+				Members members = new Members();
+				
+				
+				members.setPassword(req.getParameter("password"));
+				members.setLastname(req.getParameter("lastname"));
+				members.setFirstname(req.getParameter("firstname"));
+				
+				members.setPhone(req.getParameter("phone"));
+				members.setEmail(req.getParameter("email"));
+				members.setQuestion(req.getParameter("question"));
+				members.setAnswer(req.getParameter("answer"));
+				members.setId(req.getParameter("id"));
+				
+				
+				System.out.println(members);
+				dao.update(members);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 				rd.forward(req, resp);
 			}
 			

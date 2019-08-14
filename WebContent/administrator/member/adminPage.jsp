@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
       <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,6 +19,8 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<a class="navbar-brand" href="goMain">Logo</a>
 			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="go_qna">문의 게시??</a>
 					<li class="nav-item">
 						<a class="nav-link" href="go_qna">문의 게시판</a>
 					</li>
@@ -27,6 +29,8 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+				<li class="nav-item">
+					<a class="nav-link" href="go_qna">문의 게시판</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
@@ -56,15 +60,16 @@
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
+				<c:if test="${admin!=null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
 			</ul>
 		</nav>
 	<br>
+	<h1><a href="admin_memberList">회원 관리페이지</a></h1>
+	<h1><a href="admin_lecture">강의 등록페이지</a></h1>
 
-관리자 ?�용?�이지
 </body>
 </html>
