@@ -14,7 +14,8 @@ import dao.CmtDAO;
 import dao.CmtDAOImpl;
 import model.Cmt;
 
-@WebServlet(name = "CmtController", urlPatterns = { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete" })
+@WebServlet(name = "CmtController", urlPatterns 
+= { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete","/cmt_Fom1","/cmt_Fom2","/cmt_Fom3"})
 
 public class CmtController extends HttpServlet {
 
@@ -37,17 +38,35 @@ public class CmtController extends HttpServlet {
 		String action = uri.substring(lastIndex + 1);
 
 		if (action.equals("go_cmt")) {
-
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm.jsp");
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtTest.jsp");
 			rd.forward(req, resp);
 
+		}else if (action.equals("cmt_Fom1")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm1.jsp");
+			rd.forward(req, resp);
+			
+		}else if (action.equals("cmt_Fom2")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm2.jsp");
+			rd.forward(req, resp);
+			
+		}else if (action.equals("cmt_Fom3")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm3.jsp");
+			rd.forward(req, resp);
+			
 		} else if (action.equals("cmt_list")) {
-
+			
+			int lecture_no=2;
+			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
+			
 			CmtDAO dao = new CmtDAOImpl();
-			List<Cmt> cmtList = dao.selectAll();
-
+			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
+			
 			req.setAttribute("cmtList", cmtList);
-
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
 			rd.forward(req, resp);
 
@@ -59,7 +78,6 @@ public class CmtController extends HttpServlet {
 			cmt.setLecture_no(Integer.parseInt(req.getParameter("lecture_no")));
 			cmt.setId(req.getParameter("id"));
 			cmt.setCmt_con(req.getParameter("cmt_con"));
-			
 			cmt.setRating(Integer.parseInt(req.getParameter("star-input")));
 
 			CmtDAO dao = new CmtDAOImpl();
@@ -67,12 +85,14 @@ public class CmtController extends HttpServlet {
 			Cmt resultComment = dao.insert(cmt);
 
 			if (resultComment != null) {
+				
 				req.setAttribute("result", true);
-				req.setAttribute("message", "´ñ±ÛÀÌ Ãß°¡ ¼º°ø!");
+				//req.setAttribute("message", "´ñ±ÛÀÌ Ãß°¡ ¼º°ø!");
 
 			} else {
+				
 				req.setAttribute("result", false);
-				req.setAttribute("message", "´ñ±Û Ãß°¡ ½ÇÆÐ~");
+				//req.setAttribute("message", "´ñ±Û Ãß°¡ ½ÇÆÐ~");
 			}
 
 			req.setAttribute("cmt", resultComment);
