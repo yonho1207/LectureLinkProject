@@ -55,10 +55,10 @@
 
 
 
-	<h1>Q&A 작성 게시판</h1>
+	<h1>공지사항 작성 게시판</h1>
 	<div class="container">
 	
-	<form action="qna_insert">
+	<form action="notice_insert">
     <div class="form-group">	
       <label for=id>작성자:</label>
       <input type="hidden" name = "id" value="${members_info.id}"><br />

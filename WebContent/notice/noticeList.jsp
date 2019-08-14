@@ -77,6 +77,7 @@
 
 			</table>	
 		</div>	
+		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" >글쓰기</button>
 		
 <%-- 	<table class="">
 		<c:if test="${members_info.id != null}">

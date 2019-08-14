@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Notice;
-import model.Qna;
 import sql.NoticeSQL;
-import sql.QnaSQL;
 
 public class NoticeDAOImpl extends BaseDAO implements NoticeDAO {
 

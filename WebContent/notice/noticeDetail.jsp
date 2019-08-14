@@ -62,8 +62,14 @@
  	
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
-      <input type="hidden" name = "notice" value="${notice.notice_no}"><br />
-      <input type="text" class="form-control" id="notice"  value="${notice.notice_no}" disabled="disabled"/>
+      <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
+      <input type="text" class="form-control" id="notice_no"  value="${notice.notice_no}" disabled="disabled"/>
+    </div>
+    
+    <div class="form-group">	
+      <label for=notice_no>등록일자:</label>
+      <input type="hidden" name = "notice_date" value="${notice.notice_date}"><br />
+      <input type="text" class="form-control" id="notice_date"  value="${notice.notice_date}" disabled="disabled"/>
     </div>
     
     <div class="form-group">
@@ -78,14 +84,16 @@
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
 	
-	<div class="form-group">
-  		<label for="notice_date">내용:</label>
-  		<input type="hidden" name = "notice_date" value="${notice.notice_date}">
-  		<textarea class="form-control" rows="5" name = "notice_date" id="notice_date" disabled="disabled">${notice.notice_date}</textarea>
-	</div>
- 	
 	</div>
 	<br >
+	<div class="form-group">
+	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">삭제</a>
+	</div>	
+	<div class="form-group">
+	<a type="button"  class="btn btn-primary" href=""notice_update"">수정</a>
+	</div>
+
+		
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_notice'">리스트 돌아가기</button>
 	
 	<%@ include file ="/companyLogo.jsp" %>
