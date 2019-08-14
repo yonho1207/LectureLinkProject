@@ -24,7 +24,7 @@ public class MembersController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req,resp);
-		//System.out.println("doGet() È£ÃâµÊ");
+		//System.out.println("doGet() È£ï¿½ï¿½ï¿½");
 		
 	}
 
@@ -87,15 +87,15 @@ public class MembersController extends HttpServlet{
 				HttpSession session = req.getSession();
 				session.setAttribute("members_info", members);
 				
-				req.setAttribute("log","·Î±×ÀÎ");
+				req.setAttribute("log","ï¿½Î±ï¿½ï¿½ï¿½");
 
-				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/goMain");
 				rd.forward(req, resp);
 			
 			}else{
 				
 				
-				req.setAttribute("message", "¾ÆÀÌµð¿Í ÆÐ½º¿öµå¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
+				req.setAttribute("message", "ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/members/login.jsp");
 				rd.forward(req, resp);
