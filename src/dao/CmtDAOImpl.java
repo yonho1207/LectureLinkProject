@@ -36,11 +36,11 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 				cmt.setCmt_con(resultSet.getString("cmt_con"));
 				cmt.setRating(resultSet.getInt("rating"));
 				cmt.setCmt_date(resultSet.getString("cmt_date"));
+				cmt.setLecture_no(resultSet.getInt("lecture_no"));
 
 				cmtList.add(cmt);
-				
+
 			}
-			System.out.println("¿”«√"+cmtList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -67,8 +67,10 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			preparedStatement = connection.prepareStatement(CmtSQL.CMT_INSERT_SQL);
 
 			preparedStatement.setInt(1, cmt.getMember_no());
-			preparedStatement.setString(2, cmt.getId());
-			preparedStatement.setString(3, cmt.getCmt_con());
+			preparedStatement.setInt(2, cmt.getLecture_no());
+			preparedStatement.setString(3, cmt.getId());
+			preparedStatement.setString(4, cmt.getCmt_con());
+			preparedStatement.setInt(5, cmt.getRating());
 
 			int rowCount = preparedStatement.executeUpdate();
 
@@ -77,11 +79,10 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 				resultSet = statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
 
 				if (resultSet.next()) {
-					selectByComment = selectByCmt_no(resultSet.getInt("cmt_no"));// ???
-					System.out.println(selectByComment.toString());
+					selectByComment = selectByCmt_no(resultSet.getInt("num"));
 				}
-			}
 
+			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -110,11 +111,13 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			if (resultSet.next()) {
 
 				cmt.setCmt_no(resultSet.getInt("cmt_no"));
+				cmt.setLecture_no(resultSet.getInt("lecture_no"));
 				cmt.setMember_no(resultSet.getInt("member_no"));
 				cmt.setId(resultSet.getString("id"));
 				cmt.setCmt_con(resultSet.getString("cmt_con"));
 				cmt.setRating(resultSet.getInt("rating"));
 				cmt.setCmt_date(resultSet.getString("cmt_date"));
+				
 			}
 
 		} catch (SQLException e) {

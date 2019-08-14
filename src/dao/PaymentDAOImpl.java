@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import model.Lecture;
 import model.Payment;
 
 public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
@@ -173,7 +174,9 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(sql.PaymentSQL.SELECT_MY_PAYMENT);
 			preparedStatement.setInt(1, members_No);
-			resultSet = preparedStatement.executeQuery(); 
+			resultSet = preparedStatement.executeQuery();
+			
+			
 			
 			while(resultSet.next()) {
 				payment = new Payment();
