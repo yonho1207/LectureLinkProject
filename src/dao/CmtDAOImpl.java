@@ -75,11 +75,12 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			int rowCount = preparedStatement.executeUpdate();
 
 			if (rowCount > 0) {
+				
 				statement = connection.createStatement();
 				resultSet = statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
 
 				if (resultSet.next()) {
-					selectByComment = selectByCmt_no(resultSet.getInt("num"));
+					selectByComment = (Cmt) selectByLecture_no(resultSet.getInt("num"));
 				}
 
 			}
@@ -95,21 +96,26 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 	}
 
 	@Override
-	public Cmt selectByCmt_no(int cmt_no) {
+	public List<Cmt> selectByLecture_no(int lecture_no) {
 
-		Cmt cmt = new Cmt();
+		List<Cmt> cmtList = new ArrayList<Cmt>();
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(CmtSQL.CMT_SELECT_BY_CMT_NO_SQL);
-			preparedStatement.setInt(1, cmt_no);
+			preparedStatement = connection.prepareStatement(CmtSQL.CMT_SELECT_BY_LECTURE_NO_SQL);
+			preparedStatement.setInt(1, lecture_no);
 			resultSet = preparedStatement.executeQuery();
 
-			if (resultSet.next()) {
-
+			
+	
+			while (resultSet.next()) {
+				
+				Cmt cmt = new Cmt();
+				
 				cmt.setCmt_no(resultSet.getInt("cmt_no"));
 				cmt.setLecture_no(resultSet.getInt("lecture_no"));
 				cmt.setMember_no(resultSet.getInt("member_no"));
@@ -118,6 +124,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 				cmt.setRating(resultSet.getInt("rating"));
 				cmt.setCmt_date(resultSet.getString("cmt_date"));
 				
+				cmtList.add(cmt);
 			}
 
 		} catch (SQLException e) {
@@ -126,7 +133,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 		} finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		return cmt;
+		return cmtList;
 
 	}
 

@@ -66,13 +66,13 @@ public class Qna {
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
 	}
+	
 	@Override
 	public String toString() {
 		return "Qna [qna_no=" + qna_no + ", member_no=" + member_no + ", id=" + id + ", qna_title=" + qna_title
 				+ ", qna_con=" + qna_con + ", qna_date=" + qna_date + ", visited=" + visited + ", grp=" + grp + ", lvl="
 				+ lvl + "]";
 	} 
-	
 	
 	
 }

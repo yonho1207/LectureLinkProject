@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.LectureDAOImpl;
 import model.Lecture;
 import model.Members;
-@WebServlet(name="Lecture_Controller", urlPatterns = {"/delete_Lecture.do","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.do","/go_Lecture_Update.do","/go_Lecture_Insert.do","/insert_Lecture.do"})
+@WebServlet(name="Lecture_Controller", urlPatterns = {"/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.do","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.do","/go_Lecture_Update.do","/go_Lecture_Insert.do","/insert_Lecture.do"})
 public class Lecture_Controller extends HttpServlet {
 	
 	@Override
@@ -88,6 +88,11 @@ public class Lecture_Controller extends HttpServlet {
 			ldao.delete_Lecture(Integer.parseInt(req.getParameter("lecture_no")));
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
 			rd.forward(req, resp);
+		}else if(action.equals("go_Lecture_attend.do")) {
+			rd = req.getRequestDispatcher("lecture/lecture_Progress_Page.jsp");
+			rd.forward(req, resp);
+		}else if(action.equals("jump_To_Clicked_Lecture")) {
+			
 		}
 	}
 	

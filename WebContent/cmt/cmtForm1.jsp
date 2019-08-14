@@ -29,6 +29,7 @@
 		내용: {{= cmt_con}}
 		별점 : {{= rating}}
 		등록일자 : {{= cmt_date}}
+
 		{{if chk == true}}
 		<input type="button" class="delete_btn" value="삭제">
 		{{/if}}
@@ -40,7 +41,6 @@
 
 
 function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) {
-	
 	
 	var li_data = {
 			
@@ -59,19 +59,20 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 	$("#cmt_list").prepend(new_li);
 }
 
-$(function(){
-	$.get("cmt_list",{}, function(data){
+	$(function(){
+		$.get("cmt_list",{}, function(data){
 		
-		$(data).find("cmt").each(function(){
+			$(data).find("cmt").each(function(){
 			
-			var cmt_no =$(this).find("cmt_no").text();
-			var member_no =$(this).find("member_no").text();
-			var lecture_no = $(this).find("lecture_no").text();
-			var id = $(this).find("id").text();
-			var cmt_con = $(this).find("cmt_con").text();
-			var rating = $(this).find("rating").text();
-			var cmt_date = $(this).find("cmt_date").text();
-			var chk = false;
+				var cmt_no =$(this).find("cmt_no").text();
+				var member_no =$(this).find("member_no").text();
+				var lecture_no = $(this).find("lecture_no").text();
+				var id = $(this).find("id").text();
+				var cmt_con = $(this).find("cmt_con").text();
+				var rating = $(this).find("rating").text();
+				var cmt_date = $(this).find("cmt_date").text();
+				var chk = false;
+			
 			if(member_no == "${members_info.member_no}"){
 				chk = true;
 			}
@@ -79,22 +80,37 @@ $(function(){
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
 	});
 		
-}).fail(function(){
-	alert("댓글 목록을 불러오는데 실패했습니다. 잠시후에 다시 시도해 주세요.");
-});
+	}).fail(function(){
+		alert("댓글 목록을 불러오는데 실패했습니다. 잠시후에 다시 시도해 주세요.");
+	});
 		
-$("#cmt_form").submit(function(){
-	
-	if(!$("#cmt_con").val()){
-		alert("내용을 입력해주세요.");
-		return false;
-	}	
+	$("#cmt_form").submit(function(){
+		var star1 = $('#p1');
+		
+		if($(':radio[name="star-input"]:checked').length < 1){
+		    
+			alert('별점을 선택해주세요');                        
+			star1.focus();
+		    event.preventDefault();
+		}
 
+		
+		
+		if(!$("#cmt_con").val()){
+		
+			alert("내용을 입력해주세요.");
+			return false;
+		
+		} 
+	
 	$.post("cmt_insert",$(this).serialize(),function(xml){
 		
 		var result=$(xml).find("result").text();
+		var message=$(xml).find("message").text();
 		
 		if (result) {
+			
+			alert(message);
 			
 			var cmt_no =$(xml).find("cmt_no").text();
 			var member_no =$(xml).find("member_no").text();
@@ -104,38 +120,39 @@ $("#cmt_form").submit(function(){
 			var rating = $(xml).find("rating").text();
 			var datetime = $(xml).find("cmt_date").text();
 			var chk = false;
+			
 			if(id == "${members_info.member_no}"){
 				chk = true;
 			}
 			
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
     						
-			$("#id").val("");
 			$("#cmt_con").val("");
-			
+				
 		}else{
 			
 			alert(message);
-			return false;
+				
 		}
 	}).fail(function(){
 		
 	});
+	//return false;
 
 });	
-$(document).on('click','.delete_btn',function(){
+	$(document).on('click','.delete_btn',function(){
 	
-	if(confirm("정말 댓글을 삭제하시겠습니까")){
+		if(confirm("정말 댓글을 삭제하시겠습니까")){
 		
-		var num = $(this).parent("li").attr("data-num");
-		var target= $(this).parents(".cmt_item");
-		target.next().remove();
-		target.remove();
+			var num = $(this).parent("li").attr("data-num");
+			var target= $(this).parents(".cmt_item");
+			target.next().remove();
+			target.remove();
 	
-		$.post("cmt_delete",{"cmt_no":num},function(xml){
+			$.post("cmt_delete",{"cmt_no":num},function(xml){
 			
-		}).fail(function(){
-			
+			}).fail(function(){
+				alert("삭제 실패");
 			});
 		}
 	});		
@@ -147,7 +164,7 @@ $(document).on('click','.delete_btn',function(){
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
 .star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('img/grade_img.png')no-repeat;}
-.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
+.star-input{display:inline-block; white-space:nowrap;width:100px;height:40px;padding:25px;line-height:30px;}
 .star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
 star-input>.input.focus{outline:1px dotted #ddd;}
@@ -241,7 +258,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		
 		코멘트 <input type="text"  name="cmt_con" id="cmt_con" />
 		
-	<span class="star-input">
+	<span class="star-input" >
 		<span class="input">
     		<input type="radio" name="star-input" value=1 id="p1">
     		<label for="p1">1</label>
@@ -257,6 +274,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	</span>
 	
 		<button type="submit"  class="btn btn-primary">저장하기</button>
+	
 	</form>
 	</div>
 	<br >
