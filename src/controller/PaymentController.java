@@ -68,13 +68,20 @@ public class PaymentController extends HttpServlet {
 			payment.setId(member.getId());
 			payment.setPayment_date(req.getParameter("payment_date"));
 			payment.setLecture_name(lecture.getLecture_name());
-			payment.setPrice(Integer.parseInt(req.getParameter("select_Price")));
-			payment.setPeriod(req.getParameter("period"));
+			int select_Price = Integer.parseInt(req.getParameter("select_Price"));
+			if(select_Price==6) {
+				payment.setPrice(lecture.getPrice()*6);
+				payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
+			}else {
+				payment.setPrice(lecture.getPrice());
+				payment.setPeriod(req.getParameter("period"));
+			}
+			
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
 			if(purchase_Basket==null) {
 				purchase_Basket = new ArrayList<Payment>();
 			}
-			purchase_Basket.add(payment);
+			purchase_Basket.add(payment); 
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);

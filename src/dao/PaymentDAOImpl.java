@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import model.Lecture;
 import model.Payment;
 
 public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
@@ -156,23 +158,25 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		}finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		System.out.println(paymentList);
 		return paymentList;
 	}
 
 	@Override
-	public List<Payment> attended_Lecture(int member_no) {
+	public List<Payment> attended_Lecture(int members_No) {
 		List<Payment> paymentList = new ArrayList<Payment>();
-		Payment payment =null;
+		List<Payment> selected_Period_List = new ArrayList<Payment>();
+		Payment payment = null;
 		Connection connection = null; 
 		PreparedStatement preparedStatement =null;
 		ResultSet resultSet = null;
 		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(sql.LectureSQL.LECTURE_SELECT_BY_NUM);
-			preparedStatement.setInt(1, member_no);
+			preparedStatement = connection.prepareStatement(sql.PaymentSQL.SELECT_MY_PAYMENT);
+			preparedStatement.setInt(1, members_No);
 			resultSet = preparedStatement.executeQuery();
+			
+			
 			
 			while(resultSet.next()) {
 				payment = new Payment();
@@ -187,13 +191,28 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 				payment.setPeriod(resultSet.getString("period"));				
 				paymentList.add(payment);
 			}
+			
+			for(Payment comparison_List : paymentList) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				String get_Period = comparison_List.getPeriod();
+				String get_Today = Time_Set_Helper.get_Today();
+				Date get_Period_To_Date = transFormat.parse(get_Period);
+				Date get_Today_To_Date = transFormat.parse(get_Today);
+				
+				if(get_Period_To_Date.before(get_Today_To_Date)) {
+					selected_Period_List.add(comparison_List);
+				}
+			}
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
+		} catch (ParseException ex02) {
+			// TODO Auto-generated catch block
+			ex02.printStackTrace();
 		}finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		System.out.println(paymentList);
-		return paymentList;
+		System.out.println(selected_Period_List);
+		return selected_Period_List;
 	}
 	
 	

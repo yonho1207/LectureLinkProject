@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>현금 결제 페이지</title>
+<title>등록된 강의 목록</title>
 <script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
 <style>
 	.move_To_Home:before{
@@ -27,7 +27,7 @@
 		height : 60px;
 		border: 3px solid black;
 	}
-	</style>
+</style>
 </head>
 <body>
 	<header style="background-color: silver">
@@ -52,17 +52,28 @@
 	</header>
 
 
-	<h1>현금 결제를 선택하셨습니다</h1>
-		<c:set var="total" value="0"/>
-			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
-				<c:set var="total" value="${total+price.price}"/>
-			</c:forEach>
-		<h1>총액 : ${total}</h1>
-		<form action="account_Transfer_Accept.do">
-			<input type="submit">
-		</form>
-		
-		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
-	
+	<table>
+		<tr>
+			<th>강의 번호</th>
+			<th>강의명</th>
+			<th>강사</th>
+			<th>수강료</th>
+			<th>교재비</th>
+		</tr>
+		<tbody>
+		<c:forEach var="lecture_List" items="${lecture_List}">
+			<tr>
+				<td><a href="go_Lecture_Update.do?lecture_no=${lecture_List.lecture_no}">${lecture_List.lecture_no}</a></td>
+				<td>${lecture_List.lecture_name}</td>
+				<td>${lecture_List.lecture_teacher}</td>
+				<td>${lecture_List.price}</td>
+				<td>${lecture_List.text_price}</td>
+				<td><input type="button" onclick="location.href='delete_Lecture.do?lecture_no=${lecture_List.lecture_no}'" value="삭제하기"></td>
+				<td></td>
+			</tr>
+		</c:forEach>
+		</tbody>
+	</table><br />
+	<input type="button" onclick="location.href='go_Main_in_Lectrue'" value="메인 화면으로 이동하기">
 </body>
 </html>

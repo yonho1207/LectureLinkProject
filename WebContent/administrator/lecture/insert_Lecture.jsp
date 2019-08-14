@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>현금 결제 페이지</title>
+<title>새로운 강의 넣기</title>
 <script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
 <style>
 	.move_To_Home:before{
@@ -27,7 +27,7 @@
 		height : 60px;
 		border: 3px solid black;
 	}
-	</style>
+</style>
 </head>
 <body>
 	<header style="background-color: silver">
@@ -52,17 +52,13 @@
 	</header>
 
 
-	<h1>현금 결제를 선택하셨습니다</h1>
-		<c:set var="total" value="0"/>
-			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
-				<c:set var="total" value="${total+price.price}"/>
-			</c:forEach>
-		<h1>총액 : ${total}</h1>
-		<form action="account_Transfer_Accept.do">
-			<input type="submit">
-		</form>
-		
-		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
-	
+	<h2>새로 작성하고자 하는 강의의 정보를 입력해주세요</h2>
+	<form method="post" action="insert_Lecture.do">
+		강의명 : <input type="text" id="lecture_name" name="lecture_name"><br />
+		강사명 : <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
+		1개월 기준 수강료 : <input type="text" id="price" name="price"><br />
+		교재 가격 : <input type="text" id="text_price" name="text_price"><br />
+		<input type="submit">
+	</form>
 </body>
 </html>
