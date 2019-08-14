@@ -4,19 +4,61 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-
 import model.Members;
+import oracle.net.aso.s;
 import sql.MembersSQL;
 
 public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 
 	@Override
 	public List<Members> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Members> memberList = new ArrayList<Members>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_SELECT_ALL);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+
+				Members members = new Members();
+				members.setMember_no(resultSet.getInt("member_no"));
+				members.setId(resultSet.getString("id"));
+				members.setPassword(resultSet.getString("password"));
+				members.setLastname(resultSet.getString("lastname"));
+				members.setFirstname(resultSet.getString("firstname"));
+				members.setGender(resultSet.getString("gender"));
+				members.setPhone(resultSet.getString("phone"));
+				members.setBirth(resultSet.getString("birth"));
+				members.setEmail(resultSet.getString("email"));
+				members.setQuestion(resultSet.getString("question"));
+				members.setAnswer(resultSet.getString("answer"));
+
+				memberList.add(members);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		
+		
+		
+		return memberList;
+		
 	}
+	
+	
 
 	@Override
 	public boolean insert(Members members) {
