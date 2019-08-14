@@ -241,7 +241,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
   		<div class="media border p-3">
    		 <img src="img/java_logo_img.jpg" alt="이미지 실패" class="mr-3 mt-3 rounded-circle" style="width:160px;">
    		 <div class="media-body">
-      <h4>alex cho <small><i>Posted on 8월 19일, 2019</i></small></h4>
+      <h4>alex cho <small><i></i></small></h4>
       <p>누구나 쉽게 시작할수 있는 JAVA 기초강의 모두함께 해봐요~</p>
       <p>당신도 프로그래머가 될수 있어요!</p>          
     </div>
