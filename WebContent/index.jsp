@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>인터넷 강의 페이지 메인 화면</title>
+<script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -14,57 +15,22 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
-	
-	<style type="text/css">
-		#card{
-			position: absolute;
-  			left: 0;
-		}
-		#search-select{
-		 width:85%;
-		 overflow: scroll;
-		 overflow-x:auto;
-		 overflow-y:auto;
-		 }
-		 
-		 .advertise_Image{
-		 	align-items: center;
-  			justify-content: center;
-		 	position: fixed;
-  			top: 65px;
-  			right: 530px;	 
-		 }
-		 
-		 .advertise_Text{
-			position: fixed;
-			top: 400px;
-  			right: 530px;	 
-		 }
-		 
-		 .notice_Table{
-		 	position: fixed;
-		 	table-layout:fixed;
-			top: 530px;
-  			right: 230px;	 
-		 	max-width: 75%;
-			vertical-align: bottom;
-			
-		 }
-		 
-	</style>
-		jump_To_Clicked_Lecture
-	<script type="text/javascript">
-		$(document).ready(function () { $("#search-select").select2(); });
-		var selected_Lecture = null;
-		$('#search-select').change(function(){
-			var selected_Lecture = $(this).val();
-		});
-		$('#mySelect').change(function(){ 
-		    var value = $(this).val();
-		});
-		alert(selected_Lecture);
-	</script>
-	
+  
+      
+    <style type="text/css">
+        #card{
+            position: fixed;
+              right: 0;
+        }
+        #search-select{
+         width:85%;
+         overflow: scroll;
+         overflow-x:auto;
+         overflow-y:auto;
+         }
+
+         
+    </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -78,6 +44,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -113,6 +82,7 @@
 			</ul>
 		</nav>
 	<br>
+
 	<div class="container">
 		<c:choose>
 		<c:when test="${members_info!=null}">		
@@ -122,14 +92,13 @@
 			      <h4 class="card-title">${members_info.id}</h4>
 			      <p class="card-text">환영합니다 ${members_info.id}님</p>
 			      <a href="go_Attending_Lecture.do" class="btn btn-primary">수강중인 강의 목록으로</a>
-			      <form>
-			      	
-			      	<select class="ui search selection dropdown" id="search-select" size=3>
+			      <form action="jump_To_Clicked_Lecture" method="post">			      	
+			      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
 						<c:forEach var="attending_List" items="${attending_List}">
 							<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
 						</c:forEach>   	
-			      	</select>
-			     
+						<input type="submit" value="바로가기"> 
+			      	</select>			     
 			      </form>
 			    </div>
 			 
@@ -157,7 +126,24 @@
 	 		<h1>바뀌는 기사 시험에 대비하세요!</h1>
 	 		<p>2020년 1회차부터 바뀌는 산업, 정보처리기사 시험<br />
 	 		여러분은 대비가 되셨습니까? 여러 강의를 통해 축척된 노하우를 통해<br />
-	 		저희가 여러분의 합격을 도와드리겠습니다</p>
+	 		저희가 여러분의 합격을 도와드리겠습니다<br /></p>
+	 		a<br />
+	 		b<br />
+	 		c<br />
+	 		d<br />
+	 		e<br />
+	 		f<br />
+	 		1<br />
+	 		2<br />
+	 		3<br />
+	 		4<br />
+	 		5<br />
+	 		6<br />
+	 		7<br />
+	 		8<br />
+	 		9<br />
+	 		10<br />
+	 		
 	 	</div>
 	 </div><br />
 	 

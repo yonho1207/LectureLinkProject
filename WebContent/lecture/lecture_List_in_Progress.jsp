@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,6 +24,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -60,7 +63,12 @@
 		</nav>
 	<br>
 	
-	<a href="go_Lecture_attend.do"></a>
+	<c:forEach var="lecture_List" items="${lecture_List}">
+		<input type="hidden" value="${lecture_List.lecture_no}">
+		<h4><a href="go_Lecture_attend.do?lecture_no=${lecture_List.lecture_no}">강의명 : ${lecture_List.lecture_name}</a></h4>
+		강사 : ${lecture_List.lecture_teacher}
+		가격 : ${lecture_List.price}
+	</c:forEach>
 	
 </body>
 </html>

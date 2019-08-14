@@ -11,7 +11,8 @@ public class QnaSQL {
 	public static final String QNA_UPDATE_VISITED_SQL // QNA ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½
 			= "UPDATE QNA SET visited = visited+1 WHERE qna_no=?";
 
-	public static final String QNA_SELETE_BY_QNA_NO_SQL = "SELECT * FROM qna WHERE qna_no=?";
+	public static final String QNA_SELETE_BY_QNA_NO_SQL  //QNA °Ô½ÃÆÇ ³Ñ¹ö ¼±ÅÃ
+	= "SELECT * FROM qna WHERE qna_no=?";
 
 	public static final String QNA_SELECT_ALL_PAGE_SQL // QNA ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡Ã³ï¿½ï¿½
 			= "SELECT * FROM(SELECT ROWNUM as RN, qnas.* FROM (SELECT * from qna order by qna_no desc) qnas) "

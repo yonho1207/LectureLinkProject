@@ -11,6 +11,7 @@ public class Payment {
     String lecture_name;
     int price;
     int pay_option;
+    boolean buy_Book;
     String period;
     
     public int getPayment_no() {
@@ -67,12 +68,23 @@ public class Payment {
     public void setPeriod(String period) {
         this.period = period;
     }
-    @Override
-    public String toString() {
-        return "Payment [payment_no=" + payment_no + ", lecture_no=" + lecture_no + ", member_no=" + member_no + ", id="
-                + id + ", payment_date=" + payment_date + ", lecture_name=" + lecture_name + ", price=" + price
-                + ", pay_option=" + pay_option + ", period=" + period + "]";
-    }
+    
+    
+    
+    public boolean isBuy_Book() {
+		return buy_Book;
+	}
+	public void setBuy_Book(boolean buy_Book) {
+		this.buy_Book = buy_Book;
+	}
+	@Override
+	public String toString() {
+		return "Payment [payment_no=" + payment_no + ", lecture_no=" + lecture_no + ", member_no=" + member_no + ", id="
+				+ id + ", payment_date=" + payment_date + ", lecture_name=" + lecture_name + ", price=" + price
+				+ ", pay_option=" + pay_option + ", buy_Book=" + buy_Book + ", period=" + period + "]";
+	}
+
+	
     
     
     

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -24,6 +24,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -62,5 +65,6 @@
 	
 	
 	<h1>강의중</h1>
+	${selected_Lecture}
 </body>
 </html>
