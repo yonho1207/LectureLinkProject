@@ -3,22 +3,28 @@
 <html><head>
 <meta charset=utf-8>
 <title>Q&A Input Form</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<a class="navbar-brand" href="goMain">Logo</a>
 			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="go_qna">문의 게시판</a>
+					<li class="nav-item">
+						<a class="nav-link" href="go_qna">문의 게시판</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-				</li>
+						<a class="nav-link" href="go_notice">공지사항 게시판</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
+					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				회원 정보 조회
@@ -52,8 +58,7 @@
 			</ul>
 		</nav>
 	<br>
-
-
+	
 
 	<h1>Q&A 작성 게시판</h1>
 	<div class="container">
