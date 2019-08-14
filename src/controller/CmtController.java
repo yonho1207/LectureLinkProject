@@ -14,8 +14,7 @@ import dao.CmtDAO;
 import dao.CmtDAOImpl;
 import model.Cmt;
 
-@WebServlet(name = "CmtController", urlPatterns 
-= { "/go_cmt", "/cmt_list", "/cmt_insert","/cmt_delete" })
+@WebServlet(name = "CmtController", urlPatterns = { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete" })
 
 public class CmtController extends HttpServlet {
 
@@ -30,6 +29,7 @@ public class CmtController extends HttpServlet {
 	}
 
 	private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		req.setCharacterEncoding("utf-8");
 
 		String uri = req.getRequestURI();
@@ -44,21 +44,23 @@ public class CmtController extends HttpServlet {
 		} else if (action.equals("cmt_list")) {
 
 			CmtDAO dao = new CmtDAOImpl();
-			List<Cmt> cmt = dao.selectAll();
+			List<Cmt> cmtList = dao.selectAll();
 
-			req.setAttribute("cmts", cmt);
-			System.out.println("컨트롤"+cmt);
-			
-			RequestDispatcher rd = req.getRequestDispatcher("cmtList.jsp");
+			req.setAttribute("cmtList", cmtList);
+
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_insert")) {
 
 			Cmt cmt = new Cmt();
-			
+
 			cmt.setMember_no(Integer.parseInt(req.getParameter("member_no")));
+			cmt.setLecture_no(Integer.parseInt(req.getParameter("lecture_no")));
 			cmt.setId(req.getParameter("id"));
 			cmt.setCmt_con(req.getParameter("cmt_con"));
+			
+			cmt.setRating(Integer.parseInt(req.getParameter("star-input")));
 
 			CmtDAO dao = new CmtDAOImpl();
 
@@ -66,27 +68,29 @@ public class CmtController extends HttpServlet {
 
 			if (resultComment != null) {
 				req.setAttribute("result", true);
+				req.setAttribute("message", "댓글이 추가 성공!");
 
 			} else {
 				req.setAttribute("result", false);
+				req.setAttribute("message", "댓글 추가 실패~");
 			}
 
 			req.setAttribute("cmt", resultComment);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmtItem.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtItem.jsp");
 			rd.forward(req, resp);
 
-		}else if (action.equals("cmt_delete")) {
-					
+		} else if (action.equals("cmt_delete")) {
+
 			CmtDAO dao = new CmtDAOImpl();
-			
-			int num= Integer.parseInt(req.getParameter("cmt_no"));
+
+			int num = Integer.parseInt(req.getParameter("cmt_no"));
 
 			boolean result = dao.deleteByCmt_no(num);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmtList.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
 			rd.forward(req, resp);
-		
+
 		}
 
 	}

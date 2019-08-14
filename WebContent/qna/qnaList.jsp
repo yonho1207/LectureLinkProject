@@ -24,20 +24,24 @@
 			<td>작성일시</td>
 	
 		<tr>	
+			
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
-					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</td>
+					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</a></td>
 					<td>${qna.id}</td>
 					<td>${qna.visited}</td>
 					<td>${qna.qna_date}</td>
 				</tr>
 			</c:forEach>
 			
-			
-	</table>	
-	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>		
-	</div>
-	
+			<c:if test="${members_info != null}">
+			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>		
+			</c:if>
+
+			</table>	
+		</div>	
+		
+		
 	<!-- 페이지 처리부분 -->
 			<c:if test="${pageGroupResult.beforePage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
