@@ -18,10 +18,13 @@ import dao.BaseDAO;
 import dao.LectureDAOImpl;
 import dao.MembersDAOImpl;
 import dao.PaymentDAOImpl;
+import dao.QnaDAO;
+import dao.QnaDAOImpl;
 import dao.Time_Set_Helper;
 import model.Lecture;
 import model.Members;
 import model.Payment;
+import model.Qna;
 @WebServlet(name="PaymentController", urlPatterns = {"/goMain","/clear_Purchase_Basket.do","/account_Transfer.do","/gift_Card_ETC.do","/cell_Phone_Bill.do","/credit_Card.do","/accept_Purchase.do","/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do","/payment_Accept.do","/go_payment.do"})
 public class PaymentController extends HttpServlet {
 
@@ -36,6 +39,7 @@ public class PaymentController extends HttpServlet {
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex+1);
@@ -136,9 +140,19 @@ public class PaymentController extends HttpServlet {
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
-		}else if(action.equals("goMain")) {
+		}else if(action.equals("goMain")) {	
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			HttpSession session = req.getSession();
+			List<Qna> qnaList = new ArrayList<Qna>();
+			QnaDAO qdao = new QnaDAOImpl();
+			qnaList = qdao.selectAll();
+			List<Payment> attending_List = new ArrayList<Payment>();
+			Members member =  (Members) session.getAttribute("members_info");		
+			attending_List = pdao.attending_Lecture(member.getMember_no());
+			req.setAttribute("attending_List", attending_List);
+			req.setAttribute("qnaList", qnaList);
 			rd = req.getRequestDispatcher("/index.jsp");
-			rd.forward(req, resp);	
+			rd.forward(req, resp);
 		}
 			
 	}
