@@ -78,13 +78,14 @@
 				<option value="1" > 1개월</option>
 				<option value="6" > 6개월</option>
 				</select><br />
+				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까?
 				<input type="submit" value="구매 리스트에 추가하기">
 				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 		</form> 
 				<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
 		<h2>구매 선택하신 </h2>
 		<table>
-		<c:forEach var = "purchase_Basket" items="${purchase_Basket}"> 
+		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
 			구매하신 강의명 :${purchase_Basket.lecture_name}
 			가격 : ${purchase_Basket.price} 
 			예상 만료 기간: ${purchase_Basket.period}<br />
