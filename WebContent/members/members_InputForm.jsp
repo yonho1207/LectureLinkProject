@@ -5,27 +5,6 @@
 <html>
 <head>
 	<title>form tag</title>
-	<style>
-	.move_To_Home:before{
-		content: "\f015";
-		font-family: FontAwesome;
-   	 	font-style: normal;
-    	font-weight: normal;
-    	text-decoration: inherit;
-	}
-	a{
-		margin-left: 15px;	
-		margin-right: 15px;	
-		text-align: center;
-		line-height: 2.8;
-		font-size: 20px;
-	}
-	header{
-		background-color: silver;
-		height : 60px;
-		border: 3px solid black;
-	}
-</style>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -149,29 +128,49 @@
 
 </head>
 <body>
-	<header style="background-color: silver">
-		<a class="fas fa-home" href="goMain">홈으로 ||</a>
-		<a class="fas fa-id-card" href="go_my_page.do">마이 페이지 ||</a>
-		<a class="fas fa-coins"  href="go_payment.do">결제 화면으로 ||</a>
-		<a class="far fa-list-alt"  href="go_qna">문의 게시판 ||</a>
-		<c:choose>
-		<c:when  test="${members_info==null}">
-			<a class="fas fa-sign-in-alt" href="go_login">로그인 ||</a>
-			<a  class="far fa-id-card" href="go_account">회원가입 ||</a>
-		</c:when>
-		<c:when test="${members_info!=null}">
-			<form action="logout" class= "fas fa-sign-out-alt">
-				<input type="submit" value="로그아웃"/>
-			</form>
-		</c:when>
-		</c:choose>
-		<c:if test="${members_info!=null && members_info.id=='admin'}">
-			<a class="fas fa-user-shield" href="go_admin">관리자페이지로 이동</a>
-		</c:if>
-	</header>
-
-
-
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<a class="navbar-brand" href="goMain">Logo</a>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="go_qna">문의 게시판</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+				</li>
+				<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				회원 정보 조회
+			</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
+					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
+					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
+				</div>
+			
+				<c:choose>
+				<c:when  test="${members_info==null}">
+					<li class="nav-item">
+						<a class="nav-link" href="go_login">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_account">회원가입</a>
+					</li>
+				</c:when>
+				<c:when test="${members_info!=null}">
+					<li class="nav-item">
+						<a class="nav-link" href="logout">로그아웃</a>
+					</li>
+				</c:when>
+				</c:choose>
+				<c:if test="${members_info!=null && members_info.id=='admin'}">
+					<li class="nav-item">
+						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
+	<br>
+	
 	<h3>회원등록</h3>
 		
 		<form method="post" id="signupForm" action="input_account">
