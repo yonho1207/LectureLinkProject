@@ -58,6 +58,9 @@
 						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>
@@ -73,6 +76,6 @@
 		</table>
 	<p>주문하신 내용과 다를 경우 관리자 메일을 통하여 연락해 주십시요</p>
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
-	<input type="button" onclick="location.href='/LectureLinkProject/go_my_page.do'" value="마이 페이지로 이동하기">
+	<input type="button" onclick="location.href='/LectureLinkProject/go_Attending_Lecture.do'" value="수강중인 강의 리스트로 바로 가기">
 </body>
 </html>

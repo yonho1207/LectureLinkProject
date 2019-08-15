@@ -25,7 +25,7 @@ import model.Lecture;
 import model.Members;
 import model.Payment;
 import model.Qna;
-@WebServlet(name="PaymentController", urlPatterns = {"/goMain","/clear_Purchase_Basket.do","/account_Transfer.do","/gift_Card_ETC.do","/cell_Phone_Bill.do","/credit_Card.do","/accept_Purchase.do","/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do","/payment_Accept.do","/go_payment.do"})
+@WebServlet(name="PaymentController", urlPatterns = {"/check_Period","/clear_Purchase_Basket.do","/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do","/payment_Accept.do","/go_payment.do"})
 public class PaymentController extends HttpServlet {
 
 	@Override
@@ -73,30 +73,19 @@ public class PaymentController extends HttpServlet {
 			payment.setPayment_date(req.getParameter("payment_date"));
 			payment.setLecture_name(lecture.getLecture_name());
 			int select_Price = Integer.parseInt(req.getParameter("select_Price"));
-			int perchase_Book = Integer.parseInt(req.getParameter("buy_Book"));
-			if(select_Price==6) {
-				Lecture book_Info = null;
-				if(perchase_Book==1) {
-					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
-					payment.setPrice(lecture.getPrice()*6+book_Info.getText_price());
-					payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
-				}else {
-					payment.setPrice(lecture.getPrice()*6);
-					payment.setPeriod(Time_Set_Helper.get_SixMonth_Later());
-				}
-
-			}else {
+			int perchase_Book =0;
+			if(req.getParameter("buy_Book") != null) {
+				perchase_Book = Integer.parseInt(req.getParameter("buy_Book"));
+			}				
 				Lecture book_Info = null;
 				if(perchase_Book==1) {
 					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
 					payment.setPrice(lecture.getPrice()+book_Info.getText_price());
-					payment.setPeriod(req.getParameter("period"));
-				}else {
+					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
+				}else{
 					payment.setPrice(lecture.getPrice());
-					payment.setPeriod(req.getParameter("period"));
+					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
 				}
-
-			}
 			
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
 			if(purchase_Basket==null) {
@@ -107,29 +96,6 @@ public class PaymentController extends HttpServlet {
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
 			
-		}else if(action.equals("accept_Purchase.do")) {
-			rd = req.getRequestDispatcher("/payment/payment_Form.jsp");
-			rd.forward(req, resp);
-		}else if(action.equals("credit_Card.do")) {
-			int pay_option = 2;
-			req.setAttribute("pay_option", pay_option);
-			rd = req.getRequestDispatcher("payment/methodsOfPayment/credit_Card.jsp");
-			rd.forward(req, resp);
-		}else if(action.equals("account_Transfer.do")) {
-			int pay_option = 1;
-			req.setAttribute("pay_option", pay_option);
-			rd = req.getRequestDispatcher("payment/methodsOfPayment/account_Transfer.jsp");
-			rd.forward(req, resp);
-		}else if(action.equals("cell_Phone_Bill.do")) {
-			int pay_option = 3;
-			req.setAttribute("pay_option", pay_option);
-			rd = req.getRequestDispatcher("payment/methodsOfPayment/cell_Phone_Charge.jsp");
-			rd.forward(req, resp);
-		}else if(action.equals("gift_Card_ETC.do")) {
-			int pay_option = 4;
-			req.setAttribute("pay_option", pay_option);
-			rd = req.getRequestDispatcher("payment/methodsOfPayment/gift_Card_etc.jsp");
-			rd.forward(req, resp);
 		}else if(action.equals("account_Transfer_Accept.do")) {
 
 			int account_Transfer_Pay_Option = 1;
@@ -146,10 +112,7 @@ public class PaymentController extends HttpServlet {
 				resp.sendRedirect("payment/methodsOfPayment/puchase_Failed.jsp");
 			}else if(result==true){
 				resp.sendRedirect("payment/methodsOfPayment/purchase_Succes.jsp");
-			}
-			
-				
-				
+			}											
 		}else if(action.equals("clear_Purchase_Basket.do")) {
 			HttpSession session = req.getSession();
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
@@ -157,19 +120,8 @@ public class PaymentController extends HttpServlet {
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
-		}else if(action.equals("goMain")) {	
-			PaymentDAOImpl pdao = new PaymentDAOImpl();
-			HttpSession session = req.getSession();
-			List<Qna> qnaList = new ArrayList<Qna>();
-			QnaDAO qdao = new QnaDAOImpl();
-			qnaList = qdao.selectAll();
-			List<Payment> attending_List = new ArrayList<Payment>();
-			Members member =  (Members) session.getAttribute("members_info");		
-			attending_List = pdao.attending_Lecture(member.getMember_no());
-			req.setAttribute("attending_List", attending_List);
-			req.setAttribute("qnaList", qnaList);
-			rd = req.getRequestDispatcher("/index.jsp");
-			rd.forward(req, resp);
+		}else if(action.equals("check_Period")) {
+			
 		}
 			
 	}

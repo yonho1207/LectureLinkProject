@@ -15,8 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.MembersDAO;
 import dao.MembersDAOImpl;
-
+import dao.PaymentDAOImpl;
 import model.Members;
+import model.Payment;
 
 @WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout"})
 public class MembersController extends HttpServlet{
@@ -24,7 +25,7 @@ public class MembersController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req,resp);
-		//System.out.println("doGet() È£ÃâµÊ");
+		//System.out.println("doGet() È£ï¿½ï¿½ï¿½");
 		
 	}
 
@@ -74,10 +75,13 @@ public class MembersController extends HttpServlet{
 		} 
 		else if (action.equals("login")) {
 			String id = req.getParameter("id");
+			System.out.println(id);
 			String password = req.getParameter("password");
-
+			
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
 			MembersDAOImpl dao = new MembersDAOImpl();
 			Members members = dao.selectById(id);
+			
 
 			System.out.println(members);
 			/*System.out.println(id);
@@ -91,7 +95,7 @@ public class MembersController extends HttpServlet{
 					session.setAttribute("admin", members);
 					
 					
-					req.setAttribute("log","·Î±×ÀÎ");
+					req.setAttribute("log","ï¿½Î±ï¿½ï¿½ï¿½");
 
 					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 					rd.forward(req, resp);
@@ -106,10 +110,11 @@ public class MembersController extends HttpServlet{
 				
 					
 					HttpSession session = req.getSession();
+					List<Payment> attending_List = new ArrayList<Payment>();
+					attending_List = pdao.attending_Lecture(members.getMember_no());
+					session.setAttribute("attending_List", attending_List);
 					session.setAttribute("members_info", members);
-					
-					
-					req.setAttribute("log","·Î±×ÀÎ");
+					req.setAttribute("log","ï¿½Î±ï¿½ï¿½ï¿½");
 
 				RequestDispatcher rd = req.getRequestDispatcher("/goMain");
 				rd.forward(req, resp);
@@ -117,7 +122,7 @@ public class MembersController extends HttpServlet{
 			}else{
 				
 				
-				req.setAttribute("message", "¾ÆÀÌµð¿Í ÆÐ½º¿öµå¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
+				req.setAttribute("message", "ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/members/login.jsp");
 				rd.forward(req, resp);

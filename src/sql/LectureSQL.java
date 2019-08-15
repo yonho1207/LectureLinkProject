@@ -20,5 +20,7 @@ public class LectureSQL {
 			"lecture_teacher = ?, PRICE =? ,TEXT_PRICE =? where LECTURE_NO=?";
 	public static final String DELETE_LECTURE =
 			"delete from lecture where lecture_no=?";
+	public static final String ATTENDING_LECTURE_COUNT =
+			"select count(*) from payment where member_no=?";
 	
 }

@@ -11,6 +11,22 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+	  $(document).ready(function () {
+	
+	      $("#select_Lecture_Pick").change(function (event) {
+	    	  var selectedNumber = $(this).val();
+	    	
+	    	  $.get("get_Price",{}, function(data){
+	    		  
+	    		  priceOfBook
+	    	  });
+	      });
+
+	  });
+  
+  </script>
+  
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -59,6 +75,9 @@
 						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>
@@ -72,19 +91,15 @@
 				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name}</option>
 				 </c:forEach>
 				 </select><br />
-		구매자 ID : <input type="text" name="id" value="${members_info.id}" readonly><br />
-		구매 일자: <input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-		예상 종료 일자 : <input type="text" name="period" id="period" value= "${one_Month_Later}" readonly/><br />
-		가격: 	<select name="select_Price">
-				<option value="1" > 1개월</option>
-				<option value="6" > 6개월</option>
-				</select><br />
-				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까?<br />
+		구매자 ID :<input type="text" name="id" value="${members_info.id}" readonly><br />
+		구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+		기간 설정 :<input type="number" name="select_Price" id="select_Price" min="1" max="12" value="1"><br /> 
+				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까? 가격:<p id="priceOfBook"></p><br />
 				<input type="submit" value="구매 리스트에 추가하기">
 				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 		</form> 
 				<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
-		<h2>구매 선택하신 </h2>
+		<h2>구매 선택하신 강의 목록</h2>
 		<table>
 		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
 			구매하신 강의명 :${purchase_Basket.lecture_name}
