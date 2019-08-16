@@ -67,11 +67,12 @@
 	<br>
 	
 	<c:forEach var="lecture_List" items="${lecture_List}">
-		<input type="hidden" value="${lecture_List.lecture_no}">
+		<input type="hidden" value="${lecture_List.lecture_no}" name = "lecture_no">
 		<h4><a href="go_Lecture_attend.do?lecture_no=${lecture_List.lecture_no}">강의명 : ${lecture_List.lecture_name}</a></h4>
 		강사 : ${lecture_List.lecture_teacher}
 		가격 : ${lecture_List.price}
 	</c:forEach>
+	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >댓글</button>
 	
 </body>
 </html>

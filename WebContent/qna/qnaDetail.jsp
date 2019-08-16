@@ -64,15 +64,16 @@
 		</nav>
 	<br>
 	
-
 	<h1>Q&A 상세보기 게시판</h1>
 	<br >
 	<div class="container">
 	
-	<c:if test="${members_info.id == qna.id}">
 	<form action="qna_update" method="post">
+
+	<input type="hidden" name = "qna_grp" id ="qna_grp" value="${qna.grp}"><br />
+	
 	<div class="form-group">	
-      <label for=qna_no>글번호:</label>
+      <label for=qna_no>글번호:</label> ${qna.qna_no}
       <input type="hidden" name = "qna_no" value="${qna.qna_no}"><br />
       <input type="text" class="form-control" id="qna_no"  value="${qna.qna_no}" disabled="disabled"/>
     </div>
@@ -93,43 +94,48 @@
   		<textarea class="form-control" rows="5" name = "qna_con" id="qna_con">${qna.qna_con}</textarea>
 	</div>
 	
+	<c:if test="${members_info.id == qna.id}">
 	<div class="form-group">
   	<input type="submit"  class="btn btn-primary" value="수정">
-  	</div>
   	
+  	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna.qna_no}">삭제</a>
+  	</div>
+ 	</c:if>
  	</form>
 	
- 	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna.qna_no}">삭제</a>
- 	</c:if>
- 	
- 	<c:if test="${members_info.id != qna.id}">
- 	
- 	<div class="form-group">	
-      <label for=qna_no>글번호:</label>
-      <input type="hidden" name = "qna_no" value="${qna.qna_no}"><br />
-      <input type="text" class="form-control" id="qna_no"  value="${qna.qna_no}" disabled="disabled"/>
-    </div>
+	</div>
+	
+	<c:if test="${members_info!=null && members_info.id=='oojh'}">
+	<hr>
+	<br >
+	<div class="container">
+	<form action="qna_cmt_insert" method="post">
+
+	<input type="hidden" name = "admin_no" value="${members_info.member_no}">
+	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}"><br />
+	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">${qna.grp}
 	
     <div class="form-group">	
       <label for=id>작성자:</label>
-      <input type="hidden" name = "id" value="${qna.id}"><br />
-      <input type="text" class="form-control" id="id"  value="${qna.id}" disabled="disabled"/>
+      <input type="hidden" name = "admin_id" value="${qna.id}"><br />
+      <input type="text" class="form-control" id="admin_id"  value="${qna.id}" disabled="disabled"/>
     </div>
     
     <div class="form-group">
       <label for="qna_title">제목:</label>
-      <input type="hidden" name = "qna_no" value="${qna.qna_title}">
-      <input type="text" class="form-control" name = "qna_title" id="qna_title" value="${qna.qna_title}" disabled="disabled"/>
+      <input type="text" class="form-control" name = "qna_cmt_title" id="qna_cmt_title" "/>
     </div>
     
  	<div class="form-group">
   		<label for="qna_con">내용:</label>
-  		<input type="hidden" name = "qna_no" value="${qna.qna_con}">
-  		<textarea class="form-control" rows="5" name = "qna_con" id="qna_con" disabled="disabled">${qna.qna_con}</textarea>
+  		<textarea class="form-control" rows="5" name = "qna_cmt_con" id="qna_cmt_con"></textarea>
 	</div>
- 	
- 	</c:if>
+	
+	<input type="submit"  class="btn btn-primary" value="등록">
+	</form>
 	</div>
+	</c:if>
+	
 	<br >
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_qna'">리스트 돌아가기</button>
 	

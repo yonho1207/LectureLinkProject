@@ -18,8 +18,9 @@ import model.Qna;
 import page.PageManager;
 import page.PageSQL;
 
-@WebServlet(name = "QnaController", urlPatterns = { "/go_qna", "/qna_detail", "/qna_inputform", "/qna_insert",
-		"/qna_req_list","/qna_update","/qna_delete" })
+@WebServlet(name = "QnaController", urlPatterns 
+= { "/go_qna", "/qna_detail", "/qna_inputform", "/qna_insert",
+	"/qna_req_list","/qna_update","/qna_delete","/qna_cmt_insert" })
 
 public class QnaController extends HttpServlet {
 
@@ -46,17 +47,15 @@ public class QnaController extends HttpServlet {
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex + 1);
 
-		if (action.equals("go_qna")) {// QNA 리스트로가기
-
-			req.setCharacterEncoding("utf-8");
-
-			List<Qna> qnaList = new ArrayList<Qna>();
+		if (action.equals("go_qna")) {// QNA 게시판(질문자 글들)
+			
+		/*	int lvl=0;
 			QnaDAO dao = new QnaDAOImpl();
-
-			qnaList = dao.selectAll();
+			List<Qna> qnaList = dao.seleteBylvl(lvl);
 			
 			HttpSession session = req.getSession(); 
 			session.setAttribute("qnaList", qnaList);
+			System.out.println(qnaList);*/
 			
 			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
@@ -142,6 +141,30 @@ public class QnaController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
 
+		}else if (action.equals("qna_cmt_insert")) {  // QNA 관리자 답글 등록
+
+			Qna qna = new Qna();
+			QnaDAO dao = new QnaDAOImpl();
+
+			qna.setMember_no(Integer.parseInt(req.getParameter("admin_no")));
+			System.out.println(req.getParameter("admin_no"));
+			qna.setId(req.getParameter("admin_id"));
+			System.out.println(req.getParameter("admin_id"));
+			qna.setQna_title(req.getParameter("qna_cmt_title"));
+			System.out.println(req.getParameter("qna_cmt_title"));
+			qna.setQna_con(req.getParameter("qna_cmt_con"));
+			System.out.println(req.getParameter("qna_cmt_con"));
+			qna.setGrp(Integer.parseInt(req.getParameter("qna_cmt_grp")));
+			System.out.println(req.getParameter("qna_cmt_grp"));
+			
+			dao.QnaComment(qna);
+			
+			//req.setAttribute("qnas", qna);
+			System.out.println("컨트롤러"+qna);
+
+			RequestDispatcher rd = req.getRequestDispatcher("/qna/qnaDetail.jsp");
+			rd.forward(req, resp);
+					
 		}
 	}
 }

@@ -5,12 +5,19 @@
 <html>
 <head>
 <meta charset=utf-8>
-<title>Q&A게시판</title>
+<title>공지사항게시판</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		
+		#sel{font-size:40px;}
+	
+		a:hover {text-decoration: underline; color: red;}
+	</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -80,13 +87,10 @@
 
 			</table>	
 		</div>	
+		<c:if test="${members_info!=null && members_info.id=='oojh'}">
 		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" >글쓰기</button>
-		
-<%-- 	<table class="">
-		<c:if test="${members_info.id != null}">
-			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>	
 		</c:if>
-	</table> --%>
+
 	
 	<!-- 페이지 처리부분 -->
 			<c:if test="${pageGroupResult.beforePage}">
