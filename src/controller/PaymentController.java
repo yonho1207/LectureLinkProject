@@ -121,7 +121,12 @@ public class PaymentController extends HttpServlet {
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
 		}else if(action.equals("check_Period")) {
-			
+			String next_Month = Time_Set_Helper.get_OneMonth_Later();
+			int choosed_Month = Integer.parseInt(req.getParameter("choose_Month"));
+			System.out.println(choosed_Month);
+			req.setAttribute("next_Month", next_Month);
+			rd = req.getRequestDispatcher("payment/methodsOfPayment/get_Next_Month.jsp");
+			rd.forward(req, resp);
 		}
 			
 	}

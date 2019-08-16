@@ -11,21 +11,39 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-	  $(document).ready(function () {
-	
-	      $("#select_Lecture_Pick").change(function (event) {
-	    	  var selectedNumber = $(this).val();
-	    	
-	    	  $.get("get_Price",{}, function(data){
-	    		  
-	    		  priceOfBook
-	    	  });
-	      });
+  <script type="text/javascript"> 
 
+
+	
+  
+	  $(document).on('click','#check_Period_Button',function () {		
+			$.get("check_Period", function(data){
+				$(data).find("get_Month").each(function(){
+					$(document).on('mouseup', '#choose_Month', function() {                                                                                                                     
+						var choosed_Month = $("#choose_Month").val();
+					});	
+					var next_Month = $(this).find("month").text();
+					$("#period").val(next_Month);
+				});
+				
+			}).fail(function(){
+				
+			});
 	  });
   
   </script>
+  
+  <style type="text/css">
+  
+  	#payment_Date_Check{
+  		position: fixed;
+        right: 150px;
+        background-color: #FFEFD5;
+        height: 160px;
+	 	width: 15%;	
+  	}
+  
+  </style>
   
 </head>
 <body>
@@ -91,14 +109,24 @@
 				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name}</option>
 				 </c:forEach>
 				 </select><br />
-		구매자 ID :<input type="text" name="id" value="${members_info.id}" readonly><br />
-		구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+		구매자 ID :<input type="text" name="id" value="${members_info.id}" readonly><br />			
 		기간 설정 :<input type="number" name="select_Price" id="select_Price" min="1" max="12" value="1"><br /> 
 				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까? 가격:<p id="priceOfBook"></p><br />
 				<input type="submit" value="구매 리스트에 추가하기">
 				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 		</form> 
 				<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
+		
+		<div id="payment_Date_Check">
+			구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+			예상 종료 일자 알아보기 :<input type="number" name="choose_Month" id="choose_Month" value="1" max="12"><br />
+								<button id="check_Choose_Month">set</button><br />	
+			예상 종료 일자 : <input type="text" name="period" id="period" readonly/><br />
+						<button id="check_Period_Button">set</button><br />
+
+
+		</div>
+		
 		<h2>구매 선택하신 강의 목록</h2>
 		<table>
 		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
@@ -110,5 +138,7 @@
 		<form action="clear_Purchase_Basket.do">
 			<input type="submit" value="장바구니 비우기">
 		</form>
+		
+		
 </body>
 </html>
