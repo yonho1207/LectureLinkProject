@@ -92,10 +92,9 @@
 			</table>	
 		</div>	
 		
-	<table class="">
+	<table class="table">
 		<c:if test="${members_info != null}">
-			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_cmt'" >Cmt</button>		
+			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" >글쓰기</button>		
 		</c:if>
 	</table>
 	

@@ -17,4 +17,6 @@ public interface NoticeDAO {
 	
 	void delete(int notice_no);//공지사항  삭제
 	
+	List<Notice> selectAllPage(int setRowStartNumber, int setRowEndNumber);//페이징 처리
+	
 }

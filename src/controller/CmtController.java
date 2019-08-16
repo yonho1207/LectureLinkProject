@@ -43,7 +43,7 @@ public class CmtController extends HttpServlet {
 			rd.forward(req, resp);
 
 		}else if (action.equals("cmt_Fom1")) {
-			
+				
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm1.jsp");
 			rd.forward(req, resp);
 			
@@ -60,6 +60,7 @@ public class CmtController extends HttpServlet {
 		} else if (action.equals("cmt_list")) {
 			
 			int lecture_no=2;
+			
 			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
 			
 			CmtDAO dao = new CmtDAOImpl();

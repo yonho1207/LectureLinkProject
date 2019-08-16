@@ -16,4 +16,5 @@ public class CmtSQL {
 	
 	public static final String CMT_DELETE_BY_CMT_NO_SQL //CMT 게시판 댓글 삭제
 	="DELTE FROM cmt WHERE num = ?";
+	
 }

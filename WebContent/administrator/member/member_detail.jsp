@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@
 				</c:choose>
 				<c:if test="${members_info!=null && members_info.id=='admin'}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
 					<li class="nav-item">

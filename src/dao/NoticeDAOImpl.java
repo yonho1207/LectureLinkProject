@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Notice;
+import model.Qna;
 import sql.NoticeSQL;
+import sql.QnaSQL;
 
 public class NoticeDAOImpl extends BaseDAO implements NoticeDAO {
 
@@ -137,7 +139,7 @@ public class NoticeDAOImpl extends BaseDAO implements NoticeDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-
+				
 				notice.setNotice_no(resultSet.getInt("notice_no"));
 				notice.setNotice_title(resultSet.getString("notice_title"));
 				notice.setNotice_con(resultSet.getString("notice_con"));
@@ -152,6 +154,47 @@ public class NoticeDAOImpl extends BaseDAO implements NoticeDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return notice;
+	
+	}
+
+	@Override
+	public List<Notice> selectAllPage(int setRowStartNumber, int setRowEndNumber) {
+
+		List<Notice> noticelist = new ArrayList<Notice>();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(NoticeSQL.NOTICE_SELECT_ALL_PAGE_SQL);
+
+			preparedStatement.setInt(1, setRowStartNumber);
+			preparedStatement.setInt(2, setRowEndNumber);
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Notice notice = new Notice();
+				
+				notice.setNotice_no(resultSet.getInt("notice_no"));
+				notice.setNotice_title(resultSet.getString("notice_title"));
+				notice.setNotice_con(resultSet.getString("notice_con"));
+				notice.setNotice_date(resultSet.getString("notice_date").split("\\s")[0]);
+
+				noticelist.add(notice);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return noticelist;
+
 	
 	}
 
