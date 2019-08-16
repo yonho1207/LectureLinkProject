@@ -49,29 +49,23 @@ public class QnaController extends HttpServlet {
 
 		if (action.equals("go_qna")) {// QNA 게시판(질문자 글들)
 			
-		/*	int lvl=0;
-			QnaDAO dao = new QnaDAOImpl();
-			List<Qna> qnaList = dao.seleteBylvl(lvl);
-			
-			HttpSession session = req.getSession(); 
-			session.setAttribute("qnaList", qnaList);
-			System.out.println(qnaList);*/
-			
 			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
 
 		} else if (action.equals("qna_detail")) { // QNA 상세페이지
 
 			int qna_no = Integer.parseInt(req.getParameter("qna_no"));
+			int grp = Integer.parseInt(req.getParameter("qna_no"));
 
 			QnaDAO dao = new QnaDAOImpl();
 			Qna qna = dao.seleteByNo(qna_no);
-
 			dao.updateVisited(qna_no);
-
+			Qna qna_cmt= dao.selectGrpAndLvl(grp);
+			
 			HttpSession session = req.getSession(); 
 			session.setAttribute("qna", qna);
-
+			req.setAttribute("qna_cmt", qna_cmt);
+			
 			RequestDispatcher rd = req.getRequestDispatcher("qna/qnaDetail.jsp");
 			rd.forward(req, resp);
 
@@ -91,7 +85,6 @@ public class QnaController extends HttpServlet {
 			qna.setQna_con(req.getParameter("qna_con"));
 
 			dao.QnaInsert(qna);
-			System.out.println(qna);
 
 			RequestDispatcher rd = req.getRequestDispatcher("go_qna");
 			rd.forward(req, resp);
@@ -104,11 +97,12 @@ public class QnaController extends HttpServlet {
 
 			QnaDAO dao = new QnaDAOImpl();
 
-			List<Qna> qnaList = dao.selectAllPage(pm.getPageRowResult().getRowStartNumber(),
+			List<Qna> qnaList = dao.selectLvlPage(pm.getPageRowResult().getRowStartNumber(),
 			pm.getPageRowResult().getRowEndNumber());
 
 			HttpSession session = req.getSession(); 
-			session.setAttribute("qnaList", qnaList);
+			session.setAttribute("qnaList", qnaList)
+			;
 			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.QNA_SELETE_ALL_COUNT));
 
 			RequestDispatcher rd = req.getRequestDispatcher("qna/qnaList.jsp");
@@ -124,7 +118,6 @@ public class QnaController extends HttpServlet {
 			qna.setQna_con(req.getParameter("qna_con"));
 
 			dao.update(qna);
-			System.out.println(qna);
 
 			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
@@ -158,9 +151,6 @@ public class QnaController extends HttpServlet {
 			System.out.println(req.getParameter("qna_cmt_grp"));
 			
 			dao.QnaComment(qna);
-			
-			//req.setAttribute("qnas", qna);
-			System.out.println("컨트롤러"+qna);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/qna/qnaDetail.jsp");
 			rd.forward(req, resp);

@@ -87,7 +87,7 @@
 
 			</table>	
 		</div>	
-		<c:if test="${members_info!=null && members_info.id=='oojh'}">
+		<c:if test="${members_info!=null && members_info.id=='admin'}">
 		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" >글쓰기</button>
 		</c:if>
 

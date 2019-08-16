@@ -10,14 +10,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-	<style type="text/css">
-	
-	a:hover {text-decoration: underline; color: red;}
-	
+	<style type="text/css">	
+	#list_btn{background-color:black; color: white; }
 	</style>	
-	
-	
-	
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -66,11 +62,11 @@
 		</nav>
 	<br>
 
-	<h1>Q&A 상세보기 게시판</h1>
+	<h1>공지사항 게시판</h1>
 	<br >
 	<div class="container">
 	
- 	<c:if test="${members_info==null}">
+ 	<c:if test="${members_info==null && admin==null}">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -96,7 +92,7 @@
 	</div>
 	</c:if>
 	
-	<c:if test="${members_info!=null && members_info.id =='oojh'}">
+	<c:if test="${admin!=null}">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -111,29 +107,27 @@
     
     <div class="form-group">
       <label for="notice_title">제목:</label>
-      <input type="hidden" name = "notice_no" value="${notice.notice_title}">
+     <%--  <input type="hidden" name = "notice_title" value="${notice.notice_title}"> --%>
       <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" />
     </div>
     
  	<div class="form-group">
   		<label for="notice_con">내용:</label>
-  		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
+  		<%-- <input type="hidden" name = "notice_con" value="${notice.notice_con}"> --%>
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con">${notice.notice_con}</textarea>
 	</div>
 
 	<br >
 	<div class="form-group">
 	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">삭제</a>
-	</div>	
-	
-	<div class="form-group">
 	<a type="button"  class="btn btn-primary" href="notice_update">수정</a>
 	</div>
 	</c:if>
 
 	</div>
-		
-	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_notice'">리스트 돌아가기</button>
+	<div class="container">
+		<button type="button" class="form-control" id="list_btn" onclick="location.href='/LectureLinkProject/go_notice'" >리스트 돌아가기</button>
+	</div>	
 	
 	<%@ include file ="/companyLogo.jsp" %>
 </body>

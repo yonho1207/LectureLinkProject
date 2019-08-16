@@ -22,8 +22,7 @@
 <script type="text/x-jquery-tmpl" id="itemTemplate">
 
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
-		
-		별점 : {{= rating}}
+			
 		 글번호 :{{= cmt_no}} 
 		멤버넘버  : {{= member_no}} 
 		강의번호 :{{= lecture_no}} 
@@ -31,9 +30,29 @@
 		내용: {{= cmt_con}}
 		등록일자 : {{= cmt_date}}
 
-		{{if chk == true}}
-		<input type="button" class="delete_btn" value="삭제">
-		{{/if}}
+		별점 : {{if rating==1}}
+				<img src="img/score_one.jpg" width="80" height="20">
+			 {{/if}}
+
+			{{if rating==2}}
+				<img src="img/score_two.jpg" width="80" height="20">
+			{{/if}}
+
+			{{if rating==3}}
+				<img src="img/score_three.jpg" width="80" height="20">
+			{{/if}}
+
+			{{if rating==4}}
+				<img src="img/score_four.jpg" width="80" height="20">
+			{{/if}}
+
+			{{if rating==5}}
+				<img src="img/score_five.jpg" width="80" height="20">
+			{{/if}}
+			
+			{{if chk == true}}
+			<input type="button" class="delete_btn" value="삭제">
+			{{/if}}
 	</li>			
 	<hr>	
 </script>
@@ -292,7 +311,29 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<ul id="cmt_list">
 	<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
 	</ul>
-	
+	<!-- 페이지 처리부분 -->
+			<c:if test="${pageGroupResult.beforePage}">
+				<a href="cmt_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
+			</c:if>
+				
+			<c:forEach var ="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
+				<c:choose>
+				
+					<c:when test="${pageGroupResult.selectPageNumber==index}"> 
+						<span id="sel"><a href="cmt_req_list?reqPage=${index}">${index}</a></span>
+					</c:when>
+					
+					<c:otherwise>
+						<a href="cmt_req_list?reqPage=${index}">${index}</a>
+					</c:otherwise>
+					
+				</c:choose>	
+			</c:forEach>
+			
+			<c:if test="${pageGroupResult.afterPage}">
+				<a href="cmt_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
+			</c:if>
+
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

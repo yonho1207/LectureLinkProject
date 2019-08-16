@@ -141,7 +141,7 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 	}
 
 	@Override
-	public List<Qna> selectAllPage(int setRowStartNumber, int setRowEndNumber) {
+	public List<Qna> selectLvlPage(int setRowStartNumber, int setRowEndNumber) {
 
 		List<Qna> qnalist = new ArrayList<Qna>();
 
@@ -264,22 +264,20 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 	}
 
 	@Override
-	public List<Qna> seleteBylvl(int lvl) {
+	public Qna selectGrpAndLvl(int grp) {
 
-		List<Qna> qnaList = new ArrayList<Qna>();
+		Qna qna = new Qna();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(QnaSQL.QNA_SELETE_BY_lvl_SQL);
-			preparedStatement.setInt(1, lvl);
+			preparedStatement = connection.prepareStatement(QnaSQL.QNA_SELECT_GRP_AND_LVL_SQL);
+			preparedStatement.setInt(1, grp);
 			resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-
-				Qna qna = new Qna();
+			if (resultSet.next()) {
 
 				qna.setQna_no(resultSet.getInt("qna_no"));
 				qna.setMember_no(resultSet.getInt("member_no"));
@@ -290,8 +288,6 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 				qna.setVisited(resultSet.getInt("visited"));
 				qna.setGrp(resultSet.getInt("grp"));
 				qna.setLvl(resultSet.getInt("lvl"));
-
-				qnaList.add(qna);
 			}
 
 		} catch (SQLException e) {
@@ -300,7 +296,8 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 		} finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		return qnaList;
+		return qna;
+
 	}
 
 }

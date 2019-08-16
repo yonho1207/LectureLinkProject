@@ -15,15 +15,15 @@ public interface QnaDAO {
 	
 	Qna seleteByNo(int qna_no);//검색
 	
-	List<Qna> seleteBylvl(int lvl); //질문게시판 이용자,관리자 글 나누기
-	
 	void update(Qna qna);//수정
 	
 	void delete(int qna_no);//삭제
 	
 	void updateVisited(int qna_no);//조회수
 	
-	List<Qna> selectAllPage(int setRowStartNumber, int setRowEndNumber);//페이징 처리
+	List<Qna> selectLvlPage(int setRowStartNumber, int setRowEndNumber);// 고객 문의글 페이징 처리
+	
+	Qna selectGrpAndLvl(int grp); //관리자 답글 표시
 	
 	
 }

@@ -9,6 +9,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+  <style type="text/css">	
+	#list_btn{background-color:black; color: white; }
+</style>	
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -73,7 +77,7 @@
 	<input type="hidden" name = "qna_grp" id ="qna_grp" value="${qna.grp}"><br />
 	
 	<div class="form-group">	
-      <label for=qna_no>글번호:</label> ${qna.qna_no}
+      <label for=qna_no>글번호:</label> 
       <input type="hidden" name = "qna_no" value="${qna.qna_no}"><br />
       <input type="text" class="form-control" id="qna_no"  value="${qna.qna_no}" disabled="disabled"/>
     </div>
@@ -102,18 +106,30 @@
   	</div>
  	</c:if>
  	</form>
-	
 	</div>
 	
-	<c:if test="${members_info!=null && members_info.id=='oojh'}">
+	<div class="container">
+	<div class="form-group">	
+	<hr>
+	댓글: &nbsp; ${qna_cmt.qna_title}  &nbsp;&nbsp; ${qna_cmt.qna_date} 
+	<textarea class="form-control" rows="5" cols="50" disabled="disabled"> ${qna_cmt.qna_con}</textarea>
+	</div>
+	</div>
+	
+	<c:if test="${admin!=null && members_info==null}">
 	<hr>
 	<br >
+	
 	<div class="container">
+	<button data-toggle="collapse" data-target="#admin_cmt" class="btn btn-primary">관리자 댓글달기</button>
+	
+	<div id="admin_cmt" class="collapse">
+	
 	<form action="qna_cmt_insert" method="post">
 
 	<input type="hidden" name = "admin_no" value="${members_info.member_no}">
 	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}"><br />
-	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">${qna.grp}
+	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">
 	
     <div class="form-group">	
       <label for=id>작성자:</label>
@@ -134,11 +150,13 @@
 	<input type="submit"  class="btn btn-primary" value="등록">
 	</form>
 	</div>
+	</div>
 	</c:if>
 	
 	<br >
-	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_qna'">리스트 돌아가기</button>
-	
+	<div class="container">
+	<button type="button" class="form-control" id="list_btn" onclick="location.href='/LectureLinkProject/go_qna'" >리스트 돌아가기</button>
+	</div>
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

@@ -12,7 +12,7 @@
 			<cmt_con>${cmt.cmt_con}</cmt_con>
 			<rating>${cmt.rating} </rating>
 			<cmt_date>${cmt.cmt_date}</cmt_date>
-			
 		</cmt>
 	</c:forEach>
+	${pageGroupResult}
 </cmtList>

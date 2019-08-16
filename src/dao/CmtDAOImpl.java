@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Cmt;
+import model.Qna;
 import sql.CmtSQL;
+import sql.QnaSQL;
 
 public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 
@@ -75,7 +77,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			int rowCount = preparedStatement.executeUpdate();
 
 			if (rowCount > 0) {
-				
+
 				statement = connection.createStatement();
 				resultSet = statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
 
@@ -99,7 +101,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 	public List<Cmt> selectByLecture_no(int lecture_no) {
 
 		List<Cmt> cmtList = new ArrayList<Cmt>();
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -110,12 +112,10 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			preparedStatement.setInt(1, lecture_no);
 			resultSet = preparedStatement.executeQuery();
 
-			
-	
 			while (resultSet.next()) {
-				
+
 				Cmt cmt = new Cmt();
-				
+
 				cmt.setCmt_no(resultSet.getInt("cmt_no"));
 				cmt.setLecture_no(resultSet.getInt("lecture_no"));
 				cmt.setMember_no(resultSet.getInt("member_no"));
@@ -123,7 +123,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 				cmt.setCmt_con(resultSet.getString("cmt_con"));
 				cmt.setRating(resultSet.getInt("rating"));
 				cmt.setCmt_date(resultSet.getString("cmt_date"));
-				
+
 				cmtList.add(cmt);
 			}
 
@@ -165,5 +165,48 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 		}
 		return result;
 
+	}
+
+	@Override
+	public List<Cmt> selectByLecture_noPage(int setRowStartNumber, int setRowEndNumber, int lecture_no) {
+
+		List<Cmt> cmtlist = new ArrayList<Cmt>();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CmtSQL.CMT_SELECT_LECTURE_NO_PAGE_SQL);
+
+			preparedStatement.setInt(1, lecture_no);
+			preparedStatement.setInt(2, setRowStartNumber);
+			preparedStatement.setInt(3, setRowEndNumber);
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Cmt cmt = new Cmt();
+
+				cmt.setCmt_no(resultSet.getInt("cmt_no"));
+				cmt.setMember_no(resultSet.getInt("member_no"));
+				cmt.setId(resultSet.getString("id"));
+				cmt.setCmt_con(resultSet.getString("cmt_con"));
+				cmt.setRating(resultSet.getInt("rating"));
+				cmt.setCmt_date(resultSet.getString("cmt_date"));
+				cmt.setLecture_no(resultSet.getInt("lecture_no"));
+
+				cmtlist.add(cmt);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return cmtlist;
 	}
 }

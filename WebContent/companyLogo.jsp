@@ -1,3 +1,3 @@
 <hr />
-&copy; 2019 Global-In Company
+&copy; 2019 Logo Company
 <hr />

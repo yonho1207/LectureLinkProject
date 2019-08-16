@@ -9,13 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CmtDAO;
 import dao.CmtDAOImpl;
+import dao.QnaDAO;
+import dao.QnaDAOImpl;
 import model.Cmt;
+import model.Qna;
+import page.PageManager;
+import page.PageSQL;
 
 @WebServlet(name = "CmtController", urlPatterns 
-= { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete","/cmt_Fom1","/cmt_Fom2","/cmt_Fom3"})
+= { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete","/cmt_Fom1","/cmt_Fom2","/cmt_Fom3","/cmt_req_list"})
 
 public class CmtController extends HttpServlet {
 
@@ -59,16 +65,16 @@ public class CmtController extends HttpServlet {
 			
 		} else if (action.equals("cmt_list")) {
 			
-			int lecture_no=2;
+			/*int lecture_no=2;
 			
 			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
 			
 			CmtDAO dao = new CmtDAOImpl();
 			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
 			
-			req.setAttribute("cmtList", cmtList);
+			req.setAttribute("cmtList", cmtList);*/
 			
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("cmt_req_list?reqPage=1");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_insert")) {
@@ -88,12 +94,11 @@ public class CmtController extends HttpServlet {
 			if (resultComment != null) {
 				
 				req.setAttribute("result", true);
-				//req.setAttribute("message", "댓글이 추가 성공!");
 
 			} else {
 				
 				req.setAttribute("result", false);
-				//req.setAttribute("message", "댓글 추가 실패~");
+				
 			}
 
 			req.setAttribute("cmt", resultComment);
@@ -112,6 +117,26 @@ public class CmtController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
 			rd.forward(req, resp);
 
+		} else if (action.equals("cmt_req_list")) {
+			
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			PageManager pm = new PageManager(requestPage);
+			
+			int lecture_no=2;
+			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
+
+			CmtDAO dao = new CmtDAOImpl();
+
+			List<Cmt> cmtList = dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
+			pm.getPageRowResult().getRowEndNumber(),lecture_no);
+
+			HttpSession session = req.getSession(); 
+			session.setAttribute("cmtList", cmtList);
+			
+			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELETE_ALL_COUNT));
+
+			RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtList.jsp");
+			rd.forward(req, resp);
 		}
 
 	}
