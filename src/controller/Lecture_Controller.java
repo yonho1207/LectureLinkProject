@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.LectureDAOImpl;
 import model.Lecture;
 import model.Members;
-@WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price","/go_Lecture_List","/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.do","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.do","/go_Lecture_Update.do","/go_Lecture_Insert.do","/insert_Lecture.do"})
+@WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price","/go_Lecture_List","/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.admin","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin","/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin"})
 public class Lecture_Controller extends HttpServlet {
 	
 	@Override
@@ -33,10 +33,11 @@ public class Lecture_Controller extends HttpServlet {
 		String action = uri.substring(lastIndex+1);
 		
 		RequestDispatcher rd = null;
+		req.setCharacterEncoding("utf-8");
 		
-		if(action.equals("insert_Lecture.do")) {
+		if(action.equals("insert_Lecture.admin")) {
 			HttpSession session = req.getSession();
-			Members member = (Members) session.getAttribute("members_info");
+			Members member = (Members) session.getAttribute("admin");
 			LectureDAOImpl ldao = new LectureDAOImpl();
 				if(member!=null) {
 					Lecture lecture = new Lecture();
@@ -51,18 +52,18 @@ public class Lecture_Controller extends HttpServlet {
 				}
 				
 				
-		}else if(action.equals("go_Lecture_Insert.do")) {
+		}else if(action.equals("go_Lecture_Insert.admin")) {
 
 			rd = req.getRequestDispatcher("administrator/lecture/insert_Lecture.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("go_Lecture_Update.do")) {
+		}else if(action.equals("go_Lecture_Update.admin")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			Lecture lecture = 
 			ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
 			req.setAttribute("lecture", lecture);
 			rd = req.getRequestDispatcher("administrator/lecture/update_Lecture.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("update_Lecture.do")) {
+		}else if(action.equals("update_Lecture.admin")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			Lecture lecture = new Lecture();
 			lecture.setLecture_no(Integer.parseInt(req.getParameter("lecture_no")));
@@ -71,7 +72,7 @@ public class Lecture_Controller extends HttpServlet {
 			lecture.setPrice(Integer.parseInt(req.getParameter("price")));
 			lecture.setText_price(Integer.parseInt(req.getParameter("text_price")));
 			ldao.update_Lecture(lecture);
-			rd = req.getRequestDispatcher("go_Lecture_List.do");
+			rd = req.getRequestDispatcher("go_Lecture_List.admin");
 			rd.forward(req, resp);
 			
 		}else if(action.equals("go_Lecture_List.do")) {
@@ -83,7 +84,7 @@ public class Lecture_Controller extends HttpServlet {
 		}else if(action.equals("go_Main_in_Lectrue")) {
 			rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);	
-		}else if(action.equals("delete_Lecture.do")) {
+		}else if(action.equals("delete_Lecture.admin")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			ldao.delete_Lecture(Integer.parseInt(req.getParameter("lecture_no")));
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
@@ -109,7 +110,7 @@ public class Lecture_Controller extends HttpServlet {
 		}else if(action.equals("get_Price")) {
 			String suc = "succes";
 			req.setAttribute("suc", suc);
-			rd = req.getRequestDispatcher("go_payment.do");
+			rd = req.getRequestDispatcher("go_payment.admin");
 			rd.forward(req, resp);
 		}
 	}

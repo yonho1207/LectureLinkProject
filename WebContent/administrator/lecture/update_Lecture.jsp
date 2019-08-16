@@ -71,7 +71,7 @@
 	<br>
 
 	<h2>변경 하시고자 하는 강의의 정보를 수정해주세요</h2>
-	<form method="post" action="update_Lecture.do">
+	<form method="post" action="update_Lecture.admin">
 		강의번호 : 	<input type="text" name="lecture_no" value="${lecture.lecture_no}" readonly><br />
 		강의명 : <input type="text" id="lecture_name" name="lecture_name" value="${lecture.lecture_name}"><br />
 		강사명 : <input type="text" id="lecture_teacher" name="lecture_teacher" value="${lecture.lecture_teacher}"><br />
