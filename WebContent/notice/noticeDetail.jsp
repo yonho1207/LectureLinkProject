@@ -9,6 +9,15 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+	
+	a:hover {text-decoration: underline; color: red;}
+	
+	</style>	
+	
+	
+	
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -54,12 +63,11 @@
 		</nav>
 	<br>
 
-
-
 	<h1>Q&A 상세보기 게시판</h1>
 	<br >
 	<div class="container">
- 	
+	
+ 	<c:if test="${members_info==null}">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -83,16 +91,44 @@
   		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
+	</c:if>
 	
+	<c:if test="${members_info!=null && members_info.id =='oojh'}">
+ 	<div class="form-group">	
+      <label for=notice_no>글번호:</label>
+      <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
+      <input type="text" class="form-control" id="notice_no"  value="${notice.notice_no}" disabled="disabled"/>
+    </div>
+    
+    <div class="form-group">	
+      <label for=notice_no>등록일자:</label>
+      <input type="hidden" name = "notice_date" value="${notice.notice_date}"><br />
+      <input type="text" class="form-control" id="notice_date"  value="${notice.notice_date}" disabled="disabled"/>
+    </div>
+    
+    <div class="form-group">
+      <label for="notice_title">제목:</label>
+      <input type="hidden" name = "notice_no" value="${notice.notice_title}">
+      <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" />
+    </div>
+    
+ 	<div class="form-group">
+  		<label for="notice_con">내용:</label>
+  		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
+  		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con">${notice.notice_con}</textarea>
 	</div>
+
 	<br >
 	<div class="form-group">
 	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">삭제</a>
 	</div>	
+	
 	<div class="form-group">
-	<a type="button"  class="btn btn-primary" href=""notice_update"">수정</a>
+	<a type="button"  class="btn btn-primary" href="notice_update">수정</a>
 	</div>
+	</c:if>
 
+	</div>
 		
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_notice'">리스트 돌아가기</button>
 	

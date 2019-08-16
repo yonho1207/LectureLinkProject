@@ -22,12 +22,13 @@
 <script type="text/x-jquery-tmpl" id="itemTemplate">
 
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
+		
+		별점 : {{= rating}}
 		 글번호 :{{= cmt_no}} 
 		멤버넘버  : {{= member_no}} 
 		강의번호 :{{= lecture_no}} 
 		작성자 : {{= id}}
 		내용: {{= cmt_con}}
-		별점 : {{= rating}}
 		등록일자 : {{= cmt_date}}
 
 		{{if chk == true}}
@@ -277,8 +278,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     		<label for="p5">5</label>
   		</span>					
 	</span>
-	
-		<button type="submit"  class="btn btn-primary">저장하기</button>
+		<br >
+		<br >	
+		<button type="submit"  class="btn btn-primary btn-block" row="50px">저장하기</button>
 	
 	</form>
 	</div>

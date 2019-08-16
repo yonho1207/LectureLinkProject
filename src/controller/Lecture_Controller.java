@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CmtDAO;
+import dao.CmtDAOImpl;
 import dao.LectureDAOImpl;
+import model.Cmt;
 import model.Lecture;
 import model.Members;
 @WebServlet(name="Lecture_Controller", urlPatterns = {"/go_Lecture_List","/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.do","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.do","/go_Lecture_Update.do","/go_Lecture_Insert.do","/insert_Lecture.do"})
@@ -93,6 +96,14 @@ public class Lecture_Controller extends HttpServlet {
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
 			req.setAttribute("selected_Lecture", selected_Lecture);
 			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
+			
+			/*CmtDAO dao = new CmtDAOImpl();
+			int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
+			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
+			req.setAttribute("cmtList", cmtList);*/
+			
+			req.setAttribute("selected_Lecture", selected_Lecture);
+			//rd = req.getRequestDispatcher("/cmt/cmtForm1.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("jump_To_Clicked_Lecture")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();

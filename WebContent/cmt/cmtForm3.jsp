@@ -22,12 +22,13 @@
 <script type="text/x-jquery-tmpl" id="itemTemplate">
 
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
+		
+		별점 : {{= rating}}
 		 글번호 :{{= cmt_no}} 
 		멤버넘버  : {{= member_no}} 
 		강의번호 :{{= lecture_no}} 
 		작성자 : {{= id}}
 		내용: {{= cmt_con}}
-		별점 : {{= rating}}
 		등록일자 : {{= cmt_date}}
 
 		{{if chk == true}}
