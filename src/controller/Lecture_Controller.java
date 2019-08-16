@@ -17,7 +17,11 @@ import dao.LectureDAOImpl;
 import model.Cmt;
 import model.Lecture;
 import model.Members;
-@WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price","/go_Lecture_List","/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.admin","/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin","/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin"})
+@WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price",
+		"/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.admin",
+		"/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin",
+		"/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin",
+		"/lecture_Tmpl"})
 public class Lecture_Controller extends HttpServlet {
 	
 	@Override
@@ -112,12 +116,6 @@ public class Lecture_Controller extends HttpServlet {
 			req.setAttribute("selected_Lecture", selected_Lecture);
 			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
 			rd.forward(req, resp);
-		}else if(action.equals("go_Lecture_List")) {
-			LectureDAOImpl ldao = new LectureDAOImpl();
-			List<Lecture> lecture_List = ldao.select_All_Lecture();
-			req.setAttribute("lecture_List", lecture_List);
-			rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
-			rd.forward(req, resp);
 		}else if(action.equals("get_Price")) {
 			int selectedNumber = Integer.parseInt(req.getParameter("selectedNumber"));
 			LectureDAOImpl ldao = new LectureDAOImpl();
@@ -125,6 +123,12 @@ public class Lecture_Controller extends HttpServlet {
 			int returned_Price = selected_lecture.getPrice();
 			req.setAttribute("returned_Price", returned_Price);
 			rd = req.getRequestDispatcher("go_payment.admin");
+			rd.forward(req, resp);
+		}else if(action.equals("lecture_Tmpl")) {
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			List<Lecture> lecture_List = ldao.select_All_Lecture();
+			req.setAttribute("lecture_List", lecture_List);
+			rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 			rd.forward(req, resp);
 		}
 	}

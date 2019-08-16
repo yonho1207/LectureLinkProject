@@ -173,6 +173,38 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 		return lecture;
 	}
 
+	@Override
+	public List<Lecture> lecture_List_Get_RowNum(int rowStartNumber, int rowEndNumber) {
+		List<Lecture> lecture_List = new ArrayList<Lecture>();
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.SELECT_BY_ROWNUM);
+			preparedStatement.setInt(1, rowStartNumber);
+			preparedStatement.setInt(2, rowEndNumber);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Lecture lecture = new Lecture();
+				lecture.setLecture_no(resultSet.getInt("lecture_no"));
+				lecture.setLecture_name(resultSet.getString("lecture_name"));
+				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
+				lecture.setPrice(resultSet.getInt("price"));
+				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture_List.add(lecture);
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);		
+		}
+		return lecture_List;
+	}
+	
+	
+
 
 	
 }

@@ -12,13 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.QnaDAO;
 import dao.QnaDAOImpl;
+import model.Lecture;
 import model.Members;
 import model.Payment;
 import model.Qna;
-@WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do","/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do","/gift_Card_ETC.do","/goMain","/go_Customer_Support"})
+import page.PageDAOImpl;
+import page.PageGroupResult;
+import page.PageManager;
+import page.PageSQL;
+@WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do",
+		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
+		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
+		"/purchase_Succes","/purchase_Failed","/go_Lecture_List"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -72,6 +81,14 @@ public class Page_Move_Contoroller extends HttpServlet {
 			int pay_option = 4;
 			req.setAttribute("pay_option", pay_option);
 			rd = req.getRequestDispatcher("payment/methodsOfPayment/gift_Card_etc.jsp");
+			rd.forward(req, resp);
+		}else if(action.equals("purchase_Succes")) {
+			resp.sendRedirect("payment/methodsOfPayment/purchase_Succes.jsp");
+		}else if(action.equals("purchase_Failed")) {
+			resp.sendRedirect("payment/methodsOfPayment/purchase_Failed.jsp");
+		}else if(action.equals("go_Lecture_List")) {
+	
+			rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
 			rd.forward(req, resp);
 		}
 	}

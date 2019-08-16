@@ -71,7 +71,7 @@ public class Payment {
     
     
     
-    public  int Buy_Book() {
+    public  int getBuy_Book() {
 		return buy_Book;
 	}
 	public void setBuy_Book(int buy_Book) {

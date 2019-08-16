@@ -39,6 +39,7 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 				preparedStatement.setInt(6, payment.getPrice());
 				preparedStatement.setInt(7, payment.getPay_option());
 				preparedStatement.setString(8, payment.getPeriod());
+				preparedStatement.setInt(9, payment.getBuy_Book());
 				int rowCount = preparedStatement.executeUpdate();
 				if(rowCount>0) {
 					
