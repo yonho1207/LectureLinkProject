@@ -65,13 +65,19 @@
 			</ul>
 		</nav>
 	<br>
+
+	<p align="center" style="font-size: 32px;">상품권 및 기프티콘등 사용을 선택하셨습니다</p>
+		<c:set var="total" value="0"/>
+			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
+				<c:set var="total" value="${total+price.price}"/>
+			</c:forEach>
+		<p align="center" style="font-size: 24px; color: red;">이하의 금액을 확인하여 주십시오</p>
+		<p align="center" style="font-size: 32px;">총액 : ${total}</p>
+		<form action="gift_Card_ETC_Accept.do"  align="center">
+			<input type="submit">
+		</form>
+		
+	<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" >
 	
-
-
-	<h1>상품권 및 기프티콘등 사용을 선택하셨습니다</h1>
-	<form action="">
-		<input type="submit">
-	</form>
-	<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 </body>
 </html>

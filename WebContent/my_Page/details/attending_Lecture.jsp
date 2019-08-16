@@ -71,7 +71,7 @@
 	<h3>반갑습니다 ${members_info.id}님</h3> 
 	귀하께서는 현재 이하의 강의를 수강중이십니다.
 		<c:forEach var="attending_List" items="${attending_List}">
-			<h4>수강중이신 강의명 : ${attending_List.lecture_name}</h4>	
+			<h4>수강중이신 강의명 : <a href="go_Lecture_attend.do?lecture_no=${attending_List.lecture_no}">${attending_List.lecture_name}</a></h4>	
 			구매하신 일시 : ${attending_List.payment_date}<br />
 			예상 만료 기간: ${attending_List.period}<hr />
 		</c:forEach>

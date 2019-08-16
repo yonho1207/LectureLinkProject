@@ -80,12 +80,12 @@
 		<tbody>
 		<c:forEach var="lecture_List" items="${lecture_List}">
 			<tr>
-				<td><a href="go_Lecture_Update.do?lecture_no=${lecture_List.lecture_no}">${lecture_List.lecture_no}</a></td>
+				<td><a href="go_Lecture_Update.admin?lecture_no=${lecture_List.lecture_no}">${lecture_List.lecture_no}</a></td>
 				<td>${lecture_List.lecture_name}</td>
 				<td>${lecture_List.lecture_teacher}</td>
 				<td>${lecture_List.price}</td>
 				<td>${lecture_List.text_price}</td>
-				<td><input type="button" onclick="location.href='delete_Lecture.do?lecture_no=${lecture_List.lecture_no}'" value="삭제하기"></td>
+				<td><input type="button" onclick="location.href='delete_Lecture.admin?lecture_no=${lecture_List.lecture_no}'" value="삭제하기"></td>
 				<td></td>
 			</tr>
 		</c:forEach>

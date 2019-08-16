@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ page isELIgnored = "true"  %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +11,53 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/x-jquery-tmpl" id="itemTemplate">
+		<li id="lectureList">
+			<p style="font-size: x-large;"><a href="go_Lecture_attend.do?lecture_no=${lecture_no}">${lecture_name}</a></p> 
+			<p style="font-size: large;">${lecture_teacher}</p>
+		</li>
+	</script>
+	
+	<script type="text/javascript">
+		$(function(){
+			function addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price){
+				var li_data = {
+						"lecture_no": lecture_no,
+						"lecture_name": lecture_name,
+						"lecture_teacher": lecture_teacher,
+						"price": price,
+						"text_price" : text_price
+				};
+				var new_li = $("#itemTemplate").tmpl(li_data);
+				$("#lecture_list").append(new_li);
+				
+			}
+			$.get("lecture_Tmpl",{},function(data){
+				$(data).find("item").each(function(){
+					var lecture_no = $(this).find("lecture_no").text();
+					var lecture_name = $(this).find("lecture_name").text();
+					var lecture_teacher = $(this).find("lecture_teacher").text();
+					var price = $(this).find("price").text();
+					var text_price = $(this).find("text_price").text();
+					addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price);
+				});
+			}).fail(function(){
+				alert("CALL FAILED")
+			});
+		});
+	</script>
+	<style type="text/css">
+		#lectureList{
+				border-style: solid;
+				border-width: 1px;
+				text-align: center;
+		}
+	</style>
+	
+	
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -65,13 +112,11 @@
 			</ul>
 		</nav>
 	<br>
+		
+	<ul id="lecture_list">
 	
-	<c:forEach var="lecture_List" items="${lecture_List}">
-		<input type="hidden" value="${lecture_List.lecture_no}" name = "lecture_no">
-		<h4><a href="go_Lecture_attend.do?lecture_no=${lecture_List.lecture_no}">강의명 : ${lecture_List.lecture_name}</a></h4>
-		강사 : ${lecture_List.lecture_teacher}
-		가격 : ${lecture_List.price}
-	</c:forEach>
+	</ul>
+
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >댓글</button>
 	
 </body>

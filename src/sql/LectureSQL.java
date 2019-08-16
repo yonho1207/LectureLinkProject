@@ -22,5 +22,10 @@ public class LectureSQL {
 			"delete from lecture where lecture_no=?";
 	public static final String ATTENDING_LECTURE_COUNT =
 			"select count(*) from payment where member_no=?";
+	public static final String SELECT_BY_ROWNUM =
+			"select *\r\n" + 
+			"from(select rownum as rn, lecture_sel.* \r\n" + 
+			"    from (select * from lecture order by LECTURE_NO desc) lecture_sel)\r\n" + 
+			"where rn between ? and ?  order by LECTURE_NO";
 	
 }

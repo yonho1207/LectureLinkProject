@@ -19,6 +19,8 @@
 	}
 </style>
 <script type="text/javascript">
+
+
 	$(function(){
 		$("#signupForm").validate({
 			debug : false,
@@ -100,12 +102,14 @@
 		
 		
 	});
-	</script>
-	<script type="text/javascript">
-var idck=0;
+	
+	var idck=2;
+	var idckv=0;
+	var cnt=0;
 	$(function(){
 		$("#checkid").click(function(){
-				
+			
+			
 				var input_val=$("#id").val();
 				//alert(input_val);
 				if(!input_val){
@@ -118,51 +122,71 @@ var idck=0;
 				$.get(url,{"id":input_val},function(xml){
 					
 					var result = $(xml).find("idcheck_result").text();
-					var cnt = $(xml).find("idcheck_cnt").text();
+					cnt = $(xml).find("idcheck_cnt").text();
 					$(".console").html(result);
 					
 					if(cnt>0){
 						idck = 0;
+						idckv = document.getElementById("id").value;
+						return false;
 						
 						
 					}else if(cnt==0){
 						idck = 1;
+						idckv = document.getElementById("id").value;
+						return true;
 						
 						
-					}else if(cnt!=null){
-						
-						idck=2;
 					}
-					
 					
 				});
 		});
 		
 		
 	});
-	
+	function noSpaceForm(obj) {
+	    var str_space = /\s/;
+	    if(str_space.exec(obj.value)) {
+	        alert("공백을 사용할 수 없습니다.\n\n공백은 자동으로 지워집니다.");
+	        obj.focus();
+	        obj.value = obj.value.replace(' ','');
+	        return false;
+	    }
+	}
 	
 	$(function(){
 		$("#signup").click(function(){
+			alert(idck)
+		if(idck==0 && idckv==document.getElementById("id").value){
 			
-			if(idck == 1){
+			alert("중복된 아이디입니다.")
+		}
+		if(idck==0 && idckv!=document.getElementById("id").value){
+			alert("중복체크는 필수입니다.");
+			
+		}
+			
+		if(idck==2 ){
+			alert("중복체크는 필수입니다.");
+			
+		}
 				
-				alert("회원가입 완료.다시 로그인 해주세요.");
-				return true;
-				
-			}
-			if(idck ==0){
-				alert("중복체크를 먼저 진행해주세요");
-				return false;
-				
-			}
+		if(idck==1 && idckv==document.getElementById("id").value){
+			alert("회원가입을 환영합니다.다시 로그인 해주세요.");
+			$('form').attr({action:'input_account', method:'post'}).submit();
+		}
+		else if(idck==1 && idckv!=document.getElementById("id").value){
+			alert("새로 입력한 아이디 중복체크");
 			
-			
-			
-		});
+		}
 		
 		
+		
+			});
+			
 	});
+	
+	
 </script> 
 </head>
 <body>
@@ -221,7 +245,8 @@ var idck=0;
 	<h3>회원등록</h3>
 		
 		<form method="post" id="signupForm" action="input_account">
-			id<input type="text"name="id" id="id"/><input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br />
+			id<input type="text"name="id" id="id" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
+			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br />
 			password<input type="password" name="password" id="password"/><br />
 			비밀번호 확인<input id="repassword" type="password" name="repassword"/><br />
 			성<input type="text" name="lastname" /><br />
@@ -242,7 +267,7 @@ var idck=0;
 			
 			
 			<input type="reset" value="원래대로"/>
-			<input type="submit" id="signup" value="가입하기"/>
+			<input type="button" id="signup" value="가입하기"  />
 		</form>
 
 </body>

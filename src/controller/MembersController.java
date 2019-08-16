@@ -25,7 +25,7 @@ public class MembersController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req,resp);
-		//System.out.println("doGet() ȣ���");
+		//System.out.println("doGet() 호占쏙옙占�");
 		
 	}
 
@@ -65,6 +65,7 @@ public class MembersController extends HttpServlet{
 			members.setEmail(req.getParameter("email"));
 			
 			dao.insert(members);
+			System.out.println("왓다");
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
@@ -95,7 +96,7 @@ public class MembersController extends HttpServlet{
 					session.setAttribute("admin", members);
 					
 					
-					req.setAttribute("log","�α���");
+					req.setAttribute("log","占싸깍옙占쏙옙");
 
 					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 					rd.forward(req, resp);
@@ -114,7 +115,7 @@ public class MembersController extends HttpServlet{
 					attending_List = pdao.attending_Lecture(members.getMember_no());
 					session.setAttribute("attending_List", attending_List);
 					session.setAttribute("members_info", members);
-					req.setAttribute("log","�α���");
+					req.setAttribute("log","占싸깍옙占쏙옙");
 
 				RequestDispatcher rd = req.getRequestDispatcher("/goMain");
 				rd.forward(req, resp);
@@ -122,7 +123,7 @@ public class MembersController extends HttpServlet{
 			}else{
 				
 				
-				req.setAttribute("message", "���̵�� �н����带 Ȯ�����ּ���");
+				req.setAttribute("message", "占쏙옙占싱듸옙占� 占싻쏙옙占쏙옙占썲를 확占쏙옙占쏙옙占쌍쇽옙占쏙옙");
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/members/login.jsp");
 				rd.forward(req, resp);

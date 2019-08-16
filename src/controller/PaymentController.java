@@ -25,7 +25,10 @@ import model.Lecture;
 import model.Members;
 import model.Payment;
 import model.Qna;
-@WebServlet(name="PaymentController", urlPatterns = {"/check_Period","/clear_Purchase_Basket.do","/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do","/payment_Accept.do","/go_payment.do"})
+@WebServlet(name="PaymentController", urlPatterns = {"/gift_Card_ETC_Accept.do","/cell_Phone_Bill_Accept.do",
+		"/credit_Card_Accept.do","/payment_Date_Check","/clear_Purchase_Basket.do",
+		"/payment_Process.do","/payment_Confirm.do","/account_Transfer_Accept.do",
+		"/payment_Accept.do","/go_payment.do"})
 public class PaymentController extends HttpServlet {
 
 	@Override
@@ -109,9 +112,9 @@ public class PaymentController extends HttpServlet {
 			}
 			boolean result = pdao.insert_Payment(purchase_Basket);
 			if(result==false) {
-				resp.sendRedirect("payment/methodsOfPayment/puchase_Failed.jsp");
+				resp.sendRedirect("purchase_Failed");
 			}else if(result==true){
-				resp.sendRedirect("payment/methodsOfPayment/purchase_Succes.jsp");
+				resp.sendRedirect("purchase_Succes");
 			}											
 		}else if(action.equals("clear_Purchase_Basket.do")) {
 			HttpSession session = req.getSession();
@@ -120,8 +123,60 @@ public class PaymentController extends HttpServlet {
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");
 			rd.forward(req, resp);
-		}else if(action.equals("check_Period")) {
+		}else if(action.equals("payment_Date_Check")) {	
+			int choosed_Month = Integer.parseInt(req.getParameter("choose_Month"));
+			String next_Month = Time_Set_Helper.get_period_date(choosed_Month);
+			req.setAttribute("next_Month", next_Month);
+			rd = req.getRequestDispatcher("go_payment.do");
+			rd.forward(req, resp);
+		}else if(action.equals("credit_Card_Accept.do")) {
+
+			int account_Transfer_Pay_Option = 2;
+			HttpSession session = req.getSession();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
 			
+			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
+			for(Payment list : purchase_Basket) {				
+				list.setPay_option(account_Transfer_Pay_Option);
+			}
+			boolean result = pdao.insert_Payment(purchase_Basket);
+			if(result==false) {
+				resp.sendRedirect("purchase_Failed");
+			}else if(result==true){
+				resp.sendRedirect("purchase_Succes");
+			}				
+		}else if(action.equals("cell_Phone_Bill_Accept.do")) {
+
+			int account_Transfer_Pay_Option = 3;
+			HttpSession session = req.getSession();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			
+			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
+			for(Payment list : purchase_Basket) {				
+				list.setPay_option(account_Transfer_Pay_Option);
+			}
+			boolean result = pdao.insert_Payment(purchase_Basket);
+			if(result==false) {
+				resp.sendRedirect("purchase_Failed");
+			}else if(result==true){
+				resp.sendRedirect("purchase_Succes");
+			}		
+		}else if(action.equals("gift_Card_ETC_Accept.do")) {
+
+			int account_Transfer_Pay_Option = 4;
+			HttpSession session = req.getSession();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			
+			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
+			for(Payment list : purchase_Basket) {				
+				list.setPay_option(account_Transfer_Pay_Option);
+			}
+			boolean result = pdao.insert_Payment(purchase_Basket);
+			if(result==false) {
+				resp.sendRedirect("purchase_Failed");
+			}else if(result==true){
+				resp.sendRedirect("purchase_Succes");
+			}		
 		}
 			
 	}
