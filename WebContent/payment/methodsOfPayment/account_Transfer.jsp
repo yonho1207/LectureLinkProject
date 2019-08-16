@@ -59,23 +59,27 @@
 						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>
 	
 
 
-	<h1>현금 결제를 선택하셨습니다</h1>
+	<p align="center" style="font-size: 32px;">현금 결제를 선택하셨습니다</p>
 		<c:set var="total" value="0"/>
 			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
 				<c:set var="total" value="${total+price.price}"/>
 			</c:forEach>
-		<h1>총액 : ${total}</h1>
-		<form action="account_Transfer_Accept.do">
+		<p align="center" style="font-size: 24px; color: red;">이하의 금액을 확인하여 주십시오</p>
+		<p align="center" style="font-size: 32px;">총액 : ${total}</p>
+		<form action="account_Transfer_Accept.do"  align="center">
 			<input type="submit">
 		</form>
 		
-		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
+		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" >
 	
 </body>
 </html>

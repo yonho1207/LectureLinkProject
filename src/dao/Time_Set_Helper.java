@@ -25,15 +25,16 @@ public class Time_Set_Helper {
 		String one_Month_Later= transFormat.format(get_After_1month);
 		return one_Month_Later;
 	}
-	
-	public static String get_SixMonth_Later() {
+
+	public static String get_period_date(int select_Price) {
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); 
-		cal.add(Calendar.MONTH, 6);
+		cal.add(Calendar.MONTH, select_Price);
 		Date get_After_1month = cal.getTime();
-		String one_Month_Later= transFormat.format(get_After_1month);
-		return one_Month_Later;
+		String selected_Period= transFormat.format(get_After_1month);
+		return selected_Period;
+		
 	}
 
 

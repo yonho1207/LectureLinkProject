@@ -59,6 +59,9 @@
 						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>
@@ -76,6 +79,5 @@
 	<br />
 	<h3>이상과 같은 강의를 수강하셨습니다 이용해주셔서 감사합니다</h3>
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
-	<input type="button" onclick="location.href='/LectureLinkProject/go_my_page.do'" value="마이 페이지로 이동하기">
 </body>
 </html>

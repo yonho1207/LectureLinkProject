@@ -51,13 +51,11 @@
 					</li>
 				</c:when>
 				<c:when test="${members_info!=null || admin!=null}">
-				<c:when test="${members_info!=null}">
 					<li class="nav-item">
 						<a class="nav-link" href="logout">로그아웃</a>
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
 				<c:if test="${members_info!=null && members_info.id=='admin'}">
 					<li class="nav-item">
 					
@@ -65,6 +63,9 @@
 						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>

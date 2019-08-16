@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dao.PaymentDAOImpl;
+import dao.Time_Set_Helper;
 import model.Payment;
 
 public class Test {
@@ -19,8 +20,8 @@ public class Test {
 		payment.setPrice(75000);
 		payment.setPay_option(2);
 		
-		pdao.select_PaymentList(1);	
-
+		Time_Set_Helper.get_period_date(12);
+		
 		
 
 	}

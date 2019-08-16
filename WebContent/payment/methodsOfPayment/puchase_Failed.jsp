@@ -58,6 +58,9 @@
 						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
+					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+					</li>				
 			</ul>
 		</nav>
 	<br>
@@ -66,5 +69,6 @@
 	<h1>주문 과정에서 문제가 발생하였습니다
 		관리자에게 문의하여주세요</h1>
 
+	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
 </body>
 </html>
