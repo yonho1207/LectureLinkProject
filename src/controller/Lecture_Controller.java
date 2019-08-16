@@ -1,4 +1,4 @@
-package controller;
+﻿package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -119,8 +119,11 @@ public class Lecture_Controller extends HttpServlet {
 			rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("get_Price")) {
-			String suc = "succes";
-			req.setAttribute("suc", suc);
+			int selectedNumber = Integer.parseInt(req.getParameter("selectedNumber"));
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			Lecture selected_lecture = ldao.select_Lecture_No(selectedNumber);
+			int returned_Price = selected_lecture.getPrice();
+			req.setAttribute("returned_Price", returned_Price);
 			rd = req.getRequestDispatcher("go_payment.admin");
 			rd.forward(req, resp);
 		}
