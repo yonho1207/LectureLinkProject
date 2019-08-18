@@ -78,8 +78,8 @@
 		<form action="account_Transfer_Accept.do"  align="center">
 			<input type="submit">
 		</form>
-		
-		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" >
+		 
+		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" style="font-size: large; position: relative; left: 850px">
 	
 </body>
 </html>

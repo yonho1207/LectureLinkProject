@@ -15,7 +15,23 @@
   </script>
   
   <style type="text/css">
-  
+  	#insert_Payment_Info{
+  		font-size: xx-large;
+  		position: relative;
+  		left: 200px;
+  	}
+  	#purchase_Basket{
+  		font-size: xx-large;
+  		position: relative;
+  		left: 200px;  	
+  	
+  	}
+  	#clear_Purchase_Basket{
+  		font-size: xx-large;
+  		position: relative;
+  		left: 200px;  
+  	
+  	}
   	#payment_Date_Check{
   		position: fixed;
         right: 150px;
@@ -82,9 +98,10 @@
 	<br>
 	
 
-		<h1>구매하실 강의를 선택해주세요</h1>
+		
 
-		<form method="get" action="payment_Process.do">
+		<form method="get" action="payment_Process.do" id="insert_Payment_Info">
+		<h1>구매하실 강의를 선택해주세요</h1>
 		강의 번호 :<select name="select_Lecture_Pick" id="select_Lecture_Pick">
 				 <c:forEach var="select_Lecture" items="${lecture_List_Serve}">
 				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 교재 가격 : ${select_Lecture.text_price}</option>
@@ -97,7 +114,7 @@
 				<button type="submit">구매 리스트에 추가하기</button>
 				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
 		</form> 
-				<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
+				
 	
 		<form action="payment_Date_Check" id="payment_Date_Check" method="post">
 			구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
@@ -106,17 +123,19 @@
 						<button onclick="check_Period_Button" id="check_Period_Button">계산하기</button><br />
 		</form>
 	
-		<h2>구매 선택하신 강의 목록</h2>
-		<table>
+		<h2 style="position: relative; left: 200px">구매 선택하신 강의 목록</h2> 
+		<table id="purchase_Basket">
+		
 		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
-			<p style="font-size: large;">
+			<p style="font-size: large; position: relative; left: 200px">
 			구매하신 강의명 :${purchase_Basket.lecture_name}
 			가격 : ${purchase_Basket.price}</p>
-			<p style="font-size: x-large;">예상 만료 기간: ${purchase_Basket.period}</p><br />
+			<p style="font-size: x-large; position: relative; left: 200px">예상 만료 기간: ${purchase_Basket.period}</p><br />
 		</c:forEach>
 		</table>
-		<form action="clear_Purchase_Basket.do">
+		<form action="clear_Purchase_Basket.do" id="clear_Purchase_Basket">
 			<input type="submit" value="장바구니 비우기">
+			<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
 		</form>
 		
 		

@@ -31,6 +31,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
 				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);
 				
 			}
@@ -73,6 +74,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 			preparedStatement.setString(2, lecture.getLecture_teacher());
 			preparedStatement.setInt(3, lecture.getPrice());
 			preparedStatement.setInt(4, lecture.getText_price());
+			preparedStatement.setString(5, lecture.getDescription());
 			int lowCount = preparedStatement.executeUpdate();
 			
 			if(lowCount>0) {
@@ -101,6 +103,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 			preparedStatement.setInt(3, lecture.getPrice());
 			preparedStatement.setInt(4, lecture.getText_price());
 			preparedStatement.setInt(5, lecture.getLecture_no());
+			preparedStatement.setString(6, lecture.getDescription());
 			int lowCount = preparedStatement.executeUpdate();
 			
 			if(lowCount>0) {
@@ -162,7 +165,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
 				lecture.setText_price(resultSet.getInt("text_price"));
-				
+				lecture.setDescription(resultSet.getString("description"));
 			}
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
@@ -193,6 +196,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
 				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);
 			}
 		}catch(SQLException ex01) {

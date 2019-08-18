@@ -76,6 +76,7 @@
 		강사명 : <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
 		1개월 기준 수강료 : <input type="text" id="price" name="price"><br />
 		교재 가격 : <input type="text" id="text_price" name="text_price"><br />
+		강의 설명 : <textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
 		<input type="submit">
 	</form>
 </body>

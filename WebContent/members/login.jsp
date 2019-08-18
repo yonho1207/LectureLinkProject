@@ -26,6 +26,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	#login_Form{
+  		font-size: xx-large;
+  		position: relative;
+  		left: 200px;
+  	}
+  
+  </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -82,16 +90,18 @@
 	
 
 
-
-	<h2>로그인</h2>
-	<form action="login" method="post">
-		<input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"/><br />
-		<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/><br />
-	
-		<input type="submit" value="로그인"/><br />
-		<a href="go_searchpwd">비밀번호 찾기</a>
-	</form>${message}
-	
+	<div class="container">
+		
+		<form action="login" method="post" id="login_Form">
+			  <div class="form-group">
+			 	<h1>로그인</h2>
+				<input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"/><br />
+				<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/><br />
+				<input type="submit" value="로그인"/><br />
+				<a href="go_searchpwd">비밀번호 찾기</a>
+			</form>${message}
+		</div>
+	</div>
 	
 
 </body>

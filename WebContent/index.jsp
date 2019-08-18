@@ -22,12 +22,14 @@
             position: fixed;
               right: 0;
         }
+        
         #search-select{
          width:85%;
          overflow: scroll;
          overflow-x:auto;
          overflow-y:auto;
          }
+        
          #notice_Table{
          	width:75%;
          }
@@ -122,7 +124,7 @@
 			</c:choose>
 		 </div>
 		 
-		 <div  id="lecture_Advertise">
+		 <div  id="lecture_Advertise" >
 		 	<div id="advertise_Image">
 				 <iframe width="560" height="315" src="https://www.youtube.com/embed/htzo0mZS0yw" 
 				 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 

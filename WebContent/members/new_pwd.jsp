@@ -57,6 +57,14 @@
 	
 	
 	</script>
+	<style type="text/css">
+		#newpwdForm{
+			font-size: xx-large;
+	  		position: relative;
+	  		left: 200px;
+		}
+	
+	</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -114,14 +122,15 @@
 	
 
 
-새 비밀번호<br />
+	
 
-<form method="post" id="newpwdForm" action="pwd_update">
-<input type="hidden" name="member_no" id="member_no" value="${pwd_info.member_no}" />
-<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/><br />
-<input id="repassword" type="password" name="repassword" placeholder="비밀번호를 한번 더 입력해주세요"/><br />
-<input type="submit" value="변경하기"/>
-</form>
+	<form method="post" id="newpwdForm" action="pwd_update">
+		<h1>새 비밀번호</h1><br />
+		<input type="hidden" name="member_no" id="member_no" value="${pwd_info.member_no}" />
+		<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요"/><br />
+		<input id="repassword" type="password" name="repassword" placeholder="비밀번호를 한번 더 입력해주세요"/><br />
+		<input type="submit" value="변경하기"/>
+	</form>
 
 </body>
 </html>

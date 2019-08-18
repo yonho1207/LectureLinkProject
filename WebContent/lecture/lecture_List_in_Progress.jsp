@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ page isELIgnored = "true"  %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -15,33 +14,44 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script type="text/x-jquery-tmpl" id="itemTemplate">
 		<li id="lectureList">
-			<p style="font-size: x-large;"><a href="go_Lecture_attend.do?lecture_no=${lecture_no}">${lecture_name}</a></p> 
-			<p style="font-size: large;">${lecture_teacher}</p>
+			<p style="font-size: x-large;"><a href="go_Lecture_attend.do?lecture_no={{= lecture_no}}">{{= lecture_name}}</a></p> 
+			<p style="font-size: large;">{{= lecture_teacher}}</p>
+			<p>{{= description}}</p>
 		</li>
 	</script>
 	
 	<script type="text/javascript">
 		$(function(){
-			function addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price){
+			function addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price, description){
 				var li_data = {
 						"lecture_no": lecture_no,
 						"lecture_name": lecture_name,
 						"lecture_teacher": lecture_teacher,
 						"price": price,
-						"text_price" : text_price
+						"text_price" : text_price,
+						"description": description
 				};
 				var new_li = $("#itemTemplate").tmpl(li_data);
 				$("#lecture_list").append(new_li);
 				
 			}
+			
 			$.get("lecture_Tmpl",{},function(data){
+				function getUrlParams() {
+				    var params = {};
+				    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+				    return params;
+				} 
+				var set_Url = getUrlParams();
+				var reqPage = set_Url.reqPage;
 				$(data).find("item").each(function(){
 					var lecture_no = $(this).find("lecture_no").text();
 					var lecture_name = $(this).find("lecture_name").text();
 					var lecture_teacher = $(this).find("lecture_teacher").text();
 					var price = $(this).find("price").text();
 					var text_price = $(this).find("text_price").text();
-					addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price);
+					var description = $(this).find("description").text();
+					addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price, description);
 				});
 			}).fail(function(){
 				alert("CALL FAILED")
@@ -53,6 +63,12 @@
 				border-style: solid;
 				border-width: 1px;
 				text-align: center;
+				width: 80%;
+		}
+		
+		#lecture_list{
+		
+			
 		}
 	</style>
 	
@@ -113,9 +129,10 @@
 		</nav>
 	<br>
 		
-	<ul id="lecture_list">
+	<ul id="lecture_list" style="position: relative; left: 200px" >
 	
 	</ul>
+
 
 	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >댓글</button>
 	

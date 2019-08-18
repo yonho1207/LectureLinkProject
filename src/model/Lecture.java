@@ -8,6 +8,7 @@ public class Lecture {
     String lecture_teacher;
     int price;
     int text_price;
+    String description;
     
     public int getLecture_no() {
         return lecture_no;
@@ -39,11 +40,19 @@ public class Lecture {
     public void setText_price(int text_price) {
         this.text_price = text_price;
     }
-    @Override
-    public String toString() {
-        return "Lecture [lecture_no=" + lecture_no + ", lecture_name=" + lecture_name + ", lecture_teacher="
-                + lecture_teacher + ", price=" + price + ", text_price=" + text_price + "]";
-    }
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "Lecture [lecture_no=" + lecture_no + ", lecture_name=" + lecture_name + ", lecture_teacher="
+				+ lecture_teacher + ", price=" + price + ", text_price=" + text_price + ", description=" + description
+				+ "]";
+	}
+    
     
     
 }

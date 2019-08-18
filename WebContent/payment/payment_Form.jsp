@@ -67,8 +67,8 @@
 	<br>
 	
 
-	<h1>결제 정보를 확인하여 주십시오</h1>
-	<form method="get" action="payment_Confirm.do">
+	<h1 style="position: relative; left: 200px">결제 정보를 확인하여 주십시오</h1>
+	<form method="get" action="payment_Confirm.do" style="position: relative; left: 200px">
 		<c:if test="${!empty purchase_Basket}">
 		<table>
 			<c:forEach var = "purchase_Basket" items="${purchase_Basket}">
@@ -79,17 +79,17 @@
 		</table>
 	</c:if>
 	<c:set var="total" value="0"/>
-	<c:forEach var="price" items="${purchase_Basket}" varStatus="st">
+	<c:forEach var="price" items="${purchase_Basket}" varStatus="st" >
 		
 		<c:set var="total" value="${total+price.price}"/>
 		
 	</c:forEach>
 		<h1>총액 : ${total}</h1>
-		<input type="button" onclick="location.href='account_Transfer.do'" value="현금 결제">
-		<input type="button" onclick="location.href='credit_Card.do'" value="카드 결제">
-		<input type="button" onclick="location.href='cell_Phone_Bill.do'" value="휴대폰 결제">
-		<input type="button" onclick="location.href='gift_Card_ETC.do'" value="상품권 혹은 기프티콘"><br />
-		<input type="button" onclick="location.href='go_payment.do'" value="결제 화면으로 이동하기">
+		<input type="button" onclick="location.href='account_Transfer.do'" value="현금 결제" style="position: relative; left: 200px">
+		<input type="button" onclick="location.href='credit_Card.do'" value="카드 결제" style="position: relative; left: 200px">
+		<input type="button" onclick="location.href='cell_Phone_Bill.do'" value="휴대폰 결제" style="position: relative; left: 200px">
+		<input type="button" onclick="location.href='gift_Card_ETC.do'" value="상품권 혹은 기프티콘" style="position: relative; left: 200px"><br />
+		<input type="button" onclick="location.href='go_payment.do'" value="결제 화면으로 이동하기" style="position: relative; left: 200px">
 	</form>
 
 </body>
