@@ -56,7 +56,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
+					<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
 				</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

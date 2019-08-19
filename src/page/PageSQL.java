@@ -8,6 +8,6 @@ public class PageSQL {
 	
 	public static final String CMT_SELECTE_ALL_COUNT="select count(*) as cnt from cmt";
 	
-	public static final String  MEMO_SELECT_ALL_COUNT=
+	public static final String  LECTURE_SELECTE_ALL_COUNT=
 			"select count(*)as cnt from lecture";
 }
