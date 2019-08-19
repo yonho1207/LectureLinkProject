@@ -22,38 +22,38 @@
 <script type="text/x-jquery-tmpl" id="itemTemplate">
 
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
-			
-		 글번호 :{{= cmt_no}} 
+		
+	별점 : {{if rating==1}}
+			<img src="img/score_one.jpg" width="80" height="20">
+		 {{/if}}
+
+		 {{if rating==2}}
+			<img src="img/score_two.jpg" width="80" height="20">
+		 {{/if}}
+
+		{{if rating==3}}
+			<img src="img/score_three.jpg" width="80" height="20">
+		{{/if}}
+
+		{{if rating==4}}
+			<img src="img/score_four.jpg" width="80" height="20">
+		{{/if}}
+
+		{{if rating==5}}
+			<img src="img/score_five.jpg" width="80" height="20">
+		{{/if}}	
+
+ 		글번호 :{{= cmt_no}} 
 		멤버넘버  : {{= member_no}} 
 		강의번호 :{{= lecture_no}} 
 		작성자 : {{= id}}
 		내용: {{= cmt_con}}
 		등록일자 : {{= cmt_date}}
 
-		별점 : {{if rating==1}}
-				<img src="img/score_one.jpg" width="80" height="20">
-			 {{/if}}
-
-			{{if rating==2}}
-				<img src="img/score_two.jpg" width="80" height="20">
-			{{/if}}
-
-			{{if rating==3}}
-				<img src="img/score_three.jpg" width="80" height="20">
-			{{/if}}
-
-			{{if rating==4}}
-				<img src="img/score_four.jpg" width="80" height="20">
-			{{/if}}
-
-			{{if rating==5}}
-				<img src="img/score_five.jpg" width="80" height="20">
-			{{/if}}
-			
-			{{if chk == true}}
+		{{if chk == true}}
 			<input type="button" class="delete_btn" value="삭제">
-			{{/if}}
-	</li>			
+		{{/if}}	
+	</li>	
 	<hr>	
 </script>
 
@@ -132,8 +132,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,g
 		
 		if (result) {
 			
-			alert(message);
-			
 			var cmt_no =$(xml).find("cmt_no").text();
 			var member_no =$(xml).find("member_no").text();
 			var lecture_no = $(xml).find("lecture_no").text();
@@ -141,6 +139,9 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,g
 			var cmt_con = $(xml).find("cmt_con").text();
 			var rating = $(xml).find("rating").text();
 			var datetime = $(xml).find("cmt_date").text();
+			var groupStartNumber = $(xml).find("groupStartNumber").text();
+			var groupEndNumber = $(xml).find("groupEndNumber").text();
+			var selectPageNumber = $(xml).find("selectPageNumber").text();
 			var chk = false;
 			
 			if(id == "${members_info.member_no}"){
@@ -153,7 +154,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,g
 				
 		}else{
 			
-			alert(message);
 				
 		}
 	}).fail(function(){
@@ -181,12 +181,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,g
 });
 </script>
 
-<script type="text/javascript">
-	
-
-
-</script>
-
 <style type="text/css">
 .star-input>.input,
 .star-input>.input>label:hover,
@@ -209,6 +203,17 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 </style>
 
+
+
+<style type="text/css">
+.pagination{
+    position:absolute;
+    top:0; left:0; bottom:0; right:0;
+    height:10%; 
+    margin:10% auto;
+    }
+
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -311,7 +316,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		<br >
 		<br >	
 		<button type="submit"  class="btn btn-primary btn-block" row="50px">저장하기</button>
-	
+		${cmt_no}
 	</form>
 	</div>
 	<br >
@@ -320,31 +325,30 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
 	</ul>
 	<!-- 페이지 처리부분 -->
+	<div class="container">
+	<ul class="pagination" style="position: relative; left: 450px">
 			<c:if test="${pageGroupResult.beforePage}">
-				<%-- <a id="groupStartNumber" href="cmt_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a> --%>
-				<a id="groupStartNumber" href="cmt_req_list?reqPage=#groupStartNumber">◀</a>
+				   <li class="page-item"><a class="page-link" href="cmt_Fom1?reqPage=${pageGroupResult.groupStartNumber-1}">Previous</a></li>
 			</c:if>
-				${pageGroupResult.groupStartNumber}
-				${pageGroupResult.selectPageNumber}
-				${pageGroupResult.groupEndNumber}
 			<c:forEach var ="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 				<c:choose>
 				
 					<c:when test="${pageGroupResult.selectPageNumber==index}"> 
-						<span id="sel"><a href="cmt_req_list?reqPage=${index}">${index}</a></span>
+						 <li class="page-item active"> <span id="sel"><a class="page-link" href="cmt_Fom1?reqPage=${index}">${index}</a></span></li>
 					</c:when>
 					
 					<c:otherwise>
-						<a href="cmt_req_list?reqPage=${index}">${index}</a>
+						  <li class="page-item"><a class="page-link" href="cmt_Fom1?reqPage=${index}">${index}</a></li>
 					</c:otherwise>
 					
 				</c:choose>	
 			</c:forEach>
 			
 			<c:if test="${pageGroupResult.afterPage}">
-				<a id="groupEndNumber" href="cmt_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
+				<li class="page-item"><a class="page-link" href="cmt_Fom1?reqPage=${pageGroupResult.groupEndNumber+1}">next</a></li>
 			</c:if>
-
+		</ul>	
+	</div>
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

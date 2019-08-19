@@ -150,5 +150,6 @@
 			</div>
 			
 		</div>
+		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

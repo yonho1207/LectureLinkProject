@@ -20,8 +20,8 @@ import model.Qna;
 import page.PageManager;
 import page.PageSQL;
 
-@WebServlet(name = "CmtController", urlPatterns 
-= { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete","/cmt_Fom1","/cmt_Fom2","/cmt_Fom3","/cmt_req_list"})
+@WebServlet(name = "CmtController", urlPatterns = { "/go_cmt", "/cmt_list", "/cmt_insert", "/cmt_delete", "/cmt_Fom1",
+		"/cmt_Fom2", "/cmt_Fom3", "/cmt_req_list" })
 
 public class CmtController extends HttpServlet {
 
@@ -31,7 +31,7 @@ public class CmtController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		process(req, resp);
 	}
 
@@ -49,7 +49,16 @@ public class CmtController extends HttpServlet {
 			rd.forward(req, resp);
 
 		}else if (action.equals("cmt_Fom1")) {
-				
+			
+			
+			 int requestPage = Integer.parseInt(req.getParameter("reqPage")); 
+			 PageManager pm = new PageManager(requestPage);
+			 
+			 HttpSession session = req.getSession(); 
+			 session.setAttribute("reqPage", requestPage);
+			 
+			 req.setAttribute("pageGroupResult",pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			 
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm1.jsp");
 			rd.forward(req, resp);
 			
@@ -63,7 +72,7 @@ public class CmtController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm3.jsp");
 			rd.forward(req, resp);
 			
-		} else if (action.equals("cmt_list")) {
+		} else if (action.equals("cmt_req_list")) {
 			
 			int lecture_no=2;
 			
@@ -73,8 +82,8 @@ public class CmtController extends HttpServlet {
 			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
 			
 			req.setAttribute("cmtList", cmtList);
-			
-			RequestDispatcher rd = req.getRequestDispatcher("cmt_req_list?reqPage=1");
+			System.out.println(cmtList);
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_insert")) {
@@ -114,33 +123,34 @@ public class CmtController extends HttpServlet {
 
 			dao.deleteByCmt_no(cmt_no);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt_req_list?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("cmt_list");
 			rd.forward(req, resp);
 
-		} else if (action.equals("cmt_req_list")) {
+		} else if (action.equals("cmt_list")) {
 			
-			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
-			PageManager pm = new PageManager(requestPage);
-			
-			int lecture_no=2;
-			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
-
-			CmtDAO dao = new CmtDAOImpl();
-
-			List<Cmt> cmtList = dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
-			pm.getPageRowResult().getRowEndNumber(),lecture_no);
-
-			HttpSession session = req.getSession(); 
-			session.setAttribute("cmtList", cmtList);
-			
-			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
-			//session.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
-			
-			
-			//RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtForm1.jsp");
-			RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtList.jsp");
-			rd.forward(req, resp);
+			 HttpSession session = req.getSession(); 
+			  int requestPage = (int) session.getAttribute("reqPage"); 
+			  PageManager pm = new PageManager(requestPage);
+			  
+			  int lecture_no=2; 
+			  //int lecture_no =Integer.parseInt(req.getParameter("lecture_no"));
+			  
+			  CmtDAO dao = new CmtDAOImpl();
+			 
+			  List<Cmt> cmtList =dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
+			  pm.getPageRowResult().getRowEndNumber(),lecture_no);
+			  
+			  session.setAttribute("cmtList",cmtList);
+			 
+			  //req.setAttribute("pageGroupResult",
+			  //pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			 
+			  session.setAttribute("pageGroupResult",pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			  
+			  System.out.println(pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			  //RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtForm1.jsp");
+			  RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
+			  rd.forward(req, resp); 
 		}
-
 	}
 }
