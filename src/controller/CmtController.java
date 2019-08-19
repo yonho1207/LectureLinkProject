@@ -31,7 +31,7 @@ public class CmtController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		process(req, resp);
 	}
 
@@ -65,14 +65,14 @@ public class CmtController extends HttpServlet {
 			
 		} else if (action.equals("cmt_list")) {
 			
-			/*int lecture_no=2;
+			int lecture_no=2;
 			
 			//int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
 			
 			CmtDAO dao = new CmtDAOImpl();
 			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
 			
-			req.setAttribute("cmtList", cmtList);*/
+			req.setAttribute("cmtList", cmtList);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("cmt_req_list?reqPage=1");
 			rd.forward(req, resp);
@@ -110,11 +110,11 @@ public class CmtController extends HttpServlet {
 
 			CmtDAO dao = new CmtDAOImpl();
 
-			int num = Integer.parseInt(req.getParameter("cmt_no"));
+			int cmt_no = Integer.parseInt(req.getParameter("cmt_no"));
 
-			boolean result = dao.deleteByCmt_no(num);
+			dao.deleteByCmt_no(cmt_no);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt_req_list?reqPage=1");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_req_list")) {
@@ -133,8 +133,11 @@ public class CmtController extends HttpServlet {
 			HttpSession session = req.getSession(); 
 			session.setAttribute("cmtList", cmtList);
 			
-			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELETE_ALL_COUNT));
-
+			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			//session.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
+			
+			
+			//RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtForm1.jsp");
 			RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtList.jsp");
 			rd.forward(req, resp);
 		}

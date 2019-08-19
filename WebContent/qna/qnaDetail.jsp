@@ -108,33 +108,35 @@
  	</form>
 	</div>
 	
+	<c:if test="${qna.qna_no == qna_cmt.grp}">
 	<div class="container">
 	<div class="form-group">	
 	<hr>
 	댓글: &nbsp; ${qna_cmt.qna_title}  &nbsp;&nbsp; ${qna_cmt.qna_date} 
 	<textarea class="form-control" rows="5" cols="50" disabled="disabled"> ${qna_cmt.qna_con}</textarea>
+	<c:if test="${admin!=null && members_info==null}">
+	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna_cmt.qna_no}">삭제</a>	
+	</c:if>
 	</div>
 	</div>
+	</c:if>
 	
 	<c:if test="${admin!=null && members_info==null}">
 	<hr>
 	<br >
-	
 	<div class="container">
 	<button data-toggle="collapse" data-target="#admin_cmt" class="btn btn-primary">관리자 댓글달기</button>
 	
 	<div id="admin_cmt" class="collapse">
 	
 	<form action="qna_cmt_insert" method="post">
-
-	<input type="hidden" name = "admin_no" value="${members_info.member_no}">
-	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}"><br />
+	<input type="hidden" name = "admin_no" value=23>
+	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}">
 	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">
 	
     <div class="form-group">	
       <label for=id>작성자:</label>
-      <input type="hidden" name = "admin_id" value="${qna.id}"><br />
-      <input type="text" class="form-control" id="admin_id"  value="${qna.id}" disabled="disabled"/>
+      <input type="hidden" name = "admin_id" value="admin"><br />
     </div>
     
     <div class="form-group">

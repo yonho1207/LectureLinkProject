@@ -258,7 +258,6 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 		} finally {
 			closeDBObjects(null, preparedStatement, connection);
 		}
-		System.out.println("임플리먼트" + qna);
 		return qna;
 
 	}

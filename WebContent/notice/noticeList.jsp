@@ -13,9 +13,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	
 	<style type="text/css">
-		
 		#sel{font-size:40px;}
-	
+		.pagination{ display: table; margin-left: auto; margin-right: auto; }
 		a:hover {text-decoration: underline; color: red;}
 	</style>
 </head>
@@ -87,11 +86,13 @@
 
 			</table>	
 		</div>	
-		<c:if test="${members_info!=null && members_info.id=='admin'}">
-		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" >글쓰기</button>
-		</c:if>
-
+		<c:if test="${admin!=null && members_info==null}">
 	
+		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'"  style="position: relative; left: 300px">글쓰기</button>
+		
+		</c:if>
+		
+		<ul class="pagination">
 	<!-- 페이지 처리부분 -->
 			<c:if test="${pageGroupResult.beforePage}">
 				<a href="notice_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
@@ -114,6 +115,7 @@
 			<c:if test="${pageGroupResult.afterPage}">
 				<a href="notice_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
 			</c:if>
+		</ul>
 			<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

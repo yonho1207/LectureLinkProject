@@ -13,6 +13,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
   <style type="text/css">
+  		#sel{font-size:40px;}
+		.pagination{ display: table; margin-left: auto; margin-right: auto; }
+		a:hover {text-decoration: underline; color: red;}
  
   </style>
 </head>
@@ -103,6 +106,7 @@
 	</table>
 	
 	<!-- 페이지 처리부분 -->
+		<ul class="pagination">
 			<c:if test="${pageGroupResult.beforePage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
 			</c:if>
@@ -124,6 +128,7 @@
 			<c:if test="${pageGroupResult.afterPage}">
 				<a href="qna_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
 			</c:if>
+		</ul>	
 			<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

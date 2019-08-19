@@ -15,7 +15,7 @@ public class CmtSQL {
 			= "SELECT seq_cmt_no.currval AS num FROM dual";
 
 	public static final String CMT_DELETE_BY_CMT_NO_SQL // CMT 게시판 댓글 삭제
-			= "DELTE FROM cmt WHERE num = ?";
+			= "DELETE FROM cmt WHERE cmt_no = ?";
 
 	public static final String CMT_SELECT_LECTURE_NO_PAGE_SQL 
 			= "SELECT * FROM(SELECT ROWNUM as RN, cmts.* "

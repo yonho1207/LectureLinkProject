@@ -59,8 +59,7 @@
 
 <script type="text/javascript">
 
-
-function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) {
+function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,groupStartNumber,groupEndNumber,selectPageNumber) {
 	
 	var li_data = {
 			
@@ -71,7 +70,10 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			"cmt_con":cmt_con,
 			"rating" : rating,
 			"cmt_date":cmt_date,
-			"chk" : chk
+			"chk" : chk,
+			"groupStartNumber": groupStartNumber,
+			"groupEndNumber" : groupEndNumber,
+			"selectPageNumber" : selectPageNumber
 	};	
 	
 	var new_li = $("#itemTemplate").tmpl(li_data);
@@ -92,12 +94,15 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 				var rating = $(this).find("rating").text();
 				var cmt_date = $(this).find("cmt_date").text();
 				var chk = false;
+				var groupStartNumber = $(this).find("groupStartNumber").text();
+				var groupEndNumber = $(this).find("groupEndNumber").text();
+				var selectPageNumber = $(this).find("selectPageNumber").text();
 			
 			if(member_no == "${members_info.member_no}"){
 				chk = true;
 			}
 			
-			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
+			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,groupStartNumber,groupEndNumber,selectPageNumber);
 	});
 		
 	}).fail(function(){
@@ -114,8 +119,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		    event.preventDefault();
 		}
 
-		
-		
 		if(!$("#cmt_con").val()){
 		
 			alert("내용을 입력해주세요.");
@@ -126,7 +129,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 	$.post("cmt_insert",$(this).serialize(),function(xml){
 		
 		var result=$(xml).find("result").text();
-		var message=$(xml).find("message").text();
 		
 		if (result) {
 			
@@ -145,7 +147,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 				chk = true;
 			}
 			
-			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
+			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk,groupStartNumber,groupEndNumber,selectPageNumber);
     						
 			$("#cmt_con").val("");
 				
@@ -177,6 +179,12 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		}
 	});		
 });
+</script>
+
+<script type="text/javascript">
+	
+
+
 </script>
 
 <style type="text/css">
@@ -313,9 +321,12 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	</ul>
 	<!-- 페이지 처리부분 -->
 			<c:if test="${pageGroupResult.beforePage}">
-				<a href="cmt_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
+				<%-- <a id="groupStartNumber" href="cmt_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a> --%>
+				<a id="groupStartNumber" href="cmt_req_list?reqPage=#groupStartNumber">◀</a>
 			</c:if>
-				
+				${pageGroupResult.groupStartNumber}
+				${pageGroupResult.selectPageNumber}
+				${pageGroupResult.groupEndNumber}
 			<c:forEach var ="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 				<c:choose>
 				
@@ -331,7 +342,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			</c:forEach>
 			
 			<c:if test="${pageGroupResult.afterPage}">
-				<a href="cmt_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
+				<a id="groupEndNumber" href="cmt_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
 			</c:if>
 
 	<%@ include file ="/companyLogo.jsp" %>

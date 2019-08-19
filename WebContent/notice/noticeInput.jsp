@@ -64,9 +64,8 @@
 	
 	<form action="notice_insert">
     <div class="form-group">	
-      <label for=id>작성자:</label>
-      <input type="hidden" name = "id" value="${members_info.id}"><br />
-      <input type="text" class="form-control" id="id"  value="${members_info.id}" disabled="disabled" >
+      <label for=id></label>
+      <input type="hidden" name = "id" value="admin"><br />
     </div>
     
      <input type="hidden" name = "member_no" value="${members_info.member_no}"><br />

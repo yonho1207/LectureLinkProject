@@ -140,19 +140,14 @@ public class QnaController extends HttpServlet {
 			QnaDAO dao = new QnaDAOImpl();
 
 			qna.setMember_no(Integer.parseInt(req.getParameter("admin_no")));
-			System.out.println(req.getParameter("admin_no"));
 			qna.setId(req.getParameter("admin_id"));
-			System.out.println(req.getParameter("admin_id"));
 			qna.setQna_title(req.getParameter("qna_cmt_title"));
-			System.out.println(req.getParameter("qna_cmt_title"));
 			qna.setQna_con(req.getParameter("qna_cmt_con"));
-			System.out.println(req.getParameter("qna_cmt_con"));
 			qna.setGrp(Integer.parseInt(req.getParameter("qna_cmt_grp")));
-			System.out.println(req.getParameter("qna_cmt_grp"));
 			
 			dao.QnaComment(qna);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/qna/qnaDetail.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("qna_req_list?reqPage=1");
 			rd.forward(req, resp);
 					
 		}
