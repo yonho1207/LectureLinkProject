@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -53,7 +53,6 @@
 				alert("CALL FAILED")
 			});
 		});
-		
 	</script>
 	<style type="text/css">
 		#lectureList{
@@ -91,7 +90,7 @@
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				회원 정보 조회
-			</a> <p style="font-size: large;"></p>
+			</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
 					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
