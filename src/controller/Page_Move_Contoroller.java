@@ -23,6 +23,7 @@ import model.Qna;
 import page.PageDAOImpl;
 import page.PageGroupResult;
 import page.PageManager;
+import page.PageManager_For_Lecture;
 import page.PageSQL;
 @WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do",
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
@@ -86,10 +87,21 @@ public class Page_Move_Contoroller extends HttpServlet {
 			resp.sendRedirect("payment/methodsOfPayment/purchase_Succes.jsp");
 		}else if(action.equals("purchase_Failed")) {
 			resp.sendRedirect("payment/methodsOfPayment/purchase_Failed.jsp");
-		}else if(action.equals("go_Lecture_List")) {
-			LectureDAOImpl ldao = new LectureDAOImpl();
-			rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
-			rd.forward(req, resp);
+		}else if(action.equals("go_Lecture_List")) {		
+			HttpSession session = req.getSession();
+			int reqPage = Integer.parseInt(req.getParameter("reqPage"));
+			String lecture_name = (String) req.getAttribute("lecture_name");
+			if(lecture_name!=null) {
+				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
+				rd.forward(req, resp);
+			}else{
+				PageManager_For_Lecture pm = new PageManager_For_Lecture(reqPage);
+				PageGroupResult pageGroupResult = pm.getpageGroupResult(page.PageSQL.LECTURE_SELECTE_ALL_COUNT);
+				req.setAttribute("pageGroupResult", pageGroupResult);
+				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
+				rd.forward(req, resp);
+			}
+
 		}
 	}
 }

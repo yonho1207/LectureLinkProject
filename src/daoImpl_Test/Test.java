@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.Time_Set_Helper;
 import model.Payment;
@@ -19,8 +20,9 @@ public class Test {
 		payment.setLecture_name("Python");
 		payment.setPrice(75000);
 		payment.setPay_option(2);
+		LectureDAOImpl ldao = new LectureDAOImpl();
 		
-		Time_Set_Helper.get_period_date(12);
+		ldao.select_Lecture_Name("ja");
 		
 		
 

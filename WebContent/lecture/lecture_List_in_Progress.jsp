@@ -14,9 +14,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script type="text/x-jquery-tmpl" id="itemTemplate">
 		<li id="lectureList">
-			<p style="font-size: x-large;"><a href="go_Lecture_attend.do?lecture_no={{= lecture_no}}">{{= lecture_name}}</a></p> 
-			<p style="font-size: large;">{{= lecture_teacher}}</p>
-			<p>{{= description}}</p>
+			<img src="img/javaIcon.png" style="position: relative; right: 300px; top: 85px;">
+			<p style="font-size: x-large;">{{= lecture_name}}<br />
+			{{= lecture_teacher}}<br />
+			{{= description}}<br /></p>
+			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >상세 페이지</button></p>
+			<p style="position: relative; left: 300px; bottom: 100px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_Lecture_attend.do?lecture_no={{= lecture_no}}'" >강의로 가기</button></p>
 		</li>
 	</script>
 	
@@ -37,13 +40,6 @@
 			}
 			
 			$.get("lecture_Tmpl",{},function(data){
-				function getUrlParams() {
-				    var params = {};
-				    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-				    return params;
-				} 
-				var set_Url = getUrlParams();
-				var reqPage = set_Url.reqPage;
 				$(data).find("item").each(function(){
 					var lecture_no = $(this).find("lecture_no").text();
 					var lecture_name = $(this).find("lecture_name").text();
@@ -57,6 +53,7 @@
 				alert("CALL FAILED")
 			});
 		});
+		
 	</script>
 	<style type="text/css">
 		#lectureList{
@@ -94,7 +91,7 @@
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				회원 정보 조회
-			</a>
+			</a> <p style="font-size: large;"></p>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
 					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
@@ -132,9 +129,39 @@
 	<ul id="lecture_list" style="position: relative; left: 200px" >
 	
 	</ul>
-
-
-	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >댓글</button>
+	<div class="container">
+		<ul class="pagination" style="position: relative; left: 550px">
+		<c:if test="${pageGroupResult.beforePage}">
+			 <li class="page-item"><a  class="page-link" href="go_Lecture_List?reqPage=${pageGroupResult.groupStartNumber-1}" class="previous">&#60;&#60;Previous</a></li>
+		</c:if>
+		<c:forEach var="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
+			<c:choose>
+				<c:when test="${pageGroupResult.selectPageNumber==index}">
+					 <li class="page-item active"><span id="select"><a  class="page-link" href="go_Lecture_List?reqPage=${index}">${index}</a></span></li>
+				</c:when>	
+				<c:otherwise>
+					 <li class="page-item"><a class="page-link" href="go_Lecture_List?reqPage=${index}">${index}</a></li>					
+				</c:otherwise>
+			</c:choose>
+			
+			
+		</c:forEach>
+		<c:if test="${pageGroupResult.afterPage}">
+			<a href="go_Lecture_List?reqPage=${pageGroupResult.groupEndNumber+1}" class="previous"> next&#62;&#62;</a>
+		</c:if>
+		</ul>
+	</div>
+	<div class="container">
+		<form action="search_Lecture" style="position: relative; left: 450px" >
+			<select name="search_Option">
+				<option value=1>강의명으로 찾기</option>
+				<option value=2>강사명으로 찾기</option>
+			</select>
+			<input type=text name="search_Word" id="search_Word">
+			<input type="submit" value="검색">
+		</form>
+	</div>
+	
 	
 </body>
 </html>

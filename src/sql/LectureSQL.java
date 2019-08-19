@@ -27,5 +27,7 @@ public class LectureSQL {
 			"from(select rownum as rn, lecture_sel.* \r\n" + 
 			"    from (select * from lecture order by LECTURE_NO desc) lecture_sel)\r\n" + 
 			"where rn between ? and ?  order by LECTURE_NO";
-	
+	public static final String SELECT_BY_LECTURE_NAME = 
+			"select  LECTURE_NO,lecture_name,lecture_teacher, price, text_price, description from \r\n" + 
+			"lecture where lecture_name like ?";
 }
