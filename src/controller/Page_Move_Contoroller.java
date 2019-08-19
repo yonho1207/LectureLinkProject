@@ -87,7 +87,7 @@ public class Page_Move_Contoroller extends HttpServlet {
 		}else if(action.equals("purchase_Failed")) {
 			resp.sendRedirect("payment/methodsOfPayment/purchase_Failed.jsp");
 		}else if(action.equals("go_Lecture_List")) {
-	
+			LectureDAOImpl ldao = new LectureDAOImpl();
 			rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
 			rd.forward(req, resp);
 		}

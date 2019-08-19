@@ -241,7 +241,7 @@
 			</ul>
 		</nav>
 	<br>
-	
+	<div class="container">
 	<h3>회원등록</h3>
 		
 		<form method="post" id="signupForm" action="input_account">
@@ -269,6 +269,6 @@
 			<input type="reset" value="원래대로"/>
 			<input type="button" id="signup" value="가입하기"  />
 		</form>
-
+	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿package controller;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +17,7 @@ import dao.LectureDAOImpl;
 import model.Cmt;
 import model.Lecture;
 import model.Members;
+import page.PageManager;
 @WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price",
 		"/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.admin",
 		"/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin",
@@ -52,6 +53,7 @@ public class Lecture_Controller extends HttpServlet {
 					lecture.setLecture_teacher(req.getParameter("lecture_teacher"));
 					lecture.setPrice(Integer.parseInt(req.getParameter("price")));
 					lecture.setText_price(Integer.parseInt(req.getParameter("text_price")));
+					lecture.setDescription(req.getParameter("description"));
 					ldao.insert_Lecture(lecture);
 					resp.sendRedirect("index.jsp");
 				}else {
@@ -78,6 +80,7 @@ public class Lecture_Controller extends HttpServlet {
 			lecture.setLecture_teacher(req.getParameter("lecture_teacher"));
 			lecture.setPrice(Integer.parseInt(req.getParameter("price")));
 			lecture.setText_price(Integer.parseInt(req.getParameter("text_price")));
+			lecture.setDescription(req.getParameter("description"));
 			ldao.update_Lecture(lecture);
 			rd = req.getRequestDispatcher("go_Lecture_List.admin");
 			rd.forward(req, resp);
@@ -126,8 +129,9 @@ public class Lecture_Controller extends HttpServlet {
 			rd.forward(req, resp);
 		}else if(action.equals("lecture_Tmpl")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
-			List<Lecture> lecture_List = ldao.select_All_Lecture();
-			req.setAttribute("lecture_List", lecture_List);
+			List<Lecture> Selected_Lecture_List_For_Paging = 
+					ldao.select_All_Lecture();
+			req.setAttribute("Selected_Lecture_List_For_Paging", Selected_Lecture_List_For_Paging);
 			rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 			rd.forward(req, resp);
 		}
