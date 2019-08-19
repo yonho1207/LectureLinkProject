@@ -18,7 +18,7 @@
 			<p style="font-size: x-large;">{{= lecture_name}}<br />
 			{{= lecture_teacher}}<br />
 			{{= description}}<br /></p>
-			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1'" >상세 페이지</button></p>
+			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1?reqPage=1'" >상세 페이지</button></p>
 			<p style="position: relative; left: 300px; bottom: 100px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_Lecture_attend.do?lecture_no={{= lecture_no}}'" >강의로 가기</button></p>
 		</li>
 	</script>

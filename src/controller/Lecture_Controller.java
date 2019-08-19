@@ -146,11 +146,19 @@ public class Lecture_Controller extends HttpServlet {
 				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 				rd.forward(req, resp);
 			}else if(intersection==false){
-				String lecture_name = before_address.substring(get_lastIndex+1);
-				List<Lecture> lecture_List = ldao.select_Lecture_Name(lecture_name);
-				req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
+				int get_Intersection_Info  = before_address.lastIndexOf("&");
+				int search_Option = Integer.parseInt(before_address.substring(get_Intersection_Info-1, get_Intersection_Info));
+				if(search_Option==1) {
+					String lecture_name = before_address.substring(get_lastIndex+1);
+					List<Lecture> lecture_List = ldao.select_Lecture_Name(lecture_name);
+					req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
+				}else if(search_Option==2) {
+					String lecture_teacher = before_address.substring(get_lastIndex+1);
+					List<Lecture> lecture_List = ldao.select_Lecture_Teacher(lecture_teacher);
+					req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
+				}
 				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
-				rd.forward(req, resp);
+				rd.forward(req, resp);	
 			}
 			
 			
@@ -163,11 +171,14 @@ public class Lecture_Controller extends HttpServlet {
 			int search_Option = Integer.parseInt(req.getParameter("search_Option"));
 			if(search_Option==1) {
 				String lecture_name = req.getParameter("search_Word");
-				req.setAttribute("lecture_name", lecture_name);
+				req.setAttribute("search_Word", lecture_name);
 				rd = req.getRequestDispatcher("go_Lecture_List?reqPage=1");
 				rd.forward(req, resp);
-			}else {
-				
+			}else if(search_Option==2){
+				String lecture_teacher = req.getParameter("search_Word");
+				req.setAttribute("search_Word", lecture_teacher);
+				rd = req.getRequestDispatcher("go_Lecture_List?reqPage=1");
+				rd.forward(req, resp);
 			}
 
 		}
