@@ -13,10 +13,32 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	
 	<style type="text/css">
-		#sel{font-size:40px;}
-		.pagination{ display: table; margin-left: auto; margin-right: auto; }
-		a:hover {text-decoration: underline; color: red;}
-	</style>
+	 	 .pagination{
+	    position:absolute;
+	    top:0; left:0; bottom:0; right:0;
+	    height:10%; 
+	    margin:10% auto;
+	    }
+ 	</style>
+  
+  	<style type="text/css">
+        #card{
+            position: fixed;
+              right: 0;
+        }
+        
+        #search-select{
+         width:85%;
+         overflow: scroll;
+         overflow-x:auto;
+         overflow-y:auto;
+         }
+        
+         #notice_Table{
+         	width:75%;
+         }
+    </style>
+	
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -24,9 +46,17 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="go_notice">공지사항 게시판</a>
+				</li>
+				
+				<li class="nav-item">
 					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
 				</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -68,6 +98,39 @@
 
 
 <h3>공지사항 게시판</h3>
+			<div class="container">
+			<c:choose>
+			<c:when test="${members_info!=null}">		
+			  <div class="card" id="card" style="width:250px">
+				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
+				    <div class="card-body">
+				      <h4 class="card-title">${members_info.id}</h4>
+				      <p class="card-text">환영합니다 ${members_info.id}님</p>
+				      <a href="go_Attending_Lecture.do" class="btn btn-primary">수강중인 강의 목록으로</a>
+				      <form action="jump_To_Clicked_Lecture" method="post">			      	
+				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
+							<c:forEach var="attending_List" items="${attending_List}">
+								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
+							</c:forEach>   	
+							<input type="submit" value="바로가기"> 
+				      	</select>			     
+				      </form>
+				    </div>
+				 </div>
+				 
+				  <br>
+		 	 </c:when>
+		 	 <c:when test="${members_info==null}">
+		 	 	 <div class="card" id="card" style="width:250px">
+		 	 		<div class="card-body">
+				      <h4 class="card-title">방문해 주셔서 <br /> 감사합니다</h4>
+				      <p class="card-text">이용하시려면 <a href="go_login">로그인</a> 혹은 <br /> 
+				      		<a href="go_account">회원 가입</a>을 해주세요</p>
+				    </div>
+				  </div>
+		 	 </c:when>
+			</c:choose>
+		 </div>
 
 	<div class="container">
 	<table class="table">
@@ -88,34 +151,35 @@
 		</div>	
 		<c:if test="${admin!=null && members_info==null}">
 	
-		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'"  style="position: relative; left: 300px">글쓰기</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" style="position: relative; left: 300px">글쓰기</button>
 		
 		</c:if>
-		
-		<ul class="pagination">
-	<!-- 페이지 처리부분 -->
+		<!-- 페이지 처리부분 -->
+		<div class="container">
+		<ul class="pagination" style="position: relative; left: 450px">
 			<c:if test="${pageGroupResult.beforePage}">
-				<a href="notice_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">◀</a>
+				 <li class="page-item"><a class="page-link" href="notice_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">Previous</a></li>
 			</c:if>
 				
 			<c:forEach var ="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 				<c:choose>
 				
 					<c:when test="${pageGroupResult.selectPageNumber==index}"> 
-						<span id="sel"><a href="notice_req_list?reqPage=${index}">${index}</a></span>
+						 <li class="page-item active"><span id="sel"><a class="page-link" href="notice_req_list?reqPage=${index}">${index}</a></span></li>
 					</c:when>
 					
 					<c:otherwise>
-						<a href="notice_req_list?reqPage=${index}">${index}</a>
+						 <li class="page-item"><a class="page-link" href="notice_req_list?reqPage=${index}">${index}</a></li>
 					</c:otherwise>
 					
 				</c:choose>	
 			</c:forEach>
 			
 			<c:if test="${pageGroupResult.afterPage}">
-				<a href="notice_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">▶</a>
+				<li class="page-item"><a class="page-link" href="notice_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">next</a></li>
 			</c:if>
 		</ul>
+	</div>	
 			<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

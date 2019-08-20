@@ -9,6 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -17,9 +18,17 @@
 				<li class="nav-item">
 					<a class="nav-link" href="go_qna">문의 게시판</a>
 					</li>
+					<li class="nav-item">		
 					<li class="nav-item">
-					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-				</li>
+						<a class="nav-link" href="go_notice">공지사항 게시판</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
+					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				회원 정보 조회
@@ -57,9 +66,8 @@
 		</nav>
 	<br>
 
-
-
 	<h1>공지사항 작성 게시판</h1>
+	
 	<div class="container">
 	
 	<form action="notice_insert">

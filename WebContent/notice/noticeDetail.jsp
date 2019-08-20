@@ -23,8 +23,17 @@
 					<a class="nav-link" href="go_qna">문의 게시판</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-				</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="go_notice">공지사항 게시판</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
+					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				회원 정보 조회
@@ -66,7 +75,7 @@
 	<br >
 	<div class="container">
 	
- 	<c:if test="${members_info==null && admin==null}">
+ 	<c:if test="${members_info==null && admin==null or members_info!=null }">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -92,7 +101,7 @@
 	</div>
 	</c:if>
 	
-	<c:if test="${admin!=null}">
+	<c:if test="${members_info!=null && admin!=null}">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
