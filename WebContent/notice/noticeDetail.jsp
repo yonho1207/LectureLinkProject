@@ -45,7 +45,7 @@
 				</div>
 			
 				<c:choose>
-				<c:when  test="${members_info==null}">
+				<c:when  test="${members_info==null && admin==null}">
 					<li class="nav-item">
 						<a class="nav-link" href="go_login">로그인</a>
 					</li>
@@ -53,13 +53,13 @@
 						<a class="nav-link" href="go_account">회원가입</a>
 					</li>
 				</c:when>
-				<c:when test="${members_info!=null}">
+				<c:when test="${members_info!=null || admin!=null}">
 					<li class="nav-item">
 						<a class="nav-link" href="logout">로그아웃</a>
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
+				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
 						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
 					</li>
@@ -75,7 +75,8 @@
 	<br >
 	<div class="container">
 	
- 	<c:if test="${members_info==null && admin==null or members_info!=null }">
+	<c:choose>
+ 	<c:when test="${admin == null && members_info!=null || members_info==null && admin == null}">
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -99,9 +100,9 @@
   		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
-	</c:if>
+	</c:when>
 	
-	<c:if test="${members_info!=null && admin!=null}">
+	<c:otherwise>
  	<div class="form-group">	
       <label for=notice_no>글번호:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -116,13 +117,11 @@
     
     <div class="form-group">
       <label for="notice_title">제목:</label>
-     <%--  <input type="hidden" name = "notice_title" value="${notice.notice_title}"> --%>
       <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" />
     </div>
     
  	<div class="form-group">
   		<label for="notice_con">내용:</label>
-  		<%-- <input type="hidden" name = "notice_con" value="${notice.notice_con}"> --%>
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con">${notice.notice_con}</textarea>
 	</div>
 
@@ -131,9 +130,10 @@
 	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">삭제</a>
 	<a type="button"  class="btn btn-primary" href="notice_update">수정</a>
 	</div>
-	</c:if>
-
+	</c:otherwise>
+	</c:choose>
 	</div>
+	
 	<div class="container">
 		<button type="button" class="form-control" id="list_btn" onclick="location.href='/LectureLinkProject/go_notice'" >리스트 돌아가기</button>
 	</div>	
