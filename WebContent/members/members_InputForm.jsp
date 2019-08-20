@@ -188,6 +188,19 @@
 	
 	
 </script> 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('input[type=radio]').each(function name() {
+
+		if (gender == $(this).val()) {
+			$(this).attr('checked', 'checked')
+
+		}
+	
+});
+
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">

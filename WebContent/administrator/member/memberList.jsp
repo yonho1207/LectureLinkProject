@@ -69,6 +69,10 @@
 	<br>
 
 멤버리스트
+<form method="post" action="search_member">
+<input type="text"name="id" id="id" placeholder="아이디를 입력하세요"/>
+<input type="submit" value="검색"/>
+</form>
 <table>
 			<tr>
 				<td>회원번호</td>
