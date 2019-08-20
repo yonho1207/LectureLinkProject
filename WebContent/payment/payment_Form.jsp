@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -67,8 +67,8 @@
 	<br>
 	
 
-	<h1 style="position: relative; left: 200px">결제 정보를 확인하여 주십시오</h1>
-	<form method="get" action="payment_Confirm.do" style="position: relative; left: 200px">
+	<h1 style="position: relative; left: 400px">결제 정보를 확인하여 주십시오</h1>
+	<form method="get" action="payment_Confirm.do" style="position: relative; left: 400px">
 		<c:if test="${!empty purchase_Basket}">
 		<table>
 			<c:forEach var = "purchase_Basket" items="${purchase_Basket}">
@@ -84,13 +84,14 @@
 		<c:set var="total" value="${total+price.price}"/>
 		
 	</c:forEach>
-		<h1>총액 : ${total}</h1>
-		<input type="button" onclick="location.href='account_Transfer.do'" value="현금 결제" style="position: relative; left: 200px">
-		<input type="button" onclick="location.href='credit_Card.do'" value="카드 결제" style="position: relative; left: 200px">
-		<input type="button" onclick="location.href='cell_Phone_Bill.do'" value="휴대폰 결제" style="position: relative; left: 200px">
-		<input type="button" onclick="location.href='gift_Card_ETC.do'" value="상품권 혹은 기프티콘" style="position: relative; left: 200px"><br />
-		<input type="button" onclick="location.href='go_payment.do'" value="결제 화면으로 이동하기" style="position: relative; left: 200px">
-	</form>
+		<h1>총액 : &#8361; ${total}</h1> 
+		
+		<a href="account_Transfer.do" style="position: relative; left: 60px"><img src="img/payment/coins-stacks-and-banknotes.png">현금</a>
+		<a href="credit_Card.do" style="position: relative; left: 60px"><img src="img/payment/credit-cards.png">카드</a> 
+		<a href="cell_Phone_Bill.do" style="position: relative; left: 60px"><img src="img/payment/notification-with-dollar-sign.png">핸드폰</a>
+		<a href="gift_Card_ETC.do" style="position: relative; left: 60px"><img src="img/payment/two-money-cards.png">기프트 카드</a><br />
+		<a href="go_payment.do" style="position: relative; left: 60px"><img src="img/payment/shopping-cart.png">결제 화면으로 이동하기</a><br />
+	</form> 
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>
