@@ -17,10 +17,12 @@ import dao.AdminDAOImpl;
 import dao.MembersDAO;
 import dao.MembersDAOImpl;
 import dao.PaymentDAOImpl;
+
 import model.Members;
 import model.Payment;
 
-@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout","/go_Member_Profile.do","/go_profile_update.do","/profile_update"})
+
+@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout","/go_Member_Profile.do","/go_profile_update.do","/profile_update","/delete_member"})
 public class MembersController extends HttpServlet{
 
 	@Override
@@ -66,7 +68,7 @@ public class MembersController extends HttpServlet{
 			members.setEmail(req.getParameter("email"));
 			
 			dao.insert(members);
-			System.out.println("왓다");
+			
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
@@ -124,7 +126,7 @@ public class MembersController extends HttpServlet{
 			}else{
 				
 				
-				req.setAttribute("message", "占쏙옙占싱듸옙占� 占싻쏙옙占쏙옙占썲를 확占쏙옙占쏙옙占쌍쇽옙占쏙옙");
+				req.setAttribute("message", "아이디와 비밀번호를 다시 확인해주세요");
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/members/login.jsp");
 				rd.forward(req, resp);
@@ -146,10 +148,24 @@ public class MembersController extends HttpServlet{
 
 		}
 		else if(action.equals("go_Member_Profile.do")) {
+			
+			MembersDAO dao = new MembersDAOImpl();
+			HttpSession session = req.getSession();
+			Members member =(Members) session.getAttribute("members_info");
+			Members newmember =dao.selectById(member.getId());
+			req.setAttribute("newmember", newmember);
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/members/profile.jsp");
 			rd.forward(req, resp);
 		}
 		else if(action.equals("go_profile_update.do")) {
+			
+			MembersDAO dao = new MembersDAOImpl();
+			HttpSession session = req.getSession();
+			Members member =(Members) session.getAttribute("members_info");
+			Members newmember =dao.selectById(member.getId());
+			req.setAttribute("newmember", newmember);
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/members/profileUpdate.jsp");
 			rd.forward(req, resp);
 		}
@@ -172,12 +188,32 @@ public class MembersController extends HttpServlet{
 			members.setId(req.getParameter("id"));
 			
 			
+			
 			System.out.println(members);
 			dao.updateAll(members);
 			
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
+		}
+		else if(action.equals("delete_member")) {
+			
+			MembersDAO dao = new MembersDAOImpl();
+			Members members = new Members();
+			
+			members.setId(req.getParameter("id"));
+			System.out.println(members);
+			
+			dao.delete(members.getId());
+			HttpSession session = req.getSession();
+			session.removeAttribute("members_info");
+			
+			
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+			rd.forward(req, resp);
+		
+	
 		}
 
 }

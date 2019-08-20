@@ -71,7 +71,7 @@ public class AdminDAOImpl extends BaseDAO implements AdminDAO {
 				members.setFirstname(resultSet.getString("firstname"));
 				members.setGender(resultSet.getString("gender"));
 				members.setPhone(resultSet.getString("phone"));
-				members.setBirth(resultSet.getString("birth"));
+				members.setBirth(resultSet.getString("birth").split("\\s")[0]);
 				members.setEmail(resultSet.getString("email"));
 				members.setQuestion(resultSet.getString("question"));
 				members.setAnswer(resultSet.getString("answer"));
