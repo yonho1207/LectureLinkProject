@@ -68,16 +68,19 @@
 	
 
 	
-	<h3>반갑습니다 ${members_info.id}님</h3> 
-	귀하께서는 현재까지 이하의 강의를 수강하셨습니다.
+	<h3 style="position: relative; left: 200px">반갑습니다 ${members_info.id}님</h3> 
+	<p style="position: relative; left: 200px">귀하께서는 현재까지 이하의 강의를 수강하셨습니다.</p>
+	<ul style="position: relative; left: 160px">
 	<c:forEach var="selected_Period_List" items="${selected_Period_List}">
 			<h4>수강중이신 강의명 : ${selected_Period_List.lecture_name}</h4>	
 			가격 : ${selected_Period_List.price}<br />
 			구매하신 일시 : ${selected_Period_List.payment_date}<br />
 			예상 만료 기간: ${selected_Period_List.period}<hr />
 		</c:forEach>
+	</ul>
 	<br />
-	<h3>이상과 같은 강의를 수강하셨습니다 이용해주셔서 감사합니다</h3>
-	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
+	<h3 style="position: relative; left: 200px">이상과 같은 강의를 수강하셨습니다 이용해주셔서 감사합니다</h3>
+		<a href="goMain" style="position: relative; left: 700px"><img src="img/payment/home-location.png">메인으로</a>	
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

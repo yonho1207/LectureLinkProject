@@ -78,5 +78,6 @@
 		강의 설명 : <textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
 		<input type="submit">
 	</form>
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

@@ -72,12 +72,12 @@
 				<c:set var="total" value="${total+price.price}"/>
 			</c:forEach>
 		<p align="center" style="font-size: 24px; color: red;">이하의 금액을 확인하여 주십시오</p>
-		<p align="center" style="font-size: 32px;">총액 : ${total}</p>
+		<p align="center" style="font-size: 32px;">총액 : &#8361; ${total}</p>
 		<form action="cell_Phone_Bill_Accept.do"  align="center">
-			<input type="submit">
+		<img src="img/payment/icons8-checked-40.png"><input type="submit" value="구매 확정" style="background-color:transparent;  border:0px transparent solid;">
 		</form>
 		
-	<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" >
-	
+	<a href="go_payment.do" style="position: relative; left: 660px"><img src="img/payment/shopping-cart.png">결제 화면으로 이동하기</a><br />
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

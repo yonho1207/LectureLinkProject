@@ -80,5 +80,6 @@
 	</form><br />
 	<input type="button" onclick="location.href='go_Main_in_Lectrue'" value="메인 화면으로 이동하기">
 	<input type="button" onclick="location.href='go_Lecture_List.do'" value="강의 목록으로 이동하기">
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

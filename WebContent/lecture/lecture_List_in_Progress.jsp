@@ -15,11 +15,12 @@
 	<script type="text/x-jquery-tmpl" id="itemTemplate">
 		<li id="lectureList">
 			<img src="img/javaIcon.png" style="position: relative; right: 300px; top: 85px;">
+			<input type="hidden" value={{= lecture_no}}>
 			<p style="font-size: x-large;">{{= lecture_name}}<br />
 			{{= lecture_teacher}}<br />
 			{{= description}}<br /></p>
-			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1?reqPage=1'" >상세 페이지</button></p>
-			<p style="position: relative; left: 300px; bottom: 100px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_Lecture_attend.do?lecture_no={{= lecture_no}}'" >강의로 가기</button></p>
+			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1?reqPage=1'" >?�세 ?�이지</button></p>
+			<p style="position: relative; left: 300px; bottom: 100px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_Lecture_attend.do?lecture_no={{= lecture_no}}'" >강의�? 가�?</button></p>
 		</li>
 	</script>
 	
@@ -119,7 +120,7 @@
 					</li>
 				</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+						<a class="nav-link" href="go_Customer_Support">고객 센터  </a>
 					</li>				
 			</ul>
 		</nav>
@@ -157,10 +158,10 @@
 				<option value=2>강사명으로 찾기</option>
 			</select>
 			<input type=text name="search_Word" id="search_Word">
-			<input type="submit" value="검색">
+			<input type="submit" value="검??">
 		</form>
 	</div>
-	
+	<%@ include file ="/companyLogo.jsp" %>
 	
 </body>
 </html>

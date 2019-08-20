@@ -91,5 +91,6 @@
 		</tbody>
 	</table><br />
 	<input type="button" onclick="location.href='go_Main_in_Lectrue'" value="메인 화면으로 이동하기">
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

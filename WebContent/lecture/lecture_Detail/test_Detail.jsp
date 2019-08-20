@@ -69,5 +69,6 @@
 	
 	<h1>강의중</h1>
 	${selected_Lecture}
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

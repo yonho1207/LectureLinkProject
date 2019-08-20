@@ -131,6 +131,6 @@
 		<input id="repassword" type="password" name="repassword" placeholder="비밀번호를 한번 더 입력해주세요"/><br />
 		<input type="submit" value="변경하기"/>
 	</form>
-
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

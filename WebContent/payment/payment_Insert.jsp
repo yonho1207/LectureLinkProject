@@ -11,32 +11,34 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">	
   <script type="text/javascript"> 
   </script>
   
   <style type="text/css">
   	#insert_Payment_Info{
-  		font-size: xx-large;
   		position: relative;
   		left: 200px;
+  		top: 55px;
+  		margin : -20px;
   	}
   	#purchase_Basket{
-  		font-size: xx-large;
   		position: relative;
+  		top: -220px;
   		left: 200px;  	
-  	
+  		margin : -20px;
   	}
   	#clear_Purchase_Basket{
-  		font-size: xx-large;
   		position: relative;
   		left: 200px;  
   	
   	}
   	#payment_Date_Check{
-  		position: fixed;
-        right: 150px;
-        background-color: #FFEFD5;
-        height: 160px;
+  		position: relative;
+        left: 900px;
+        top : -10px;
+        background-color: #e6ffe6;
+        height: 200px;
 	 	width: 15%;	
   	}
   
@@ -102,42 +104,40 @@
 
 		<form method="get" action="payment_Process.do" id="insert_Payment_Info">
 		<h1>구매하실 강의를 선택해주세요</h1>
-		강의 번호 :<select name="select_Lecture_Pick" id="select_Lecture_Pick">
+		강의 번호 :<select name="select_Lecture_Pick" class="w3-select" id="select_Lecture_Pick" style="size: landscape;">
 				 <c:forEach var="select_Lecture" items="${lecture_List_Serve}">
 				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 교재 가격 : ${select_Lecture.text_price}</option>
 				 </c:forEach>
 				 </select><br />
-		구매자 ID :<input type="text" name="id" value="${members_info.id}" readonly><br />			
-		구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-		기간 설정 :<input type="number" name="select_Price" id="select_Price" min="1" max="12" value="1"><br /> 
-				<input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까? <br />
-				<button type="submit">구매 리스트에 추가하기</button>
-				<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기">
+		구매자 ID :<input type="text" class="w3-input" name="id" value="${members_info.id}" readonly><br />			
+		구매 일자:<input type="text"  class="w3-input" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+		기간 설정 :<input type="number"  name="select_Price" id="select_Price" min="1" max="12" value="1">
+				기간 설정에 유의해주세요	<br /> 
+				<span style="background-color: #e6ffe6;"><input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까? <br /></span>
+				<img src="img/payment/add-to-cart.png"><input type="submit" value="카트에 추가" style="background-color:transparent;  border:0px transparent solid;">
+				<a href="accept_Purchase.do" style="position: relative; left: 200px"><img src="img/payment/cash-register.png">결제 화면으로 이동하기</a>	
 		</form> 
 				
 	
-		<form action="payment_Date_Check" id="payment_Date_Check" method="post">
+		<form action="payment_Date_Check" id="payment_Date_Check" method="post"> 
 			구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
 			결제 월수:<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12"><br />
 			예상 종료 일자 : <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />
-						<button onclick="check_Period_Button" id="check_Period_Button">계산하기</button><br />
+						<img src="img/payment/icons8-calculator-100.png">
+						<button onclick="check_Period_Button" id="check_Period_Button" style="background-color:transparent;  border:0px transparent solid;">계산하기</button><br />
 		</form>
-	
-		<h2 style="position: relative; left: 200px">구매 선택하신 강의 목록</h2> 
-		<table id="purchase_Basket">
-		
+		<a href="clear_Purchase_Basket.do" style="position: relative; left: 200px"><img src="img/payment/clearBasket.png">장바구니 비우기</a>
+		<a href="goMain" style="position: relative; left: 200px"><img src="img/payment/home-location.png">메인으로</a>	
+		<table id="purchase_Basket">		
 		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
 			<p style="font-size: large; position: relative; left: 200px">
 			구매하신 강의명 :${purchase_Basket.lecture_name}
-			가격 : ${purchase_Basket.price}</p>
+			가격 : &#8361; ${purchase_Basket.price}</p>
 			<p style="font-size: x-large; position: relative; left: 200px">예상 만료 기간: ${purchase_Basket.period}</p><br />
 		</c:forEach>
-		</table>
-		<form action="clear_Purchase_Basket.do" id="clear_Purchase_Basket">
-			<input type="submit" value="장바구니 비우기">
-			<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
-		</form>
-		
+		</table><br />
+	
+		<%@ include file ="/companyLogo.jsp" %>
 		
 </body>
 </html>

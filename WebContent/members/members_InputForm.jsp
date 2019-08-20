@@ -286,5 +286,6 @@
 			<input type="button" id="signup" value="가입하기"  />
 		</form>
 	</div>
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

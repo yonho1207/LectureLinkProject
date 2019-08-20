@@ -69,6 +69,7 @@
 				</div>
 			
 				<c:choose>
+<<<<<<< HEAD
 					<c:when  test="${members_info==null && admin==null}">
 						<li class="nav-item">
 							<a class="nav-link" href="go_login">로그인</a>
@@ -89,6 +90,27 @@
 							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 						</li>
 					</c:if>
+=======
+				<c:when  test="${members_info==null && admin==null}">
+					<li class="nav-item">
+						<a class="nav-link" href="go_login">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="go_account">회원가입</a>
+					</li>
+				</c:when>
+				<c:when test="${members_info!=null || admin!=null}">
+					<li class="nav-item">
+						<a class="nav-link" href="logout">로그아웃</a>
+					</li>
+				</c:when>
+				</c:choose>
+				<c:if test="${admin!=null && members_info==null}">
+					<li class="nav-item">
+						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+					</li>
+				</c:if>
+>>>>>>> 2f3cde412086cd8786e0fd47a80f633e19aa3f33
 					<li class="nav-item">
 						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
 					</li>				
@@ -150,11 +172,11 @@
 
 			</table>	
 		</div>	
-		<c:if test="${admin!=null && members_info==null}">
 	
+		<c:if test="${admin != null}">
 		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" style="position: relative; left: 300px">글쓰기</button>
-		
 		</c:if>
+		
 		<!-- 페이지 처리부분 -->
 		<div class="container">
 		<ul class="pagination" style="position: relative; left: 450px">
