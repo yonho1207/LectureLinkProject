@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import dao.AdminDAO;
+import dao.AdminDAOImpl;
 import dao.MembersDAO;
 import dao.MembersDAOImpl;
 import dao.PaymentDAOImpl;
 import model.Members;
 import model.Payment;
 
-@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout"})
+@WebServlet(name="MembersController",urlPatterns = {"/go_account","/input_account","/go_login","/login","/logout","/go_Member_Profile.do","/go_profile_update.do","/profile_update"})
 public class MembersController extends HttpServlet{
 
 	@Override
@@ -143,6 +144,40 @@ public class MembersController extends HttpServlet{
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
 
+		}
+		else if(action.equals("go_Member_Profile.do")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/members/profile.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("go_profile_update.do")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/members/profileUpdate.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("profile_update")) {
+			
+			MembersDAO dao = new MembersDAOImpl();
+			Members members = new Members();
+			
+			
+			
+			members.setLastname(req.getParameter("lastname"));
+			members.setFirstname(req.getParameter("firstname"));
+			members.setGender(req.getParameter("gender"));
+			
+			members.setPhone(req.getParameter("phone"));
+			members.setBirth(req.getParameter("birth"));
+			members.setEmail(req.getParameter("email"));
+			members.setQuestion(req.getParameter("question"));
+			members.setAnswer(req.getParameter("answer"));
+			members.setId(req.getParameter("id"));
+			
+			
+			System.out.println(members);
+			dao.updateAll(members);
+			
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+			rd.forward(req, resp);
 		}
 
 }
