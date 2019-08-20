@@ -30,4 +30,7 @@ public class LectureSQL {
 	public static final String SELECT_BY_LECTURE_NAME = 
 			"select  LECTURE_NO,lecture_name,lecture_teacher, price, text_price, description from \r\n" + 
 			"lecture where lecture_name like ?";
+	public static final String SELECT_BY_LECTURE_TEACHER = 
+			"select  LECTURE_NO,lecture_name,lecture_teacher, price, text_price, description from \r\n" + 
+			"lecture where lecture_teacher like ?";
 }

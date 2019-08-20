@@ -29,7 +29,7 @@
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
+						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -69,6 +69,10 @@
 	<br>
 
 멤버리스트
+<form method="post" action="search_member">
+<input type="text"name="id" id="id" placeholder="아이디를 입력하세요"/>
+<input type="submit" value="검색"/>
+</form>
 <table>
 			<tr>
 				<td>회원번호</td>

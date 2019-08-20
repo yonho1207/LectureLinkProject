@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Members;
+import sql.AdminSQL;
 import sql.MembersSQL;
 
 public class MembersDAOImpl extends BaseDAO implements MembersDAO {
@@ -203,6 +204,37 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 
 		return members;
 
+	}
+	public void updateAll(Members members) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+				
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_PROFILE_UPDATE);
+			
+				
+			preparedStatement.setString(1,members.getLastname());
+			preparedStatement.setString(2,members.getFirstname());
+			preparedStatement.setString(3,members.getGender());
+			preparedStatement.setString(4,members.getPhone());
+			preparedStatement.setString(5,members.getBirth());
+			preparedStatement.setString(6,members.getEmail());
+			preparedStatement.setString(7,members.getQuestion());
+			preparedStatement.setString(8,members.getAnswer());
+			preparedStatement.setString(9,members.getId());
+			
+			
+			preparedStatement.executeUpdate();
+			
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			closeDBObjects(null,preparedStatement,connection);
+			
+		}
 	}
 
 }

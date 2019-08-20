@@ -90,8 +90,8 @@ public class Page_Move_Contoroller extends HttpServlet {
 		}else if(action.equals("go_Lecture_List")) {		
 			HttpSession session = req.getSession();
 			int reqPage = Integer.parseInt(req.getParameter("reqPage"));
-			String lecture_name = (String) req.getAttribute("lecture_name");
-			if(lecture_name!=null) {
+			String search_Word = (String) req.getAttribute("search_Word");
+			if(search_Word!=null) {
 				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
 				rd.forward(req, resp);
 			}else{

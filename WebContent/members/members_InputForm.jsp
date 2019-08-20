@@ -188,6 +188,19 @@
 	
 	
 </script> 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('input[type=radio]').each(function name() {
+
+		if (gender == $(this).val()) {
+			$(this).attr('checked', 'checked')
+
+		}
+	
+});
+
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -203,7 +216,7 @@
 						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List">강의 목록보기 </a>
+						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
