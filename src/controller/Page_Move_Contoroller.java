@@ -55,6 +55,8 @@ public class Page_Move_Contoroller extends HttpServlet {
 			QnaDAO qdao = new QnaDAOImpl();
 			qnaList = qdao.selectAll();
 			req.setAttribute("qnaList", qnaList);
+			String before_address = req.getRequestURI();
+			System.out.println(before_address);
 			rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("go_Customer_Support")) {
