@@ -68,8 +68,8 @@
 
 	<h1>주문 과정에서 문제가 발생하였습니다
 		관리자에게 문의하여주세요</h1>
-
-	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
+	<a href="goMain" style="position: relative; left: 200px"><img src="img/payment/home-location.png">메인으로</a>	
+	<a href="go_payment.do" style="position: relative; left: 200px"><img src="img/payment/shopping-cart.png">결제 화면으로 이동하기</a><br />
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>
