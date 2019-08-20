@@ -77,5 +77,6 @@
 	<p>주문하신 내용과 다를 경우 관리자 메일을 통하여 연락해 주십시요</p>
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
 	<input type="button" onclick="location.href='/LectureLinkProject/go_Attending_Lecture.do'" value="수강중인 강의 리스트로 바로 가기">
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

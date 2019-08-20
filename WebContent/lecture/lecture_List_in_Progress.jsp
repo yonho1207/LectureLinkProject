@@ -160,7 +160,7 @@
 			<input type="submit" value="검색">
 		</form>
 	</div>
-	
+	<%@ include file ="/companyLogo.jsp" %>
 	
 </body>
 </html>

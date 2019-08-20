@@ -91,6 +91,6 @@
 		<input type="button" onclick="location.href='gift_Card_ETC.do'" value="상품권 혹은 기프티콘" style="position: relative; left: 200px"><br />
 		<input type="button" onclick="location.href='go_payment.do'" value="결제 화면으로 이동하기" style="position: relative; left: 200px">
 	</form>
-
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

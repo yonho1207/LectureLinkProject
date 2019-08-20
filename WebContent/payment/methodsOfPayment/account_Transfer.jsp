@@ -80,6 +80,6 @@
 		</form>
 		 
 		<input type="button" onclick="location.href='accept_Purchase.do'" value="결제 화면으로 이동하기" style="font-size: large; position: relative; left: 850px">
-	
+		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

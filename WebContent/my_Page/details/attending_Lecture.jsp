@@ -78,5 +78,6 @@
 	<br />
 	<h3>이상과 같은 강의를 수강중이십니다 이용해주셔서 감사합니다</h3>
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

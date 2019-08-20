@@ -137,7 +137,7 @@
 			<input type="submit" value="장바구니 비우기">
 			<input type="button" onclick="location.href='index.jsp'" value="메인 화면으로 이동하기">
 		</form>
-		
+		<%@ include file ="/companyLogo.jsp" %>
 		
 </body>
 </html>

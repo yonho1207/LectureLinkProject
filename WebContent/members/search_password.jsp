@@ -87,5 +87,6 @@
 		<input type="submit" value="제출"/><br />
 	</form>
 	${message}
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

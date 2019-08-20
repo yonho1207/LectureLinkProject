@@ -70,5 +70,6 @@
 		관리자에게 문의하여주세요</h1>
 
 	<input type="button" onclick="location.href='/LectureLinkProject/goMain'" value="메인 화면으로 이동하기">
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>
