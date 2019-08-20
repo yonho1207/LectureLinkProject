@@ -144,8 +144,6 @@ public class CmtController extends HttpServlet {
 			 
 			  //req.setAttribute("pageGroupResult",
 			  //pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
-			 
-			  session.setAttribute("pageGroupResult",pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
 			  
 			  System.out.println(pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
 			  //RequestDispatcher rd = req.getRequestDispatcher("cmt/cmtForm1.jsp");

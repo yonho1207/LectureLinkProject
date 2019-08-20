@@ -160,7 +160,7 @@
 			<input type="submit" value="검색">
 		</form>
 	</div>
-	
+	<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1?reqPage=1'" >댓글</button>
 	
 </body>
 </html>
