@@ -89,7 +89,7 @@
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
 					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
+					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
 				</div>
 			
 				<c:choose>

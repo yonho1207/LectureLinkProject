@@ -17,7 +17,18 @@
 	#signupForm input.error,#signupForm textarea.error{
 		border : 1px dashed red;
 	}
+	#signupForm{background-color:white; color: black; }
+	
+	#signupForm{
+     
+    margin:auto;
+    padding:20px;
+    width:500px;
+    background-color:#EEEFF1;
+    border-radius:5px;
+     }
 </style>
+
 <script type="text/javascript">
 
 
@@ -188,19 +199,7 @@
 	
 	
 </script> 
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	$('input[type=radio]').each(function name() {
 
-		if (gender == $(this).val()) {
-			$(this).attr('checked', 'checked')
-
-		}
-	
-});
-
-</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -225,29 +224,30 @@ $(document).ready(function() {
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
 					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
+					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
 				</div>
 			
 				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
-					</li>
-				</c:if>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">회원가입</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">로그아웃</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
 						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
 					</li>				
@@ -255,27 +255,30 @@ $(document).ready(function() {
 		</nav>
 	<br>
 	<div class="container">
-	<h3>회원등록</h3>
+	
 		
 		<form method="post" id="signupForm" action="input_account">
-			id<input type="text"name="id" id="id" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
-			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br />
-			password<input type="password" name="password" id="password"/><br />
-			비밀번호 확인<input id="repassword" type="password" name="repassword"/><br />
-			성<input type="text" name="lastname" /><br />
-			이름<input type="text" name="firstname" /><br />
-			성별<input type="radio" name="gender" value="남"/>남
-				<input type="radio" name="gender" value="여"/>여<br />
-			전화번호<input type="text" name="phone" /><br />
-			생일<input type="date" name="birth"><br />
-			이메일<input type="text" name="email" /><br />
+			<h2>회원등록</h2>
+			id<input type="text"name="id" id="id" class="form-control" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
+			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br /><br />
+			password<input type="password"  class="form-control" name="password" id="password"/><br />
+			비밀번호 확인<input id="repassword" class="form-control" type="password" name="repassword"/><br />
+			성<input type="text" name="lastname" class="form-control"/><br />
+			이름<input type="text" name="firstname" class="form-control"/><br />
+			성별<br />
+				<input type="radio" name="gender" value="남"/>남
+				<input type="radio" name="gender" value="여"/>여<br /><br />
+			전화번호<input type="text" name="phone" class="form-control"/><br />
+			생일<br />
+				<input type="date" name="birth"><br /><br />
+			이메일<input type="text" name="email" class="form-control"/><br />
 			질문<select name="question">
 				<option value="가장 친한 친구의 이름은?">가장 친한 친구의 이름은?</option>
 				<option value="초등학교 선생님의 이름은?">초등학교 선생님의 이름은?</option>
 				<option value="당신의 별명은?">당신의 별명은?</option>
 				</select>
-			<br />
-			답<input type="text" name="answer" /><br />
+			<br /><br />
+			답<input type="text" name="answer" class="form-control"/><br />
 			약관 동의합니다.<input id="agree" type="checkbox" name="agree"/><br />
 			
 			
