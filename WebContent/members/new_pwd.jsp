@@ -19,6 +19,7 @@
 		border : 1px dashed red;
 	}
 </style>
+
 <script type="text/javascript">
 	$(function(){
 		$("#newpwdForm").validate({
@@ -91,7 +92,7 @@
 					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
 					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
 				</div>
-			
+			</li>
 				<c:choose>
 				<c:when  test="${members_info==null && admin==null}">
 					<li class="nav-item">
@@ -109,9 +110,16 @@
 				</c:choose>
 				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
+						
+						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+							관리자 메뉴
+						</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
 					
-						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
-					</li>
+						</div>
+						</li>
 				</c:if>
 					<li class="nav-item">
 						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>

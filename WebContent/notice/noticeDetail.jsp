@@ -25,10 +25,10 @@
 					<li class="nav-item">
 					
 					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공�??�항 게시??</a>
+						<a class="nav-link" href="go_notice">공�??�항 게시??</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 ?�면?�로 </a>
+						<a class="nav-link" href="go_payment.do">결제 ?�면?�로 </a>
 					</li>
 					
 					<li class="nav-item">
@@ -36,12 +36,12 @@
 					</li>
 				<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				?�원 ?�보 조회
+				?�원 ?�보 조회
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">?�강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">?�강?�던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">?�원 ?�보 조회 �? ?�정</a>
+					<a class="dropdown-item" href="go_Attending_Lecture.do">?�강중인 강의 목록</a>
+					<a class="dropdown-item" href="go_Attended_Lecture.do">?�강?�던 강의 목록</a>
+					<a class="dropdown-item" href="go_Member_Profile.do">?�원 ?�보 조회 �? ?�정</a>
 				</div>
 			
 				<c:choose>
@@ -50,28 +50,36 @@
 						<a class="nav-link" href="go_login">로그??</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_account">?�원가??</a>
+						<a class="nav-link" href="go_account">?�원가??</a>
 					</li>
 				</c:when>
 				<c:when test="${members_info!=null || admin!=null}">
 					<li class="nav-item">
-						<a class="nav-link" href="logout">로그?�웃</a>
+						<a class="nav-link" href="logout">로그?�웃</a>
 					</li>
 				</c:when>
 				</c:choose>
 				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자?�이지�? ?�동</a>
-					</li>
+						
+						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+							관리자 메뉴
+						</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
+					
+						</div>
+						</li>
 				</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 ?�터 </a>
+						<a class="nav-link" href="go_Customer_Support">고객 ?�터 </a>
 					</li>				
 			</ul>
 		</nav>
 	<br>
 
-	<h1>공�??�항 게시??</h1>
+	<h1>공�??�항 게시??</h1>
 	<br >
 	<div class="container">
 	
@@ -84,19 +92,19 @@
     </div>
     
     <div class="form-group">	
-      <label for=notice_no>?�록?�자:</label>
+      <label for=notice_no>?�록?�자:</label>
       <input type="hidden" name = "notice_date" value="${notice.notice_date}"><br />
       <input type="text" class="form-control" id="notice_date"  value="${notice.notice_date}" disabled="disabled"/>
     </div>
     
     <div class="form-group">
-      <label for="notice_title">?�목:</label>
+      <label for="notice_title">?�목:</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_title}">
       <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" disabled="disabled"/>
     </div>
     
  	<div class="form-group">
-  		<label for="notice_con">?�용:</label>
+  		<label for="notice_con">?�용:</label>
   		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
@@ -110,32 +118,32 @@
     </div>
     
     <div class="form-group">	
-      <label for=notice_no>?�록?�자:</label>
+      <label for=notice_no>?�록?�자:</label>
       <input type="hidden" name = "notice_date" value="${notice.notice_date}"><br />
       <input type="text" class="form-control" id="notice_date"  value="${notice.notice_date}" disabled="disabled"/>
     </div>
     
     <div class="form-group">
-      <label for="notice_title">?�목:</label>
+      <label for="notice_title">?�목:</label>
       <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" />
     </div>
     
  	<div class="form-group">
-  		<label for="notice_con">?�용:</label>
+  		<label for="notice_con">?�용:</label>
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con">${notice.notice_con}</textarea>
 	</div>
 
 	<br >
 	<div class="form-group">
-	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">??��</a>
-	<a type="button"  class="btn btn-primary" href="notice_update">?�정</a>
+	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">??��</a>
+	<a type="button"  class="btn btn-primary" href="notice_update">?�정</a>
 	</div>
 	</c:otherwise>
 	</c:choose>
 	</div>
 	
 	<div class="container">
-		<button type="button" class="form-control" id="list_btn" onclick="location.href='/LectureLinkProject/go_notice'" >리스?? ?�아가�?</button>
+		<button type="button" class="form-control" id="list_btn" onclick="location.href='/LectureLinkProject/go_notice'" >리스?? ?�아가�?</button>
 	</div>	
 	
 	<%@ include file ="/companyLogo.jsp" %>
