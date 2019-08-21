@@ -88,6 +88,7 @@
 						</li>
 					</c:if>
 					<li class="nav-item">
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 
 
 
