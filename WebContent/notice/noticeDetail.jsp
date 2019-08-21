@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html >
 <html><head>
@@ -94,7 +94,6 @@
     </div>
     
  	<div class="form-group">
-  		<label for="notice_con">?�용:</label>
   		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
