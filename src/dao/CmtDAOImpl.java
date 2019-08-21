@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Cmt;
+import model.CmtCoutn;
 import model.Qna;
+import page.PageSQL;
 import sql.CmtSQL;
 import sql.QnaSQL;
 
@@ -56,13 +58,13 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 	@Override
 	public Cmt insert(Cmt cmt) {
 
-		Cmt selectByComment = null;
+		//Cmt selectByComment = null;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Statement statement = null;
-		ResultSet resultSet = null;
+		//Statement statement = null;
+		//ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
@@ -74,9 +76,9 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			preparedStatement.setString(4, cmt.getCmt_con());
 			preparedStatement.setInt(5, cmt.getRating());
 
-			int rowCount = preparedStatement.executeUpdate();
-
-			if (rowCount > 0) {
+			//int rowCount = preparedStatement.executeUpdate();
+			preparedStatement.executeQuery();
+		/*	if (rowCount > 0) {
 
 				statement = connection.createStatement();
 				resultSet = statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
@@ -85,16 +87,16 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 					selectByComment = (Cmt) selectByLecture_no(resultSet.getInt("num"));
 				}
 
-			}
+			}*/
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		} finally {
-			closeDBObjects(resultSet, preparedStatement, null);
+			//closeDBObjects(resultSet, preparedStatement, null);
 			closeDBObjects(null, preparedStatement, connection);
 		}
-		return selectByComment;
-
+		//return selectByComment;
+		return cmt;
 	}
 
 	@Override
@@ -209,4 +211,5 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 		}
 		return cmtlist;
 	}
+
 }

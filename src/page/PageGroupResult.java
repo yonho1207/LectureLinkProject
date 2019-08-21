@@ -40,5 +40,9 @@ public class PageGroupResult {
 	public void setSelectPageNumber(int selectPageNumber) {
 		this.selectPageNumber = selectPageNumber;
 	}
+	public void setInt(int i, int lecture_no) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

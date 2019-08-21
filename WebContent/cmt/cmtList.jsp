@@ -14,7 +14,4 @@
 			<cmt_date>${cmt.cmt_date}</cmt_date>
 		</cmt>
 	</c:forEach>
-	<groupStartNumber>${pageGroupResult.groupStartNumber}</groupStartNumber>
-	<groupEndNumber>${pageGroupResult.groupEndNumber}</groupEndNumber>
-	<selectPageNumber>${pageGroupResult.selectPageNumber}</selectPageNumber>
 </cmtList>

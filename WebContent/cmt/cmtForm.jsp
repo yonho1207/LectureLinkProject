@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -20,26 +20,45 @@
 
 <!-- 2단계 : 탬플릿 구조 만들기 -->
 <script type="text/x-jquery-tmpl" id="itemTemplate">
-
+	
+	<div class="container">
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
-		
-		별점 : {{= rating}}
-		 글번호 :{{= cmt_no}} 
-		멤버넘버  : {{= member_no}} 
-		강의번호 :{{= lecture_no}} 
+	
+	별점 : {{if rating==1}}
+			<img src="img/score_one.jpg" width="80" height="20">
+		 {{/if}}
+
+		 {{if rating==2}}
+			<img src="img/score_two.jpg" width="80" height="20">
+		 {{/if}}
+
+		{{if rating==3}}
+			<img src="img/score_three.jpg" width="80" height="20">
+		{{/if}}
+
+		{{if rating==4}}
+			<img src="img/score_four.jpg" width="80" height="20">
+		{{/if}}
+
+		{{if rating==5}}
+			<img src="img/score_five.jpg" width="80" height="20">
+		{{/if}}	
+
+ 		글번호 :{{= cmt_no}}
+		강의번호 : {{=lecture_no}} 
 		작성자 : {{= id}}
 		내용: {{= cmt_con}}
 		등록일자 : {{= cmt_date}}
 
 		{{if chk == true}}
-		<input type="button" class="delete_btn" value="삭제">
-		{{/if}}
-	</li>			
+			<input type="button" class="delete_btn" value="삭제">
+		{{/if}}	
+	</li>	
+	</div>
 	<hr>	
 </script>
 
 <script type="text/javascript">
-
 
 function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) {
 	
@@ -95,23 +114,18 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		    event.preventDefault();
 		}
 
-		
-		
 		if(!$("#cmt_con").val()){
 		
 			alert("내용을 입력해주세요.");
 			return false;
 		
 		} 
-	
+
 	$.post("cmt_insert",$(this).serialize(),function(xml){
 		
 		var result=$(xml).find("result").text();
-		var message=$(xml).find("message").text();
 		
 		if (result) {
-			
-			alert(message);
 			
 			var cmt_no =$(xml).find("cmt_no").text();
 			var member_no =$(xml).find("member_no").text();
@@ -127,12 +141,12 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			}
 			
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
-    						
+    					
+			alert("댓글 추가 성공");
 			$("#cmt_con").val("");
 				
 		}else{
 			
-			alert(message);
 				
 		}
 	}).fail(function(){
@@ -158,7 +172,9 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		}
 	});		
 });
+
 </script>
+
 
 <style type="text/css">
 .star-input>.input,
@@ -182,9 +198,17 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 </style>
 
+<style type="text/css">
+.pagination{
+    position:absolute;
+    top:0; left:0; bottom:0; right:0;
+    height:10%; 
+    margin:10% auto;
+    }
+#list_btn{background-color:black; color: white; }
+</style>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<a class="navbar-brand" href="goMain">Logo</a>
 			<ul class="navbar-nav">
@@ -211,7 +235,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				</div>
 			
 				<c:choose>
-				<c:when  test="${members_info==null}">
+				<c:when  test="${members_info==null && admin==null}">
 					<li class="nav-item">
 						<a class="nav-link" href="go_login">로그인</a>
 					</li>
@@ -219,15 +243,16 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 						<a class="nav-link" href="go_account">회원가입</a>
 					</li>
 				</c:when>
-				<c:when test="${members_info!=null}">
+				<c:when test="${members_info!=null || admin!=null}">
 					<li class="nav-item">
 						<a class="nav-link" href="logout">로그아웃</a>
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${members_info!=null && members_info.id=='admin'}">
+				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
+					
+						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
 					</li>
 				</c:if>
 					<li class="nav-item">
@@ -240,27 +265,27 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<h2>인터넷 강의 상세 게시판</h2>
 	<hr>
 	<div class="container mt-3">
-  		<h2>JAVA 는 즐거워 강의</h2>
-  		<p>alex cho 선생님의 JAVA 기초 강의</p>
+  		<h2>lecture</h2>
+  			
+    	<h2>${lecture.lecture_name}</h2>
   		<div class="media border p-3">
    		 <img src="img/java_logo_img.jpg" alt="이미지 실패" class="mr-3 mt-3 rounded-circle" style="width:160px;">
    		 <div class="media-body">
-      <h4>alex cho <small><i></i></small></h4>
-      <p>누구나 쉽게 시작할수 있는 JAVA 기초강의 모두함께 해봐요~</p>
-      <p>당신도 프로그래머가 될수 있어요!</p>          
+      <h3><i>${lecture.lecture_teacher}</i></h3><br >
+      <p><h3>${lecture.description}</h3></p>
+      <p></p>          
     </div>
   	</div>
 	</div>
-	
 	<br >
-	<div class="container">
 
+	<c:if test="${admin==null && members_info!=null}">
+	<div class="container">
 	<form id="cmt_form" >
-		
 		 <input type="hidden" name = "member_no" value="${members_info.member_no}">
 		 회원번호<input type="text"  name="member_no" id="member_no" value="${members_info.member_no}" disabled="disabled" />
 		 
-		강의 번호<input type="text" name="lecture_no" id="lecture_no" />
+		  <input type="hidden" name = "lecture_no"  id="lecture_no" value="${lecture.lecture_no}"/>
 		
 		<input type="hidden" name = "id" value="${members_info.id}">
 		id<input type="text"  name="id" id="id" value="${members_info.id}" disabled="disabled" />
@@ -281,17 +306,56 @@ star-input>.input.focus{outline:1px dotted #ddd;}
     		<label for="p5">5</label>
   		</span>					
 	</span>
-	
-		<button type="submit"  class="btn btn-primary">저장하기</button>
-	
+		<br >
+		<br >	
+		<button type="submit"  class="btn btn-primary btn-block" row="50px">저장하기</button>
 	</form>
 	</div>
+	</c:if>
+	
 	<br >
 	<br >
+	
+	<div class="container">
+	<h2>최신 댓글</h2>
+	</div>
+	<hr >
 	<ul id="cmt_list">
 	<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
 	</ul>
+
+
+	<div class="container">
+	<button data-toggle="collapse"  id="list_btn" data-target="#lecture_no_cmt" class="form-control">댓글 더보기</button>
+	<div id="lecture_no_cmt" class="collapse">
+		
+	<c:forEach var="cmtlists" items="${cmtlists}">
+		<hr>
+		<c:if test="${cmtlists.rating==1}">
+			<img src="img/score_one.jpg" width="80" height="20">
+		</c:if>		
+		<c:if test="${cmtlists.rating==2}">
+			<img src="img/score_two.jpg" width="80" height="20">
+		</c:if>	
+		<c:if test="${cmtlists.rating==3}">
+			<img src="img/score_three.jpg" width="80" height="20">
+		</c:if>	
+		<c:if test="${cmtlists.rating==4}">
+			<img src="img/score_four.jpg" width="80" height="20">
+		</c:if>	
+		<c:if test="${cmtlists.rating==5}">
+			<img src="img/score_five.jpg" width="80" height="20">
+		</c:if>	
+		
+		별점 :${cmtlists.rating} 작성자 :${cmtlists.id} 
+		내용 :${cmtlists.cmt_con} 등록일자 :${cmtlists.cmt_date}
+		<br >
+
+	</c:forEach>
 	
+	</div>
+	</div>
+
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

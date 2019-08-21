@@ -3,7 +3,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <cmt>
 		<result>${result}</result>
-		<message>${message}</message>
 		<item>
 			<cmt_no>${cmt.cmt_no}$</cmt_no>
 			<member_no>${cmt.member_no}</member_no>

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import dao.BaseDAO;
 
-
 public class PageDAOImpl extends BaseDAO implements PageDAO {
 
 	@Override
@@ -32,9 +31,9 @@ public class PageDAOImpl extends BaseDAO implements PageDAO {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-			
+
 		} finally {
-			
+
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return cnt;
