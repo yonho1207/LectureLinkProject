@@ -167,7 +167,7 @@
 	
 	$(function(){
 		$("#signup").click(function(){
-			alert(idck)
+			
 		if(idck==0 && idckv==document.getElementById("id").value){
 			
 			alert("중복된 아이디입니다.")

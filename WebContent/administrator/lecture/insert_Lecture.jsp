@@ -14,6 +14,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+
+<style type="text/css">
+	#insert_lecture input.error,#signupForm textarea.error{
+		border : 1px dashed red;
+	}
+	#insert_lecture{background-color:white; color: black; }
+	
+	#insert_lecture{
+     
+    margin:auto;
+    padding:20px;
+    width:500px;
+    background-color:#EEEFF1;
+    border-radius:5px;
+     }
+</style>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -77,12 +94,12 @@
 	<br>
 
 	<h2>새로 작성하고자 하는 강의의 정보를 입력해주세요</h2>
-	<form method="post" action="insert_Lecture.admin">
-		강의명 : <input type="text" id="lecture_name" name="lecture_name"><br />
-		강사명 : <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
-		1개월 기준 수강료 : <input type="text" id="price" name="price"><br />
-		교재 가격 : <input type="text" id="text_price" name="text_price"><br />
-		강의 설명 : <textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
+	<form method="post" id="insert_lecture" action="insert_Lecture.admin">
+		강의명 : <input type="text" id="lecture_name" class="form-control" name="lecture_name"><br />
+		강사명 : <input type="text" id="lecture_teacher" class="form-control" name="lecture_teacher"><br />
+		1개월 기준 수강료 : <input type="text" id="price" class="form-control" name="price"><br />
+		교재 가격 : <input type="text" id="text_price" class="form-control" name="text_price"><br />
+		강의 설명 : <textarea type="textbox" id="description" class="form-control" name="description" cols="60" rows="7"></textarea><br />
 		<input type="submit">
 	</form>
 	<%@ include file ="/companyLogo.jsp" %>

@@ -84,11 +84,11 @@
 						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
 							관리자 메뉴
 						</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
-					<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
 					
-				</div>
+						</div>
 						</li>
 					</c:if>
 					<li class="nav-item">
