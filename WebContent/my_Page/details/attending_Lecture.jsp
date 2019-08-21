@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> 수강중인 강의 목록</title>
+<title>受講中の講義リスト</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -13,73 +13,106 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-					
-						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
-					</li>
-				</c:if>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+				</ul>
+			</nav>
+		<br>
+	
+		<div class="container">
+			<c:choose>
+			<c:when test="${members_info!=null}">		
+			  <div class="card" id="card" style="width:250px">
+				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
+				    <div class="card-body">
+				      <h4 class="card-title">${members_info.id}</h4>
+				      <p class="card-text">ようこそお越しくださいました ${members_info.id}様</p>
+				      <a href="go_Attending_Lecture.do" class="btn btn-primary">受講中の講義リスト</a>
+				      <form action="jump_To_Clicked_Lecture" method="post">			      	
+				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
+							<c:forEach var="attending_List" items="${attending_List}">
+								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
+							</c:forEach>   	
+							<input type="submit" value="移動する"> 
+				      	</select>			     
+				      </form>
+				    </div>
+				 
+				  <br>
+		 	 </c:when>
+		 	 <c:when test="${members_info==null}">
+		 	 	 <div class="card" id="card" style="width:250px">
+		 	 		<div class="card-body">
+				      <h4 class="card-title">ようこそお越しくださいました。</h4>
+				      <p class="card-text">ご利用になされるためには <a href="go_login">ログイン</a><br /> または <br /> 
+				      		<a href="go_account">会員登録</a>をお済ませください。</p>
+				    </div>
+				  </div>
+		 	 </c:when>
+			</c:choose>
+		 </div>
+		 
 	
 
 
-	<h3 style="position: relative; left: 200px">반갑습니다 ${members_info.id}님</h3> 
-	<p style="position: relative; left: 200px">귀하께서는 현재 이하의 강의를 수강중이십니다.</p>
+	<h3 style="position: relative; left: 200px">ようこそお越しくださいました ${members_info.id}様</h3> 
+	<p style="position: relative; left: 200px">お客様は以下の講義を受講なされています。</p>
 	<ul style="position: relative; left: 200px">
 		<c:forEach var="attending_List" items="${attending_List}">
-			<h4>수강중이신 강의명 : <a href="go_Lecture_attend.do?lecture_no=${attending_List.lecture_no}">${attending_List.lecture_name}</a></h4>	
-			구매하신 일시 : ${attending_List.payment_date}<br />
-			예상 만료 기간: ${attending_List.period}<hr />
-		</c:forEach>
-	<br />
-		<h3 style="position: relative; left: 200px">이상과 같은 강의를 수강중이십니다 이용해주셔서 감사합니다</h3>
+			<h4>受講なされている講義名：<a href="go_Lecture_attend.do?lecture_no=${attending_List.lecture_no}">${attending_List.lecture_name}</a></h4>	
+			お買い上げになった日時：${attending_List.payment_date}<br />
+			満了日： ${attending_List.period}<hr />
+		</c:forEach><br />
+		<h3 style="position: relative; left: 200px">以上の講義を受講なされています、ご利用いただき誠にありがとうございました。</h3>
 	</ul>
-	<a href="goMain" style="position: relative; left: 750px"><img src="img/payment/home-location.png">메인으로</a>	
+	<a href="goMain" style="position: relative; left: 750px"><img src="img/payment/home-location.png">メインページ</a>	
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

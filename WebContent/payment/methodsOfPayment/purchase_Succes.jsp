@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>구매 성공 페이지</title>
+<title>ご利用いただきありがとうございます。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -13,72 +13,71 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-					<c:when  test="${members_info==null && admin==null}">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="go_login">로그인</a>
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_account">회원가입</a>
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
-							<a class="nav-link" href="logout">로그아웃</a>
+							<a class="nav-link" href="logout">ログアウト</a>
 						</li>
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
 						<li class="nav-item">
 						
-							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
 	
 
-	
-		<table style=" position: relative; left: 200px">
-			<h1>주문하신 상품의 구매가 정상적으로 처리되었습니다</h1>
-			<c:forEach var = "purchase_Basket" items="${purchase_Basket}">
-				<h3>구매하신 강의명 :${purchase_Basket.lecture_name}</h3>
-				가격 : ${purchase_Basket.price} 
-				예상 만료 기간: ${purchase_Basket.period}<hr />
+		<h1>ご購入ありがとうございます。</h1>
+		<table style=" position: relative; left: 600px">
+			<c:forEach var = "purchase_Basket" items="${purchase_Basket}" >
+				<h3>お買い上げになった講義の名前：${purchase_Basket.lecture_name}</h3>
+				値段：&#165 ${purchase_Basket.price} 
+				満了日： ${purchase_Basket.period}<hr />
 			</c:forEach>
 		</table>
-	<h3 style=" position: relative; left: 200px">주문하신 내용과 다를 경우 관리자 메일을 통하여 연락해 주십시요</h3>
-	<a href="goMain" style="position: relative; left: 400px"><img src="img/payment/home-location.png">메인으로</a>	
-	<a href="go_Attending_Lecture.do" style="position: relative; left: 400px"><img src="img/payment/icons8-books-64.png">수강중인 강의 리스트로 바로 가기</a>	
+	<h3 style=" position: relative; left: 200px">明細に異常、または問題が発生した場合は遠慮なさらずご連絡くださいますようお願い申し上げます。</h3>
+	<a href="goMain" style="position: relative; left: 400px"><img src="img/payment/home-location.png">メインページへ</a>	
+	<a href="go_Attending_Lecture.do" style="position: relative; left: 400px"><img src="img/payment/icons8-books-64.png">受講中の講義リストへ</a>	
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

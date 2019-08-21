@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>결제 정보 입력 화면 </title>
+<title>決済情報入力フォーム</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -46,96 +46,97 @@
   
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-					<c:when  test="${members_info==null && admin==null}">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="go_login">로그인</a>
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_account">회원가입</a>
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
-							<a class="nav-link" href="logout">로그아웃</a>
+							<a class="nav-link" href="logout">ログアウト</a>
 						</li>
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
 						<li class="nav-item">
 						
-							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
 	
 
 		
 
 		<form method="get" action="payment_Process.do" id="insert_Payment_Info">
-		<h1>구매하실 강의를 선택해주세요</h1>
-		강의 번호 :<select name="select_Lecture_Pick" class="w3-select" id="select_Lecture_Pick" style="size: landscape;">
+		<h1>お買い上げになる講義を選択してください。</h1>
+		講義：<select name="select_Lecture_Pick" class="w3-select" id="select_Lecture_Pick" style="size: landscape;">
 				 <c:forEach var="select_Lecture" items="${lecture_List_Serve}">
 				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 교재 가격 : ${select_Lecture.text_price}</option>
 				 </c:forEach>
 				 </select><br />
-		구매자 ID :<input type="text" class="w3-input" name="id" value="${members_info.id}" readonly><br />			
-		구매 일자:<input type="text"  class="w3-input" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-		기간 설정 :<input type="number"  name="select_Price" id="select_Price" min="1" max="12" value="1">
-				기간 설정에 유의해주세요	<br /> 
-				<span style="background-color: #e6ffe6;"><input type="checkbox" name="buy_Book" value="1">교재를 구매하시겠습니까? <br /></span>
-				<img src="img/payment/add-to-cart.png"><input type="submit" value="카트에 추가" style="background-color:transparent;  border:0px transparent solid;">
-				<a href="accept_Purchase.do" style="position: relative; left: 200px"><img src="img/payment/cash-register.png">결제 화면으로 이동하기</a>	
+		お客様のID：<input type="text" class="w3-input" name="id" value="${members_info.id}" readonly><br />			
+		お買い上げになる日時：<input type="text"  class="w3-input" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+		期間設定：<input type="number"  name="select_Price" id="select_Price" min="1" max="12" value="1">
+				必ず期間の確認をお願い申し上げます。<br /> 
+				<span style="background-color: #e6ffe6;"><input type="checkbox" name="buy_Book" value="1">教科書もお買い上げになりますか？<br /></span>
+				<img src="img/payment/add-to-cart.png"><input type="submit" value="カートに入れる" style="background-color:transparent;  border:0px transparent solid;">
+				<a href="accept_Purchase.do" style="position: relative; left: 200px"><img src="img/payment/cash-register.png">決済手段選択フォームへ</a>	
 		</form> 
 				
 	
 		<form action="payment_Date_Check" id="payment_Date_Check" method="post"> 
-			구매 일자:<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-			결제 월수:<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12"><br />
-			예상 종료 일자 : <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />
+			お買い上げになる日時：<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
+			期間設定：<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12"><br />
+			予想される満了日： <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />
 						<img src="img/payment/icons8-calculator-100.png">
-						<button onclick="check_Period_Button" id="check_Period_Button" style="background-color:transparent;  border:0px transparent solid;">계산하기</button><br />
+						<button onclick="check_Period_Button" id="check_Period_Button" style="background-color:transparent;  border:0px transparent solid;">計算する</button><br />
 		</form>
-		<a href="clear_Purchase_Basket.do" style="position: relative; left: 200px"><img src="img/payment/clearBasket.png">장바구니 비우기</a>
-		<a href="goMain" style="position: relative; left: 200px"><img src="img/payment/home-location.png">메인으로</a>	
+		
 		<table id="purchase_Basket">		
 		<c:forEach var = "purchase_Basket" items="${purchase_Basket}" varStatus="status"> 
 			<p style="font-size: large; position: relative; left: 200px">
-			구매하신 강의명 :${purchase_Basket.lecture_name}
-			가격 : &#8361; ${purchase_Basket.price}</p>
-			<p style="font-size: x-large; position: relative; left: 200px">예상 만료 기간: ${purchase_Basket.period}</p><br />
+			お買い上げになった講義の名前：${purchase_Basket.lecture_name}
+			値段： &#165 ${purchase_Basket.price}</p>
+			<p style="font-size: x-large; position: relative; left: 200px">予想される満了日： ${purchase_Basket.period}</p><br />
 		</c:forEach>
 		</table><br />
+		<a href="clear_Purchase_Basket.do" style="position: relative; left: 200px"><img src="img/payment/clearBasket.png">カートを空ける</a>
+		<a href="goMain" style="position: relative; left: 200px"><img src="img/payment/home-location.png">メインページへ</a>	
 	
 		<%@ include file ="/companyLogo.jsp" %>
 		

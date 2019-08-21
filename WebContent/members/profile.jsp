@@ -26,18 +26,18 @@
      }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>お客様の情報</title>
 <script type="text/javascript">
 $(function(){
 	$("#delete").click(function(){
-		var con = confirm("정말 탈퇴하시겠습니까?");
+		var con = confirm("本当に退会なさいますか？");
 		if(con==true){
 		$('form').attr({action:'delete_member', method:'post'}).submit();
-		alert("그동안 감사했습니다.")
+		alert("ご利用いただき誠にありがとうございました。")
 		}
 		else if(con!=true){
 			
-			alert("취소되었습니다.")
+			alert("キャンセルされました。")
 		}
 	});
 	
@@ -48,115 +48,116 @@ $(function(){
 </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-					<c:when  test="${members_info==null && admin==null}">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="go_login">로그인</a>
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_account">회원가입</a>
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
-							<a class="nav-link" href="logout">로그아웃</a>
+							<a class="nav-link" href="logout">ログアウト</a>
 						</li>
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
 						<li class="nav-item">
 						
-							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
+	
 
 	
 			<form method="post" action="delete_member" id="css">
 			<h2>회원정보</h2>
 				<div class="form-group">	
-     			<label for=member_no>회원번호:</label> 
+     			<label for=member_no>会員番号：</label> 
       			<input type="hidden" name = "member_no" value="${newmember.member_no}"><br />
       			<input type="text" class="form-control" id="member_no"  value="${newmember.member_no}" disabled="disabled"/>
     			</div>
 
     			<div class="form-group">	
-     			<label for=id>아이디:</label> 
+     			<label for=id>ID：</label> 
       			<input type="hidden" name = "id" id="id" value="${newmember.id}"><br />
       			<input type="text" class="form-control" id="id"  value="${newmember.id}" disabled="disabled"/>
     			</div>
 				
 				<div class="form-group">	
-     			<label for=password>비밀번호:</label>       			
+     			<label for=password>パスワード：</label>       			
       			<input type="text" class="form-control" id="password"  value="${newmember.password}" disabled="disabled"/>
     			</div>
 				<div class="form-group">	
-     			<label for=lastname>성:</label>       			
+     			<label for=lastname>苗字：</label>       			
       			<input type="text" class="form-control" id="lastname"  value="${newmember.lastname}" disabled="disabled"/>
     			</div>
     			<div class="form-group">	
-     			<label for=firstname>이름:</label>       			
+     			<label for=firstname>名前：</label>       			
       			<input type="text" class="form-control" id="firstname"  value="${newmember.firstname}" disabled="disabled"/>
     			</div>
 				<div class="form-group">	
-     			<label for=gender>성별:</label>       			
+     			<label for=gender>性別：</label>       			
       			<input type="text" class="form-control" id="gender"  value="${newmember.gender}" disabled="disabled"/>
     			</div>
 				<div class="form-group">	
-     			<label for=phone>핸드폰 번호:</label>       			
+     			<label for=phone>連絡先：</label>       			
       			<input type="text" class="form-control" id="phone"  value="${newmember.phone}" disabled="disabled"/>
     			</div>
     			<div class="form-group">	
-     			<label for=birth>생일:</label>       			
+     			<label for=birth>お誕生日：</label>       			
       			<input type="text" class="form-control" id="birth"  value="${newmember.birth}" disabled="disabled"/>
     			</div>
     			<div class="form-group">	
-     			<label for=email>이메일:</label>       			
+     			<label for=email>メールアドレス：</label>       			
       			<input type="text" class="form-control" id="email"  value="${newmember.email}" disabled="disabled"/>
     			</div>
     			<div class="form-group">	
-     			<label for=question>질문:</label>       			
+     			<label for=question>パスワード再設定質問</label>       			
       			<input type="text" class="form-control" id="question"  value="${newmember.question}" disabled="disabled"/>
     			</div>
     			<div class="form-group">	
-     			<label for=answer>답:</label>       			
+     			<label for=answer>パスワード再設定答え</label>       			
       			<input type="text" class="form-control" id="answer"  value="${newmember.answer}" disabled="disabled"/>
     			</div>
 				
 			
 			
-			<button type="button" class="form-control" onclick="location.href='/LectureLinkProject/go_profile_update.do'" >수정하기</button>
-			<button type="button" class="form-control" id="delete" >회원 탈퇴</button>
+			<button type="button" class="form-control" onclick="location.href='/LectureLinkProject/go_profile_update.do'" >修正する</button>
+			<button type="button" class="form-control" id="delete" >退会する</button>
 			
 			</form>
 			

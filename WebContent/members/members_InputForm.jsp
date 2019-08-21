@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>form tag</title>
+	<title>会員登録フォーム</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -74,36 +74,36 @@
 				agree : "required"
 			},
 			messages:{
-				lastname:"성은 필수 입력입니다.",
-				firstname:"이름은 필수 입력입니다.",
-				gender : "성별을 체크해주세요",
-				question : "비밀번호 찾기를 위한 질문을 입력해주세요",
-				answer : "비밀번호 찾기를 위한 질문의 답을 입력해주세요",
-				birth:"생일을 입력해주세요",
+				lastname:"苗字の入力は必須です。",
+				firstname:"名前の入力は必須です。",
+				gender : "性別をチェックしてください。",
+				question : "パスワード再設定質問の入力は必須です。",
+				answer : "パスワード再設定答えの入力は必須です。",
+				birth:"お誕生日の入力は必須です。",
 				phone : {
-					required:"전화번호를 입력해주세요"
+					required:"連絡先の入力は必須です。"
 					
 				},
 				id : {
-					required:"아이디를 입력해주세요",
-					minlength : "아이디는 최소 {0}글자 이상이어야 합니다"
+					required:"IDを入力してください。",
+					minlength : "IDは最小{0}字まで入力できます。"
 				},
 				password : {
-					required : "비밀번호를 입력해주세요",
-					minlength : "비밀번호는 최소 {0}글자 이상이어야 합니다",
-					maxlength : "비밀번호는 최대 {0}글자 이하여야 합니다"
+					required : "パスワードを入力してください。",
+					minlength : "パスワードは最小{0}字まで入力できます。",
+					maxlength : "パスワードは最大{0}字まで入力できます。"
 				},
 				repassword : {
-					required : "비밀번호를 다시 입력해주세요",
-					equalTo : "비밀번호 확인이 잘못되었습니다"					
+					required : "パスワードをもう一度入力してください。",
+					equalTo : "パスワードが一致しません。"				
 				},
 				email :{
-					required : "이메일을 입력해주세요",
-					email : "이메일 형식에 맞지 않습니다"
+					required : "メールアドレスを入力してください。",
+					email : "正しいメールアドレスを入力してください。"
 				},
 				
 				
-				agree : "약관동의에 체크해주세요"
+				agree : "´同義する´項目がチェックされていません。"
 			
 			}
 			
@@ -124,7 +124,7 @@
 				var input_val=$("#id").val();
 				//alert(input_val);
 				if(!input_val){
-					alert("아이디를 입력하세요");
+					alert("IDを入力してください。");
 					return false;
 					
 				}
@@ -158,7 +158,7 @@
 	function noSpaceForm(obj) {
 	    var str_space = /\s/;
 	    if(str_space.exec(obj.value)) {
-	        alert("공백을 사용할 수 없습니다.\n\n공백은 자동으로 지워집니다.");
+	        alert("空白が存在します、\n\n空白は自動的に削除されます。");
 	        obj.focus();
 	        obj.value = obj.value.replace(' ','');
 	        return false;
@@ -167,27 +167,26 @@
 	
 	$(function(){
 		$("#signup").click(function(){
-			alert(idck)
 		if(idck==0 && idckv==document.getElementById("id").value){
 			
-			alert("중복된 아이디입니다.")
+			alert("同じIDが使用中です、")
 		}
 		if(idck==0 && idckv!=document.getElementById("id").value){
-			alert("중복체크는 필수입니다.");
+			alert("重なるIDがあるか確認してください。");
 			
 		}
 			
 		if(idck==2 ){
-			alert("중복체크는 필수입니다.");
+			alert("重なるIDがあるか確認してください。");
 			
 		}
 				
 		if(idck==1 && idckv==document.getElementById("id").value){
-			alert("회원가입을 환영합니다.다시 로그인 해주세요.");
+			alert("会員登録が成功しました、ログインしてください。");
 			$('form').attr({action:'input_account', method:'post'}).submit();
 		}
 		else if(idck==1 && idckv!=document.getElementById("id").value){
-			alert("새로 입력한 아이디 중복체크");
+			alert("入力されたIDに変更がありました、もう一度重なるIDがあるか確認してください。");
 			
 		}
 		
@@ -202,88 +201,89 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-					<c:when  test="${members_info==null && admin==null}">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="go_login">로그인</a>
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_account">회원가입</a>
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
-							<a class="nav-link" href="logout">로그아웃</a>
+							<a class="nav-link" href="logout">ログアウト</a>
 						</li>
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
 						<li class="nav-item">
 						
-							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
 	<div class="container">
 	
 		
 		<form method="post" id="signupForm" action="input_account">
-			<h2>회원등록</h2>
-			id<input type="text"name="id" id="id" class="form-control" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
+			<h2>会員登録</h2>
+			ID：<input type="text"name="id" id="id" class="form-control" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
 			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br /><br />
-			password<input type="password"  class="form-control" name="password" id="password"/><br />
-			비밀번호 확인<input id="repassword" class="form-control" type="password" name="repassword"/><br />
-			성<input type="text" name="lastname" class="form-control"/><br />
-			이름<input type="text" name="firstname" class="form-control"/><br />
-			성별<br />
-				<input type="radio" name="gender" value="남"/>남
-				<input type="radio" name="gender" value="여"/>여<br /><br />
-			전화번호<input type="text" name="phone" class="form-control"/><br />
-			생일<br />
+			パスワード：<input type="password"  class="form-control" name="password" id="password"/><br />
+			パスワードの再確認：<input id="repassword" class="form-control" type="password" name="repassword"/><br />
+			苗字<input type="text" name="lastname" class="form-control"/><br />
+			名前<input type="text" name="firstname" class="form-control"/><br />
+			性別：<br />
+				<input type="radio" name="gender" value="male"/>男
+				<input type="radio" name="gender" value="female"/>女<br /><br />
+			連絡先：<input type="text" name="phone" class="form-control"/><br />
+			生年月日：<br />
 				<input type="date" name="birth"><br /><br />
-			이메일<input type="text" name="email" class="form-control"/><br />
-			질문<select name="question">
-				<option value="가장 친한 친구의 이름은?">가장 친한 친구의 이름은?</option>
-				<option value="초등학교 선생님의 이름은?">초등학교 선생님의 이름은?</option>
-				<option value="당신의 별명은?">당신의 별명은?</option>
+			メールアドレス：<input type="text" name="email" class="form-control"/><br />
+			パスワード再設定質問　<select name="question">
+				<option value="一番親しい友達の名前は？">一番親しい友達の名前は？</option>
+				<option value="小学校の頃の先生の名前は？">小学校の頃の先生の名前は？</option>
+				<option value="あなたのあだ名は？">あなたのあだ名は？</option>
 				</select>
 			<br /><br />
-			답<input type="text" name="answer" class="form-control"/><br />
-			약관 동의합니다.<input id="agree" type="checkbox" name="agree"/><br />
+			パスワード再設定の答え：
+			<input type="text" name="answer" class="form-control"/><br />
+			同義する：<input id="agree" type="checkbox" name="agree"/><br />
 			
 			
-			<input type="reset" value="원래대로"/>
-			<input type="button" id="signup" value="가입하기"  />
+			<input type="reset" value="リセット"/>
+			<input type="button" id="signup" value="会員登録"  />
 		</form>
 	</div>
 	<%@ include file ="/companyLogo.jsp" %>
