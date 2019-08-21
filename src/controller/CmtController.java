@@ -88,8 +88,8 @@ public class CmtController extends HttpServlet {
 
 			req.setAttribute("cmt", resultComment);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm.jsp");
-
+			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtItem.jsp");
+			//RequestDispatcher rd = req.getRequestDispatcher("cmt_list");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_delete")) {
@@ -109,12 +109,16 @@ public class CmtController extends HttpServlet {
 
 			String before_address = req.getHeader("referer");
 			System.out.println("비포어"+before_address);//last
-			int get_Intersection_Info = before_address.indexOf("=");
+			
+			//int get_Intersection_Info = before_address.indexOf("&");
+			int get_Intersection_Info = before_address.indexOf("lecture_no=");
 			System.out.println("겟"+get_Intersection_Info);
+			
 			int lecture_no = Integer
-					.parseInt(before_address.substring(get_Intersection_Info+1, get_Intersection_Info));
+					.parseInt(before_address.substring(get_Intersection_Info+11, get_Intersection_Info+12));
 			System.out.println("렉쳐넘버"+lecture_no);
 
+			
 			int get_lastIndex = before_address.lastIndexOf("=");
 			String get_reqPage = before_address.substring(get_lastIndex + 1);
 
