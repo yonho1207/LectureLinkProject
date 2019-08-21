@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>새로운 강의 넣기</title>
+<title>新しい講義入力フォーム</title>
 <script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -33,74 +33,66 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-						
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-							관리자 메뉴
-						</a>
-						<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
-						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
-					
-						</div>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
-				</c:if>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
 
-	<h2>새로 작성하고자 하는 강의의 정보를 입력해주세요</h2>
-	<form method="post" id="insert_lecture" action="insert_Lecture.admin">
-		강의명 : <input type="text" id="lecture_name" class="form-control" name="lecture_name"><br />
-		강사명 : <input type="text" id="lecture_teacher" class="form-control" name="lecture_teacher"><br />
-		1개월 기준 수강료 : <input type="text" id="price" class="form-control" name="price"><br />
-		교재 가격 : <input type="text" id="text_price" class="form-control" name="text_price"><br />
-		강의 설명 : <textarea type="textbox" id="description" class="form-control" name="description" cols="60" rows="7"></textarea><br />
-		<input type="submit">
+	<form method="post" action="insert_Lecture.admin">
+		講義名： <input type="text" id="lecture_name" name="lecture_name"><br />
+		教師名： <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
+		1ヶ月別の値段： <input type="text" id="price" name="price"><br />
+		教科書の値段： <input type="text" id="text_price" name="text_price"><br />
+		講義に関する説明：<textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
+		<input type="submit" value="入力する">
 	</form>
 	<%@ include file ="/companyLogo.jsp" %>
 </body>

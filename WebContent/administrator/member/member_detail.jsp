@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>会員情報詳細</title>
 <script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -51,14 +51,14 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(function(){
 	$("#delete").click(function(){
-		var con = confirm("정말 탈퇴시키겠습니까?");
+		var con = confirm("本当に退会させますか？");
 		if(con==true){
 		$('form').attr({action:'delete_member', method:'post'}).submit();
-		alert("탈퇴시켰습니다");
+		alert("退会処理が行われました。");
 		}
 		else if(con!=true){
 			
-			alert("취소되었습니다.")
+			alert("キャンセルされました。")
 		}
 	});
 	
@@ -70,94 +70,120 @@ $(function(){
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-						
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-							관리자 메뉴
-						</a>
-						<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
-						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
-					
-						</div>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
-				</c:if>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
+		<br>
+	
+		<div class="container">
+			<c:choose>
+			<c:when test="${members_info!=null}">		
+			  <div class="card" id="card" style="width:250px">
+				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
+				    <div class="card-body">
+				      <h4 class="card-title">${members_info.id}</h4>
+				      <p class="card-text">ようこそお越しくださいました ${members_info.id}様</p>
+				      <a href="go_Attending_Lecture.do" class="btn btn-primary">受講中の講義リスト</a>
+				      <form action="jump_To_Clicked_Lecture" method="post">			      	
+				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
+							<c:forEach var="attending_List" items="${attending_List}">
+								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
+							</c:forEach>   	
+							<input type="submit" value="移動する"> 
+				      	</select>			     
+				      </form>
+				    </div>
+				 
+				  <br>
+		 	 </c:when>
+		 	 <c:when test="${members_info==null}">
+		 	 	 <div class="card" id="card" style="width:250px">
+		 	 		<div class="card-body">
+				      <h4 class="card-title">ようこそお越しくださいました。</h4>
+				      <p class="card-text">ご利用になされるためには <a href="go_login">ログイン</a><br /> または <br /> 
+				      		<a href="go_account">会員登録</a>をお済ませください。</p>
+				    </div>
+				  </div>
+		 	 </c:when>
+			</c:choose>
+		 </div>
 <form action="admin_update" method="post" id="css">
 		
 		<div class="form-group">	
-     			<label for=member_no>회원번호</label> 
+     			<label for=member_no>会員番号</label> 
       			<input type="hidden" name = "member_no" value="${members.member_no}"><br />
       			<input type="text" class="form-control" id="member_no"  value="${members.member_no}" disabled="disabled"/>
     	</div>
 		<input type="hidden" name="id" id="id" value="${members.id}" /><br />
-		아이디<input type="text" class="form-control" name="id" value="${members.id}" disabled="disabled"/><br />
-		비밀번호<input type="text" class="form-control" name="password" value="${members.password}"/><br />
+		ID：<input type="text" class="form-control" name="id" value="${members.id}" disabled="disabled"/><br />
+		パスワード：<input type="text" class="form-control" name="password" value="${members.password}"/><br />
 		
-		성<input type="text" class="form-control" name="lastname" value="${members.lastname}"/><br />
-		이름<input type="text" class="form-control" name="firstname" value="${members.firstname}"/><br />
-		전화번호<input type="text" class="form-control" name="phone" value="${members.phone}"/><br />
-		이메일<input type="text" class="form-control" name="email" value="${members.email}"/><br />
-		질문<select name="question">
+		苗字：<input type="text" class="form-control" name="lastname" value="${members.lastname}"/><br />
+		名前：<input type="text" class="form-control" name="firstname" value="${members.firstname}"/><br />
+		連絡先：<input type="text" class="form-control" name="phone" value="${members.phone}"/><br />
+		メールアドレス：<input type="text" class="form-control" name="email" value="${members.email}"/><br />
+		パスワード再設定質問　　<select name="question">
 				
-				<option value="가장 친한 친구의 이름은?">가장 친한 친구의 이름은?</option>
-				<option value="초등학교 선생님의 이름은?">초등학교 선생님의 이름은?</option>
-				<option value="당신의 별명은?">당신의 별명은?</option>
+				<option value="一番親しい友達の名前は？">一番親しい友達の名前は？</option>
+				<option value="小学校の頃の先生の名前は？">小学校の頃の先生の名前は？</option>
+				<option value="あなたのあだ名は？">あなたのあだ名は？</option>
 			</select><br /><br />
-		답<input type="text" class="form-control" name="answer" value="${members.answer}"/><br />
+		パスワード再設定の答え　<input type="text" class="form-control" name="answer" value="${members.answer}"/><br />
 		
-		<input type="submit" class="btn btn-primary" value="수정">
+		<input type="submit" class="btn btn-primary" value="修正">
 	
 	</form>
 	<form method="post" action="delete_member" id="css">
 	<input type="hidden" name = "id" id="id" value="${members.id}">
-	<button type="button" class="btn btn-primary" id="delete" >회원 탈퇴</button>
+	<button type="button" class="btn btn-primary" id="delete" >退会</button>
 	</form>
 
 </body>
