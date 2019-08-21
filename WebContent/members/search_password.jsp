@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -22,69 +22,70 @@
   </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-					
-						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
-					</li>
-				</c:if>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+				</ul>
+			</nav>
+		<br>
+	
 	
 
 
 	
 	<form action="search_pwd" method="post" id="search_pwd">
-		<h1>비밀번호 찾기</h1>
-		<input type="text" name="id" id="id" placeholder="아이디를 입력해주세요"/><br />
-		<input type="text" name="email" id="email" placeholder="이메일을 입력해주세요"/><br />
-		<input type="text" name="question" id="question" placeholder="비밀번호 찾기 질문을 입력해주세요"/ style="width: 40%;"><br />
-		<input type="text" name="answer" id="answer" placeholder="질문에 대한 답을 입력해주세요"/  style="width: 40%;"><br />
-		<input type="submit" value="제출"/><br />
+		<h1>パスワード再設定</h1>
+		<input type="text" name="id" id="id" placeholder="IDを入力してください"/><br />
+		<input type="text" name="email" id="email" placeholder="E-MAILを入力してください"/><br />
+		<input type="text" name="question" id="question" placeholder="パスワード再設定質問を入力してください"/ style="width: 40%;"><br />
+		<input type="text" name="answer" id="answer" placeholder="パスワード再設定答えを入力してください"/  style="width: 40%;"><br />
+		<input type="submit" value="確定"/><br />
 	</form>
 	${message}
 	<%@ include file ="/companyLogo.jsp" %>

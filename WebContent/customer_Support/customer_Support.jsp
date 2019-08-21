@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>サポートセンター</title>
 <script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -59,57 +59,57 @@
 			<a class="navbar-brand" href="goMain">Logo</a>
 				<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="go_qna">문의 게시판</a>
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_notice">공지사항 게시판</a>
+							<a class="nav-link" href="go_notice">告知フォーム</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
 						</li>
 					<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-					회원 정보 조회
+					マイページ
 				</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-						<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-						<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
 					</div>
 				
 					<c:choose>
 					<c:when  test="${members_info==null && admin==null}">
 						<li class="nav-item">
-							<a class="nav-link" href="go_login">로그인</a>
+							<a class="nav-link" href="go_login">ログイン</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="go_account">회원가입</a>
+							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
-							<a class="nav-link" href="logout">로그아웃</a>
+							<a class="nav-link" href="logout">ログアウト</a>
 						</li>
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
 						<li class="nav-item">
 						
-							<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 					</li>
 				</ul>
 			</nav>
 		<br>
 		
-		<h1 align="center">항상 노력하는 xxx가 되겠습니다</h1>
-		<h3 align="center">찾아오시는 길</h3>
+		<h1 align="center">お客様の力になれるよう努力をする〇〇〇になります。</h1>
+		<h3 align="center">サーポトセンター</h3>
 		<div id="map" style="width:800px; height:300px" ></div>
 
 		<script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPXU0YkRSdjNPeG0wRCZzPWNvbnN1bWVyc2VjcmV0Jng9ZTI-"></script>
@@ -131,22 +131,24 @@
 			   
 			}			 
 			</script>
-		
+		<p align="center"> 東京都中央区日本橋2丁目1-10 <br />
+			柳屋ビル255F<br />
+			交通：東京メトロ銀座線・東西線、都営地下鉄浅草線日本橋駅B-5またはB-7出口方面</p>
 		<div id="customer_Support_Text" align="center">
-			<p style="font-size:x-large;">고객님과 함께하는 서비스를 지향합니다</p>
+			<p style="font-size:x-large;">お客様の隣で支えるサービスを志向します。</p>
 			<div id="phone" align="center">
-				<p style="font-size:xx-large;">전화 번호 : <br />
+				<p style="font-size:xx-large;">  連絡先： <br />
 				123-4567</p> 
 			</div>
 			<div id="businessHours" align="center">
-				<p style="font-size:xx-large;">
-					주말,공휴일 제외<br />
+				<p style="font-size:large;">
+					月~金曜日　ただし国民の祝日、年末年始等当社指定休日を除く<br />
 					09:00 ~ 18:00</p>
 			</div>
 			<div id="contactMail" align="center">
-				<p style="font-size: 20px">메일 주소: aa@aa.aa.com<br />
-					라인 상담 : ID:GLB_Customer_Support<br />
-					상담 시간 : 09:00~18:00</p>
+				<p style="font-size: 15px">メールアドレス: aa@aa.aa.com<br />
+					ラインID； ID:GLB_Customer_Support<br />
+					業務時間： 09:00~18:00</p>
 			</div>
 			
 		</div>

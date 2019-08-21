@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> <!-- 자바기본문 쓰기 -->
 
 <!DOCTYPE html >
 <html>
 <head>
 <meta charset=utf-8>
-<title>공지사항게시판</title>
+<title>告知フォーム</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -41,91 +41,86 @@
 	
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="go_qna">문의 게시판</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="go_notice">공지사항 게시판</a>
-				</li>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
 				
-				<li class="nav-item">
-					<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-				</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_admin">관리자페이지로 이동</a>
-					</li>
-				</c:if>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 
 
 
-<h3>공지사항 게시판</h3>
-			<div class="container">
+<h3>告知フォーム</h3>
+
+		<div class="container">
 			<c:choose>
 			<c:when test="${members_info!=null}">		
 			  <div class="card" id="card" style="width:250px">
 				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
 				    <div class="card-body">
 				      <h4 class="card-title">${members_info.id}</h4>
-				      <p class="card-text">환영합니다 ${members_info.id}님</p>
-				      <a href="go_Attending_Lecture.do" class="btn btn-primary">수강중인 강의 목록으로</a>
+				      <p class="card-text">ようこそお越しくださいました ${members_info.id}様</p>
+				      <a href="go_Attending_Lecture.do" class="btn btn-primary">受講中の講義リスト</a>
 				      <form action="jump_To_Clicked_Lecture" method="post">			      	
 				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
 							<c:forEach var="attending_List" items="${attending_List}">
 								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
 							</c:forEach>   	
-							<input type="submit" value="바로가기"> 
+							<input type="submit" value="移動する"> 
 				      	</select>			     
 				      </form>
 				    </div>
-				 </div>
 				 
 				  <br>
 		 	 </c:when>
 		 	 <c:when test="${members_info==null}">
 		 	 	 <div class="card" id="card" style="width:250px">
 		 	 		<div class="card-body">
-				      <h4 class="card-title">방문해 주셔서 <br /> 감사합니다</h4>
-				      <p class="card-text">이용하시려면 <a href="go_login">로그인</a> 혹은 <br /> 
-				      		<a href="go_account">회원 가입</a>을 해주세요</p>
+				      <h4 class="card-title">ようこそお越しくださいました。</h4>
+				      <p class="card-text">ご利用になされるためには <a href="go_login">ログイン</a><br /> または <br /> 
+				      		<a href="go_account">会員登録</a>をお済ませください。</p>
 				    </div>
 				  </div>
 		 	 </c:when>
@@ -135,8 +130,8 @@
 	<div class="container">
 	<table class="table">
 		<tr>	
-			<td>제목</td>
-			<td>작성일시</td>
+			<td>タイトル</td>
+			<td>日時</td>
 	
 		<tr>	
 			
@@ -151,7 +146,7 @@
 		</div>	
 	
 		<c:if test="${admin != null}">
-		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" style="position: relative; left: 300px">글쓰기</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/notice_inputform'" style="position: relative; left: 300px">書き込む</button>
 		</c:if>
 		
 		<!-- 페이지 처리부분 -->

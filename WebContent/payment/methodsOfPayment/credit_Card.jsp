@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>카드 결제 화면</title>
+<title>クレジットカードでの決済</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -13,72 +13,72 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="goMain">Logo</a>
-			<ul class="navbar-nav">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="goMain">Logo</a>
+				<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_notice">告知フォーム</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_payment.do">決済フォーム </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ </a>
+						</li>
+					<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					マイページ
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+						<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+						<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
+					</div>
+				
+					<c:choose>
+					<c:when  test="${members_info==null && admin==null}">
+						<li class="nav-item">
+							<a class="nav-link" href="go_login">ログイン</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="go_account">会員登録</a>
+						</li>
+					</c:when>
+					<c:when test="${members_info!=null || admin!=null}">
+						<li class="nav-item">
+							<a class="nav-link" href="logout">ログアウト</a>
+						</li>
+					</c:when>
+					</c:choose>
+					<c:if test="${admin!=null && members_info==null}">
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						</li>
+					</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
-					</li>
-				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="#">회원 정보 조회 및 수정</a>
-				</div>
-			
-				<c:choose>
-				<c:when  test="${members_info==null && admin==null}">
-					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
-					</li>
-				</c:when>
-				<c:when test="${members_info!=null || admin!=null}">
-					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
-					</li>
-				</c:when>
-				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
-					<li class="nav-item">
-					
-						<a class="nav-link" href="go_admin.admin">관리자페이지로 이동</a>
-					</li>
-				</c:if>
-					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
-					</li>				
-			</ul>
-		</nav>
-	<br>
+				</ul>
+			</nav>
+		<br>
 	
 
-	<p align="center" style="font-size: 32px;">카드 결제를 선택하셨습니다</p>
+	<p align="center" style="font-size: 32px;">クレジットカードでの決済をお選び頂きました</p>
 		<c:set var="total" value="0"/>
 			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
 				<c:set var="total" value="${total+price.price}"/>
 			</c:forEach>
-		<p align="center" style="font-size: 24px; color: red;">이하의 금액을 확인하여 주십시오</p>
-		<p align="center" style="font-size: 32px;">총액 : &#8361; ${total}</p>
+		<p align="center" style="font-size: 24px; color: red;">以下の金額が正しいかご確認ください。</p>
+		<p align="center" style="font-size: 32px;">総額 : &#165 ${total}</p>
 		<form action="credit_Card_Accept.do"  align="center">
-		<img src="img/payment/icons8-checked-40.png"><input type="submit" value="구매 확정" style="background-color:transparent;  border:0px transparent solid;">
+		<img src="img/payment/icons8-checked-40.png"><input type="submit" value="確定" style="background-color:transparent;  border:0px transparent solid;">
 		</form>
 		
-		<a href="go_payment.do" style="position: relative; left: 660px"><img src="img/payment/shopping-cart.png">결제 화면으로 이동하기</a><br />
+		<a href="go_payment.do" style="position: relative; left: 660px"><img src="img/payment/shopping-cart.png">決済情報入力画面へ</a><br />
 		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

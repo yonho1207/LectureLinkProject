@@ -36,7 +36,7 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 				members.setFirstname(resultSet.getString("firstname"));
 				members.setGender(resultSet.getString("gender"));
 				members.setPhone(resultSet.getString("phone"));
-				members.setBirth(resultSet.getString("birth"));
+				members.setBirth(resultSet.getString("birth").split("\\s")[0]);
 				members.setEmail(resultSet.getString("email"));
 				members.setQuestion(resultSet.getString("question"));
 				members.setAnswer(resultSet.getString("answer"));
@@ -76,7 +76,7 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 			preparedStatement.setString(4, members.getFirstname());
 			preparedStatement.setString(5, members.getGender());
 			preparedStatement.setString(6, members.getPhone());
-			preparedStatement.setString(7, members.getBirth());
+			preparedStatement.setString(7, members.getBirth().split("\\s")[0]);
 			preparedStatement.setString(8, members.getEmail());
 			preparedStatement.setString(9, members.getQuestion());
 			preparedStatement.setString(10, members.getAnswer());
@@ -121,9 +121,35 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 		}
 	}@Override
 	public boolean delete(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_DELETE_SQL);
+			preparedStatement.setString(1,id);
+			
+			int rowCount = preparedStatement.executeUpdate();
+		
+			if(rowCount>0) {
+			result = true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			closeDBObjects(null,preparedStatement,connection);
+			
+		}
+		
+		
+		return result;
+		
+		
 	}
+	
+	
 
 	@Override
 	public List<Members> selectByName(String firstname, String lastname) {
@@ -187,7 +213,7 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 				members.setFirstname(resultSet.getString("firstname"));
 				members.setGender(resultSet.getString("gender"));
 				members.setPhone(resultSet.getString("phone"));
-				members.setBirth(resultSet.getString("birth"));
+				members.setBirth(resultSet.getString("birth").split("\\s")[0]);
 				members.setEmail(resultSet.getString("email"));
 				members.setQuestion(resultSet.getString("question"));
 				members.setAnswer(resultSet.getString("answer"));
@@ -218,7 +244,7 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 			preparedStatement.setString(2,members.getFirstname());
 			preparedStatement.setString(3,members.getGender());
 			preparedStatement.setString(4,members.getPhone());
-			preparedStatement.setString(5,members.getBirth());
+			preparedStatement.setString(5,members.getBirth().split("\\s")[0]);
 			preparedStatement.setString(6,members.getEmail());
 			preparedStatement.setString(7,members.getQuestion());
 			preparedStatement.setString(8,members.getAnswer());
