@@ -89,6 +89,9 @@
 					</c:if>
 					<li class="nav-item">
 						<a class="nav-link" href="go_Customer_Support">サポートセンター </a>
+					</li>
+				</ul>
+			</nav>
 
 
 
@@ -112,7 +115,7 @@
 				      	</select>			     
 				      </form>
 				    </div>
-				 
+				 </div>
 				  <br>
 		 	 </c:when>
 		 	 <c:when test="${members_info==null}">
