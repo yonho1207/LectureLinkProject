@@ -28,7 +28,7 @@ public class MembersController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		process(req,resp);
-		//System.out.println("doGet() 호占쏙옙占�");
+		
 		
 	}
 
@@ -99,7 +99,7 @@ public class MembersController extends HttpServlet{
 					session.setAttribute("admin", members);
 					
 					
-					req.setAttribute("log","占싸깍옙占쏙옙");
+					
 
 					RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 					rd.forward(req, resp);
@@ -118,7 +118,7 @@ public class MembersController extends HttpServlet{
 					attending_List = pdao.attending_Lecture(members.getMember_no());
 					session.setAttribute("attending_List", attending_List);
 					session.setAttribute("members_info", members);
-					req.setAttribute("log","占싸깍옙占쏙옙");
+					
 
 				RequestDispatcher rd = req.getRequestDispatcher("/goMain");
 				rd.forward(req, resp);
@@ -126,7 +126,7 @@ public class MembersController extends HttpServlet{
 			}else{
 				
 				
-				req.setAttribute("message", "아이디와 비밀번호를 다시 확인해주세요");
+				req.setAttribute("message", "IDとパスワードをもう一度お確かめください");
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/members/login.jsp");
 				rd.forward(req, resp);
