@@ -95,15 +95,7 @@
 				 
 				  <br>
 		 	 </c:when>
-		 	 <c:when test="${members_info==null}">
-		 	 	 <div class="card" id="card" style="width:250px">
-		 	 		<div class="card-body">
-				      <h4 class="card-title">ようこそお越しくださいました。</h4>
-				      <p class="card-text">ご利用になされるためには <a href="go_login">ログイン</a><br /> または <br /> 
-				      		<a href="go_account">会員登録</a>をお済ませください。</p>
-				    </div>
-				  </div>
-		 	 </c:when>
+		 	 
 			</c:choose>
 		 </div>
 
@@ -112,7 +104,9 @@
 <input type="text"name="id" id="id" placeholder="IDを入力してください。"/>
 <input type="submit" value="検索"/>
 </form>
+<div class="form-group">
 <table>
+	
 			<tr>
 				<td>会員番号</td>
 				<td>ID</td>
@@ -147,5 +141,6 @@
 			
 			
 		</table>
+		</div>
 </body>
 </html>
