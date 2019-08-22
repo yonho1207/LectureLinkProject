@@ -109,7 +109,7 @@ $(function(){
 
 	
 			<form method="post" action="delete_member" id="css">
-			<h2>회원정보</h2>
+			<h2>登録済みのお客様の情報は以下の通りです。</h2>
 				<div class="form-group">	
      			<label for=member_no>会員番号：</label> 
       			<input type="hidden" name = "member_no" value="${newmember.member_no}"><br />

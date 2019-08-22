@@ -142,27 +142,6 @@
 		 		私共が合格までの道をしっかりサポートさせて頂きます。<br /></p>
 		 	</div>
 		 </div><br />
-		 
-		<h3>新しい告知に必ず目を通してくださいませ。</h3>
-	 	<table class="table table-striped" id="notice_Table" class="table" style="table-layout: fixed;">
-			<thead>
-				<tr>	
-					<td>タイトル</td>
-					<td>作成者</td>
-					<td>内容</td>
-					<td>日時</td>				
-				</tr>
-			</thead>	
-			<c:forEach var="qna" items="${qnaList}" varStatus="status" end="1">				
-					<tr> 
-						<td>${qna.qna_title}</td>
-						<td>${qna.id}</td>
-						<td style="width:50%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"	>${qna.qna_con}</td>
-						<td>${qna.qna_date}</td>
-					</tr><br />			
-			</c:forEach>
-		</table>
-			
 
 </body>
 </html>

@@ -11,6 +11,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<style type="text/css">
+	        #card{
+	            position: fixed;
+	              right: 0;
+	        }
+        </style>
+
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -115,7 +122,7 @@
 			お買い上げになった日時：${attending_List.payment_date}<br />
 			満了日： ${attending_List.period}<hr />
 		</c:forEach><br />
-		<h3 style="position: relative; left: 200px">以上の講義を受講なされています、ご利用いただき誠にありがとうございました。</h3>
+		<h3 style="position: relative; right: 100px">以上の講義を受講なされています、ご利用いただき誠にありがとうございました。</h3>
 	</ul>
 	<a href="goMain" style="position: relative; left: 750px"><img src="img/payment/home-location.png">メインページ</a>	
 	<%@ include file ="/companyLogo.jsp" %>

@@ -104,7 +104,7 @@ public class Lecture_Controller extends HttpServlet {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
 			req.setAttribute("selected_Lecture", selected_Lecture);
-			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
+			rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");
 			
 			/*CmtDAO dao = new CmtDAOImpl();
 			int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
@@ -118,7 +118,7 @@ public class Lecture_Controller extends HttpServlet {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
 			req.setAttribute("selected_Lecture", selected_Lecture);
-			rd = req.getRequestDispatcher("lecture/lecture_Detail/test_Detail.jsp");
+			rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("get_Price")) {
 			int selectedNumber = Integer.parseInt(req.getParameter("selectedNumber"));
