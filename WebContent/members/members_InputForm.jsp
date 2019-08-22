@@ -182,7 +182,7 @@
 		}
 				
 		if(idck==1 && idckv==document.getElementById("id").value){
-			alert("会員登録が成功しました、ログインしてください。");
+			
 			$('form').attr({action:'input_account', method:'post'}).submit();
 		}
 		else if(idck==1 && idckv!=document.getElementById("id").value){
@@ -264,7 +264,7 @@
 		<form method="post" id="signupForm" action="input_account">
 			<h2>会員登録</h2>
 			ID：<input type="text"name="id" id="id" class="form-control" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
-			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br /><br />
+			<input type="button" id="checkid" value="IDチェック"/><span class="console"></span>	<br /><br />
 			パスワード：<input type="password"  class="form-control" name="password" id="password"/><br />
 			パスワードの再確認：<input id="repassword" class="form-control" type="password" name="repassword"/><br />
 			苗字<input type="text" name="lastname" class="form-control"/><br />
