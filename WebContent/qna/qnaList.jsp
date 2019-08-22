@@ -34,9 +34,7 @@
          overflow-y:auto;
          }
         
-         #notice_Table{
-         	width:75%;
-         }
+
     </style>
   
 </head>
@@ -94,7 +92,7 @@
 			</nav>
 		<br>
 	
-<h3>お問い合わせフォーム</h3>
+<h1>お問い合わせフォーム</h1>
 			<div class="container">
 			<c:choose>
 			<c:when test="${members_info!=null}">		
@@ -109,7 +107,7 @@
 							<c:forEach var="attending_List" items="${attending_List}">
 								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
 							</c:forEach>   	
-							<input type="submit" value="바로가기"> 
+							<input type="submit" value="移動する"> 
 				      	</select>			     
 				      </form>
 				    </div>
@@ -128,7 +126,7 @@
 		 	 </c:when>
 			</c:choose>
 		 </div>
-
+	<hr>
 	<div class="container">
 	<table class="table">
 		<tr>	
@@ -136,9 +134,7 @@
 			<td>作成者</td>
 			<td>閲覧数</td>
 			<td>日時</td>
-	
 		<tr>	
-			
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
 					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</a></td>
@@ -147,7 +143,7 @@
 					<td>${qna.qna_date}</td>
 				</tr>
 			</c:forEach>
-
+			
 			</table>	
 		</div>	
 		

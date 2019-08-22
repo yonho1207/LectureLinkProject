@@ -158,6 +158,6 @@
 			</c:forEach>
 		</table>
 			
-
+		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

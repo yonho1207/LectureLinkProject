@@ -100,9 +100,9 @@
 	
 	<c:if test="${members_info.id == qna.id}">
 	<div class="form-group">
-  	<input type="submit"  class="btn btn-primary" value="수정">
+  	<input type="submit"  class="btn btn-primary" value="修正する">
   	
-  	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna.qna_no}">삭제</a>
+  	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna.qna_no}">削除する</a>
   	</div>
  	</c:if>
  	</form>
