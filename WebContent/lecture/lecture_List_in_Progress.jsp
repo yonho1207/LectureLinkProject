@@ -20,7 +20,7 @@
 			<p style="font-size: x-large;">{{= lecture_name}}<br />
 			{{= lecture_teacher}}<br />
 			{{= description}}<br /></p>
-			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/cmt_Fom1?reqPage=1'" >講義詳細</button></p>
+			<p style="position: relative; left: 300px; bottom: 120px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_cmt_Fom?lecture_no={{= lecture_no}}&reqPage=1'" >講義詳細</button></p>
 			<p style="position: relative; left: 300px; bottom: 100px;"><button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/go_Lecture_attend.do?lecture_no={{= lecture_no}}'" >講義ページへ</button></p>
 		</li>
 	</script>

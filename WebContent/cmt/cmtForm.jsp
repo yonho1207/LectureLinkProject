@@ -45,7 +45,7 @@
 		{{/if}}	
 
  		글번호 :{{= cmt_no}}
-		강의번호 : {{=lecture_no}} 
+		강의번호 : {{= lecture_no}} 
 		작성자 : {{= id}}
 		내용: {{= cmt_con}}
 		등록일자 : {{= cmt_date}}
@@ -279,8 +279,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
    		 <img src="img/java_logo_img.jpg" alt="이미지 실패" class="mr-3 mt-3 rounded-circle" style="width:160px;">
    		 <div class="media-body">
       <h3><i>${lecture.lecture_teacher}</i></h3><br >
-      <p><h3>${lecture.description}</h3></p>
-      <p></p>          
+      <p>${lecture.description}</p>
+	<p><h4>가격:${lecture.price}</h4></p>       
     </div>
   	</div>
 	</div>
@@ -339,23 +339,24 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<c:forEach var="cmtlists" items="${cmtlists}">
 		<hr>
 		<c:if test="${cmtlists.rating==1}">
-			<img src="img/score_one.jpg" width="80" height="20">
+			별점:<img src="img/score_one.jpg" width="80" height="20">
 		</c:if>		
 		<c:if test="${cmtlists.rating==2}">
-			<img src="img/score_two.jpg" width="80" height="20">
+			별점:<img src="img/score_two.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==3}">
-			<img src="img/score_three.jpg" width="80" height="20">
+			별점:<img src="img/score_three.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==4}">
-			<img src="img/score_four.jpg" width="80" height="20">
+			별점:<img src="img/score_four.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==5}">
-			<img src="img/score_five.jpg" width="80" height="20">
+			별점:<img src="img/score_five.jpg" width="80" height="20">
 		</c:if>	
 		
-		별점 :${cmtlists.rating} 작성자 :${cmtlists.id} 
-		내용 :${cmtlists.cmt_con} 등록일자 :${cmtlists.cmt_date}
+		 작성자 :${cmtlists.id} 
+		내용 :${cmtlists.cmt_con} 
+		등록일자 :${cmtlists.cmt_date}
 		<br >
 
 	</c:forEach>
