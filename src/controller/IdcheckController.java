@@ -52,10 +52,10 @@ public class IdcheckController extends HttpServlet{
 				
 				if(cnt>0) {
 					
-					req.setAttribute("message","Áßº¹µÈ ¾ÆÀÌµğÀÔ´Ï´Ù");
+					req.setAttribute("message","é‡ãªã‚‹IDãŒå­˜åœ¨ã—ã¾ã™ã€‚");
 				}else if(cnt<1) {
 					
-					req.setAttribute("message","»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù");
+					req.setAttribute("message","ä½¿ç”¨å¯èƒ½ãªIDã§ã™ã€‚");
 				}
 				
 			
@@ -94,7 +94,7 @@ public class IdcheckController extends HttpServlet{
 				}else{
 					
 					
-					req.setAttribute("message", "ÇØ´çÇÏ´Â È¸¿øÀÌ ¾ø½À´Ï´Ù.");
+					req.setAttribute("message", "æ¡ä»¶ã«åˆã£ãŸä¼šå“¡ãŒã„ã¾ã›ã‚“ã€‚");
 					
 					RequestDispatcher rd = req.getRequestDispatcher("/members/search_password.jsp");
 					rd.forward(req, resp);

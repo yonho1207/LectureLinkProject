@@ -167,6 +167,10 @@
 	
 	$(function(){
 		$("#signup").click(function(){
+<<<<<<< HEAD
+			
+=======
+>>>>>>> 368461ff56f070408468486e5bb94271da07c9fb
 		if(idck==0 && idckv==document.getElementById("id").value){
 			
 			alert("同じIDが使用中です、")
@@ -182,7 +186,7 @@
 		}
 				
 		if(idck==1 && idckv==document.getElementById("id").value){
-			
+			alert("会員登録が成功しました、ログインしてください。");
 			$('form').attr({action:'input_account', method:'post'}).submit();
 		}
 		else if(idck==1 && idckv!=document.getElementById("id").value){
@@ -242,14 +246,9 @@
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
-						<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-							管理者メニュー
-						</a>
-						<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
-						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>						
-						</div>
+						<li class="nav-item">
+						
+							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
@@ -264,7 +263,7 @@
 		<form method="post" id="signupForm" action="input_account">
 			<h2>会員登録</h2>
 			ID：<input type="text"name="id" id="id" class="form-control" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"/>
-			<input type="button" id="checkid" value="IDチェック"/><span class="console"></span>	<br /><br />
+			<input type="button" id="checkid" value="중복검사"/><span class="console"></span>	<br /><br />
 			パスワード：<input type="password"  class="form-control" name="password" id="password"/><br />
 			パスワードの再確認：<input id="repassword" class="form-control" type="password" name="repassword"/><br />
 			苗字<input type="text" name="lastname" class="form-control"/><br />

@@ -83,9 +83,14 @@
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
-						<li class="nav-item">
-						
-							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							管理者メニュー
+						</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>						
+						</div>
 						</li>
 					</c:if>
 					<li class="nav-item">

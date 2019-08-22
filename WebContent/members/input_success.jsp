@@ -1,16 +1,45 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>クレジットカードでの決済</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>会員リスト</title>
+<script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<style type="text/css">
+
+.button5 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #555555;
+
+  width:100px;
+
+}
+
+ 
+
+.button5:hover {
+
+  background-color: #555555;
+
+  color: white;
+
+}
+
+</style>
+
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -70,20 +99,25 @@
 				</ul>
 			</nav>
 		<br>
-	
+	<div style="margin-top:150px;">
 
-	<p align="center" style="font-size: 32px;">クレジットカードでの決済をお選び頂きました</p>
-		<c:set var="total" value="0"/>
-			<c:forEach var="price" items="${purchase_Basket}" varStatus="st">				
-				<c:set var="total" value="${total+price.price}"/>
-			</c:forEach>
-		<p align="center" style="font-size: 24px; color: red;">以下の金額が正しいかご確認ください。</p>
-		<p align="center" style="font-size: 32px;">総額 : &#165 ${total}</p>
-		<form action="credit_Card_Accept.do"  align="center">
-		<img src="img/payment/icons8-checked-40.png"><input type="submit" value="確定" style="background-color:transparent;  border:0px transparent solid;">
-		</form>
+		<fieldset style="width:20%;text-align:center;margin:auto;width:50%">
+
+			<legend>会員登録</legend>
+
+			
+
+				<h4>会員登録完了しました。</h4>
+
+			<hr>
+
+				<a href="index.jsp"><button class="button button5">メインページへ</button></a>
+
+				<a href="/LectureLinkProject/go_login"><button class="button button5">ログインページへ</button></a>
+
+		</fieldset>
+
+	</div>
 		
-		<a href="go_payment.do" style="position: relative; left: 660px"><img src="img/payment/shopping-cart.png">決済情報入力画面へ</a><br />
-		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

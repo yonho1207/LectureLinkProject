@@ -5,19 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>パスワード再設定フォーム</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <style type="text/css">
+  	
+  	#search_pwd{background-color:white; color: black; }
   	#search_pwd{
-  		font-size: xx-large;
-  		position: relative;
-  		left: 200px;  	
- 	
-  	}
+     
+    margin:auto;
+    padding:20px;
+    width:500px;
+    background-color:#EEEFF1;
+    border-radius:5px;
+     }
   
   </style>
 </head>
@@ -63,9 +67,14 @@
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
-						<li class="nav-item">
-						
-							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							管理者メニュー
+						</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>						
+						</div>
 						</li>
 					</c:if>
 					<li class="nav-item">
@@ -81,10 +90,10 @@
 	
 	<form action="search_pwd" method="post" id="search_pwd">
 		<h1>パスワード再設定</h1>
-		<input type="text" name="id" id="id" placeholder="IDを入力してください"/><br />
-		<input type="text" name="email" id="email" placeholder="E-MAILを入力してください"/><br />
-		<input type="text" name="question" id="question" placeholder="パスワード再設定質問を入力してください"/ style="width: 40%;"><br />
-		<input type="text" name="answer" id="answer" placeholder="パスワード再設定答えを入力してください"/  style="width: 40%;"><br />
+		<input type="text" name="id" class="form-control" id="id" placeholder="IDを入力してください"/><br />
+		<input type="text" name="email" class="form-control" id="email" placeholder="E-MAILを入力してください"/><br />
+		<input type="text" name="question" class="form-control" id="question" placeholder="パスワード再設定質問を入力してください"/ style="width: 40%;"><br />
+		<input type="text" name="answer" class="form-control" id="answer" placeholder="パスワード再設定答えを入力してください"/  style="width: 40%;"><br />
 		<input type="submit" value="確定"/><br />
 	</form>
 	${message}
