@@ -14,6 +14,32 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<style type="text/css">
+
+.button5 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #555555;
+
+  width:100px;
+
+}
+
+ 
+
+.button5:hover {
+
+  background-color: #555555;
+
+  color: white;
+
+}
+
+</style>
+
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -73,74 +99,25 @@
 				</ul>
 			</nav>
 		<br>
-	
-		<div class="container">
-			<c:choose>
-			<c:when test="${members_info!=null}">		
-			  <div class="card" id="card" style="width:250px">
-				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
-				    <div class="card-body">
-				      <h4 class="card-title">${members_info.id}</h4>
-				      <p class="card-text">ようこそお越しくださいました ${members_info.id}様</p>
-				      <a href="go_Attending_Lecture.do" class="btn btn-primary">受講中の講義リスト</a>
-				      <form action="jump_To_Clicked_Lecture" method="post">			      	
-				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
-							<c:forEach var="attending_List" items="${attending_List}">
-								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
-							</c:forEach>   	
-							<input type="submit" value="移動する"> 
-				      	</select>			     
-				      </form>
-				    </div>
-				 
-				  <br>
-		 	 </c:when>
-		 	 
-			</c:choose>
-		 </div>
+	<div style="margin-top:150px;">
 
-メンバーリスト
-<form method="post" action="search_member">
-<input type="text"name="id" id="id" placeholder="IDを入力してください。"/>
-<input type="submit" value="検索"/>
-</form>
-<div class="form-group">
-<table>
-	
-			<tr>
-				<td>会員番号</td>
-				<td>ID</td>
-				<td>パスワード</td>
-				<td>苗字</td>
-				<td>名前</td>
-				<td>性別</td>
-				<td>連絡先</td>
-				<td>生年月日</td>
-				<td>メールアドレス</td>
-				<td>パスワード再設定質問を入力してください</td>
-				<td>パスワード再設定の答えを入力してください</td>
-				
-				<!-- <td>상세보기</td> -->
-			</tr>
-			<c:forEach var="member" items="${members}">
-				<tr>
-				<td>${member.member_no}</td>
-				<td><a href="member_detail?id=${member.id}">${member.id}</td>
-				<td>${member.password}</td>
-				<td>${member.lastname}</td>
-				<td>${member.firstname}</td>
-				<td>${member.gender}</td>
-				<td>${member.phone}</td>
-				<td>${member.birth}</td>
-				<td>${member.email}</td>
-				<td>${member.question}</td>
-				<td>${member.answer}</td>
+		<fieldset style="width:20%;text-align:center;margin:auto;width:50%">
+
+			<legend>会員登録</legend>
+
 			
-				</tr>
-			</c:forEach>
-			
-			
-		</table>
-		</div>
+
+				<h4>会員登録完了しました。</h4>
+
+			<hr>
+
+				<a href="index.jsp"><button class="button button5">メインページへ</button></a>
+
+				<a href="/LectureLinkProject/go_login"><button class="button button5">ログインページへ</button></a>
+
+		</fieldset>
+
+	</div>
+		
 </body>
 </html>

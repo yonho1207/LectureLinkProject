@@ -142,6 +142,6 @@
 		 		私共が合格までの道をしっかりサポートさせて頂きます。<br /></p>
 		 	</div>
 		 </div><br />
-
+		<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

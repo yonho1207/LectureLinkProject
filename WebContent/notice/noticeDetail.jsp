@@ -94,12 +94,13 @@
     
     <div class="form-group">
       <label for="notice_title">タイトル：</label>
-      <input type="hidden" name = "notice_no" value="${notice.notice_title}">
+      <input type="hidden" name = "notice_title" value="${notice.notice_title}">
       <input type="text" class="form-control" name = "notice_title" id="notice_title" value="${notice.notice_title}" disabled="disabled"/>
     </div>
     
  	<div class="form-group">
-  		<input type="hidden" name = "notice_no" value="${notice.notice_con}">
+ 		<label for="notice_con">内容：</label>
+  		<input type="hidden" name = "notice_con" value="${notice.notice_con}">
   		<textarea class="form-control" rows="5" name = "notice_con" id="notice_con" disabled="disabled">${notice.notice_con}</textarea>
 	</div>
 	</c:when>

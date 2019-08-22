@@ -24,7 +24,7 @@
 	<div class="container">
 	<li data-num="{{= cmt_no}}" class="cmt_item"> 
 	
-	별점 : {{if rating==1}}
+レーティング :{{if rating==1}}
 			<img src="img/score_one.jpg" width="80" height="20">
 		 {{/if}}
 
@@ -44,11 +44,11 @@
 			<img src="img/score_five.jpg" width="80" height="20">
 		{{/if}}	
 
- 		글번호 :{{= cmt_no}}
-		강의번호 : {{= lecture_no}} 
-		작성자 : {{= id}}
-		내용: {{= cmt_con}}
-		등록일자 : {{= cmt_date}}
+ 		Q&A番号 :{{= cmt_no}}
+		講義番号 :{{= lecture_no}} 
+		作成者 : {{= id}}
+		内容: {{= cmt_con}}
+		日時 : {{= cmt_date}}
 
 		{{if chk == true}}
 			<input type="button" class="delete_btn" value="삭제">
@@ -101,7 +101,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 	});
 		
 	}).fail(function(){
-		alert("댓글 목록을 불러오는데 실패했습니다. 잠시후에 다시 시도해 주세요.");
+		alert("通信エラーが発生しました。しばらく時間をおいてから再度お試してください。");
 	});
 		
 	$("#cmt_form").submit(function(){
@@ -109,14 +109,14 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		
 		if($(':radio[name="star-input"]:checked').length < 1){
 		    
-			alert('별점을 선택해주세요');                        
+			alert('レーティングをチェックしてください。');                        
 			star1.focus();
 		    event.preventDefault();
 		}
 
 		if(!$("#cmt_con").val()){
 		
-			alert("내용을 입력해주세요.");
+			alert("内容を入力してください。");
 			return false;
 		
 		} 
@@ -142,7 +142,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
     					
-			alert("댓글 추가 성공");
 			$("#cmt_con").val("");
 				
 		}else{
@@ -157,7 +156,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 });	
 	$(document).on('click','.delete_btn',function(){
 	
-		if(confirm("정말 댓글을 삭제하시겠습니까")){
+		if(confirm("本当に削除しますか？")){
 		
 			var num = $(this).parent("li").attr("data-num");
 			var target= $(this).parents(".cmt_item");
@@ -167,7 +166,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			$.post("cmt_delete",{"cmt_no":num},function(xml){
 			
 			}).fail(function(){
-				alert("삭제 실패");
+				alert("削除失敗");
 			});
 		}
 	});		
@@ -213,74 +212,70 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		<a class="navbar-brand" href="goMain">Logo</a>
 			<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="go_qna">문의 게시판</a>
+						<a class="nav-link" href="go_qna">お問い合わせフォーム</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_notice">공지사항 게시판</a>
+						<a class="nav-link" href="go_notice">告知フォーム</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_payment.do">결제 화면으로 </a>
+						<a class="nav-link" href="go_payment.do">決済フォーム </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Lecture_List?reqPage=1">강의 목록보기 </a>
+						<a class="nav-link" href="go_Lecture_List?reqPage=1">講義リストへ  </a>
 					</li>
 				<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				회원 정보 조회
-			</a>
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">マイページ</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="go_Attending_Lecture.do">수강중인 강의 목록</a>
-					<a class="dropdown-item" href="go_Attended_Lecture.do">수강했던 강의 목록</a>
-					<a class="dropdown-item" href="go_Member_Profile.do">회원 정보 조회 및 수정</a>
+					<a class="dropdown-item" href="go_Attending_Lecture.do">受講中の講義リストへ</a>
+					<a class="dropdown-item" href="go_Attended_Lecture.do">受講済みの講義リスト</a>
+					<a class="dropdown-item" href="go_Member_Profile.do">お客様の情報閲覧・修正</a>
 				</div>
 			
 				<c:choose>
 				<c:when  test="${members_info==null && admin==null}">
 					<li class="nav-item">
-						<a class="nav-link" href="go_login">로그인</a>
+						<a class="nav-link" href="go_login">ログイン</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="go_account">회원가입</a>
+						<a class="nav-link" href="go_account">会員登録<</a>
 					</li>
 				</c:when>
 				<c:when test="${members_info!=null || admin!=null}">
 					<li class="nav-item">
-						<a class="nav-link" href="logout">로그아웃</a>
+						<a class="nav-link" href="logout">ログアウト</a>
 					</li>
 				</c:when>
 				</c:choose>
 				<c:if test="${admin!=null && members_info==null}">
 					<li class="nav-item">
 						
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-							관리자 메뉴
-						</a>
+						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">管理者ページへ</a>
 						<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
-						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
+						<a class="dropdown-item" href="admin_memberList.admin">管理者ページへ</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義登録ページへ</a>
 					
 						</div>
 						</li>
 				</c:if>
 					<li class="nav-item">
-						<a class="nav-link" href="go_Customer_Support">고객 센터 </a>
+						<a class="nav-link" href="go_Customer_Support">サポートセンター  </a>
 					</li>				
 			</ul>
 		</nav>
 	<br>
 
-	<h2>인터넷 강의 상세 게시판</h2>
+	<h2>講義詳細 ページ</h2>
 	<hr>
 	<div class="container mt-3">
-  		<h2>lecture</h2>
+  		<h2>講義詳細</h2>
   			
     	<h2>${lecture.lecture_name}</h2>
   		<div class="media border p-3">
-   		 <img src="img/java_logo_img.jpg" alt="이미지 실패" class="mr-3 mt-3 rounded-circle" style="width:160px;">
+   		 <img src="img/java_logo_img.jpg" alt="失敗" class="mr-3 mt-3 rounded-circle" style="width:160px;">
    		 <div class="media-body">
-      <h3><i>${lecture.lecture_teacher}</i></h3><br >
+      先生：<h3><i>${lecture.lecture_teacher}</i></h3><br >
       <p>${lecture.description}</p>
-	<p><h4>가격:${lecture.price}</h4></p>       
+	<p><h4>プライス:${lecture.price}</h4></p>       
     </div>
   	</div>
 	</div>
@@ -290,14 +285,14 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<div class="container">
 	<form id="cmt_form" >
 		 <input type="hidden" name = "member_no" value="${members_info.member_no}">
-		 회원번호<input type="text"  name="member_no" id="member_no" value="${members_info.member_no}" disabled="disabled" />
+		 会員番号：<input type="text"  name="member_no" id="member_no" value="${members_info.member_no}" disabled="disabled" />
 		 
 		  <input type="hidden" name = "lecture_no"  id="lecture_no" value="${lecture.lecture_no}"/>
 		
 		<input type="hidden" name = "id" value="${members_info.id}">
 		id<input type="text"  name="id" id="id" value="${members_info.id}" disabled="disabled" />
 		
-		코멘트 <input type="text"  name="cmt_con" id="cmt_con" />
+		コメント： <input type="text"  name="cmt_con" id="cmt_con" />
 		
 	<span class="star-input" >
 		<span class="input">
@@ -315,7 +310,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	</span>
 		<br >
 		<br >	
-		<button type="submit"  class="btn btn-primary btn-block" row="50px">저장하기</button>
+		<button type="submit"  class="btn btn-primary btn-block" row="50px">セーブする</button>
 	</form>
 	</div>
 	</c:if>
@@ -324,7 +319,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<br >
 	
 	<div class="container">
-	<h2>최신 댓글</h2>
+	<h2>最新　 コメント</h2>
 	</div>
 	<hr >
 	<ul id="cmt_list">
@@ -333,30 +328,30 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 
 	<div class="container">
-	<button data-toggle="collapse"  id="list_btn" data-target="#lecture_no_cmt" class="form-control">댓글 더보기</button>
+	<button data-toggle="collapse"  id="list_btn" data-target="#lecture_no_cmt" class="form-control">コメントmore</button>
 	<div id="lecture_no_cmt" class="collapse">
 		
 	<c:forEach var="cmtlists" items="${cmtlists}">
 		<hr>
 		<c:if test="${cmtlists.rating==1}">
-			별점:<img src="img/score_one.jpg" width="80" height="20">
+			レーティング :<img src="img/score_one.jpg" width="80" height="20">
 		</c:if>		
 		<c:if test="${cmtlists.rating==2}">
-			별점:<img src="img/score_two.jpg" width="80" height="20">
+			レーティング :<img src="img/score_two.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==3}">
-			별점:<img src="img/score_three.jpg" width="80" height="20">
+			レーティング :<img src="img/score_three.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==4}">
-			별점:<img src="img/score_four.jpg" width="80" height="20">
+			レーティング :<img src="img/score_four.jpg" width="80" height="20">
 		</c:if>	
 		<c:if test="${cmtlists.rating==5}">
-			별점:<img src="img/score_five.jpg" width="80" height="20">
+			レーティング :<img src="img/score_five.jpg" width="80" height="20">
 		</c:if>	
 		
-		 작성자 :${cmtlists.id} 
-		내용 :${cmtlists.cmt_con} 
-		등록일자 :${cmtlists.cmt_date}
+		 作成者:${cmtlists.id} 
+		内容 :${cmtlists.cmt_con} 
+		日時:${cmtlists.cmt_date}
 		<br >
 
 	</c:forEach>

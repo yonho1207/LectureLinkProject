@@ -108,16 +108,11 @@ public class CmtController extends HttpServlet {
 			HttpSession session = req.getSession();
 
 			String before_address = req.getHeader("referer");
-			System.out.println("비포어"+before_address);//last
 			
-			//int get_Intersection_Info = before_address.indexOf("&");
 			int get_Intersection_Info = before_address.indexOf("lecture_no=");
-			System.out.println("겟"+get_Intersection_Info);
 			
 			int lecture_no = Integer
 					.parseInt(before_address.substring(get_Intersection_Info+11, get_Intersection_Info+12));
-			System.out.println("렉쳐넘버"+lecture_no);
-
 			
 			int get_lastIndex = before_address.lastIndexOf("=");
 			String get_reqPage = before_address.substring(get_lastIndex + 1);
@@ -128,11 +123,10 @@ public class CmtController extends HttpServlet {
 			PageManager pm = new PageManager(Integer.parseInt(get_reqPage));
 
 			Lecture lecture = daol.select_Lecture_No(lecture_no);
-
+			List<Cmt> cmtlists = dao.selectByLecture_no(lecture_no);
+			
 			List<Cmt> cmtList = dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
 					pm.getPageRowResult().getRowEndNumber(), lecture_no);
-
-			List<Cmt> cmtlists = dao.selectByLecture_no(lecture_no);
 
 			session.setAttribute("cmtList", cmtList);
 			session.setAttribute("lecture", lecture);

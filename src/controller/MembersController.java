@@ -70,7 +70,7 @@ public class MembersController extends HttpServlet{
 			dao.insert(members);
 			
 			
-			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/members/input_success.jsp");
 			rd.forward(req, resp);
 		}
 		else if (action.equals("go_login")) {

@@ -100,7 +100,7 @@
 
 
 
-<h3>告知フォーム</h3>
+<h1>告知フォーム</h1>
 
 		<div class="container">
 			<c:choose>
@@ -140,9 +140,7 @@
 		<tr>	
 			<td>タイトル</td>
 			<td>日時</td>
-	
 		<tr>	
-			
 			<c:forEach var="notice" items="${noticeList}">
 				<tr>
 					<td><a href="notice_detail?notice_no=${notice.notice_no}">${notice.notice_title}</a></td>
