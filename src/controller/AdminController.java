@@ -17,7 +17,8 @@ import dao.MembersDAOImpl;
 import model.Members;
 
 
-@WebServlet(name="AdminController",urlPatterns = {"/go_admin.admin","/admin_memberList.admin","/member_detail","/admin_update","/search_member"})
+@WebServlet(name="AdminController",urlPatterns = {"/go_admin.admin","/admin_memberList.admin","/member_detail","/admin_update",
+		"/search_member", "/get_CustomerInfo.admin"})
 public class AdminController extends HttpServlet{
 
 	@Override
@@ -110,6 +111,10 @@ public class AdminController extends HttpServlet{
 				System.out.println(memberList);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/administrator/member/search_member_result.jsp");
+				rd.forward(req, resp);
+			}else if(action.equals("get_CustomerInfo.admin")) {
+
+				RequestDispatcher rd = req.getRequestDispatcher("go_Cutomer_Information.admin");
 				rd.forward(req, resp);
 			}
 			
