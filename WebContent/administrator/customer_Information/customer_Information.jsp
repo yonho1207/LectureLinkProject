@@ -16,7 +16,8 @@
 </head>
 <body>
   
- 	<h1>성별</h1>
+ 	<h1>性別</h1>
+ 	<p>単位：％</p>
 		<div class="container" > 
 		  <div class="progress" id="progress" style="font-size: large; height: 40px"> 
 				여: <div class="progress-bar" style="width:${female_Rating}%">${female_Rating}</div>
@@ -25,14 +26,15 @@
 				남: <div class="progress-bar bg-success" style="width:${male_Rating}%">${male_Rating}</div>
 		   </div>
 	  	</div>
-	<h1>나이</h1>
+	<h1>年代</h1>
+	<p>単位：名</p>
 		<div class="container" > 
-		  <div class="progress" id="progress" style="font-size: large; height: 40px"> 
-				여: <div class="progress-bar" style="width:${female_Rating}%">${female_Rating}</div>
-		   </div>
-		   <div class="progress" style="font-size: large; height: 40px">
-				남: <div class="progress-bar bg-success" style="width:${male_Rating}%">${male_Rating}</div>
-		   </div>
-	  	</div>
+			<c:forEach var="ageGroup" items="${ageGroup}">
+			  	<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+					${ageGroup.ageGroup}代: <div class="progress-bar" style="width:${ageGroup.ageGroupCount}%">${ageGroup.ageGroupCount}</div>
+				</div>
+			</c:forEach>
+		</div>
+
 </body>
 </html>

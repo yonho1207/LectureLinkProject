@@ -18,6 +18,7 @@ import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.QnaDAO;
 import dao.QnaDAOImpl;
+import model.AgeGroup;
 import model.Lecture;
 import model.Members;
 import model.Payment;
@@ -115,6 +116,8 @@ public class Page_Move_Contoroller extends HttpServlet {
 			double male_Rating = genderRating.get(1);
 			req.setAttribute("female_Rating", female_Rating);
 			req.setAttribute("male_Rating", male_Rating);
+			List<AgeGroup> ageGroup = adao.get_AgeGroup();
+			req.setAttribute("ageGroup", ageGroup);
 			rd = req.getRequestDispatcher("administrator/customer_Information/customer_Information.jsp");
 			rd.forward(req, resp);			
 		}

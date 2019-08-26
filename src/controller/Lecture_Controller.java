@@ -146,8 +146,8 @@ public class Lecture_Controller extends HttpServlet {
 				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 				rd.forward(req, resp);
 			}else if(intersection==false){
-				int get_Intersection_Info  = before_address.lastIndexOf("&");
-				int search_Option = Integer.parseInt(before_address.substring(get_Intersection_Info-1, get_Intersection_Info));
+				int intersection_Info  = before_address.lastIndexOf("&search_Word");
+				int search_Option=Integer.parseInt(before_address.substring(intersection_Info-1,intersection_Info));
 				if(search_Option==1) {
 					String lecture_name = before_address.substring(get_lastIndex+1);
 					List<Lecture> lecture_List = ldao.select_Lecture_Name(lecture_name);
