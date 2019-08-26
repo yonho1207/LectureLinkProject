@@ -92,19 +92,22 @@ public class QnaController extends HttpServlet {
 		} else if (action.equals("qna_req_list")) { // QNA 페이징 리스트
 
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
-
+			//int grp = Integer.parseInt(req.getParameter("grp"));
+			int cnt = 0;
+			
 			PageManager pm = new PageManager(requestPage);
 
 			QnaDAO dao = new QnaDAOImpl();
-
+					
 			List<Qna> qnaList = dao.selectLvlPage(pm.getPageRowResult().getRowStartNumber(),
 			pm.getPageRowResult().getRowEndNumber());
 
+			//req.setAttribute("cnt", cnt);
+			
 			HttpSession session = req.getSession(); 
-			session.setAttribute("qnaList", qnaList)
-			;
+			session.setAttribute("qnaList", qnaList);
 			req.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.QNA_SELETE_ALL_COUNT));
-
+			
 			RequestDispatcher rd = req.getRequestDispatcher("qna/qnaList.jsp");
 			rd.forward(req, resp);
 			

@@ -93,6 +93,7 @@ public class MembersController extends HttpServlet{
 					
 					HttpSession session = req.getSession();
 					session.setAttribute("admin", members);
+					session.setAttribute("members_info", members);
 					
 					
 					

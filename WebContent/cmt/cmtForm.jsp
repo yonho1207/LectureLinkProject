@@ -246,7 +246,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
+				<c:if test="${admin!=null}">
 					<li class="nav-item">
 						
 						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">管理者ページへ</a>
@@ -275,7 +275,29 @@ star-input>.input.focus{outline:1px dotted #ddd;}
    		 <div class="media-body">
       先生：<h3><i>${lecture.lecture_teacher}</i></h3><br >
       <p>${lecture.description}</p>
-	<p><h4>プライス:${lecture.price}</h4></p>       
+	<p><h4>プライス:${lecture.price}</h4></p> 
+	<p>
+	<h4>
+		<c:choose>
+		<c:when test="${avg2>=0.0 && 2.0>avg2}">
+			平均レーティング :<img src="img/score_one.jpg" width="200" height="50">
+		</c:when>		
+		<c:when test="${avg2>=2.0 && 3.0>avg2}">
+			平均レーティング :<img src="img/score_two.jpg" width="200" height="50">
+		</c:when>	
+		<c:when test="${avg2>=3.0 && 4.0>avg2}">
+			平均レーティング :<img src="img/score_three.jpg" width="200" height="50">
+		</c:when>	
+		<c:when test="${avg2>=4.0 && 5.0>avg2}">
+			平均レーティング :<img src="img/score_four.jpg" width="200" height="50">
+		</c:when>	
+		<c:otherwise>
+			平均レーティング :<img src="img/score_five.jpg" width="200" height="50">
+		</c:otherwise>
+		</c:choose>	
+		(${avg2})
+	</h4>
+	</p>   
     </div>
   	</div>
 	</div>

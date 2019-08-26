@@ -55,7 +55,7 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
+					<c:if test="${admin!=null}">
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							管理者メニュー
@@ -119,14 +119,14 @@
 	<hr>
 	댓글: &nbsp; ${qna_cmt.qna_title}  &nbsp;&nbsp; ${qna_cmt.qna_date} 
 	<textarea class="form-control" rows="5" cols="50" disabled="disabled"> ${qna_cmt.qna_con}</textarea>
-	<c:if test="${admin!=null && members_info==null}">
+	<c:if test="${admin!=null}">
 	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna_cmt.qna_no}">コメントを消す</a>	
 	</c:if>
 	</div>
 	</div>
 	</c:if>
 	
-	<c:if test="${admin!=null && members_info==null}">
+	<c:if test="${admin!=null}">
 	<hr>
 	<br >
 	<div class="container">
@@ -135,7 +135,7 @@
 	<div id="admin_cmt" class="collapse">
 	
 	<form action="qna_cmt_insert" method="post">
-	<input type="hidden" name = "admin_no" value=23>
+	<input type="hidden" name = "admin_no" value=1>
 	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}">
 	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">
 	

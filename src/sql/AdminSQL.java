@@ -7,7 +7,7 @@ public class AdminSQL {
 				+ " phone=?, email=?, question=?, answer=? where id=?";
 	
 	public static final String ADMIN_SEARCH_BY_ID 
-			= "select * from members where id like ?";
+			= "select * from members where upper(id) like upper(?)";
 	
 	public static final String GET_FEMALERATING =
 			"select \r\n" + 

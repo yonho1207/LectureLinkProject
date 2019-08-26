@@ -55,7 +55,7 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
+					<c:if test="${admin!=null}">
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							管理者メニュー
@@ -88,7 +88,7 @@
 				<td>${lecture_List.lecture_name}</td>
 				<td>${lecture_List.lecture_teacher}</td>
 				<td>${lecture_List.price}</td>
-				<td>${lecture_List.text_price}</td>
+				<td>${lecture_List.book_price}</td>
 				<td><input type="button" onclick="location.href='delete_Lecture.admin?lecture_no=${lecture_List.lecture_no}'" value="削除"></td>
 				<td></td>
 			</tr>
