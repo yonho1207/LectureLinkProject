@@ -97,19 +97,30 @@ public class Page_Move_Contoroller extends HttpServlet {
 			rd.forward(req, resp);
 		}else if(action.equals("go_Lecture_List")) {		
 			HttpSession session = req.getSession();
+			String before_address = req.getHeader("referer");
 			int reqPage = Integer.parseInt(req.getParameter("reqPage"));
 			String search_Word = (String) req.getAttribute("search_Word");
 			if(search_Word!=null) {
 				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
 				rd.forward(req, resp);
-			}else{
+			}else if(search_Word==null){
 				PageManager_For_Lecture pm = new PageManager_For_Lecture(reqPage);
 				PageGroupResult pageGroupResult = pm.getpageGroupResult(page.PageSQL.LECTURE_SELECTE_ALL_COUNT);
 				req.setAttribute("pageGroupResult", pageGroupResult);
-				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
-				rd.forward(req, resp);
-			}
+					if(before_address.contains("search_Word")) {
+						String URL = before_address;
+						int a = URL.lastIndexOf("/search_Lecture");
+						URL.indexOf(a);
+						URL.concat("reqPage="+reqPage);
+						System.out.println(URL);
+						rd = req.getRequestDispatcher(URL);
+						rd.forward(req, resp);
+					}else {
+						rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
+						rd.forward(req, resp);
+					}
 
+			}
 		}else if(action.equals("go_Cutomer_Information.admin")) {
 			AdminDAO adao = new AdminDAOImpl();
 			List<Double> genderRating = adao.get_GenderRating();
@@ -128,7 +139,6 @@ public class Page_Move_Contoroller extends HttpServlet {
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
 			req.setAttribute("selected_Lecture", selected_Lecture);
 			Members member = (Members) session.getAttribute("members_info");
-			System.out.println(member.getMember_no());
 			List<Payment> attending_Lecture = pdao.attending_Lecture(member.getMember_no());
 			for(Payment attending : attending_Lecture) {
 				if(attending.getLecture_no()==selected_Lecture.getLecture_no()) {
