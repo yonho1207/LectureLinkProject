@@ -29,5 +29,8 @@ public class QnaSQL {
 			= "DELETE FROM qna WHERE QNA_NO=?";
 	
 	public static final String QNA_SELECT_GRP_AND_LVL_SQL //QNA 관리자 답글 불러오기
-	="SELECT * FROM qna where lvl=1 AND grp=?";
+			="SELECT * FROM qna where lvl=1 AND grp=?";
+	
+	public static final String QNA_COMENT_CNT_SQL
+			="SELECT count(*) as cnt FROM qna WHERE grp=? AND lvl=1";
 }

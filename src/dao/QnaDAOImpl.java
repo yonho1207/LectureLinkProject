@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.Cmt;
 import model.Qna;
+import sql.CmtSQL;
 import sql.QnaSQL;
 
 public class QnaDAOImpl extends BaseDAO implements QnaDAO {
@@ -250,6 +251,12 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 			preparedStatement.setString(4, qna.getQna_con());
 			preparedStatement.setInt(5, qna.getGrp());
 
+			System.out.println("임플" + " " + qna.getMember_no());
+			System.out.println("임플" + " " + qna.getId());
+			System.out.println("임플" + " " + qna.getQna_title());
+			System.out.println("임플" + " " + qna.getQna_con());
+			System.out.println("임플" + " " + qna.getGrp());
+
 			preparedStatement.executeQuery();
 
 		} catch (SQLException e) {
@@ -296,6 +303,37 @@ public class QnaDAOImpl extends BaseDAO implements QnaDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return qna;
+
+	}
+
+	@Override
+	public int QnaCommentCnt(int grp) {
+
+		int cnt = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(QnaSQL.QNA_COMENT_CNT_SQL);
+			preparedStatement.setInt(1, grp);
+
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+
+				cnt = resultSet.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return cnt;
 
 	}
 

@@ -21,5 +21,9 @@ public class CmtSQL {
 			= "SELECT * FROM(SELECT ROWNUM as RN, cmts.* "
 			+ "FROM (SELECT * FROM(SELECT * from cmt where cmt.lecture_no=?) cmt ORDER BY cmt_no DESC) cmts)"
 			+ "WHERE rn BETWEEN ? AND ? ORDER BY cmt_no DESC";
+	
+	public static final String CMT_AVG_RATING_SQL //CMT 강의별 평균 별점
+			="SELECT avg(rating) as avg FROM cmt WHERE lecture_no=?";
+	
 
 }

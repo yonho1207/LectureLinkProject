@@ -25,5 +25,7 @@ public interface QnaDAO {
 	
 	Qna selectGrpAndLvl(int grp); //관리자 답글 표시
 	
+	int QnaCommentCnt(int grp);
+	
 	
 }

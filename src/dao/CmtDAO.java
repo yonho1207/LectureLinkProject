@@ -17,6 +17,8 @@ public interface CmtDAO {
 	boolean deleteByCmt_no(int cmt_no); //CMT 삭제
 	
 	List<Cmt> selectByLecture_noPage(int setRowStartNumber, int setRowEndNumber,int lecture_no); //CMT 강의별 페이징 처리
+	
+	double avgRating(int lecture_no);//CMT 강의별 평균 별점
 
 
 }

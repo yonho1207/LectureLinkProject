@@ -58,13 +58,13 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 	@Override
 	public Cmt insert(Cmt cmt) {
 
-		//Cmt selectByComment = null;
+		// Cmt selectByComment = null;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		//Statement statement = null;
-		//ResultSet resultSet = null;
+		// Statement statement = null;
+		// ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
@@ -76,26 +76,27 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			preparedStatement.setString(4, cmt.getCmt_con());
 			preparedStatement.setInt(5, cmt.getRating());
 
-			//int rowCount = preparedStatement.executeUpdate();
+			// int rowCount = preparedStatement.executeUpdate();
 			preparedStatement.executeQuery();
-		/*	if (rowCount > 0) {
-
-				statement = connection.createStatement();
-				resultSet = statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
-
-				if (resultSet.next()) {
-					selectByComment = (Cmt) selectByLecture_no(resultSet.getInt("num"));
-				}
-
-			}*/
+			/*
+			 * if (rowCount > 0) {
+			 * 
+			 * statement = connection.createStatement(); resultSet =
+			 * statement.executeQuery(CmtSQL.CMT_SELECT_SEQCURRVAL_SQL);
+			 * 
+			 * if (resultSet.next()) { selectByComment = (Cmt)
+			 * selectByLecture_no(resultSet.getInt("num")); }
+			 * 
+			 * }
+			 */
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		} finally {
-			//closeDBObjects(resultSet, preparedStatement, null);
+			// closeDBObjects(resultSet, preparedStatement, null);
 			closeDBObjects(null, preparedStatement, connection);
 		}
-		//return selectByComment;
+		// return selectByComment;
 		return cmt;
 	}
 
@@ -210,6 +211,37 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return cmtlist;
+	}
+
+	@Override
+	public double avgRating(int lecture_no) {
+
+		double avg = 0.0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CmtSQL.CMT_AVG_RATING_SQL);
+			preparedStatement.setInt(1, lecture_no);
+
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+
+				avg = resultSet.getDouble("avg");
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return avg;
+
 	}
 
 }

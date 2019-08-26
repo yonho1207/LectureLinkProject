@@ -148,8 +148,8 @@
 					<td>${qna.qna_date}</td>
 				</tr>
 			</c:forEach>
-			
-			</table>	
+
+		</table>	
 		</div>	
 		
 	<table class="table">
