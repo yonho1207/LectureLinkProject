@@ -31,7 +31,8 @@ import page.PageSQL;
 @WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do",
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
-		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin"})
+		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
+		"/go_Lecture_attend.do"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -120,6 +121,26 @@ public class Page_Move_Contoroller extends HttpServlet {
 			req.setAttribute("ageGroup", ageGroup);
 			rd = req.getRequestDispatcher("administrator/customer_Information/customer_Information.jsp");
 			rd.forward(req, resp);			
+		}else if(action.equals("go_Lecture_attend.do")) {
+			HttpSession session = req.getSession();
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
+			req.setAttribute("selected_Lecture", selected_Lecture);
+			Members member = (Members) session.getAttribute("members_info");
+			System.out.println(member.getMember_no());
+			List<Payment> attending_Lecture = pdao.attending_Lecture(member.getMember_no());
+			for(Payment attending : attending_Lecture) {
+				if(attending.getLecture_no()==selected_Lecture.getLecture_no()) {
+					rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");			
+					rd.forward(req, resp);
+				}else if(attending.getLecture_no()!=selected_Lecture.getLecture_no()){
+					rd = req.getRequestDispatcher("lecture/lecture_Detail/not_Purchase.jsp");			
+					rd.forward(req, resp);
+				}		
+			}
+			
+
 		}
 	}
 }

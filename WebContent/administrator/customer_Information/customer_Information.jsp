@@ -36,5 +36,6 @@
 			</c:forEach>
 		</div>
 
+	<a href="goMain" style="position: relative; left: 400px"><img src="img/payment/home-location.png">メインページへ</a>	
 </body>
 </html>
