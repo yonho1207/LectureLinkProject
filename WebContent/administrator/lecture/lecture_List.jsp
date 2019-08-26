@@ -88,7 +88,7 @@
 				<td>${lecture_List.lecture_name}</td>
 				<td>${lecture_List.lecture_teacher}</td>
 				<td>${lecture_List.price}</td>
-				<td>${lecture_List.text_price}</td>
+				<td>${lecture_List.book_price}</td>
 				<td><input type="button" onclick="location.href='delete_Lecture.admin?lecture_no=${lecture_List.lecture_no}'" value="削除"></td>
 				<td></td>
 			</tr>

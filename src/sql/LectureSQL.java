@@ -29,7 +29,7 @@ public class LectureSQL {
 			"where rn between ? and ?  order by LECTURE_NO";
 	public static final String SELECT_BY_LECTURE_NAME = 
 			"select  LECTURE_NO,lecture_name,lecture_teacher, price, BOOK_price, description, lecture_Url from \r\n" + 
-			"lecture where lecture_name like ?";
+			"lecture where upper(lecture_name) like upper(?)";
 	public static final String SELECT_BY_LECTURE_TEACHER = 
 			"select  LECTURE_NO,lecture_name,lecture_teacher, price, BOOK_price, description, lecture_Url from \r\n" + 
 			"lecture where lecture_teacher like ?";
