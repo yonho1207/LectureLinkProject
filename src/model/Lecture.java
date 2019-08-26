@@ -8,6 +8,7 @@ public class Lecture {
     String lecture_teacher;
     int price;
     int text_price;
+    String lecture_Url;
     String description;
     
     public int getLecture_no() {
@@ -46,12 +47,19 @@ public class Lecture {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getLecture_Url() {
+		return lecture_Url;
+	}
+	public void setLecture_Url(String lecture_Url) {
+		this.lecture_Url = lecture_Url;
+	}
 	@Override
 	public String toString() {
 		return "Lecture [lecture_no=" + lecture_no + ", lecture_name=" + lecture_name + ", lecture_teacher="
-				+ lecture_teacher + ", price=" + price + ", text_price=" + text_price + ", description=" + description
-				+ "]";
+				+ lecture_teacher + ", price=" + price + ", text_price=" + text_price + ", lecture_Url=" + lecture_Url
+				+ ", description=" + description + "]";
 	}
+	
     
     
     

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AdminDAO;
+import dao.AdminDAOImpl;
 import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.QnaDAO;
@@ -28,7 +30,7 @@ import page.PageSQL;
 @WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do",
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
-		"/purchase_Succes","/purchase_Failed","/go_Lecture_List"})
+		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -106,6 +108,15 @@ public class Page_Move_Contoroller extends HttpServlet {
 				rd.forward(req, resp);
 			}
 
+		}else if(action.equals("go_Cutomer_Information.admin")) {
+			AdminDAO adao = new AdminDAOImpl();
+			List<Double> genderRating = adao.get_GenderRating();
+			double female_Rating = genderRating.get(0);
+			double male_Rating = genderRating.get(1);
+			req.setAttribute("female_Rating", female_Rating);
+			req.setAttribute("male_Rating", male_Rating);
+			rd = req.getRequestDispatcher("administrator/customer_Information/customer_Information.jsp");
+			rd.forward(req, resp);			
 		}
 	}
 }

@@ -11,6 +11,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	    <style type="text/css">
+        #card{
+            position: fixed;
+              right: 0;
+        }
+        </style>
+
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -118,7 +125,7 @@
 		</c:forEach>
 	</ul>
 	<br />
-	<h3 style="position: relative; left: 200px">以上の講義を受講なされました、ご利用いただき誠にありがとうございました。</h3>
+	<h3 style="position: relative; left: 80px">以上の講義を受講なされました、ご利用いただき誠にありがとうございました。</h3>
 		<a href="goMain" style="position: relative; left: 700px"><img src="img/payment/home-location.png">メインページ</a>	
 	<%@ include file ="/companyLogo.jsp" %>
 </body>

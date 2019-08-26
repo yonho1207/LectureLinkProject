@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import model.Members;
@@ -96,7 +97,83 @@ public class AdminDAOImpl extends BaseDAO implements AdminDAO {
 		
 		
 	}
+
+	@Override
+	public List<Double> get_GenderRating() {
+		List<Double> genderRating = new ArrayList();
+		Double female_Raiting =0.0;
+		Double male_RAiting = 0.0;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null; 
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_FEMALERATING);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				female_Raiting = resultSet.getDouble("ratio");			
+			}
+			
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_MALERATING);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				male_RAiting = resultSet.getDouble("ratio");	
+			}
+			
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		genderRating.add(female_Raiting);
+		genderRating.add(male_RAiting);
+		return genderRating;
 	}
+
+	@Override
+	public List<Integer> get_AgeGroup() {
+		HashMap<Integer, Integer> ageList = new HashMap<Integer, Integer>();
+		List<Integer> ageGroup = new ArrayList<>();
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_AGE_GROUP);
+			resultSet = preparedStatement.executeQuery();
+			int groupByAge = 0;
+			int c = 0;
+			while(resultSet.next()) {
+				int age = resultSet.getInt("age");
+				int cnt = resultSet.getInt("cnt");
+				ageList.put(age, cnt);
+				for(int i=0; i>110; i=i+10) {
+					cnt = resultSet.getInt("cnt");
+					System.out.println(cnt);
+					if(ageList.get(age)>i) {
+						
+						ageGroup.add(cnt);
+					}
+				}
+			
+			
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet,preparedStatement, connection);
+		}
+		System.out.println(ageGroup);
+		return ageGroup;
+	}
+	
+	
+}
 	
 
 

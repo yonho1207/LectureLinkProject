@@ -111,13 +111,13 @@
 		<h1>お買い上げになる講義を選択してください。</h1>
 		講義：<select name="select_Lecture_Pick" class="w3-select" id="select_Lecture_Pick" style="size: landscape;">
 				 <c:forEach var="select_Lecture" items="${lecture_List_Serve}">
-				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 교재 가격 : ${select_Lecture.text_price}</option>
+				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 教科書の値段： ${select_Lecture.text_price}</option>
 				 </c:forEach>
 				 </select><br />
 		お客様のID：<input type="text" class="w3-input" name="id" value="${members_info.id}" readonly><br />			
 		お買い上げになる日時：<input type="text"  class="w3-input" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-		期間設定：<input type="number"  name="select_Price" id="select_Price" min="1" max="12" value="1">
-				必ず期間の確認をお願い申し上げます。<br /> 
+		期間設定：<input type="number"  name="select_Price" id="select_Price" min="1" max="12" value="1">ヶ月<br /> 
+				<h2>必ず期間の確認をお願い申し上げます。</h2><br /> 
 				<span style="background-color: #e6ffe6;"><input type="checkbox" name="buy_Book" value="1">教科書もお買い上げになりますか？<br /></span>
 				<img src="img/payment/add-to-cart.png"><input type="submit" value="カートに入れる" style="background-color:transparent;  border:0px transparent solid;">
 				<a href="accept_Purchase.do" style="position: relative; left: 200px"><img src="img/payment/cash-register.png">決済手段選択フォームへ</a>	
@@ -126,7 +126,7 @@
 	
 		<form action="payment_Date_Check" id="payment_Date_Check" method="post"> 
 			お買い上げになる日時：<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
-			期間設定：<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12"><br />
+			期間設定：<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12">ヶ月<br />　
 			予想される満了日： <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />
 						<img src="img/payment/icons8-calculator-100.png">
 						<button onclick="check_Period_Button" id="check_Period_Button" style="background-color:transparent;  border:0px transparent solid;">計算する</button><br />

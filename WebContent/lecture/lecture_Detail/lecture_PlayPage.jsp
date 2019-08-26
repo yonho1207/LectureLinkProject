@@ -1,41 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>インターネット講義サイトのメインページ</title>
-<script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
+<title>講義進行中</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
   
-      
-    <style type="text/css">
+      <style type="text/css">
         #card{
             position: fixed;
               right: 0;
         }
- 
-        #search-select{
-         width:85%;
-         overflow: scroll;
-         overflow-x:auto;
-         overflow-y:auto;
-         }
-        
-         #notice_Table{
-         	width:75%;
-         }
-
-         
-    </style>
+       </style>
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -79,20 +61,14 @@
 					</c:when>
 					</c:choose>
 					<c:if test="${admin!=null && members_info==null}">
-						<li class="nav-item">
-						
-<<<<<<< HEAD
-						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-							관리자 메뉴
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							管理者メニュー
 						</a>
 						<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin_memberList.admin">회원관리 페이지</a>
-						<a class="dropdown-item" href="go_Lecture_Insert.admin">강의등록 페이지</a>
-					
+						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>						
 						</div>
-=======
-							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
->>>>>>> 368461ff56f070408468486e5bb94271da07c9fb
 						</li>
 					</c:if>
 					<li class="nav-item">
@@ -101,7 +77,7 @@
 				</ul>
 			</nav>
 		<br>
-	
+		
 		<div class="container">
 			<c:choose>
 			<c:when test="${members_info!=null}">		
@@ -134,41 +110,13 @@
 		 	 </c:when>
 			</c:choose>
 		 </div>
-		 
-		 <div  id="lecture_Advertise" >
-		 	<div id="advertise_Image">
-				 <iframe width="560" height="315" src="https://www.youtube.com/embed/htzo0mZS0yw" 
-				 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-				 picture-in-picture" allowfullscreen></iframe>
-		 	</div><br />
-		 	<div id="advertise_Text">
-		 		<h1>２０２０年、生まれ変わる情報処理技術者試験を<br />サポートさせて頂きます！</h1>
-		 		<p>２０２０年1回目から変わる情報処理技術者試験<br />
-		 		皆様は備えていらっしゃいますか？数多くの講義ノウハウから<br />
-		 		私共が合格までの道をしっかりサポートさせて頂きます。<br /></p>
-		 	</div>
-		 </div><br />
-		 
-		<h3>新しい告知に必ず目を通してくださいませ。</h3>
-	 	<table class="table table-striped" id="notice_Table" class="table" style="table-layout: fixed;">
-			<thead>
-				<tr>	
-					<td>タイトル</td>
-					<td>作成者</td>
-					<td>内容</td>
-					<td>日時</td>				
-				</tr>
-			</thead>	
-			<c:forEach var="qna" items="${qnaList}" varStatus="status" end="1">				
-					<tr> 
-						<td>${qna.qna_title}</td>
-						<td>${qna.id}</td>
-						<td style="width:50%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"	>${qna.qna_con}</td>
-						<td>${qna.qna_date}</td>
-					</tr><br />			
-			</c:forEach>
-		</table>
-			
-
+		<h1>只今${selected_Lecture.lecture_teacher}講師の${selected_Lecture.lecture_name}が進行中です。</h1>
+		<p>${selected_Lecture.description}</p>
+		
+		<div>
+			${selected_Lecture.lecture_Url}
+		</div>
+		
+	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>
