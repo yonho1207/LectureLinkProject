@@ -31,13 +31,13 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			function addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price, description){
+			function addNewItem(lecture_no, lecture_name, lecture_teacher, price, book_price, description){
 				var li_data = {
 						"lecture_no": lecture_no,
 						"lecture_name": lecture_name,
 						"lecture_teacher": lecture_teacher,
 						"price": price,
-						"text_price" : text_price,
+						"book_price" : book_price,
 						"description": description
 				};
 				var new_li = $("#itemTemplate").tmpl(li_data);
@@ -51,9 +51,9 @@
 					var lecture_name = $(this).find("lecture_name").text();
 					var lecture_teacher = $(this).find("lecture_teacher").text();
 					var price = $(this).find("price").text();
-					var text_price = $(this).find("text_price").text();
+					var book_price = $(this).find("book_price").text();
 					var description = $(this).find("description").text();
-					addNewItem(lecture_no, lecture_name, lecture_teacher, price, text_price, description);
+					addNewItem(lecture_no, lecture_name, lecture_teacher, price, book_price, description);
 				});
 			}).fail(function(){
 				alert("リスト作成に問題が発生しました。")
