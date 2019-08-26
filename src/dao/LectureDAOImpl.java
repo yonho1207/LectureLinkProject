@@ -30,7 +30,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_name(resultSet.getString("lecture_name"));
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
-				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setBook_price(resultSet.getInt("book_price"));
 				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
 				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);
@@ -68,7 +68,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_name(resultSet.getString("lecture_name"));
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
-				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setBook_price(resultSet.getInt("BOOK_price"));
 				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
 				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);				
@@ -100,7 +100,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_name(resultSet.getString("lecture_name"));
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
-				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setBook_price(resultSet.getInt("BOOK_price"));
 				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
 				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);				
@@ -126,7 +126,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 			preparedStatement.setString(1, lecture.getLecture_name());
 			preparedStatement.setString(2, lecture.getLecture_teacher());
 			preparedStatement.setInt(3, lecture.getPrice());
-			preparedStatement.setInt(4, lecture.getText_price());
+			preparedStatement.setInt(4, lecture.getBook_price());
 			preparedStatement.setString(5, lecture.getLecture_Url());
 			preparedStatement.setString(6, lecture.getDescription());
 			int lowCount = preparedStatement.executeUpdate();
@@ -155,7 +155,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 			preparedStatement.setString(1, lecture.getLecture_name());
 			preparedStatement.setString(2, lecture.getLecture_teacher());
 			preparedStatement.setInt(3, lecture.getPrice());
-			preparedStatement.setInt(4, lecture.getText_price());
+			preparedStatement.setInt(4, lecture.getBook_price());
 			preparedStatement.setInt(5, lecture.getLecture_no());
 			preparedStatement.setString(6, lecture.getLecture_Url());
 			preparedStatement.setString(7, lecture.getDescription());
@@ -219,7 +219,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_name(resultSet.getString("lecture_name"));
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
-				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setBook_price(resultSet.getInt("book_price"));
 				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
 				lecture.setDescription(resultSet.getString("description"));
 			}
@@ -251,7 +251,7 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 				lecture.setLecture_name(resultSet.getString("lecture_name"));
 				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
 				lecture.setPrice(resultSet.getInt("price"));
-				lecture.setText_price(resultSet.getInt("text_price"));
+				lecture.setBook_price(resultSet.getInt("book_price"));
 				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
 				lecture.setDescription(resultSet.getString("description"));
 				lecture_List.add(lecture);
