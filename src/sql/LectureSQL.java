@@ -3,7 +3,7 @@ package sql;
 public class LectureSQL {
 
 	public static final String LECTURE_SELECT_ALL = 
-			" select LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, PRICE, BOOK_PRICE, description,lecture_Url \r\n"
+			" select LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, PRICE, BOOK_PRICE, url,description,lecture_Url \r\n"
 			+ " from lecture order by LECTURE_NO";
 	
 	public static final String LECTURE_SELECT_BY_NUM = 

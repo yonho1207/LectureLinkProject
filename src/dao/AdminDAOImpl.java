@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import model.AgeGroup;
 import model.Members;
 
 import sql.AdminSQL;
@@ -134,41 +135,29 @@ public class AdminDAOImpl extends BaseDAO implements AdminDAO {
 	}
 
 	@Override
-	public List<Integer> get_AgeGroup() {
-		HashMap<Integer, Integer> ageList = new HashMap<Integer, Integer>();
-		List<Integer> ageGroup = new ArrayList<>();
+	public List<AgeGroup> get_AgeGroup() {
 		ResultSet resultSet = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		List<AgeGroup> ageGroup = new ArrayList<AgeGroup>();
 		
 		try {
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_AGE_GROUP);
 			resultSet = preparedStatement.executeQuery();
-			int groupByAge = 0;
-			int c = 0;
+
 			while(resultSet.next()) {
-				int age = resultSet.getInt("age");
-				int cnt = resultSet.getInt("cnt");
-				ageList.put(age, cnt);
-				for(int i=0; i>110; i=i+10) {
-					cnt = resultSet.getInt("cnt");
-					System.out.println(cnt);
-					if(ageList.get(age)>i) {
-						
-						ageGroup.add(cnt);
-					}
-				}
-			
-			
-			}
+				AgeGroup getAge = new AgeGroup();
+				getAge.setAgeGroup(resultSet.getInt("age"));
+				getAge.setAgeGroupCount(resultSet.getInt("cnt"));
+				ageGroup.add(getAge);
+				}		
 			
 		}catch(SQLException ex01) {
 			ex01.printStackTrace();
 		}finally {
 			closeDBObjects(resultSet,preparedStatement, connection);
 		}
-		System.out.println(ageGroup);
 		return ageGroup;
 	}
 	
