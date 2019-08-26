@@ -16,12 +16,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
 <style type="text/css">
-	#insert_lecture input.error,#signupForm textarea.error{
+	#insert_Lecture.admin input.error,#signupForm textarea.error{
 		border : 1px dashed red;
 	}
-	#insert_lecture{background-color:white; color: black; }
+	#css{background-color:white; color: black; }
 	
-	#insert_lecture{
+	#css{
      
     margin:auto;
     padding:20px;
@@ -91,12 +91,12 @@
 			</nav>
 		<br>
 
-	<form method="post" action="insert_Lecture.admin">
-		講義名： <input type="text" id="lecture_name" name="lecture_name"><br />
-		教師名： <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
-		1ヶ月別の値段： <input type="text" id="price" name="price"><br />
-		教科書の値段： <input type="text" id="text_price" name="text_price"><br />
-		講義に関する説明：<textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
+	<form method="post" id="css" action="insert_Lecture.admin">
+		講義名： <input type="text" id="lecture_name" class="form-control" name="lecture_name"><br />
+		教師名： <input type="text" id="lecture_teacher" class="form-control" name="lecture_teacher"><br />
+		1ヶ月別の値段： <input type="text" id="price" class="form-control" name="price"><br />
+		教科書の値段： <input type="text" id="text_price" class="form-control" name="text_price"><br />
+		講義に関する説明：<textarea type="textbox" id="description" class="form-control" name="description" cols="60" rows="7"></textarea><br />
 		<input type="submit" value="入力する">
 	</form>
 	<%@ include file ="/companyLogo.jsp" %>

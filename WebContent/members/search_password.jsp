@@ -92,7 +92,12 @@
 		<h1>パスワード再設定</h1>
 		<input type="text" name="id" class="form-control" id="id" placeholder="IDを入力してください"/><br />
 		<input type="text" name="email" class="form-control" id="email" placeholder="E-MAILを入力してください"/><br />
-		<input type="text" name="question" class="form-control" id="question" placeholder="パスワード再設定質問を入力してください"/ style="width: 40%;"><br />
+		パスワード再設定質問<br />　<select name="question">
+				<option value="一番親しい友達の名前は？">一番親しい友達の名前は？</option>
+				<option value="小学校の頃の先生の名前は？">小学校の頃の先生の名前は？</option>
+				<option value="あなたのあだ名は？">あなたのあだ名は？</option>
+				</select>
+			<br /><br />
 		<input type="text" name="answer" class="form-control" id="answer" placeholder="パスワード再設定答えを入力してください"/  style="width: 40%;"><br />
 		<input type="submit" value="確定"/><br />
 	</form>
