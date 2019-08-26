@@ -246,7 +246,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 					</li>
 				</c:when>
 				</c:choose>
-				<c:if test="${admin!=null && members_info==null}">
+				<c:if test="${admin!=null}">
 					<li class="nav-item">
 						
 						<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">管理者ページへ</a>

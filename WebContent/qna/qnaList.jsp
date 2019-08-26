@@ -79,7 +79,7 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
+					<c:if test="${admin!=null}">
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							管理者メニュー
@@ -142,7 +142,7 @@
 		<tr>	
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
-					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</a></td>
+					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}${qna.lvl}</a></td>
 					<td>${qna.id}</td>
 					<td>${qna.visited}</td>
 					<td>${qna.qna_date}</td>

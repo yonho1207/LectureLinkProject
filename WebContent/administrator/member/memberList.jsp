@@ -74,30 +74,6 @@
 			</nav>
 		<br>
 	
-		<div class="container">
-			<c:choose>
-			<c:when test="${members_info!=null}">		
-			  <div class="card" id="card" style="width:250px">
-				    <img class="card-img-top" src="img/java_logo_img.jpg" alt="Card image" style="width:100%">
-				    <div class="card-body">
-				      <h4 class="card-title">${members_info.id}</h4>
-				      <p class="card-text">ようこそお越しくださいました ${members_info.id}様</p>
-				      <a href="go_Attending_Lecture.do" class="btn btn-primary">受講中の講義リスト</a>
-				      <form action="jump_To_Clicked_Lecture" method="post">			      	
-				      	<select class="ui search selection dropdown" name= "search-select" id="search-select" size=3>
-							<c:forEach var="attending_List" items="${attending_List}">
-								<option value="${attending_List.lecture_no}"> ${attending_List.lecture_name}</option>
-							</c:forEach>   	
-							<input type="submit" value="移動する"> 
-				      	</select>			     
-				      </form>
-				    </div>
-				 
-				  <br>
-		 	 </c:when>
-		 	 
-			</c:choose>
-		 </div>
 
 メンバーリスト
 <form method="post" action="search_member">

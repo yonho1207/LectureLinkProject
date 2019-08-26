@@ -66,7 +66,7 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
+					<c:if test="${admin!=null}">
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							管理者メニュー
