@@ -135,7 +135,7 @@
 	<div id="admin_cmt" class="collapse">
 	
 	<form action="qna_cmt_insert" method="post">
-	<input type="hidden" name = "admin_no" value=23>
+	<input type="hidden" name = "admin_no" value=1>
 	<input type="hidden" name = "qna_cmt_no" value="${qna.qna_no}">
 	<input type="hidden" name = "qna_cmt_grp" value="${qna.grp}">
 	

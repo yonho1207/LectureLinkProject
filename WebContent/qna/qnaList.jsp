@@ -142,6 +142,7 @@
 		<tr>	
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
+					<td><input type="hidden" name = "grp" value="${qna.grp}"></td>
 					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</a></td>
 					<td>${qna.id}</td>
 					<td>${qna.visited}</td>
@@ -151,7 +152,7 @@
 			
 			</table>	
 		</div>	
-		
+		${cnt}
 	<table class="table">
 		<c:if test="${members_info != null}">
 			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" style="position: relative; left: 300px">書き込む</button>		

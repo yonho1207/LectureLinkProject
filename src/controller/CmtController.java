@@ -54,7 +54,10 @@ public class CmtController extends HttpServlet {
 
 			Lecture lecture = daol.select_Lecture_No(lecture_no);
 			List<Cmt> cmtlists = dao.selectByLecture_no(lecture_no);
-
+			double avg=dao.avgRating(lecture_no);
+			String avg2=(String.format("%.2f", avg));
+		
+			session.setAttribute("avg2", avg2);
 			session.setAttribute("lecture", lecture);
 			session.setAttribute("cmtlists", cmtlists);
 			session.setAttribute("reqPage", requestPage);
@@ -88,8 +91,8 @@ public class CmtController extends HttpServlet {
 
 			req.setAttribute("cmt", resultComment);
 
-			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtItem.jsp");
-			//RequestDispatcher rd = req.getRequestDispatcher("cmt_list");
+			//RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtItem.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("go_cmt_Fom");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_delete")) {
@@ -124,14 +127,12 @@ public class CmtController extends HttpServlet {
 
 			Lecture lecture = daol.select_Lecture_No(lecture_no);
 			List<Cmt> cmtlists = dao.selectByLecture_no(lecture_no);
-			
 			List<Cmt> cmtList = dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
 					pm.getPageRowResult().getRowEndNumber(), lecture_no);
-
+				
 			session.setAttribute("cmtList", cmtList);
 			session.setAttribute("lecture", lecture);
 			session.setAttribute("cmtlists", cmtlists);
-
 			session.setAttribute("pageGroupResult", pm.getpageGroupResult(PageSQL.CMT_SELECTE_ALL_COUNT));
 
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtList.jsp");

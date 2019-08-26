@@ -83,7 +83,7 @@ public class PaymentController extends HttpServlet {
 				Lecture book_Info = null;
 				if(perchase_Book==1) {
 					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
-					payment.setPrice(lecture.getPrice()+book_Info.getText_price());
+					payment.setPrice(lecture.getPrice()+book_Info.getBook_price());
 					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
 				}else{
 					payment.setPrice(lecture.getPrice());

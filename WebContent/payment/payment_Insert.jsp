@@ -111,7 +111,7 @@
 		<h1>お買い上げになる講義を選択してください。</h1>
 		講義：<select name="select_Lecture_Pick" class="w3-select" id="select_Lecture_Pick" style="size: landscape;">
 				 <c:forEach var="select_Lecture" items="${lecture_List_Serve}">
-				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 教科書の値段： ${select_Lecture.text_price}</option>
+				 	<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name} / 教科書の値段： ${select_Lecture.book_price}</option>
 				 </c:forEach>
 				 </select><br />
 		お客様のID：<input type="text" class="w3-input" name="id" value="${members_info.id}" readonly><br />			

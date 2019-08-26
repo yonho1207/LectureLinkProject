@@ -12,7 +12,7 @@
 		<lecture_name>${lecture_List.lecture_name}</lecture_name>
 		<lecture_teacher>${lecture_List.lecture_teacher}</lecture_teacher>
 		<price>${lecture_List.price}</price>
-		<text_price>${lecture_List.text_price}</text_price><br />
+		<text_price>${lecture_List.book_price}</text_price><br />
 		<description>${lecture_List.description}</description>
 	</item>
 	</c:forEach>

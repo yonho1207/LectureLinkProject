@@ -53,7 +53,7 @@ public class Lecture_Controller extends HttpServlet {
 					lecture.setLecture_name(req.getParameter("lecture_name"));
 					lecture.setLecture_teacher(req.getParameter("lecture_teacher"));
 					lecture.setPrice(Integer.parseInt(req.getParameter("price")));
-					lecture.setText_price(Integer.parseInt(req.getParameter("text_price")));
+					lecture.setBook_price(Integer.parseInt(req.getParameter("book_price")));
 					lecture.setDescription(req.getParameter("description"));
 					ldao.insert_Lecture(lecture);
 					resp.sendRedirect("index.jsp");
@@ -80,7 +80,7 @@ public class Lecture_Controller extends HttpServlet {
 			lecture.setLecture_name(req.getParameter("lecture_name"));
 			lecture.setLecture_teacher(req.getParameter("lecture_teacher"));
 			lecture.setPrice(Integer.parseInt(req.getParameter("price")));
-			lecture.setText_price(Integer.parseInt(req.getParameter("text_price")));
+			lecture.setBook_price(Integer.parseInt(req.getParameter("book_price")));
 			lecture.setDescription(req.getParameter("description"));
 			ldao.update_Lecture(lecture);
 			rd = req.getRequestDispatcher("go_Lecture_List.admin");
