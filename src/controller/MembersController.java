@@ -86,10 +86,6 @@ public class MembersController extends HttpServlet{
 			MembersDAOImpl dao = new MembersDAOImpl();
 			Members members = dao.selectById(id);
 			
-
-			System.out.println(members);
-			/*System.out.println(id);
-*/
 			if (members!=null && members.getId() !=null && members.getId().equals("admin")
 					&& password.equals(members.getPassword())) {
 

@@ -20,7 +20,7 @@ import model.Members;
 import page.PageManager;
 import page.PageManager_For_Lecture;
 @WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price",
-		"/jump_To_Clicked_Lecture","/go_Lecture_attend.do","/delete_Lecture.admin",
+		"/jump_To_Clicked_Lecture","/delete_Lecture.admin",
 		"/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin",
 		"/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin",
 		"/lecture_Tmpl", "/search_Lecture"})
@@ -100,20 +100,6 @@ public class Lecture_Controller extends HttpServlet {
 			ldao.delete_Lecture(Integer.parseInt(req.getParameter("lecture_no")));
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
 			rd.forward(req, resp);
-		}else if(action.equals("go_Lecture_attend.do")) {
-			LectureDAOImpl ldao = new LectureDAOImpl();
-			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("lecture_no")));
-			req.setAttribute("selected_Lecture", selected_Lecture);
-			rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");
-			
-			/*CmtDAO dao = new CmtDAOImpl();
-			int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
-			List<Cmt> cmtList = dao.selectByLecture_no(lecture_no);
-			req.setAttribute("cmtList", cmtList);*/
-			
-			req.setAttribute("selected_Lecture", selected_Lecture);
-			//rd = req.getRequestDispatcher("/cmt/cmtForm1.jsp");
-			rd.forward(req, resp);
 		}else if(action.equals("jump_To_Clicked_Lecture")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
@@ -146,8 +132,8 @@ public class Lecture_Controller extends HttpServlet {
 				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 				rd.forward(req, resp);
 			}else if(intersection==false){
-				int get_Intersection_Info  = before_address.lastIndexOf("&");
-				int search_Option = Integer.parseInt(before_address.substring(get_Intersection_Info-1, get_Intersection_Info));
+				int intersection_Info  = before_address.lastIndexOf("&search_Word");
+				int search_Option=Integer.parseInt(before_address.substring(intersection_Info-1,intersection_Info));
 				if(search_Option==1) {
 					String lecture_name = before_address.substring(get_lastIndex+1);
 					List<Lecture> lecture_List = ldao.select_Lecture_Name(lecture_name);

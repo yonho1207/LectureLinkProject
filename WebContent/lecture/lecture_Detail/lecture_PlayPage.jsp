@@ -116,7 +116,8 @@
 		<div>
 			${selected_Lecture.lecture_Url}
 		</div>
-		
+	<a href="goMain" style="position: relative; left: 400px"><img src="img/payment/home-location.png">メインページへ</a>
+	<a href="go_Lecture_List?reqPage=1" style="position: relative; left: 400px"><img src="img/payment/icons8-books-64.png">講義リストへ</a>
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

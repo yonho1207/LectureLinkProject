@@ -16,6 +16,7 @@ import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.Time_Set_Helper;
 import javafx.print.Collation;
+import model.AgeGroup;
 import model.Payment;
 import sun.text.resources.sk.CollationData_sk;
 
@@ -23,7 +24,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		AdminDAOImpl adao = new AdminDAOImpl();
-		adao.get_AgeGroup();
+		List<AgeGroup> ageGroup = adao.get_AgeGroup();
+		
+		System.out.println(ageGroup);
 /*		TreeMap<Integer, Integer> tm = new TreeMap<>(adao.get_AgeGroup());
 		Iterator<Integer> ik = tm.keySet().iterator();
 		System.out.println(ik);
