@@ -1,35 +1,16 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新しい講義入力フォーム</title>
-<script src="https://kit.fontawesome.com/3e23d516a6.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
-<style type="text/css">
-	#insert_lecture input.error,#signupForm textarea.error{
-		border : 1px dashed red;
-	}
-	#insert_lecture{background-color:white; color: black; }
-	
-	#insert_lecture{
-     
-    margin:auto;
-    padding:20px;
-    width:500px;
-    background-color:#EEEFF1;
-    border-radius:5px;
-     }
-</style>
 
 </head>
 <body>
@@ -73,10 +54,17 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
-						<li class="nav-item">
-						
-							<a class="nav-link" href="go_admin.admin">管理者ページへ</a>
+					<c:if test="${admin!=null}">
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							管理者メニュー
+						</a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
+						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>	
+						<a class="dropdown-item" href="go_Cutomer_Information.admin">会員情報分析</a>
+						<a class="dropdown-item" href="go_Attend_Lecture.admin">受講者分析</a>
+						</div>
 						</li>
 					</c:if>
 					<li class="nav-item">
@@ -85,27 +73,30 @@
 				</ul>
 			</nav>
 		<br>
-
-<<<<<<< HEAD
-	<h2>새로 작성하고자 하는 강의의 정보를 입력해주세요</h2>
-	<form method="post" id="insert_lecture" action="insert_Lecture.admin">
-		강의명 : <input type="text" id="lecture_name" class="form-control" name="lecture_name"><br />
-		강사명 : <input type="text" id="lecture_teacher" class="form-control" name="lecture_teacher"><br />
-		1개월 기준 수강료 : <input type="text" id="price" class="form-control" name="price"><br />
-		교재 가격 : <input type="text" id="text_price" class="form-control" name="text_price"><br />
-		강의 설명 : <textarea type="textbox" id="description" class="form-control" name="description" cols="60" rows="7"></textarea><br />
-		<input type="submit">
-=======
-	<h2>新しい講義の情報入力してください。</h2>
-	<form method="post" action="insert_Lecture.admin">
-		講義名： <input type="text" id="lecture_name" name="lecture_name"><br />
-		教師名： <input type="text" id="lecture_teacher" name="lecture_teacher"><br />
-		1ヶ月別の値段： <input type="text" id="price" name="price"><br />
-		教科書の値段： <input type="text" id="text_price" name="text_price"><br />
-		講義に関する説明：<textarea type="textbox" id="description" name="description" cols="60" rows="7"></textarea><br />
-		<input type="submit" value="入力する">
->>>>>>> 368461ff56f070408468486e5bb94271da07c9fb
-	</form>
-	<%@ include file ="/companyLogo.jsp" %>
+		
+		<h1>受講者数をカウントします。</h1>
+			<form action="get_cnt_Attending_Member" method="post">				
+				<select name="select_Lecture_Pick">
+					<c:forEach var="select_Lecture" items="${lecture_List_Serve}">
+				 		<option value="${select_Lecture.lecture_no}">${select_Lecture.lecture_name}</option>
+				 	</c:forEach>
+				</select><br />
+				<div class="container" > 
+					<p>受講者数</p>
+		 			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+						<div class="progress-bar" style="width: ${attending_CNT}%">${attending_CNT}</div>
+					</div>				
+		   		</div>
+		   		<br />
+		   		<div class="container" > 
+		   			<p>年齢別の受講者</p>
+					<c:forEach var="ageGroup" items="${ageGroup}">
+			  			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+							${ageGroup.ageGroup}代: <div class="progress-bar" style="width:${ageGroup.ageGroupCount}%">${ageGroup.ageGroupCount}</div>
+						</div>
+					</c:forEach>
+				</div>
+			   	<button onclick="check_Period_Button">計算する</button><br />
+			</form>
 </body>
 </html>

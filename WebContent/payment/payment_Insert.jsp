@@ -40,10 +40,9 @@
         background-color: #e6ffe6;
         height: 200px;
 	 	width: 15%;	
-  	}
-  
+  	}  
+
   </style>
-  
 </head>
 <body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -94,6 +93,8 @@
 						<div class="dropdown-menu">
 						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
 						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>						
+						<a class="dropdown-item" href="go_Cutomer_Information.admin">会員情報分析</a>
+						<a class="dropdown-item" href="go_Attend_Lecture.admin">受講者分析</a>
 						</div>
 						</li>
 					</c:if>
@@ -127,9 +128,10 @@
 		<form action="payment_Date_Check" id="payment_Date_Check" method="post"> 
 			お買い上げになる日時：<input type="text" name ="payment_date" id="payment_date"  value= "${payment_date}" readonly/><br />
 			期間設定：<input type="number" name="choose_Month" id="choose_Month" value="1" min="1" max="12">ヶ月<br />　
-			予想される満了日： <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />
-						<img src="img/payment/icons8-calculator-100.png">
-						<button onclick="check_Period_Button" id="check_Period_Button" style="background-color:transparent;  border:0px transparent solid;">計算する</button><br />
+			予想される満了日： <input type="text" name="period" id="period" value="${next_Month}" readonly/><br />			
+			<button onclick="check_Period_Button" id="check_Period_Button" 
+			style="background-color:transparent;  border:0px transparent solid;">
+			<img src="img/payment/icons8-calculator-100.png">計算する</button><br />
 		</form>
 		
 		<table id="purchase_Basket">		

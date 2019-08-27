@@ -26,4 +26,5 @@ public class AdminSQL {
 			"from (select floor((to_char(sysdate, 'yyyy')-to_char(members.birth, 'yyyy')) / 10) \r\n" + 
 			"* 10 as age from members) info\r\n" + 
 			"group by age order by age";
+
 }
