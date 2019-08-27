@@ -44,7 +44,7 @@
 			<img src="img/score_five.jpg" width="80" height="20">
 		{{/if}}	
 
- 		Q&A番号 :{{= cmt_no}}
+ 		コメント番号 :{{= cmt_no}}
 		講義番号 :{{= lecture_no}} 
 		作成者 : {{= id}}
 		内容: {{= cmt_con}}
@@ -120,8 +120,8 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			return false;
 		
 		} 
-
-	$.post("cmt_insert",$(this).serialize(),function(xml){
+		
+/* 	$.post("cmt_insert",$(this).serialize(),function(xml){
 		
 		var result=$(xml).find("result").text();
 		
@@ -141,19 +141,18 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			}
 			
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
-    					
+			location.replace('index.jsp');
 			$("#cmt_con").val("");
-				
-		}else{
 			
 				
-		}
+			}
+		
 	}).fail(function(){
 		
 	});
 	//return false;
-
-});	
+		*/
+});	 
 	$(document).on('click','.delete_btn',function(){
 	
 		if(confirm("本当に削除しますか？")){
@@ -306,14 +305,14 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 	<c:if test="${admin==null && members_info!=null}">
 	<div class="container">
-	<form id="cmt_form" >
+	<form id="cmt_form" action="cmt_insert">
 		 <input type="hidden" name = "member_no" value="${members_info.member_no}">
 		 会員番号：<input type="text"  name="member_no" id="member_no" value="${members_info.member_no}" disabled="disabled" />
 		 
 		  <input type="hidden" name = "lecture_no"  id="lecture_no" value="${lecture.lecture_no}"/>
 		
 		<input type="hidden" name = "id" value="${members_info.id}">
-		id<input type="text"  name="id" id="id" value="${members_info.id}" disabled="disabled" />
+		id : <input type="text"  name="id" id="id" value="${members_info.id}" disabled="disabled" />
 		
 		コメント： <input type="text"  name="cmt_con" id="cmt_con" />
 		

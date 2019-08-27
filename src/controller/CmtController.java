@@ -57,11 +57,11 @@ public class CmtController extends HttpServlet {
 			double avg=dao.avgRating(lecture_no);
 			String avg2=(String.format("%.2f", avg));
 		
-			session.setAttribute("avg2", avg2);
-			session.setAttribute("lecture", lecture);
-			session.setAttribute("cmtlists", cmtlists);
-			session.setAttribute("reqPage", requestPage);
-			session.setAttribute("lecture_no", lecture_no);
+			req.setAttribute("avg2", avg2);
+			req.setAttribute("lecture", lecture);
+			req.setAttribute("cmtlists", cmtlists);
+			req.setAttribute("reqPage", requestPage);
+			req.setAttribute("lecture_no", lecture_no);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtForm.jsp");
 			rd.forward(req, resp);
@@ -79,18 +79,8 @@ public class CmtController extends HttpServlet {
 
 			Cmt resultComment = dao.insert(cmt);
 
-			if (resultComment != null) {
-
-				req.setAttribute("result", true);
-
-			} else {
-
-				req.setAttribute("result", false);
-
-			}
-
 			req.setAttribute("cmt", resultComment);
-
+			
 			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 
