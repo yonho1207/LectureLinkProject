@@ -24,9 +24,10 @@ public class Test {
 
 	public static void main(String[] args) {
 		AdminDAOImpl adao = new AdminDAOImpl();
+		LectureDAOImpl ldao = new LectureDAOImpl();
 		List<AgeGroup> ageGroup = adao.get_AgeGroup();
-		
-		System.out.println(ageGroup);
+		System.out.println(ldao.get_Attending_Count(2));
+
 /*		TreeMap<Integer, Integer> tm = new TreeMap<>(adao.get_AgeGroup());
 		Iterator<Integer> ik = tm.keySet().iterator();
 		System.out.println(ik);

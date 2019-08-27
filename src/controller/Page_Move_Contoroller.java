@@ -32,7 +32,7 @@ import page.PageSQL;
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
 		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
-		"/go_Lecture_attend.do"})
+		"/go_Lecture_attend.do","/go_Attend_Lecture.admin"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -107,18 +107,9 @@ public class Page_Move_Contoroller extends HttpServlet {
 				PageManager_For_Lecture pm = new PageManager_For_Lecture(reqPage);
 				PageGroupResult pageGroupResult = pm.getpageGroupResult(page.PageSQL.LECTURE_SELECTE_ALL_COUNT);
 				req.setAttribute("pageGroupResult", pageGroupResult);
-					if(before_address.contains("search_Word")) {
-						String URL = before_address;
-						int a = URL.lastIndexOf("/search_Lecture");
-						URL.indexOf(a);
-						URL.concat("reqPage="+reqPage);
-						System.out.println(URL);
-						rd = req.getRequestDispatcher(URL);
-						rd.forward(req, resp);
-					}else {
-						rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
-						rd.forward(req, resp);
-					}
+				rd = req.getRequestDispatcher("lecture/lecture_List_in_Progress.jsp");
+				rd.forward(req, resp);
+
 
 			}
 		}else if(action.equals("go_Cutomer_Information.admin")) {
@@ -149,8 +140,12 @@ public class Page_Move_Contoroller extends HttpServlet {
 					rd.forward(req, resp);
 				}		
 			}
-			
-
+		}else if(action.equals("go_Attend_Lecture.admin")) {
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			List<Lecture> lecture_List_Serve = ldao.select_All_Lecture();
+			req.setAttribute("lecture_List_Serve", lecture_List_Serve);
+			rd = req.getRequestDispatcher("administrator/customer_Information/count_Attending_Member.jsp");			
+			rd.forward(req, resp);
 		}
 	}
 }

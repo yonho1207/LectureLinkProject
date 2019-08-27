@@ -119,6 +119,10 @@ public class PaymentController extends HttpServlet {
 		}else if(action.equals("clear_Purchase_Basket.do")) {
 			HttpSession session = req.getSession();
 			List<Payment> purchase_Basket = (List<Payment>) session.getAttribute("purchase_Basket");
+				if(purchase_Basket.isEmpty()) {
+					rd = req.getRequestDispatcher("go_payment.do");
+					rd.forward(req, resp);
+				}
 			purchase_Basket.clear();
 			session.setAttribute("purchase_Basket", purchase_Basket);
 			rd = req.getRequestDispatcher("go_payment.do");

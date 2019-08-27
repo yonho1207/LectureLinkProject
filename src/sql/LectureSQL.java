@@ -38,4 +38,13 @@ public class LectureSQL {
 			"from(select rownum as rn, lecture_sel.* \r\n" + 
 			"    from (select * from lecture where LECTURE_NAME like ? order by LECTURE_NO desc) lecture_sel)\r\n" + 
 			"where rn between ? and ?  order by LECTURE_NO";
+	
+	public static final String GET_LECTURE_ATTEND_COUNT =
+			"select lecture_no, count(*) as cnt from payment where lecture_no = ? group by lecture_no";
+	
+	public static final String GET_ATTENDMEMBER_AGEGROUP =
+			"select  age ,count(*) as cnt \r\n" + 
+			"from (select floor((to_char(sysdate, 'yyyy')-to_char(members.birth, 'yyyy')) / 10) \r\n" + 
+			"* 10 as age from members natural join payment p where p.lecture_no=?)\r\n" + 
+			"group by age order by age";
 }
