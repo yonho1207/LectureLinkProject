@@ -70,7 +70,7 @@ public class CmtController extends HttpServlet {
 
 			Cmt cmt = new Cmt();
 			CmtDAO dao = new CmtDAOImpl();
-
+			
 			cmt.setMember_no(Integer.parseInt(req.getParameter("member_no")));
 			cmt.setLecture_no(Integer.parseInt(req.getParameter("lecture_no")));
 			cmt.setId(req.getParameter("id"));
@@ -91,8 +91,7 @@ public class CmtController extends HttpServlet {
 
 			req.setAttribute("cmt", resultComment);
 
-			//RequestDispatcher rd = req.getRequestDispatcher("/cmt/cmtItem.jsp");
-			RequestDispatcher rd = req.getRequestDispatcher("go_cmt_Fom");
+			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_delete")) {
@@ -103,7 +102,7 @@ public class CmtController extends HttpServlet {
 
 			dao.deleteByCmt_no(cmt_no);
 
-			RequestDispatcher rd = req.getRequestDispatcher("cmt_list");
+			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);
 
 		} else if (action.equals("cmt_list")) {

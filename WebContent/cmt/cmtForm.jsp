@@ -51,7 +51,7 @@
 		日時 : {{= cmt_date}}
 
 		{{if chk == true}}
-			<input type="button" class="delete_btn" value="삭제">
+			<input type="button" class="delete_btn" value="コメントを消す">
 		{{/if}}	
 	</li>	
 	</div>
@@ -162,7 +162,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			var target= $(this).parents(".cmt_item");
 			target.next().remove();
 			target.remove();
-	
+			location.replace('index.jsp');
 			$.post("cmt_delete",{"cmt_no":num},function(xml){
 			
 			}).fail(function(){
@@ -374,8 +374,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		 作成者:${cmtlists.id} 
 		内容 :${cmtlists.cmt_con} 
 		日時:${cmtlists.cmt_date}
+		<c:if test="${members_info.id == cmtlists.id}">
+		<a type="button" class="btn" href="cmt_delete?cmt_no=${cmtlists.cmt_no}">コメントを消す</a>	
+		</c:if>
 		<br >
-
 	</c:forEach>
 	
 	</div>
