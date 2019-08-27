@@ -146,6 +146,9 @@ public class Page_Move_Contoroller extends HttpServlet {
 			req.setAttribute("lecture_List_Serve", lecture_List_Serve);
 			rd = req.getRequestDispatcher("administrator/customer_Information/count_Attending_Member.jsp");			
 			rd.forward(req, resp);
+		}else if(action.equals("get_CustomerInfo.admin")) {
+			rd = req.getRequestDispatcher("go_Cutomer_Information.admin");
+			rd.forward(req, resp);
 		}
 	}
 }

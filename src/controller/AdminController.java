@@ -112,9 +112,6 @@ public class AdminController extends HttpServlet{
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/administrator/member/search_member_result.jsp");
 				rd.forward(req, resp);
-			}else if(action.equals("get_CustomerInfo.admin")) {
-				RequestDispatcher rd = req.getRequestDispatcher("go_Cutomer_Information.admin");
-				rd.forward(req, resp);
 			}
 			
 			
