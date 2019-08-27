@@ -142,18 +142,23 @@
 		<tr>	
 			<c:forEach var="qna" items="${qnaList}">
 				<tr>
-					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}</a></td>
+					<td><a href="qna_detail?qna_no=${qna.qna_no}">${qna.qna_title}
+						<c:forEach var="qna_Compare" items="${qnaList}">
+							<c:if test="${qna_Compare.lvl!=0 && qna.grp==qna_Compare.grp}">
+								!
+							</c:if>
+						</c:forEach>
+					</a></td>
 					<td>${qna.id}</td>
 					<td>${qna.visited}</td>
 					<td>${qna.qna_date}</td>
 				</tr>
 			</c:forEach>
-
-		</table>	
+			
+			</table>	
 		</div>	
-		
 	<table class="table">
-		<c:if test="${members_info != null}">
+		<c:if test="${members_info != null && admin == null}">
 			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" style="position: relative; left: 300px">書き込む</button>		
 		</c:if>
 	</table>

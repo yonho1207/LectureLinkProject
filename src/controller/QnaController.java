@@ -93,7 +93,7 @@ public class QnaController extends HttpServlet {
 
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			//int grp = Integer.parseInt(req.getParameter("grp"));
-			int cnt = 0;
+			//int cnt = 0;
 			
 			PageManager pm = new PageManager(requestPage);
 

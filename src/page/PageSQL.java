@@ -10,4 +10,6 @@ public class PageSQL {
 	
 	public static final String  LECTURE_SELECTE_ALL_COUNT=
 			"select count(*)as cnt from lecture";
+	public static final String LECTURE_SELECT_BY_NAME=
+			"select count(*)as cnt from lecture where lecture_name like ?";
 }

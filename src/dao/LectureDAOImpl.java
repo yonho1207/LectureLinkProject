@@ -264,8 +264,69 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 		return lecture_List;
 	}
 	
+	public List<Lecture> Selected_Lecture_List_For_Paging_By_LectureName(String searchName, int rowStartNumber, int rowEndNumber) {
+		List<Lecture> lecture_List = new ArrayList<Lecture>();
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.SELECT_BY_ROWNUM_IN_SERACH_BY_LECTURE);
+			preparedStatement.setString(1, "%"+ searchName +"%");
+			preparedStatement.setInt(2, rowStartNumber);
+			preparedStatement.setInt(3, rowEndNumber);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Lecture lecture = new Lecture();
+				lecture.setLecture_no(resultSet.getInt("lecture_no"));
+				lecture.setLecture_name(resultSet.getString("lecture_name"));
+				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
+				lecture.setPrice(resultSet.getInt("price"));
+				lecture.setBook_price(resultSet.getInt("book_price"));
+				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
+				lecture.setDescription(resultSet.getString("description"));
+				lecture_List.add(lecture);
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);		
+		}
+		return lecture_List;
+	}
+
+	@Override
+	public List<Lecture> select_Lecture_By_Name(String lecture_Name) {
+		List<Lecture> lecture_List = new ArrayList<Lecture>();
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.SELECT_BY_LECTURE_NAME);
+			preparedStatement.setString(1, "%"+ lecture_Name +"%");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Lecture lecture = new Lecture();
+				lecture.setLecture_no(resultSet.getInt("lecture_no"));
+				lecture.setLecture_name(resultSet.getString("lecture_name"));
+				lecture.setLecture_teacher(resultSet.getString("lecture_teacher"));
+				lecture.setPrice(resultSet.getInt("price"));
+				lecture.setBook_price(resultSet.getInt("book_price"));
+				lecture.setLecture_Url(resultSet.getString("lecture_Url"));
+				lecture.setDescription(resultSet.getString("description"));
+				lecture_List.add(lecture);
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);		
+		}
+		return lecture_List;
+	}
+
 	
-
-
 	
 }

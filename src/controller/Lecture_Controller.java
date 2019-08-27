@@ -17,6 +17,7 @@ import dao.LectureDAOImpl;
 import model.Cmt;
 import model.Lecture;
 import model.Members;
+import page.PageGroupResult;
 import page.PageManager;
 import page.PageManager_For_Lecture;
 @WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price",
@@ -119,33 +120,42 @@ public class Lecture_Controller extends HttpServlet {
 			HttpSession session = req.getSession();
 			String before_address = req.getHeader("referer");
 			int get_lastIndex = before_address.lastIndexOf("=");
-			boolean intersection = before_address.contains("reqPage");
-			int get_reqPage = 0;
-			if(intersection==true) {
+			int intersection = 0;
+			int search_Option = 0;
+			if(before_address.contains("&search_Word")) {
+				intersection = before_address.lastIndexOf("&search_Word");
+				search_Option=Integer.parseInt(before_address.substring(intersection-1,intersection));
+			}
+			int get_reqPage = 1;
+			if (before_address.contains("reqPage")) {
 				get_reqPage = Integer.parseInt(before_address.substring(get_lastIndex+1));
-				PageManager_For_Lecture pm = new PageManager_For_Lecture(get_reqPage);
-				int rowStartNumber = pm.getPageRowResult().getRowStartNumber();
-				int rowEndNumber = pm.getPageRowResult().getRowEndNumber();			
+			}
+			PageManager_For_Lecture pm = new PageManager_For_Lecture(get_reqPage);
+			int rowStartNumber = pm.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = pm.getPageRowResult().getRowEndNumber();
+			if(intersection==0) {		
 				List<Lecture> Selected_Lecture_List_For_Paging = 
 						ldao.lecture_List_Get_RowNum(rowStartNumber, rowEndNumber);
 				req.setAttribute("Selected_Lecture_List_For_Paging", Selected_Lecture_List_For_Paging);
 				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
 				rd.forward(req, resp);
-			}else if(intersection==false){
-				int intersection_Info  = before_address.lastIndexOf("&search_Word");
-				int search_Option=Integer.parseInt(before_address.substring(intersection_Info-1,intersection_Info));
-				if(search_Option==1) {
-					String lecture_name = before_address.substring(get_lastIndex+1);
-					List<Lecture> lecture_List = ldao.select_Lecture_Name(lecture_name);
+			}else if(search_Option==1){			
+					String searchName = before_address.substring(get_lastIndex+1);
+					List<Lecture> lecture_List = ldao.select_Lecture_Name(searchName);
 					req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
-				}else if(search_Option==2) {
-					String lecture_teacher = before_address.substring(get_lastIndex+1);
-					List<Lecture> lecture_List = ldao.select_Lecture_Teacher(lecture_teacher);
-					req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
-				}
-				rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
-				rd.forward(req, resp);	
+					List<Lecture> selected_Lecture_List_For_Paging_By_LectureName = 
+							ldao.Selected_Lecture_List_For_Paging_By_LectureName
+							(searchName, rowStartNumber, rowEndNumber);
+					req.setAttribute("selected_Lecture_List_For_Paging_By_LectureName", 
+							selected_Lecture_List_For_Paging_By_LectureName);
+					rd = req.getRequestDispatcher("lecture/lecture_tmpl/lecture_tmpl.jsp");
+					rd.forward(req, resp);	
+			}else if(search_Option==2) {
+				String lecture_teacher = before_address.substring(get_lastIndex+1);
+				List<Lecture> lecture_List = ldao.select_Lecture_Teacher(lecture_teacher);
+				req.setAttribute("Selected_Lecture_List_For_Paging", lecture_List);
 			}
+
 			
 			
 		}else if(action.equals("search_Lecture")) {
@@ -154,10 +164,13 @@ public class Lecture_Controller extends HttpServlet {
 			String before_address = req.getHeader("referer");
 			int get_lastIndex = before_address.lastIndexOf("=");
 			String get_reqPage = before_address.substring(get_lastIndex+1);
+			PageManager_For_Lecture pm = new PageManager_For_Lecture();
 			int search_Option = Integer.parseInt(req.getParameter("search_Option"));
 			if(search_Option==1) {
 				String lecture_name = req.getParameter("search_Word");
 				req.setAttribute("search_Word", lecture_name);
+				PageGroupResult pageGroupResult = pm.getpageGroupResult(page.PageSQL.LECTURE_SELECT_BY_NAME, lecture_name);
+				req.setAttribute("pageGroupResult", pageGroupResult);
 				rd = req.getRequestDispatcher("go_Lecture_List?reqPage=1");
 				rd.forward(req, resp);
 			}else if(search_Option==2){

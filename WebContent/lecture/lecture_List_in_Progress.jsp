@@ -162,7 +162,7 @@
 		</ul>
 	</div>
 	<div class="container">
-		<form action="search_Lecture" style="position: relative; left: 450px" >
+		<form action="search_Lecture?reqPage=1" style="position: relative; left: 450px" >
 			<select name="search_Option">
 				<option value=1>講義名での検索</option>
 				<option value=2>講師名での検索</option>

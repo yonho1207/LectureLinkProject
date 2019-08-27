@@ -3,11 +3,11 @@ package sql;
 public class LectureSQL {
 
 	public static final String LECTURE_SELECT_ALL = 
-			" select LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, PRICE, BOOK_PRICE, url,description,lecture_Url \r\n"
+			" select LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, PRICE, BOOK_PRICE, LECTURE_URL,description,lecture_Url \r\n"
 			+ " from lecture order by LECTURE_NO";
 	
 	public static final String LECTURE_SELECT_BY_NUM = 
-			" select LECTURE_NO,lecture_name,lecture_teacher, price, BOOK_price, description, lecture_Url \r\n" + 
+			" select LECTURE_NO,lecture_name,lecture_teacher, price, BOOK_price, LECTURE_URL,description, lecture_Url \r\n" + 
 			" from lecture where lecture_no=?";
 	public static final String ATTENDING_LECTURE =
 			"select PAYMENT_NO, lecture_no, member_no, id, lecture_name, payment_date\r\n" + 
@@ -33,4 +33,9 @@ public class LectureSQL {
 	public static final String SELECT_BY_LECTURE_TEACHER = 
 			"select  LECTURE_NO,lecture_name,lecture_teacher, price, BOOK_price, description, lecture_Url from \r\n" + 
 			"lecture where lecture_teacher like ?";
+	public static final String SELECT_BY_ROWNUM_IN_SERACH_BY_LECTURE =
+			"select *\r\n" + 
+			"from(select rownum as rn, lecture_sel.* \r\n" + 
+			"    from (select * from lecture where LECTURE_NAME like ? order by LECTURE_NO desc) lecture_sel)\r\n" + 
+			"where rn between ? and ?  order by LECTURE_NO";
 }
