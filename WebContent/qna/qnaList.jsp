@@ -79,7 +79,7 @@
 						</li>
 					</c:when>
 					</c:choose>
-					<c:if test="${admin!=null && members_info==null}">
+					<c:if test="${admin!=null}">
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							管理者メニュー
@@ -159,9 +159,8 @@
 			
 			</table>	
 		</div>	
-		
 	<table class="table">
-		<c:if test="${members_info != null}">
+		<c:if test="${members_info != null && admin == null}">
 			<button type="button" class="btn btn-primary" onclick="location.href='/LectureLinkProject/qna_inputform'" style="position: relative; left: 300px">書き込む</button>		
 		</c:if>
 	</table>

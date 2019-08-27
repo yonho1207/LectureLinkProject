@@ -101,7 +101,7 @@
 			</nav>
 
 
-
+<br >
 <h1>告知フォーム</h1>
 
 		<div class="container">

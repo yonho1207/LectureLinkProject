@@ -119,7 +119,7 @@
 	<div class="container">
 	<div class="form-group">	
 	<hr>
-	댓글: &nbsp; ${qna_cmt.qna_title}  &nbsp;&nbsp; ${qna_cmt.qna_date} 
+	コメント: &nbsp; ${qna_cmt.qna_title}  &nbsp;&nbsp; ${qna_cmt.qna_date} 
 	<textarea class="form-control" rows="5" cols="50" disabled="disabled"> ${qna_cmt.qna_con}</textarea>
 	<c:if test="${admin!=null}">
 	<a type="button"  class="btn btn-primary" href="qna_delete?qna_no=${qna_cmt.qna_no}">コメントを消す</a>	
