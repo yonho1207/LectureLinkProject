@@ -84,7 +84,8 @@
 				<div class="container" > 
 					<p>受講者数</p>
 		 			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
-						<div class="progress-bar" style="width: ${attending_CNT}%">${attending_CNT}</div>
+						<div class="progress-bar" style="width: ${attending_CNT}%">
+						${attending_CNT}</div>
 					</div>				
 		   		</div>
 		   		<br />
@@ -92,7 +93,9 @@
 		   			<p>年齢別の受講者</p>
 					<c:forEach var="ageGroup" items="${ageGroup}">
 			  			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
-							${ageGroup.ageGroup}代: <div class="progress-bar" style="width:${ageGroup.ageGroupCount}%">${ageGroup.ageGroupCount}</div>
+							${ageGroup.ageGroup}代: 
+							<div class="progress-bar" style="width:${ageGroup.ageGroupCount}%">
+							${ageGroup.ageGroupCount}</div>
 						</div>
 					</c:forEach>
 				</div>
