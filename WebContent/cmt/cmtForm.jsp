@@ -264,7 +264,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		</nav>
 	<br>
 
-	<h2>講義詳細 ページ</h2>
+	<h1>講義詳細 ページ</h1>
 	<hr>
 	<div class="container mt-3">
   		<h2>講義詳細</h2>
