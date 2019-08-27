@@ -253,7 +253,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 						<div class="dropdown-menu">
 						<a class="dropdown-item" href="admin_memberList.admin">管理者ページへ</a>
 						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義登録ページへ</a>
-					
+						<a class="dropdown-item" href="go_Cutomer_Information.admin">会員情報分析</a>
+						<a class="dropdown-item" href="go_Attend_Lecture.admin">受講者分析</a>
 						</div>
 						</li>
 				</c:if>

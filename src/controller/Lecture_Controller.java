@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AdminDAO;
+import dao.AdminDAOImpl;
 import dao.CmtDAO;
 import dao.CmtDAOImpl;
 import dao.LectureDAOImpl;
+import model.AgeGroup;
 import model.Cmt;
 import model.Lecture;
 import model.Members;
@@ -24,7 +27,7 @@ import page.PageManager_For_Lecture;
 		"/jump_To_Clicked_Lecture","/delete_Lecture.admin",
 		"/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin",
 		"/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin",
-		"/lecture_Tmpl", "/search_Lecture"})
+		"/lecture_Tmpl", "/search_Lecture","/get_cnt_Attending_Member"})
 public class Lecture_Controller extends HttpServlet {
 	
 	@Override
@@ -169,8 +172,6 @@ public class Lecture_Controller extends HttpServlet {
 			if(search_Option==1) {
 				String lecture_name = req.getParameter("search_Word");
 				req.setAttribute("search_Word", lecture_name);
-				PageGroupResult pageGroupResult = pm.getpageGroupResult(page.PageSQL.LECTURE_SELECT_BY_NAME, lecture_name);
-				req.setAttribute("pageGroupResult", pageGroupResult);
 				rd = req.getRequestDispatcher("go_Lecture_List?reqPage=1");
 				rd.forward(req, resp);
 			}else if(search_Option==2){
@@ -180,6 +181,16 @@ public class Lecture_Controller extends HttpServlet {
 				rd.forward(req, resp);
 			}
 
+		}else if(action.equals("get_cnt_Attending_Member")) {
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			AdminDAO adao = new AdminDAOImpl();
+			int lecture_No = Integer.parseInt(req.getParameter("select_Lecture_Pick"));
+			int attending_CNT = ldao.get_Attending_Count(lecture_No);
+			req.setAttribute("attending_CNT", attending_CNT);
+			List<AgeGroup> ageGroup = ldao.get_Attending_AgeGroup(lecture_No);
+			req.setAttribute("ageGroup", ageGroup);
+			rd = req.getRequestDispatcher("go_Attend_Lecture.admin");
+			rd.forward(req, resp);
 		}
 	}
 	

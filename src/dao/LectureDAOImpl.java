@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.AgeGroup;
 import model.Lecture;
 import model.Payment;
 
@@ -325,6 +326,60 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);		
 		}
 		return lecture_List;
+	}
+
+	@Override
+	public int get_Attending_Count(int lecture_No) {
+		int attending_CNT = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.GET_LECTURE_ATTEND_COUNT);
+			preparedStatement.setInt(1, lecture_No);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				attending_CNT = resultSet.getInt("CNT");
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return attending_CNT;
+	}
+
+	@Override
+	public List<AgeGroup> get_Attending_AgeGroup(int lecture_No) {
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		List<AgeGroup> ageGroup = new ArrayList<AgeGroup>();
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.GET_ATTENDMEMBER_AGEGROUP);
+			preparedStatement.setInt(1, lecture_No);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				AgeGroup getAge = new AgeGroup();
+				getAge.setAgeGroup(resultSet.getInt("age"));
+				getAge.setAgeGroupCount(resultSet.getInt("cnt"));
+				ageGroup.add(getAge);	
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return ageGroup;
 	}
 
 	
