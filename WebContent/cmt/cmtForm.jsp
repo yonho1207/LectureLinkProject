@@ -72,7 +72,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no) {
 	
 	var new_li = $("#itemTemplate").tmpl(li_data);
 	
-	$("#cmt_list").prepend(new_li);
+	$("#cmt_list").append(new_li);
 }
 
 	$(function(){
@@ -89,6 +89,7 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no) {
 				var cmt_date = $(this).find("cmt_date").text();
 			
 			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no);
+			
 	});
 		
 	}).fail(function(){
