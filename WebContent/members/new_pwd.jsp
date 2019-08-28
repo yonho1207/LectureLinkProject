@@ -60,10 +60,13 @@
 	<style type="text/css">
 		#newpwdForm{
 			font-size: xx-large;
-	  		position: relative;
 	  		left: 200px;
-		}
-	
+			margin:auto;
+			padding:20px;
+			width:500px;
+			background-color:#EEEFF1;
+			border-radius:5px;
+		} 
 	</style>
 </head>
 <body>
@@ -130,14 +133,17 @@
 
 
 	
-
-	<form method="post" id="newpwdForm" action="pwd_update">
-		<h1>パスワード再設定</h1><br />
-		<input type="hidden" name="member_no" id="member_no" value="${pwd_info.member_no}" />
-		<input type="password" name="password" id="password" placeholder="パスワードを入力してください。"/><br />
-		<input id="repassword" type="password" name="repassword" placeholder="パスワードをもう一度入力してください。"/><br />
-		<input type="submit" value="確定"/>
-	</form>
+	<div class="container">	
+		<form method="post" id="newpwdForm" action="pwd_update">
+		 <div class="form-group">
+			<h1>パスワード再設定</h1><br />
+			<input type="hidden" class="form-control" name="member_no" id="member_no" value="${pwd_info.member_no}" />
+			<input type="password" class="form-control" name="password" id="password" placeholder="パスワードを入力してください。"/><br />
+			<input id="repassword" class="form-control" type="password" name="repassword" placeholder="パスワードをもう一度入力してください。"/><br />
+			<input type="submit" value="確定" />
+		</div>
+		</form>
+	</div>
 	<%@ include file ="/companyLogo.jsp" %>
 </body>
 </html>

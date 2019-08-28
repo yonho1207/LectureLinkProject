@@ -201,6 +201,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 				cmt.setLecture_no(resultSet.getInt("lecture_no"));
 
 				cmtlist.add(cmt);
+				
 			}
 
 		} catch (SQLException e) {
@@ -210,6 +211,7 @@ public class CmtDAOImpl extends BaseDAO implements CmtDAO {
 
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
+
 		return cmtlist;
 	}
 

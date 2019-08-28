@@ -50,9 +50,6 @@
 		内容: {{= cmt_con}}
 		日時 : {{= cmt_date}}
 
-		{{if chk == true}}
-			<input type="button" class="delete_btn" value="コメントを消す">
-		{{/if}}	
 	</li>	
 	</div>
 	<hr>	
@@ -60,7 +57,7 @@
 
 <script type="text/javascript">
 
-function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) {
+function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no) {
 	
 	var li_data = {
 			
@@ -71,7 +68,6 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 			"cmt_con":cmt_con,
 			"rating" : rating,
 			"cmt_date":cmt_date,
-			"chk" : chk
 	};	
 	
 	var new_li = $("#itemTemplate").tmpl(li_data);
@@ -91,13 +87,8 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 				var cmt_con = $(this).find("cmt_con").text();
 				var rating = $(this).find("rating").text();
 				var cmt_date = $(this).find("cmt_date").text();
-				var chk = false;
 			
-			if(member_no == "${members_info.member_no}"){
-				chk = true;
-			}
-			
-			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
+			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no);
 	});
 		
 	}).fail(function(){
@@ -121,52 +112,13 @@ function addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk) 
 		
 		} 
 		
-/* 	$.post("cmt_insert",$(this).serialize(),function(xml){
-		
-		var result=$(xml).find("result").text();
-		
-		if (result) {
-			
-			var cmt_no =$(xml).find("cmt_no").text();
-			var member_no =$(xml).find("member_no").text();
-			var lecture_no = $(xml).find("lecture_no").text();
-			var id = $(xml).find("id").text();
-			var cmt_con = $(xml).find("cmt_con").text();
-			var rating = $(xml).find("rating").text();
-			var datetime = $(xml).find("cmt_date").text();
-			var chk = false;
-			
-			if(id == "${members_info.member_no}"){
-				chk = true;
-			}
-			
-			addNewItem(cmt_no,member_no,id,cmt_con,rating,cmt_date,lecture_no,chk);
-			location.replace('index.jsp');
-			$("#cmt_con").val("");
-			
-				
-			}
-		
-	}).fail(function(){
-		
-	});
-	//return false;
-		*/
 });	 
 	$(document).on('click','.delete_btn',function(){
 	
 		if(confirm("本当に削除しますか？")){
 		
-			var num = $(this).parent("li").attr("data-num");
-			var target= $(this).parents(".cmt_item");
-			target.next().remove();
-			target.remove();
 			location.replace('index.jsp');
-			$.post("cmt_delete",{"cmt_no":num},function(xml){
-			
-			}).fail(function(){
-				alert("削除失敗");
-			});
+		
 		}
 	});		
 });
@@ -197,13 +149,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 </style>
 
 <style type="text/css">
-.pagination{
-    position:absolute;
-    top:0; left:0; bottom:0; right:0;
-    height:10%; 
-    margin:10% auto;
-    }
 #list_btn{background-color:black; color: white; }
+.delete_btn{background-color:#0064FF; color: white;}
 </style>
 </head>
 <body>
@@ -375,7 +322,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		内容 :${cmtlists.cmt_con} 
 		日時:${cmtlists.cmt_date}
 		<c:if test="${members_info.id == cmtlists.id}">
-		<a type="button" class="btn" href="cmt_delete?cmt_no=${cmtlists.cmt_no}">コメントを消す</a>	
+		&nbsp &nbsp<a type="button" class="delete_btn" href="cmt_delete?cmt_no=${cmtlists.cmt_no}">コメントを消す</a>	
 		</c:if>
 		<br >
 	</c:forEach>

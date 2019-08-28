@@ -48,7 +48,6 @@ public class CmtController extends HttpServlet {
 			int lecture_no = Integer.parseInt(req.getParameter("lecture_no"));
 			int requestPage = 1;
 
-			HttpSession session = req.getSession();
 			CmtDAO dao = new CmtDAOImpl();
 			LectureDAO daol = new LectureDAOImpl();
 
@@ -118,7 +117,7 @@ public class CmtController extends HttpServlet {
 			List<Cmt> cmtlists = dao.selectByLecture_no(lecture_no);
 			List<Cmt> cmtList = dao.selectByLecture_noPage(pm.getPageRowResult().getRowStartNumber(),
 					pm.getPageRowResult().getRowEndNumber(), lecture_no);
-				
+
 			session.setAttribute("cmtList", cmtList);
 			session.setAttribute("lecture", lecture);
 			session.setAttribute("cmtlists", cmtlists);

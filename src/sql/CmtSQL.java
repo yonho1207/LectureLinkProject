@@ -3,7 +3,7 @@ package sql;
 public class CmtSQL {
 
 	public static final String CMT_SELCTE_ALL_SQL // CMT 게시판 조회
-			= "SELECT * FROM cmt ORDER BY cmt_no ASC ";
+			= "SELECT * FROM cmt  ";
 
 	public static final String CMT_INSERT_SQL // CMT 게시판 댓글 입력
 			= "INSERT INTO cmt VALUES(seq_cmt_no.nextval,?,?,?,?,?,sysdate)";
