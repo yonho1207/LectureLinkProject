@@ -24,7 +24,7 @@ import page.PageGroupResult;
 import page.PageManager;
 import page.PageManager_For_Lecture;
 @WebServlet(name="Lecture_Controller", urlPatterns = {"/get_Price",
-		"/jump_To_Clicked_Lecture","/delete_Lecture.admin",
+		"/delete_Lecture.admin",
 		"/go_Main_in_Lectrue","/go_Lecture_List.do","/update_Lecture.admin",
 		"/go_Lecture_Update.admin","/go_Lecture_Insert.admin","/insert_Lecture.admin",
 		"/lecture_Tmpl", "/search_Lecture","/get_cnt_Attending_Member"})
@@ -103,12 +103,6 @@ public class Lecture_Controller extends HttpServlet {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			ldao.delete_Lecture(Integer.parseInt(req.getParameter("lecture_no")));
 			rd = req.getRequestDispatcher("go_Lecture_List.do");
-			rd.forward(req, resp);
-		}else if(action.equals("jump_To_Clicked_Lecture")) {
-			LectureDAOImpl ldao = new LectureDAOImpl();
-			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
-			req.setAttribute("selected_Lecture", selected_Lecture);
-			rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");
 			rd.forward(req, resp);
 		}else if(action.equals("get_Price")) {
 			int selectedNumber = Integer.parseInt(req.getParameter("selectedNumber"));
@@ -192,6 +186,6 @@ public class Lecture_Controller extends HttpServlet {
 			rd = req.getRequestDispatcher("go_Attend_Lecture.admin");
 			rd.forward(req, resp);
 		}
-	}
 	
+	}
 }

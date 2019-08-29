@@ -1,7 +1,13 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +24,7 @@ import dao.LectureDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.QnaDAO;
 import dao.QnaDAOImpl;
+import dao.Time_Set_Helper;
 import model.AgeGroup;
 import model.Lecture;
 import model.Members;
@@ -28,11 +35,12 @@ import page.PageGroupResult;
 import page.PageManager;
 import page.PageManager_For_Lecture;
 import page.PageSQL;
+import sun.util.resources.LocaleData;
 @WebServlet(name="Page_Move_Contoroller", urlPatterns = {"/accept_Purchase.do",
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
 		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
-		"/go_Lecture_attend.do","/go_Attend_Lecture.admin"})
+		"/go_Lecture_attend.do","/go_Attend_Lecture.admin","/jump_To_Clicked_Lecture"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -131,15 +139,28 @@ public class Page_Move_Contoroller extends HttpServlet {
 			req.setAttribute("selected_Lecture", selected_Lecture);
 			Members member = (Members) session.getAttribute("members_info");
 			List<Payment> attending_Lecture = pdao.attending_Lecture(member.getMember_no());
+			boolean have_Right = false;
 			for(Payment attending : attending_Lecture) {
-				if(attending.getLecture_no()==selected_Lecture.getLecture_no()) {
-					rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");			
-					rd.forward(req, resp);
-				}else if(attending.getLecture_no()!=selected_Lecture.getLecture_no()){
-					rd = req.getRequestDispatcher("lecture/lecture_Detail/not_Purchase.jsp");			
-					rd.forward(req, resp);
+				String period = attending.getPeriod();
+				String replaced_Period = period.replaceAll("[^0-9]", "");
+				Long period_To_Long = Long.parseLong(replaced_Period);
+				String get_Today = Time_Set_Helper.get_Today();
+				String replaced_Today = get_Today.replaceAll("[^0-9]", "");
+				Long today_to_Long = Long.parseLong(replaced_Today);
+				if(attending.getLecture_no()==selected_Lecture.getLecture_no() && period_To_Long > today_to_Long) {					
+					have_Right = true;
+				}else if(attending.getLecture_no()!=selected_Lecture.getLecture_no() ||  period_To_Long < today_to_Long){
+					have_Right = false;
 				}		
 			}
+			if(have_Right==true) {
+				rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");			
+				rd.forward(req, resp);
+			}else {
+				rd = req.getRequestDispatcher("lecture/lecture_Detail/not_Purchase.jsp");			
+				rd.forward(req, resp);
+			}
+			
 		}else if(action.equals("go_Attend_Lecture.admin")) {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			List<Lecture> lecture_List_Serve = ldao.select_All_Lecture();
@@ -149,6 +170,27 @@ public class Page_Move_Contoroller extends HttpServlet {
 		}else if(action.equals("get_CustomerInfo.admin")) {
 			rd = req.getRequestDispatcher("go_Cutomer_Information.admin");
 			rd.forward(req, resp);
+		}else if(action.equals("jump_To_Clicked_Lecture")) {
+			HttpSession session = req.getSession();
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
+			req.setAttribute("selected_Lecture", selected_Lecture);
+			Members member = (Members) session.getAttribute("members_info");
+			String period = pdao.select_Attending_Lecture
+					(member.getMember_no(), Integer.parseInt(req.getParameter("search-select")));
+/*			String period = period_a.substring(0, 10)+" "+"01"+period_a.substring(13, period_a.length()) ;*/
+			//insert 당시 오류로 인한 00:00:00 케이스 처리를 위한 구문
+			boolean have_Right = ldao.distinction_Access_Authority
+					(member.getMember_no(), period, Integer.parseInt(req.getParameter("search-select")));
+			if(have_Right==true) {
+				rd = req.getRequestDispatcher("lecture/lecture_Detail/lecture_PlayPage.jsp");			
+				rd.forward(req, resp);
+			}else {
+				rd = req.getRequestDispatcher("lecture/lecture_Detail/not_Purchase.jsp");			
+				rd.forward(req, resp);
+			}
+			
 		}
 	}
 }

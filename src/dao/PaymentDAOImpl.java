@@ -215,6 +215,32 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		System.out.println(selected_Period_List);
 		return selected_Period_List;
 	}
+
+	@Override
+	public String select_Attending_Lecture(int member_no, int lecture_no) {
+		String period = null; 
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.SELECTED_ATTENDING_LECTURE);
+			preparedStatement.setInt(1, member_no);
+			preparedStatement.setInt(2, lecture_no);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				period = resultSet.getString("period");
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return period;
+	}
 	
 	
 

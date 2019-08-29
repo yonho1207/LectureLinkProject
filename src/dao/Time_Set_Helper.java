@@ -8,7 +8,7 @@ import java.util.Date;
 public class Time_Set_Helper {
 	
 	public static String get_Today() {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		Date get_payment_Day = cal.getTime();
@@ -17,7 +17,7 @@ public class Time_Set_Helper {
 	}
 
 	public static String get_OneMonth_Later() {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); 
 		cal.add(Calendar.MONTH, 1);
@@ -27,7 +27,7 @@ public class Time_Set_Helper {
 	}
 
 	public static String get_period_date(int select_Price) {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); 
 		cal.add(Calendar.MONTH, select_Price);
@@ -37,6 +37,12 @@ public class Time_Set_Helper {
 		
 	}
 
-
+	public static boolean distintion_Period(String period) {
+		boolean result = false;
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		return result;
+	}
 
 }

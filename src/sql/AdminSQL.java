@@ -26,5 +26,20 @@ public class AdminSQL {
 			"from (select floor((to_char(sysdate, 'yyyy')-to_char(members.birth, 'yyyy')) / 10) \r\n" + 
 			"* 10 as age from members) info\r\n" + 
 			"group by age order by age";
+	
+	public static final String GET_COUNT_PAYOPTION = 
+			"select count(*) from payment group by pay_option";
+	
+	public static final String GET_AVG_PAYOPTION =
+			"select round(avg(price)) from payment group by pay_option";
+	
+	public static final String GET_PAY_MONTH = 
+			"select \r\n" + 
+			"round((to_date(?, 'yyyy-mm-dd hh24:mi:ss')- \r\n" + 
+			"to_date(?,'yyyy-mm-dd hh24:mi:ss'))/30) as month\r\n" + 
+			"from dual";
+	
+	public static final String GET_MEMBERS_COUNT =
+			"select count(*) from members";
 
 }

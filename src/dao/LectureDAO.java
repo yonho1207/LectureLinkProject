@@ -16,6 +16,7 @@ public interface LectureDAO {
 	List<Lecture> select_Lecture_By_Name(String lecture_Name);
 	int get_Attending_Count(int lecture_No);
 	List<AgeGroup> get_Attending_AgeGroup(int lecture_No);
+	boolean distinction_Access_Authority(int member_no, String period, int lecture_no);
 	boolean insert_Lecture(Lecture lecture);
 	boolean update_Lecture(Lecture lecture);
 	boolean delete_Lecture(int lecture_no);

@@ -139,6 +139,7 @@ public class MembersController extends HttpServlet{
 			HttpSession session = req.getSession();
 			session.removeAttribute("members_info");
 			session.removeAttribute("admin");
+			session.removeAttribute("purchase_Basket");
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
