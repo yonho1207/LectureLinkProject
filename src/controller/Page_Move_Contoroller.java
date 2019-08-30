@@ -40,7 +40,8 @@ import sun.util.resources.LocaleData;
 		"/credit_Card.do","/account_Transfer.do","/cell_Phone_Bill.do",
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
 		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
-		"/go_Lecture_attend.do","/go_Attend_Lecture.admin","/jump_To_Clicked_Lecture"})
+		"/go_Lecture_attend.do","/go_Attend_Lecture.admin","/jump_To_Clicked_Lecture"
+		,"/go_about_Pay.admin"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -190,6 +191,27 @@ public class Page_Move_Contoroller extends HttpServlet {
 				rd = req.getRequestDispatcher("lecture/lecture_Detail/not_Purchase.jsp");			
 				rd.forward(req, resp);
 			}
+			
+		}else if(action.equals("go_about_Pay.admin")) {
+			LectureDAOImpl ldao = new LectureDAOImpl();
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			AdminDAO adao = new AdminDAOImpl();
+			
+			List<Integer> get_PayOption = adao.get_Payoption_CNT();
+			List<Integer> get_PayOption_AVG = adao.get_Payoption_AVG();
+			double paymented_Month_AVG = adao.get_AVG_period();
+			List<String> payOption_Name = new ArrayList<String>();
+			payOption_Name.add("口座振替");
+			payOption_Name.add("クレジットカード");
+			payOption_Name.add("携帯");
+			payOption_Name.add("ギフトカード");
+			req.setAttribute("payOption_Name", payOption_Name);
+			req.setAttribute("get_PayOption", get_PayOption);
+			req.setAttribute("get_PayOption_AVG", get_PayOption_AVG);
+			req.setAttribute("paymented_Month_AVG", paymented_Month_AVG);
+			
+			rd = req.getRequestDispatcher("administrator/customer_Information/about_Payment.jsp");			
+			rd.forward(req, resp);
 			
 		}
 	}

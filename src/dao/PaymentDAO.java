@@ -13,4 +13,5 @@ public interface PaymentDAO {
 	List<Payment> attended_Lecture(int members_No);
 	String select_Attending_Lecture(int member_no, int lecture_no);
 	List<Payment> select_PaymentList(int member_no);
+	List<String> list_Period();
 }

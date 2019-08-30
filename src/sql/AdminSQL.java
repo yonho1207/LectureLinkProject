@@ -28,10 +28,10 @@ public class AdminSQL {
 			"group by age order by age";
 	
 	public static final String GET_COUNT_PAYOPTION = 
-			"select count(*) from payment group by pay_option";
+			"select count(*) as cnt from payment group by pay_option";
 	
 	public static final String GET_AVG_PAYOPTION =
-			"select round(avg(price)) from payment group by pay_option";
+			"select round(avg(price)) as avg from payment group by pay_option";
 	
 	public static final String GET_PAY_MONTH = 
 			"select \r\n" + 
@@ -41,5 +41,10 @@ public class AdminSQL {
 	
 	public static final String GET_MEMBERS_COUNT =
 			"select count(*) from members";
+	
+	public static final String GET_AVG_PERIOD =
+			"select round(sum(round((to_date(period, 'yyyy-mm-dd hh24:mi:ss') \r\n" + 
+			"- to_date(sysdate,'yyyy-mm-dd hh24:mi:ss'))/30)) / count(*), 2) as avg\r\n" + 
+			"from payment";
 
 }

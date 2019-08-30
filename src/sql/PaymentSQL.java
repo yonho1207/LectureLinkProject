@@ -19,4 +19,6 @@ public class PaymentSQL {
 			" where PAYMENT_NO=?";
 	public static final String DELETE_PAYMENT_INFO =
 			" delete from payment where PAYMENT_NO = ?";
+	public static final String GET_PERIOD =
+			"select period from payment";
 }

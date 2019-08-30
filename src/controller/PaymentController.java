@@ -188,6 +188,8 @@ public class PaymentController extends HttpServlet {
 			}else if(result==true){
 				resp.sendRedirect("purchase_Succes");
 			}		
+		}else if(action.equals("")) {
+			
 		}
 			
 	}

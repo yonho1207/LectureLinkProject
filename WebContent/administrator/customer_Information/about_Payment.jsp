@@ -5,18 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>講義の購読権限がありません。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+
+
 </head>
 <body>
 
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<a class="navbar-brand" href="goMain">Logo</a>
 				<ul class="navbar-nav">
 						<li class="nav-item">
@@ -77,9 +76,33 @@
 			</nav>
 		<br>
 		
-	<h1>講義を閲覧できる権限がありません、講義の購読をお願いします。</h1><br />
-	<a href="go_payment.do" style="position: relative; left: 600px"><img src="img/payment/shopping-cart.png">決済情報入力画面へ</a>
-	<a href="goMain" style="position: relative; left: 200px"><img src="img/payment/home-location.png">メインページへ</a>
-	<a href="go_Lecture_List?reqPage=1" style="position: relative; left: 550px"><img src="img/payment/icons8-books-64.png">講義リストへ</a>	
+		<h1>決済に関する情報を表示するページです</h1>
+		
+				<div class="container" > 
+		   			<p>決済手段別のカウント</p>
+					<c:forEach var="get_PayOption" items="${get_PayOption}" varStatus="status">
+			  			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+							${payOption_Name[status.index]} <br /> 	
+							<div class="progress-bar" style="width:${get_PayOption}%">
+							${get_PayOption}名</div>
+						</div><br />
+					</c:forEach>
+				</div>
+				
+				<div class="container" > 
+		   			<p>決済手段別の平均受講料</p>
+					<c:forEach var="get_PayOption_AVG" items="${get_PayOption_AVG}" varStatus="status">
+			  			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+							${payOption_Name[status.index]}　
+							<div class="progress-bar" style="width: 80%">
+							${get_PayOption_AVG}円</div>
+						</div><br />
+					</c:forEach>
+				</div>
+				
+				<div class="container" > 
+					<h1>平均受講月　：${paymented_Month_AVG}</h1>
+				</div>
+		
 </body>
 </html>

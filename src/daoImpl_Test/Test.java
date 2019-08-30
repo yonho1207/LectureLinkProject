@@ -40,7 +40,9 @@ public class Test {
 		ParsePosition pos = new ParsePosition(0);
 		Date xa = transFormat.parse(day, pos);
 		String xx = transFormat.format(xa);
-		System.out.println(xa);
+		
+		
+		List<String> list1 = pdao.list_Period();
 	/*		TreeMap<Integer, Integer> tm = new TreeMap<>(adao.get_AgeGroup());
 		Iterator<Integer> ik = tm.keySet().iterator();
 		System.out.println(ik);
