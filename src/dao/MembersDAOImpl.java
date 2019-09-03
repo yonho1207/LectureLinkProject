@@ -262,5 +262,35 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 			
 		}
 	}
+	
+	public void insertMember(Members member,Connection connection, PreparedStatement preparedStatement) {
+		
+
+
+		try {
+			
+			preparedStatement = connection.prepareStatement(MembersSQL.MEMBERS_INSERT_SQL);
+
+			preparedStatement.setString(1, member.getId());
+			preparedStatement.setString(2, member.getPassword());
+			preparedStatement.setString(3, member.getLastname());
+			preparedStatement.setString(4, member.getFirstname());
+			preparedStatement.setString(5, member.getGender());
+			preparedStatement.setString(6, member.getPhone());
+			preparedStatement.setString(7, member.getBirth());
+			preparedStatement.setString(8, member.getEmail());
+			preparedStatement.setString(9, member.getQuestion());
+			preparedStatement.setString(10, member.getAnswer());
+			preparedStatement.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			closeDBObjects(null, preparedStatement, null);
+
+		}
+
+	}
 
 }

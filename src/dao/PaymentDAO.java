@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import model.Payment;
@@ -14,4 +16,6 @@ public interface PaymentDAO {
 	String select_Attending_Lecture(int member_no, int lecture_no);
 	List<Payment> select_PaymentList(int member_no);
 	List<String> list_Period();
+	void insert_Payment(List<Payment> purchase_Basket, Connection connection, PreparedStatement preparedStatement);
+	
 }

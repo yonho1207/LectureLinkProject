@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -20,7 +22,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdminDAO;
 import dao.AdminDAOImpl;
+import dao.BaseDAO;
 import dao.LectureDAOImpl;
+import dao.MembersDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.QnaDAO;
 import dao.QnaDAOImpl;
@@ -41,7 +45,7 @@ import sun.util.resources.LocaleData;
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
 		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
 		"/go_Lecture_attend.do","/go_Attend_Lecture.admin","/jump_To_Clicked_Lecture"
-		,"/go_about_Pay.admin"})
+		,"/go_about_Pay.admin","/clickinsert"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -213,6 +217,82 @@ public class Page_Move_Contoroller extends HttpServlet {
 			rd = req.getRequestDispatcher("administrator/customer_Information/about_Payment.jsp");			
 			rd.forward(req, resp);
 			
+		}else if(action.equals("clickinsert")) {
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			Members member = new Members();
+			BaseDAO bdao = new BaseDAO();
+			connection = bdao.getConnection();
+			
+			String[] lastName = {"choulSu","hongGu","shungHa","jiGyou","hanGu","haShun","gwangSu","manShuck","hweShung","dangSa"};
+			String[] userID = {"kim","lee","park","choi","yang","myoung","kang","kwun","bhe","chu"};
+			
+			int add_ID =0;
+			int set_Birth =0;
+			for(int i=0; i<24129; i++) {
+				if(i%2==0) {
+				member.setGender("female");
+				}else {
+				member.setGender("male");
+				}
+				if(add_ID>9) {
+				add_ID=0;
+				}
+				member.setId(userID[add_ID]);
+				member.setFirstname(userID[add_ID]);
+				member.setLastname(lastName[add_ID]);
+				add_ID++;
+
+				if(add_ID==11) {
+				add_ID=0;
+				}
+				if(set_Birth==10) {
+				set_Birth=0;
+				}
+				if(i%3==0) {
+				member.setPhone("010-111-1111");
+				member.setEmail("1234@gmail.com");
+				member.setBirth("199"+set_Birth+"-01-11");
+				member.setQuestion("school");
+				member.setAnswer("seoul");
+				}else if(i%5==0) {
+				member.setPhone("019-111-1111");
+				member.setEmail("1234@daum.net");
+				member.setBirth("198"+set_Birth+"-01-11");
+				member.setQuestion("school");
+				member.setAnswer("seoul");
+				}else if(i%4==0) {
+				member.setPhone("016-111-1111");
+				member.setEmail("1234@yahoo.com");
+				member.setBirth("197"+set_Birth+"-01-11");
+				member.setQuestion("school");
+				member.setAnswer("seoul");
+				}else if(i%7==0) {
+				member.setPhone("011-111-1111");
+				member.setEmail("1234@naver.com");
+				member.setBirth("196"+set_Birth+"-01-11");
+				member.setQuestion("school");
+				member.setAnswer("seoul");
+				}else if(i%9==0) {
+					member.setPhone("011-111-1111");
+					member.setEmail("1234@naver.com");
+					member.setBirth("194"+set_Birth+"-01-11");
+					member.setQuestion("school");
+					member.setAnswer("seoul");
+				}else if(i%6==0) {
+					member.setPhone("011-111-1111");
+					member.setEmail("1234@naver.com");
+					member.setBirth("200	"+set_Birth+"-01-11");
+					member.setQuestion("school");
+					member.setAnswer("seoul");
+				}
+
+				mdao.insertMember(member, connection, preparedStatement);
+				}
+
+				
+				bdao.closeDBObjects(null, preparedStatement, connection);
 		}
 	}
 }
