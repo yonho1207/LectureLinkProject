@@ -108,6 +108,7 @@
 	</c:when>
 	
 	<c:otherwise>
+	<form action="notice_update" method="post">
  	<div class="form-group">	
       <label for=notice_no>告知番号：</label>
       <input type="hidden" name = "notice_no" value="${notice.notice_no}"><br />
@@ -132,9 +133,11 @@
 
 	<br >
 	<div class="form-group">
+	<input type="submit"  class="btn btn-primary" value="修正する">
 	<a type="button"  class="btn btn-primary" href="notice_delete?notice_no=${notice.notice_no}">削除する</a>
-	<a type="button"  class="btn btn-primary" href="notice_update">修正する</a>
+	<!-- <a type="button"  class="btn btn-primary" href="notice_update">修正する</a> -->
 	</div>
+	</form>
 	</c:otherwise>
 	</c:choose>
 	</div>
