@@ -179,7 +179,9 @@ public class Lecture_Controller extends HttpServlet {
 			LectureDAOImpl ldao = new LectureDAOImpl();
 			AdminDAO adao = new AdminDAOImpl();
 			int lecture_No = Integer.parseInt(req.getParameter("select_Lecture_Pick"));
+			String select_Lecture_Pick = req.getParameter("select_Lecture_Pick");
 			int attending_CNT = ldao.get_Attending_Count(lecture_No);
+			req.setAttribute("select_Lecture_Pick", select_Lecture_Pick);
 			req.setAttribute("attending_CNT", attending_CNT);
 			List<AgeGroup> ageGroup = ldao.get_Attending_AgeGroup(lecture_No);
 			req.setAttribute("ageGroup", ageGroup);

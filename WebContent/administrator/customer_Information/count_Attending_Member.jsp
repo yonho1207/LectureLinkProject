@@ -11,6 +11,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+	<style type="text/css">
+		#groupBar{
+			margin: 12px;	
+		}
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var select_Lecture_Pick = "${select_Lecture_Pick}";
+			$('option').each(function(){
+				
+				if(select_Lecture_Pick==$(this).val()){
+					$(this).attr('selected','selected');
+					}	
+			});
+		});
+		
+	</script>
 
 </head>
 <body>
@@ -93,7 +111,7 @@
 		   		<div class="container" > 
 		   			<p>年齢別の受講者</p>
 					<c:forEach var="ageGroup" items="${ageGroup}">
-			  			<div class="progress" id="progress" style="font-size: large; height: 40px"> 
+			  			<div class="progress" id="progress" style="font-size: 12px; height: 40px" id="groupBar"> 
 							${ageGroup.ageGroup}代: 
 							<div class="progress-bar" style="width:${ageGroup.ageGroupCount}%">
 							${ageGroup.ageGroupCount}</div>

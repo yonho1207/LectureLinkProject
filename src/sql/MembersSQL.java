@@ -11,4 +11,6 @@ public class MembersSQL {
 	public static final String MEMBERS_PROFILE_UPDATE = "update members Set lastname=?"
 			+ " ,firstname=?,gender=?, phone=?, birth=to_date(? ,'yyyy-MM-dd'), email=?, question=?, answer=? where id=?";
 	public static final String MEMBERS_DELETE_SQL = "delete from members where id=?";
+	public static final String SELECET_MEMBERNO =
+			"select * from members where member_no =?";
 }

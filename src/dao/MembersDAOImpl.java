@@ -293,4 +293,38 @@ public class MembersDAOImpl extends BaseDAO implements MembersDAO {
 
 	}
 
+
+
+	@Override
+	public Members selectByMemNo(int member_No,Connection connection, 
+			PreparedStatement preparedStatement,ResultSet resultSet) {
+		Members members = null;
+		
+		try {
+			preparedStatement = connection.prepareStatement(sql.MembersSQL.SELECET_MEMBERNO);
+			preparedStatement.setInt(1, member_No);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				members = new Members();
+				members.setMember_no(resultSet.getInt("member_no"));
+				members.setId(resultSet.getString("id"));
+				members.setPassword(resultSet.getString("password"));
+				members.setLastname(resultSet.getString("lastname"));
+				members.setFirstname(resultSet.getString("firstname"));
+				members.setGender(resultSet.getString("gender"));
+				members.setPhone(resultSet.getString("phone"));
+				members.setBirth(resultSet.getString("birth").split("\\s")[0]);
+				members.setEmail(resultSet.getString("email"));
+				members.setQuestion(resultSet.getString("question"));
+				members.setAnswer(resultSet.getString("answer"));
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}
+		return members;
+	}
+
+	
 }

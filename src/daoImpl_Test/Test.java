@@ -1,5 +1,8 @@
 package daoImpl_Test;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -12,13 +15,16 @@ import java.util.List;
 import java.util.TreeMap;
 
 import dao.AdminDAOImpl;
+import dao.BaseDAO;
 import dao.CmtDAO;
 import dao.CmtDAOImpl;
 import dao.LectureDAOImpl;
+import dao.MembersDAOImpl;
 import dao.PaymentDAOImpl;
 import dao.Time_Set_Helper;
 import javafx.print.Collation;
 import model.AgeGroup;
+import model.Members;
 import model.Payment;
 import sun.text.resources.sk.CollationData_sk;
 
@@ -26,7 +32,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		AdminDAOImpl adao = new AdminDAOImpl();
+		MembersDAOImpl mdao = new MembersDAOImpl();
 		LectureDAOImpl ldao = new LectureDAOImpl();
+		BaseDAO  bdao = new BaseDAO();
 		PaymentDAOImpl pdao = new PaymentDAOImpl();
 		List<AgeGroup> ageGroup = adao.get_AgeGroup();
 		String a = "2019-12-12 12:50:03";
@@ -50,7 +58,13 @@ public class Test {
 			Integer aged = ik.next();
 			System.out.println(tm.get());
 		}*/
-
+		int cnt =0;
+		for(int i=0; i<34278; i++) {
+			if(i%99==0) {
+				cnt++;
+			}
+		}
+		System.out.println(cnt);
 	}
 
 }

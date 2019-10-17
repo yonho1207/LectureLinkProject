@@ -71,9 +71,6 @@
 						<li class="nav-item">
 							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="clickinsert">1button</a>
-						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
@@ -120,7 +117,7 @@
 				      	</select>			     
 				      </form>
 				    </div>
-				 
+				 </div>
 				  <br>
 		 	 </c:when>
 		 	 <c:when test="${members_info==null}">

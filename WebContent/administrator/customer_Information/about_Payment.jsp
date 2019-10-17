@@ -101,7 +101,7 @@
 				</div>
 				
 				<div class="container" > 
-					<h1>平均受講月　：${paymented_Month_AVG}</h1>
+					<h1>平均受講月数　：${paymented_Month_AVG}</h1>
 				</div>
 		
 </body>

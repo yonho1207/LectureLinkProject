@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -45,7 +47,7 @@ import sun.util.resources.LocaleData;
 		"/gift_Card_ETC.do","/goMain","/go_Customer_Support",
 		"/purchase_Succes","/purchase_Failed","/go_Lecture_List", "/go_Cutomer_Information.admin",
 		"/go_Lecture_attend.do","/go_Attend_Lecture.admin","/jump_To_Clicked_Lecture"
-		,"/go_about_Pay.admin","/clickinsert"})
+		,"/go_about_Pay.admin","/clickinsert", "/paymentinsertAll","/paymentinsertC"})
 public class Page_Move_Contoroller extends HttpServlet {
 
 	@Override
@@ -128,8 +130,8 @@ public class Page_Move_Contoroller extends HttpServlet {
 		}else if(action.equals("go_Cutomer_Information.admin")) {
 			AdminDAO adao = new AdminDAOImpl();
 			List<Double> genderRating = adao.get_GenderRating();
-			double female_Rating = genderRating.get(0);
-			double male_Rating = genderRating.get(1);
+			double female_Rating = Math.round(genderRating.get(0)*100)/100;
+			double male_Rating = Math.round(genderRating.get(1)*100)/100;;
 			req.setAttribute("female_Rating", female_Rating);
 			req.setAttribute("male_Rating", male_Rating);
 			List<AgeGroup> ageGroup = adao.get_AgeGroup();
@@ -182,9 +184,9 @@ public class Page_Move_Contoroller extends HttpServlet {
 			Lecture selected_Lecture = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("search-select")));
 			req.setAttribute("selected_Lecture", selected_Lecture);
 			Members member = (Members) session.getAttribute("members_info");
-			String period = pdao.select_Attending_Lecture
+			String period_a = pdao.select_Attending_Lecture
 					(member.getMember_no(), Integer.parseInt(req.getParameter("search-select")));
-/*			String period = period_a.substring(0, 10)+" "+"01"+period_a.substring(13, period_a.length()) ;*/
+			String period = period_a.substring(0, 10)+" "+"01"+period_a.substring(13, period_a.length()) ;
 			//insert 당시 오류로 인한 00:00:00 케이스 처리를 위한 구문
 			boolean have_Right = ldao.distinction_Access_Authority
 					(member.getMember_no(), period, Integer.parseInt(req.getParameter("search-select")));
@@ -219,6 +221,7 @@ public class Page_Move_Contoroller extends HttpServlet {
 			
 		}else if(action.equals("clickinsert")) {
 			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			MembersDAOImpl mdao = new MembersDAOImpl();
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			Members member = new Members();
@@ -230,10 +233,10 @@ public class Page_Move_Contoroller extends HttpServlet {
 			
 			int add_ID =0;
 			int set_Birth =0;
-			for(int i=0; i<24129; i++) {
-				if(i%2==0) {
+			member.setPassword("1111");
+			for(int i=0; i<124129; i++) {
 				member.setGender("female");
-				}else {
+				if(i%3==0) {
 				member.setGender("male");
 				}
 				if(add_ID>9) {
@@ -290,9 +293,121 @@ public class Page_Move_Contoroller extends HttpServlet {
 
 				mdao.insertMember(member, connection, preparedStatement);
 				}
-
-				
 				bdao.closeDBObjects(null, preparedStatement, connection);
+		}else if(action.equals("paymentinsertAll")) {
+			PaymentDAOImpl pdao = new PaymentDAOImpl();
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			ResultSet resultSet = null;
+			MembersDAOImpl mdao = new MembersDAOImpl();
+			Members member = new Members();
+			BaseDAO bdao = new BaseDAO();
+			Payment payment = new Payment();
+			connection = bdao.getConnection();
+			payment.setPayment_date(Time_Set_Helper.get_Today());
+			for(int i=0; i<324278; i++) {
+				if(i%99==0) {
+					bdao.closeDBObjects(null, null, connection);
+					connection = bdao.getConnection();
+				}
+				if(i%3==0) {
+					payment.setBuy_Book(0);
+				}else {
+					payment.setBuy_Book(1);
+				}
+				payment.setMember_no(375+i);
+				payment.setId("mem"+i);
+				if(i%3==0) {
+					payment.setLecture_no(3);
+					payment.setLecture_name("java");
+					if(i%2==0) {
+						payment.setPrice(75000);
+						payment.setPeriod(Time_Set_Helper.get_OneMonth_Later());
+						payment.setPay_option(1);
+					}else if(i%3==0) {
+						payment.setPrice(900000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(12));
+						payment.setPay_option(2);
+					}else {
+						payment.setPrice(450000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(6));
+						payment.setPay_option(3);
+					}
+				}else if(i%4==0) {
+					payment.setLecture_no(5);
+					payment.setLecture_name("Python");
+					if(i%2==0) {
+						payment.setPrice(75000);
+						payment.setPeriod(Time_Set_Helper.get_OneMonth_Later());
+						payment.setPay_option(1);
+					}else if(i%3==0) {
+						payment.setPrice(900000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(12));
+						payment.setPay_option(2);
+					}else {
+						payment.setPrice(450000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(6));
+						payment.setPay_option(3);
+					}
+				}else if(i%5==0) {
+					payment.setLecture_no(6);
+					payment.setLecture_name("javascript");
+					if(i%2==0) {
+						payment.setPrice(75000);
+						payment.setPeriod(Time_Set_Helper.get_OneMonth_Later());
+						payment.setPay_option(1);
+					}else if(i%3==0) {
+						payment.setPrice(900000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(12));
+						payment.setPay_option(2);
+					}else {
+						payment.setPrice(450000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(6));
+						payment.setPay_option(3);
+					}
+				}else if(i%6==0) {
+					payment.setLecture_no(4);
+					payment.setLecture_name("C");
+					if(i%2==0) {
+						payment.setPrice(75000);
+						payment.setPeriod(Time_Set_Helper.get_OneMonth_Later());
+						payment.setPay_option(1);
+					}else if(i%3==0) {
+						payment.setPrice(900000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(12));
+						payment.setPay_option(2);
+					}else {
+						payment.setPrice(450000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(6));
+						payment.setPay_option(3);
+					}
+				}else if(i%7==0) {
+					payment.setLecture_no(7);
+					payment.setLecture_name("Ruby");
+					if(i%2==0) {
+						payment.setPrice(75000);
+						payment.setPeriod(Time_Set_Helper.get_OneMonth_Later());
+						payment.setPay_option(1);
+					}else if(i%3==0) {
+						payment.setPrice(900000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(12));
+						payment.setPay_option(2);
+					}else {
+						payment.setPrice(450000);
+						payment.setPeriod(Time_Set_Helper.get_period_date(6));
+						payment.setPay_option(3);
+					}
+				}
+				Payment purchase_Basket = payment;
+				System.out.println(purchase_Basket);
+				pdao.insert_Payment(purchase_Basket, connection, preparedStatement);
+				
+			}
+			
+			
+			
+			
+			bdao.closeDBObjects(resultSet, preparedStatement, connection);
 		}
 	}
 }

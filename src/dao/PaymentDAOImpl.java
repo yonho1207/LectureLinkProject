@@ -298,6 +298,32 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 			}
 
 		}
+
+	@Override
+	public void insert_Payment(Payment payment, Connection connection, PreparedStatement preparedStatement) {
+
+		
+		
+		try {
+				preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
+				preparedStatement.setInt(1,payment.getLecture_no());
+				preparedStatement.setInt(2,payment.getMember_no());
+				preparedStatement.setString(3, payment.getId());
+				preparedStatement.setString(4, payment.getPayment_date());
+				preparedStatement.setString(5, payment.getLecture_name());
+				preparedStatement.setInt(6, payment.getPrice());
+				preparedStatement.setInt(7, payment.getPay_option());
+				preparedStatement.setString(8, payment.getPeriod());
+				preparedStatement.setInt(9, payment.getBuy_Book());
+				preparedStatement.execute();
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+	
+		}				
+	}
+	
+		
 		
 	}
 

@@ -17,5 +17,7 @@ public interface PaymentDAO {
 	List<Payment> select_PaymentList(int member_no);
 	List<String> list_Period();
 	void insert_Payment(List<Payment> purchase_Basket, Connection connection, PreparedStatement preparedStatement);
+	void insert_Payment(Payment purchase_Basket, Connection connection, PreparedStatement preparedStatement);
+	
 	
 }

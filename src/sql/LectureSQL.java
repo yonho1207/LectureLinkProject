@@ -43,10 +43,13 @@ public class LectureSQL {
 			"select lecture_no, count(*) as cnt from payment where lecture_no = ? group by lecture_no";
 	
 	public static final String GET_ATTENDMEMBER_AGEGROUP =
-			"select  age ,count(*) as cnt \r\n" + 
-			"from (select floor((to_char(sysdate, 'yyyy')-to_char(members.birth, 'yyyy')) / 10) \r\n" + 
-			"* 10 as age from members natural join payment p where p.lecture_no=?)\r\n" + 
-			"group by age order by age";
+			"select age, count(*) as cnt from\r\n" + 
+			"(select floor((to_char(sysdate, 'yyyy')-to_char(m.birth, 'yyyy')) / 10)\r\n" + 
+			"			* 10 as age, m.member_no  from members  m \r\n" + 
+			"            inner join payment p \r\n" + 
+			"            on p.member_no = m.member_no\r\n" + 
+			"            where p.lecture_no=?)\r\n" + 
+			"            GROUP by age";
 	
 	public static final String DISTINCTION_ACCESS_AUTHORITY =
 			"select member_no, lecture_name, period from payment \r\n" + 
