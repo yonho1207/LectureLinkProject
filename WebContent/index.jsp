@@ -134,9 +134,9 @@
 		 
 		 <div  id="lecture_Advertise" >
 		 	<div id="advertise_Image">
-				 <iframe width="560" height="315" src="https://www.youtube.com/embed/htzo0mZS0yw" 
-				 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-				 picture-in-picture" allowfullscreen></iframe>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/WRUtzogzC0E" 
+				frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+				allowfullscreen></iframe>
 		 	</div><br />
 		 	<div id="advertise_Text">
 		 		<h1>２０２０年、生まれ変わる情報処理技術者試験を<br />サポートさせて頂きます！</h1>

@@ -99,6 +99,7 @@
 		教師名： <input type="text" id="lecture_teacher" class="form-control" name="lecture_teacher"><br />
 		1ヶ月別の値段： <input type="text" id="price" class="form-control" name="price"><br />
 		教科書の値段： <input type="text" id="text_price" class="form-control" name="text_price"><br />
+		講義のURL<textarea type="textbox" id="lecture_Url" class="form-control" name="lecture_Url" cols="60" rows="7"></textarea><br />
 		講義に関する説明：<textarea type="textbox" id="description" class="form-control" name="description" cols="60" rows="7"></textarea><br />
 		<input type="submit" value="入力する">
 	</form>
