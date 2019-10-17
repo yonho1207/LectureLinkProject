@@ -215,7 +215,89 @@ public class PaymentDAOImpl extends BaseDAO implements PaymentDAO {
 		System.out.println(selected_Period_List);
 		return selected_Period_List;
 	}
-	
-	
 
-}
+	@Override
+	public String select_Attending_Lecture(int member_no, int lecture_no) {
+		String period = null; 
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.SELECTED_ATTENDING_LECTURE);
+			preparedStatement.setInt(1, member_no);
+			preparedStatement.setInt(2, lecture_no);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				period = resultSet.getString("period");
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return period;
+	}
+
+	@Override
+	public List<String> list_Period() {
+		List<String> periodList = new ArrayList<String>();
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.PaymentSQL.GET_PERIOD);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String get_period = resultSet.getString("period");
+				periodList.add(get_period);
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return periodList;
+	}
+	
+	
+	public void insert_Payment(List<Payment> purchase_Basket, Connection connection, PreparedStatement preparedStatement) {
+
+		
+		
+		try {
+			for(Payment payment : purchase_Basket) {
+/*				if(payment.getLecture_no()==3) {
+					payment.setPay_option(7);
+				} */ //고의적 에러 발생으로 인한 트렌젝션 처리 정상 작동 여부 판별용 코드
+				preparedStatement = connection.prepareStatement(sql.PaymentSQL.INSERT_PAYMENT_INFO);
+				preparedStatement.setInt(1,payment.getLecture_no());
+				preparedStatement.setInt(2,payment.getMember_no());
+				preparedStatement.setString(3, payment.getId());
+				preparedStatement.setString(4, payment.getPayment_date());
+				preparedStatement.setString(5, payment.getLecture_name());
+				preparedStatement.setInt(6, payment.getPrice());
+				preparedStatement.setInt(7, payment.getPay_option());
+				preparedStatement.setString(8, payment.getPeriod());
+				preparedStatement.setInt(9, payment.getBuy_Book());
+				preparedStatement.execute();
+				
+			}
+			
+		
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+			}
+
+		}
+		
+	}
+

@@ -47,4 +47,14 @@ public class LectureSQL {
 			"from (select floor((to_char(sysdate, 'yyyy')-to_char(members.birth, 'yyyy')) / 10) \r\n" + 
 			"* 10 as age from members natural join payment p where p.lecture_no=?)\r\n" + 
 			"group by age order by age";
+	
+	public static final String DISTINCTION_ACCESS_AUTHORITY =
+			"select member_no, lecture_name, period from payment \r\n" + 
+			" where to_date(?,'yyyy-mm-dd hh:mi:ss') > to_date(?,'yyyy-mm-dd hh:mi:ss') \r\n" + 
+			" and lecture_no=? and member_no=?";
+	
+	public static final String SELECTED_ATTENDING_LECTURE =
+			"select lecture_no, member_no, lecture_name, \r\n" + 
+			" price, pay_option, period\r\n" + 
+			" from payment where member_no=? and lecture_no=?";
 }

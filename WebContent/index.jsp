@@ -71,6 +71,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="go_account">会員登録</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="clickinsert">1button</a>
+						</li>
 					</c:when>
 					<c:when test="${members_info!=null || admin!=null}">
 						<li class="nav-item">
@@ -87,7 +90,8 @@
 						<a class="dropdown-item" href="admin_memberList.admin">会員情報管理フォーム</a>
 						<a class="dropdown-item" href="go_Lecture_Insert.admin">講義情報管理フォーム</a>	
 						<a class="dropdown-item" href="go_Cutomer_Information.admin">会員情報分析</a>
-						<a class="dropdown-item" href="go_Attend_Lecture.admin">受講者分析</a>							
+						<a class="dropdown-item" href="go_Attend_Lecture.admin">受講者分析</a>
+						<a class="dropdown-item" href="go_about_Pay.admin">決済情報通計</a>							
 						</div>
 						</li>
 					</c:if>

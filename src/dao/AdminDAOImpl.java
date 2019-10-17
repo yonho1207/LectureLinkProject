@@ -10,7 +10,7 @@ import java.util.List;
 
 import model.AgeGroup;
 import model.Members;
-
+import model.Payment;
 import sql.AdminSQL;
 
 
@@ -160,6 +160,109 @@ public class AdminDAOImpl extends BaseDAO implements AdminDAO {
 		}
 		return ageGroup;
 	}
+
+	@Override
+	public List<Integer> get_Payoption_CNT() {
+		List<Integer> payOptionGRP = new ArrayList<Integer>(); 
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_COUNT_PAYOPTION);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Integer got_CNT = resultSet.getInt("cnt");
+				payOptionGRP.add(got_CNT);
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		
+		return payOptionGRP;
+	}
+
+	@Override
+	public int get_Paymented_Month(Payment payment) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int month =0;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_PAY_MONTH);
+			preparedStatement.setString(1, payment.getPeriod());
+			preparedStatement.setString(2, Time_Set_Helper.get_Today());
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				month = resultSet.getInt("month");
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return month;
+	}
+
+	@Override
+	public double get_AVG_period() {
+		double month_AVG = 0.0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_AVG_PERIOD);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				month_AVG = resultSet.getDouble("avg");
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return month_AVG;
+	}
+
+	@Override
+	public List<Integer> get_Payoption_AVG() {
+		List<Integer> payOption_AVG = new ArrayList<Integer>();	
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.AdminSQL.GET_AVG_PAYOPTION);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Integer got_avgPrice = resultSet.getInt("avg");
+				payOption_AVG.add(got_avgPrice);
+			}
+			
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally{
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return payOption_AVG;
+	}
+	
 	
 	
 }

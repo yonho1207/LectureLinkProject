@@ -382,6 +382,33 @@ public class LectureDAOImpl extends BaseDAO implements LectureDAO {
 		return ageGroup;
 	}
 
+	@Override
+	public boolean distinction_Access_Authority(int member_no, String period, int lecture_no) {
+		boolean authority = false;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(sql.LectureSQL.DISTINCTION_ACCESS_AUTHORITY);
+			preparedStatement.setString(1, period);
+			preparedStatement.setString(2, Time_Set_Helper.get_Today());
+			preparedStatement.setInt(3, lecture_no);
+			preparedStatement.setInt(4, member_no);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				authority = true;
+			}
+		}catch(SQLException ex01) {
+			ex01.printStackTrace();
+		}finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+		return authority;
+	}
+
 	
 	
 }

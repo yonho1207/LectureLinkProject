@@ -81,11 +81,18 @@ public class PaymentController extends HttpServlet {
 				perchase_Book = Integer.parseInt(req.getParameter("buy_Book"));
 			}				
 				Lecture book_Info = null;
-				if(perchase_Book==1) {
+				if(perchase_Book==1 && select_Price>1) {
+					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
+					payment.setPrice(lecture.getPrice()*select_Price+book_Info.getBook_price());
+					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
+				}else if(perchase_Book==1 && select_Price==1 ){
 					book_Info = ldao.select_Lecture_No(Integer.parseInt(req.getParameter("select_Lecture_Pick")));
 					payment.setPrice(lecture.getPrice()+book_Info.getBook_price());
 					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
-				}else{
+				}else if(perchase_Book==0 && select_Price>1) {
+					payment.setPrice(lecture.getPrice()*select_Price);
+					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
+				}else {
 					payment.setPrice(lecture.getPrice());
 					payment.setPeriod(Time_Set_Helper.get_period_date(select_Price));
 				}
@@ -181,6 +188,8 @@ public class PaymentController extends HttpServlet {
 			}else if(result==true){
 				resp.sendRedirect("purchase_Succes");
 			}		
+		}else if(action.equals("")) {
+			
 		}
 			
 	}
