@@ -89,7 +89,7 @@ public class NoticeDAOImpl extends BaseDAO implements NoticeDAO {
 			preparedStatement.setString(1, notice.getNotice_title());
 			preparedStatement.setString(2, notice.getNotice_con());
 			preparedStatement.setInt(3, notice.getNotice_no());
-
+			
 			preparedStatement.executeQuery();
 
 		} catch (SQLException e) {

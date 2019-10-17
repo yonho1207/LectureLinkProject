@@ -98,11 +98,11 @@ public class NoticeController extends HttpServlet {
 
 			Notice notice = new Notice();
 			NoticeDAO dao = new NoticeDAOImpl();
-
+			
 			notice.setNotice_no(Integer.parseInt(req.getParameter("notice_no")));
 			notice.setNotice_title(req.getParameter("notice_title"));
 			notice.setNotice_con(req.getParameter("notice_con"));
-
+			
 			dao.update(notice);
 			System.out.println(notice);
 
